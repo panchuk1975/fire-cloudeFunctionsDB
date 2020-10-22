@@ -2,7 +2,6 @@ import React, { useContext, useState, memo } from "react";
 import { NavLink } from "react-router-dom";
 import fire from "../config/Fire";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import "../CSS/NavbarStyle.scss";
 
 export const Navbar = memo(() => {
   const [showBtn, setBtn] = useState("item");
