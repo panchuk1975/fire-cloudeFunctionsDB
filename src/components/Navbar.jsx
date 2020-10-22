@@ -27,7 +27,7 @@ export const Navbar = memo(() => {
   return (
     <nav>
       <ul>
-        <li className="logo">TEHSUPPORT</li>
+        <li className="logo">FORAS-LAND DB</li>
         <li className="btn">
           <i
             id="mainBtn"
@@ -47,29 +47,29 @@ export const Navbar = memo(() => {
         </li>
         <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/home">
-            Автомобілі
+            Клієнти
           </NavLink>
         </li>
         <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/autoagr">
-            Авто-агрегати
+            Проекти
           </NavLink>
         </li>
         <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/agr">
-            Агрегати
+            Завдання
           </NavLink>
         </li>
-        <li className={showBtn} onClick={() => setClass()}>
+        {/* <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/exploutation">
-            Прилади
+            Резерв
           </NavLink>
-        </li>
-        <li className={showBtn} onClick={() => setClass()}>
+        </li> */}
+        {/* <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/liquids">
-            ПММ
+            Статистика
           </NavLink>
-        </li>
+        </li> */}
         <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/profile">
             Профіль

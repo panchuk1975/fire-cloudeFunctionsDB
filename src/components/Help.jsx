@@ -27,13 +27,13 @@ const Help = () => {
     email = email.split("@")[0];
   }
   return (
-    <div>
+    <div className="helpConteiner">
       <div>
         <small>{email}</small>
       </div>
       <div className="helpContent">
         <div className="textConteiner">
-          <h3>TEHSUPPORT 1.0.27.1</h3>
+          <h3>FORAS-LAND DB 1.0.0</h3>
           <p></p>
           <div className="helpDescription">
             <div>

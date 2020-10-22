@@ -3,7 +3,6 @@ import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { AlertBox } from "./AlertBox";
 import { useHistory } from "react-router-dom";
 import fire from "../config/Fire";
-import "../CSS/CreateObjStyle.scss";
 var moment = require("moment");
 
 export const CreateCar = ({ car, cars, userInfo }) => {
@@ -179,9 +178,8 @@ export const CreateCar = ({ car, cars, userInfo }) => {
   //-------------------------------GSX car form------------------------------//
   return (
     <div className={classCarBasis}>
-      <hr id="createCarHr" />
       <div id="carMainForm">
-        <div className="d-flex  flex-wrap justify-content-between">
+        <div className="d-flex flex-wrap justify-content-between">
           <div className="form-group">
             <label htmlFor="driver">
               <small>Оберіть тип виробу:</small>

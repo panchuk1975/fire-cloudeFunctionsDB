@@ -1,12 +1,11 @@
 nav {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   background: #1b1b1b;
   padding: 0px 20px 0px 20px;
   z-index: 999;
-  background: url("../pictures/tu160-2.jpg");
+  background: url("../pictures/2-headerBG.jpg");
   background-size: cover;
   background-position: bottom;
   -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.999);
@@ -35,7 +34,6 @@ nav ul li.item {
   width: auto;
   text-align: center;
   cursor: pointer;
-  color: #bbbaba;
   text-decoration: none;
   font-size: 18px;
   margin: 15px 3px 15px 0; }
@@ -73,7 +71,7 @@ nav ul li.logo {
   line-height: 85px;
   text-align: left; }
 
-@media all and (max-width: 950px) {
+@media all and (max-width: 860px) {
   nav ul li.item {
     width: 100%;
     display: none; }
@@ -83,7 +81,7 @@ nav ul li.logo {
     margin: 15px 5px 15px 0; }
   nav {
     z-index: 999;
-    background: url("../pictures/tu160.jpg");
+    background: url("../pictures/2-headerBG.jpg");
     background-size: cover;
     -webkit-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.999);
     -moz-box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.999);
