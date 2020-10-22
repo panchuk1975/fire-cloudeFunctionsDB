@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.bg-fon {
+    background-color:rgba(0,0,0,.3);
+    height:100%;
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+}
+
+.bg-img {
+  background: url("../pictures/1-title.jpg");
+  height: 100vh;
+  background-size: cover;
+  background-position: top left;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  &:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.fireAuthConteinerRegister {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+  align-items: center;
+  z-index: 555;
+  left: 50%;
+  height: 300px;
+  transform: translate(-50%, 45%);
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(37, 37, 37, 0.75);
+  -moz-box-shadow: 0px 0px 10px 3px rgba(37, 37, 37, 0.75);
+  box-shadow: 0px 0px 10px 3px rgba(37, 37, 37, 0.75);
+  &:hover {
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(92, 92, 92, 0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(92, 92, 92, 0.75);
+    box-shadow: 0px 0px 10px 3px rgba(68, 68, 68, 0.75);
+  }
+
+  .firebaseAuth {
+    cursor: pointer;
+    z-index: 999;
+  }
+  &:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.content {
+    position: relative;
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    z-index: 333;
+    width: 80%;
+    text-align: center;
+    padding: 10px 32px;
+    background: rgba(255, 255, 255, 0.04);
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
+  }
+  
