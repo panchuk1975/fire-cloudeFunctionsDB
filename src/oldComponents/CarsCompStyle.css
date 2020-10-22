@@ -1,0 +1,415 @@
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+/*-------------------------Common properties-------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.justify-content-between {
+  color: black;
+}
+details {
+  color: rgb(42, 173, 42);
+  font-size: 11px;
+  margin: 4px 0 0 0;
+  padding: 0;
+}
+details:hover {
+  color: rgb(110, 247, 110);
+  font-size: 11px;
+  margin: 4px 0 0 0;
+}
+pre {
+  margin: 0;
+  font-weight: 550;
+  font-family: "Montserrat", sans-serif;
+}
+.head {
+  color: rgb(41, 168, 41);
+}
+.carBrocken {
+  color: red;
+}
+.form-group {
+  padding: 0 0 0 0;
+  margin: 0 2px 0 0;
+}
+.form-group input {
+  font-size: 14px;
+  height: 20px;
+}
+.form-group label {
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  color: rgb(206, 202, 202);
+}
+.form-group label:hover {
+  color: limegreen;
+}
+.form-control .custom-select-sm {
+  margin: 0;
+  padding: 0 2px 0 2px;
+  width: 90%;
+  text-align: center;
+  background: rgb(173, 173, 173);
+}
+.form-control:hover .custom-select-sm:hover {
+  background: rgb(248, 248, 248);
+  color: black;
+  font-weight: 500;
+}
+.custom-select-sm {
+  color: rgb(73, 72, 72);
+  font-size: 12px;
+  font-weight: 700;
+  height: 25px;
+  margin: -4px 40px 0 0;
+}
+#date {
+  width: 90%;
+  margin: 0 25px 0 0;
+  text-align: center;
+}
+#dateOfRegistration {
+  width: 100%;
+  margin: 0 25px 0 0;
+  text-align: center;
+}
+#listDate {
+  background-color: lightgreen;
+  width: 90%;
+  margin: 0 25px 0 0;
+  text-align: center;
+}
+#listDate:hover {
+  background-color: rgb(210, 241, 210);
+}
+#time {
+  width: 178px;
+  margin: 0 0px 0 0px;
+  padding: 0 0px 0 0px;
+  text-align: center;
+}
+#time label {
+  padding: 0 0 0 0;
+  margin: 0 0 0 -120px;
+}
+#important {
+  background-color: lightgreen;
+}
+#important:hover {
+  background-color: rgb(210, 241, 210);
+}
+.justify-content-between {
+  color: rgb(28, 28, 36);
+}
+/* -----------------------------Car Table------------------------------*/
+#carInnerLi {
+  padding: 2px 5px 2px 5px;
+  background: url("../pictures/cover.jpg");
+  background-position: 50% 25%;
+  background-size: cover;
+  border-radius: 5px;
+  -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+  margin: 0 0 6px 0;
+}
+.carTable {
+  font-size: 16px;
+  padding: 0;
+  margin: 3px 7px 0 0;
+}
+.carTable tbody tr {
+  color: rgb(207, 206, 206);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 0 0 0;
+  margin: 5px 0 0 0;
+  -webkit-box-shadow: 0px 0px 4px 3px rgb(61, 61, 61);
+  -moz-box-shadow: 0px 0px 4px 3px rgb(61, 61, 61);
+  box-shadow: 0px 0px 4px 3px rgb(61, 61, 61);
+}
+.carTable tbody tr:hover {
+  color: rgb(3, 192, 192);
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+  -moz-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+  box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+}
+.carTable tbody tr td {
+  padding: 0 5px 0 5px;
+}
+#deleteCarBtn {
+  font-size: 10px;
+  margin: 5px 0 0 0;
+  padding: 0 5px 0 5px;
+  color: #ff2400;
+}
+#deleteCarBtn:hover {
+  color: black;
+}
+.headTable {
+  color: rgb(43, 158, 43);
+  font-size: 15px;
+  font-weight: 600;
+  background-color: none;
+  margin: 2px 0 0 0;
+  user-select: none;
+}
+.routeTO2 pre {
+  margin: 1px 0 0 0;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgb(175, 172, 172);
+}
+/* -----------------------------List Table------------------------------*/
+#innerLi {
+  margin: 5px 0 0 0;
+  padding: 0;
+  background: none;
+  box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.89);
+}
+.listTable {
+  cursor: pointer;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
+  -moz-box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
+  box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
+  font-size: 14px;
+  color: rgb(192, 191, 191);
+  padding: 0 5px 0 5px;
+}
+.listTable:hover {
+  color: rgb(3, 192, 192);
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+  -moz-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+  box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+}
+#listButtonsGrup button {
+  font-size: 12px;
+  color: rgb(206, 202, 202);
+  margin: 0 0 5px 0;
+}
+.liquidValue {
+  color: rgb(146, 145, 145);
+}
+#deleteListBtn {
+  font-size: 7px;
+  padding: 0 5px 0 5px;
+  margin: 2px 0 2px 0;
+  color: #ff2400;
+}
+#deleteListBtn:hover {
+  color: black;
+}
+/* -----------------------------Create Car Form------------------------------*/
+.createCarBasis {
+  margin: 0px 0 0px 0;
+  padding: 0 0px 0 0px;
+  background: url("../pictures/cover.jpg");
+  border-radius: 5px;
+  background-position: top;
+  background-size: cover;
+}
+#createCarHr {
+  margin: 0px 0 20px 0;
+  padding: 0 0 0 0;
+}
+#createCarBtn,
+#saveCarBtn {
+  font-size: 15px;
+  width: 100%;
+  padding: 0;
+  color: black;
+}
+#createCarBtn {
+  margin: -5px 20px 10px 20px;
+}
+#saveCarBtn {
+  font-size: 15px;
+  width: 100%;
+  margin: -5px 35px 5px 30px;
+  color: black;
+}
+#carForm {
+  margin: -10px 0 15px 0;
+  padding: 0 20px 0 20px;
+}
+#serviceabilityReason {
+  width: 100%;
+  height: auto;
+  text-align: left;
+  vertical-align: text-top;
+  background: rgb(173, 173, 173);
+}
+#serviceabilityReason:hover {
+  background: rgb(248, 248, 248);
+  color: black;
+  font-weight: 500;
+}
+/* -----------------------------Modify Car Form------------------------------*/
+#modifyCarForm {
+  margin: -5px 0 15px 0;
+  padding: 0 15px 0 30px;
+}
+/* -----------------------------Create List Form------------------------------*/
+#CreateList {
+  margin: 0 22px 4px 25px;
+}
+#addListBtn,
+#closeListFormBtn {
+  width: 50%;
+  padding: 0;
+  color: black;
+  margin: 10px 0 0 0;
+}
+#createListBtn {
+  font-size: 15px;
+  width: 100%;
+  margin: 10px 2px 0px 0;
+  padding: 0;
+  color: black;
+}
+#listButtonsGrup {
+  padding: 5px 20px 0 25px;
+}
+/* -----------------------------Modify List Form------------------------------*/
+#ModifyList {
+  margin: 0 22px 0 26px;
+}
+.routeHeadTable {
+  user-select: none;
+  color: #539ab6;
+  font-size: 12px;
+}
+#modifyListBtn {
+  font-size: 15px;
+  width: 100%;
+  margin: 10px 20px 5px 0;
+  padding: 0 0 0 0;
+  color: black;
+}
+.routeDetails {
+  color: #539ab6;
+  font-size: 10px;
+}
+.routeDetails:hover {
+  color: #74d3f8;
+  font-size: 10px;
+}
+.routeDetailsSmall {
+  margin: 0 0 0 0;
+}
+/* -----------------------------Create Route Form------------------------------*/
+#CreateRoute {
+  padding: 0 25px 7px 25px;
+}
+.routeHead {
+  color: #539ab6;
+}
+/* -------------------------------Route Table----------------------------------*/
+#routeTableBasis {
+  height: 25px;
+  margin: 1px 0 1px 0;
+}
+.routeTable {
+  cursor: pointer;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 4px 3px rgb(48, 47, 48);
+  -moz-box-shadow: 0px 0px 4px 3px rgb(48, 47, 48);
+  box-shadow: 0px 0px 4px 3px rgb(48, 47, 48);
+  font-size: 14px;
+  color: rgb(199, 198, 198);
+  padding: 0 5px 0 5px;
+  margin: 2px 0 2px 0;
+}
+.routeTable:hover {
+  color: rgb(3, 192, 192);
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+  -moz-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+  box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
+}
+#deleteRouteBtn {
+  font-size: 7px;
+  padding: 0 5px 0 5px;
+  margin: 4px 0 4px 0;
+  color: #ff2400;
+}
+#deleteRouteBtn:hover {
+  color: black;
+}
+#countRoutesGroup {
+  font-size: 14px;
+  margin: 2px 30px 0 20px;
+}
+#countRoutesGroup small {
+  font-size: 11px;
+}
+.headStart {
+  color: #970a97;
+}
+.headAdd {
+  color: #4c6faf;
+}
+.headExpended {
+  color: #a72646;
+}
+.headEnd {
+  color: #0fa80f;
+}
+/*--------------------------Common Liquids------------------------------*/
+.createTimeLiquidsBasis {
+  margin: 10px 0 0 0;
+  padding: 1px 10px 10px 10px;
+  background: url("../pictures/cover.jpg");
+  border-radius: 5px;
+  background-position: top;
+  background-size: cover;
+  -webkit-box-shadow: 12px 13px 4px 4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 13px 4px 4px rgba(0, 0, 0, 0.75);
+  box-shadow: 9px 10px 4px 4px rgba(0, 0, 0, 0.75);
+}
+#createDateBtn {
+  color: black;
+  padding: 0 0 0 0;
+  height: 25px;
+  width: 122px;
+  margin: 20px 0 0 -18px;
+}
+.createLiquidsBasis {
+  margin: 17px 0 0 0;
+  padding: 1px 10px 10px 10px;
+  background: url("../pictures/cover.jpg");
+  border-radius: 5px;
+  background-position: top;
+  background-size: cover;
+  width: 78vh;
+  -webkit-box-shadow: 12px 13px 4px 4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 12px 13px 4px 4px rgba(0, 0, 0, 0.75);
+  box-shadow: 9px 10px 4px 4px rgba(0, 0, 0, 0.75);
+}
+.liquidName {
+  color: rgb(43, 223, 52);
+  font-weight: 300;
+}
+.liquidbalanceStart {
+  font-weight: 300;
+  color: rgb(160, 64, 250);
+}
+.liquidbalanceRecived {
+  font-weight: 300;
+  color: rgb(58, 45, 245);
+}
+.liquidbalanceExpended {
+  font-weight: 300;
+  color: rgb(248, 24, 61);
+}
+.liquidbalanceFinish {
+  font-weight: 300;
+  color: rgb(15, 216, 31);
+}
