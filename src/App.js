@@ -6,8 +6,7 @@ import { Navbar } from "./components/Navbar";
 import { FirebaseState } from "./context/fiebase/FirebaseState";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Loader } from "./components/Loader";
-//import { NavLink } from "react-router-dom";
-import "./CSS/AppCommonStyle.scss";
+//import { NavLink } from "react-router-dom;
 
 const Home = React.lazy(() => import("./pages/Home"));
 const AutoAgr = React.lazy(() => import("./pages/AutoAgr"));
@@ -88,9 +87,9 @@ class App extends Component {
     return (
       <FirebaseState>
         <BrowserRouter>
-          <div className="container bg-img pt-4">
+          <div className="bg-img pt-4">
             {this.state.user ? (
-              <div className="appBackgroung">
+              <div>
                 <Navbar />
                 <Switch>
                   <Route

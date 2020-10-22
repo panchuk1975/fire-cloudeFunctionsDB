@@ -4,9 +4,7 @@ nav {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   background: #1b1b1b;
-  padding: 15px 20px 0px 20px; }
-
-nav {
+  padding: 0px 20px 0px 20px;
   z-index: 999;
   background: url("../pictures/tu160-2.jpg");
   background-size: cover;
@@ -75,7 +73,7 @@ nav ul li.logo {
   line-height: 85px;
   text-align: left; }
 
-@media all and (max-width: 1081px) {
+@media all and (max-width: 950px) {
   nav ul li.item {
     width: 100%;
     display: none; }
@@ -92,7 +90,6 @@ nav ul li.logo {
     box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.999); } }
 
 nav ul li.showBtn {
-  z-index: 999;
   width: 100%;
   display: block;
   color: white;
@@ -103,7 +100,6 @@ nav ul li.showBtn {
   line-height: 50px; }
 
 nav ul li.showBtn:hover {
-  z-index: 999;
   color: cyan;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
