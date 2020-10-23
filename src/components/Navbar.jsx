@@ -2,6 +2,7 @@ import React, { useContext, useState, memo } from "react";
 import { NavLink } from "react-router-dom";
 import fire from "../config/Fire";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
+const newLogo = require("../pictures/newLogo.png");
 
 export const Navbar = memo(() => {
   const [showBtn, setBtn] = useState("item");
@@ -26,8 +27,16 @@ export const Navbar = memo(() => {
   const { changeCreate } = useContext(FirebaseContext);
   return (
     <nav>
-      <ul>
-        <li className="logo">FORAS-LAND DB</li>
+      <div className="logo">
+      <img
+                className="logoPicture"
+                alt="ForasLand"
+                src={newLogo}
+              />
+      </div>
+              <small className="blockBeetween"></small>
+      <ul className="headerBlock">
+        {/* <li className="logo">FORAS-LAND DB</li> */}
         <li className="btn">
           <i
             id="mainBtn"
@@ -60,11 +69,11 @@ export const Navbar = memo(() => {
             Завдання
           </NavLink>
         </li>
-        {/* <li className={showBtn} onClick={() => setClass()}>
+         <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/exploutation">
             Резерв
           </NavLink>
-        </li> */}
+        </li> 
         {/* <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/liquids">
             Статистика
@@ -86,7 +95,6 @@ export const Navbar = memo(() => {
           </NavLink>
         </li>
       </ul>
-      <small></small>
     </nav>
   );
 });
