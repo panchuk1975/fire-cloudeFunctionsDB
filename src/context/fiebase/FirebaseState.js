@@ -30,7 +30,8 @@ import {
   OPEN_ROUTE,
 } from "../types";
 
-const url = "https://tehsupport-react-firebase.firebaseio.com/";
+//const url = "https://tehsupport-react-firebase.firebaseio.com";
+const url = "https://fire-cloudefunctionsdb.firebaseio.com";
 
 export const FirebaseState = ({ children }) => {
   //-----------------------Get Car Owner ID = userID-----------------------//

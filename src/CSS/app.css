@@ -2,10 +2,11 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif; }
 
 .bg-fon {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: white;
   height: 100%;
   position: fixed;
   width: 100%;
@@ -24,45 +25,102 @@
   min-width: 100%;
   min-height: 100%; }
 
-.fireAuthConteinerRegister {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  position: relative;
-  align-items: center;
-  z-index: 555;
-  left: 50%;
-  height: 300px;
-  transform: translate(-50%, 45%);
-  -webkit-box-shadow: 0px 0px 10px 3px rgba(37, 37, 37, 0.75);
-  -moz-box-shadow: 0px 0px 10px 3px rgba(37, 37, 37, 0.75);
-  box-shadow: 0px 0px 10px 3px rgba(37, 37, 37, 0.75); }
-  .fireAuthConteinerRegister:hover {
-    -webkit-box-shadow: 0px 0px 10px 3px rgba(92, 92, 92, 0.75);
-    -moz-box-shadow: 0px 0px 10px 3px rgba(92, 92, 92, 0.75);
-    box-shadow: 0px 0px 10px 3px rgba(68, 68, 68, 0.75); }
-  .fireAuthConteinerRegister .firebaseAuth {
-    cursor: pointer;
-    z-index: 999; }
-  .fireAuthConteinerRegister:after {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.4); }
+.justify-content-between {
+  color: #1c1c24; }
 
-.content {
-  position: relative;
+details {
+  color: #2aad2a;
+  font-size: 11px;
+  margin: 4px 0 0 0;
+  padding: 0; }
+
+details:hover {
+  color: #6ef76e;
+  font-size: 11px;
+  margin: 4px 0 0 0; }
+
+pre {
+  margin: 0;
+  font-weight: 550;
+  font-family: "Montserrat", sans-serif; }
+
+.head {
+  color: #29a829; }
+
+.carBrocken {
+  color: red; }
+
+.form-group {
+  width: 122px;
+  padding: 0 0 0 0;
+  margin: 0 2px 0 0; }
+
+.form-group input {
+  font-size: 14px;
+  height: 20px; }
+
+.form-group label {
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  color: #cecaca; }
+
+.form-group label:hover {
+  color: limegreen; }
+
+.form-control {
+  margin: 0;
+  padding: 0 2px 0 2px;
+  width: 100%;
   text-align: center;
-  font-size: 2rem;
-  color: white;
-  z-index: 333;
-  width: 80%;
-  text-align: center;
-  padding: 10px 32px;
-  background: rgba(255, 255, 255, 0.04);
-  -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.75); }
+  background: #acaaaa; }
+
+.form-control:hover {
+  background: #f8f8f8;
+  color: black;
+  font-weight: 500; }
+
+#date {
+  background-color: #8bec8b;
+  width: 100%;
+  margin: 0 25px 0 0;
+  text-align: center; }
+
+#date:hover {
+  background-color: #d2f1d2; }
+
+#time {
+  width: 197px;
+  margin: 0 0px 0 0px;
+  padding: 0 0px 0 0px;
+  text-align: center; }
+
+#time label {
+  padding: 0 0 0 0;
+  margin: 0 0 0 -130px; }
+
+#date {
+  width: 120px;
+  font-size: 13px;
+  padding: 0; }
+
+#datetime-local {
+  width: 122px; }
+
+#datetime-local input {
+  font-size: 8.5px;
+  padding: 0; }
+
+#dateOfCarRegistration {
+  width: 90%;
+  margin: 0 32px 0 0;
+  text-align: center; }
+
+.important {
+  background-color: lightgreen; }
+
+.important:hover {
+  background-color: #d2f1d2; }
+
+#danger:hover {
+  background-color: #e21a1a; }

@@ -6,7 +6,7 @@ import { Navbar } from "./components/Navbar";
 import { FirebaseState } from "./context/fiebase/FirebaseState";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Loader } from "./components/Loader";
-//import { NavLink } from "react-router-dom;
+import { NavLink } from "react-router-dom";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const AutoAgr = React.lazy(() => import("./pages/AutoAgr"));
@@ -14,12 +14,12 @@ const Agreg = React.lazy(() => import("./pages/Agreg"));
 const Liquids = React.lazy(() => import("./pages/Liquids"));
 const Exploutation = React.lazy(() => import("./pages/Exploutation"));
 const CreateNew = React.lazy(() => import("./pages/CreateNew"));
-//const About = React.lazy(() => import("./components/About"));
+const About = React.lazy(() => import("./components/About"));
 const Help = React.lazy(() => import("./components/Help"));
-//const Login = React.lazy(() => import("./components/Login"));
-//const Register =  import("./components/Register");
+const Login = React.lazy(() => import("./components/Login"));
+const Register = React.lazy(() => import("./components/Register"));
 const Profile = React.lazy(() => import("./pages/Profile"));
-//const ForgotPassword = React.lazy(() => import("./components/ForgotPassword"));
+const ForgotPassword = React.lazy(() => import("./components/ForgotPassword"));
 
 let contentWidth = "25%";
 let contentWidthNumber =
@@ -38,13 +38,16 @@ class App extends Component {
       user: null,
     };
   }
-  // uiConfigLogin = {
-  //   signInFlow: "popup",
-  //   signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
-  //   callBacks: {
-  //     signInSuccess: () => false,
-  //   },
-  // };
+  uiConfigLogin = {
+    signInFlow: "popup",
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    ],
+    callBacks: {
+      ignInSuccessWithAuthResult: () => false,
+    },
+  };
   uiConfigRegister = {
     signInFlow: "popup",
     signInOptions: [
@@ -52,7 +55,7 @@ class App extends Component {
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     ],
     callBacks: {
-      signInSuccess: () => false,
+      ignInSuccessWithAuthResult: () => false,
     },
   };
   updateDimensions = () => {
@@ -67,7 +70,7 @@ class App extends Component {
   }
 
   authListener() {
-    fire.auth().onAuthStateChanged((user) => {
+        fire.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
       } else {
@@ -84,6 +87,7 @@ class App extends Component {
       0.1046586 * window.innerWidth +
       106.6952733
     }%`;
+    console.log(this.state);
     return (
       <FirebaseState>
         <BrowserRouter>
@@ -243,7 +247,7 @@ class App extends Component {
               <div>
                 <Switch>
                   <Route
-                    // path={"/register"}
+                     path={"/register"}
                     render={() => {
                       return (
                         <React.Suspense
@@ -253,14 +257,11 @@ class App extends Component {
                             </div>
                           }
                         >
-                          {/* <Register /> */}
+                           <Register /> 
                           <div
-                            style={{ width: contentWidth }}
+                          style={{ width: contentWidth }}
                             className="fireAuthConteinerRegister"
                           >
-                            <div className="content">
-                              <header>FORAS-LAND DB</header>
-                            </div>
                             <StyledFirebaseAuth
                               className="firebaseAuth"
                               uiConfig={this.uiConfigRegister}
@@ -271,7 +272,7 @@ class App extends Component {
                       );
                     }}
                   />
-                  {/* <Route
+                  <Route
                     path={"/about"}
                     render={() => {
                       return (
@@ -286,8 +287,8 @@ class App extends Component {
                         </React.Suspense>
                       );
                     }}
-                  /> */}
-                  {/* <Route
+                  />
+                  <Route
                     path={"/forgotpassword"}
                     render={() => {
                       return (
@@ -320,8 +321,8 @@ class App extends Component {
                         </React.Suspense>
                       );
                     }}
-                  /> */}
-                  {/* <React.Suspense
+                  />
+                  <React.Suspense
                     fallback={
                       <div>
                         <Loader />
@@ -329,7 +330,7 @@ class App extends Component {
                     }
                   >
                     <Login />
-                  </React.Suspense> */}
+                  </React.Suspense>
                 </Switch>
               </div>
             )}

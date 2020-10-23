@@ -6,7 +6,6 @@ import { CreateCar } from "./CreateCar";
 import { ModalBox } from "./ModalBox";
 import { ListComponent } from "./ListComponent";
 import { AlertBox } from "./AlertBox";
-import "../CSS/ProfCompStyle.scss";
 import fire from "../config/Fire";
 var normalize = require("normalize-object");
 var moment = require("moment");
@@ -229,9 +228,9 @@ export const ProfileComponent = memo(
                 <small>Ідентифікатор</small>
               </label>
               <input
-                id="important"
+            
                 type="text"
-                className="form-control"
+                className="important form-control"
                 placeholder="Ідентифікатор"
                 value={form.company}
                 name="company"
@@ -243,9 +242,9 @@ export const ProfileComponent = memo(
                 <small>Відображення</small>
               </label>
               <input
-                id="important"
+             
                 type="text"
-                className="form-control"
+                className="important form-control"
                 placeholder="Відображення"
                 value={form.jointCompany}
                 name="jointCompany"

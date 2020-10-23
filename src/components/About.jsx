@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import "../CSS/LogRegFormStyle.scss";
 
 const logo = require("../pictures/about1.png");
 

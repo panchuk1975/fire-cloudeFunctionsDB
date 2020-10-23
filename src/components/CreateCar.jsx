@@ -186,12 +186,11 @@ export const CreateCar = ({ car, cars, userInfo }) => {
             </label>
             <div>
               <select
-                id="important"
                 type="text"
                 name="driver"
                 value={form.driver}
                 onChange={changeHandler}
-                className="custom-select custom-select-sm"
+                className="custom-select custom-select-sm important"
               >
                 <option className="main" value="Автомобіль">
                   Автомобіль
@@ -208,9 +207,8 @@ export const CreateCar = ({ car, cars, userInfo }) => {
               <small>Найменування</small>
             </label>
             <input
-              id="important"
               type="text"
-              className="form-control"
+              className="form-control important"
               placeholder="Найменування"
               value={form.typeOfCar}
               name="typeOfCar"
@@ -223,9 +221,8 @@ export const CreateCar = ({ car, cars, userInfo }) => {
               <small>Обліковий номер</small>
             </label>
             <input
-              id="important"
               type="text"
-              className="form-control"
+              className="form-control important"
               placeholder="Номер"
               value={form.governmentCarNumber}
               name="governmentCarNumber"
@@ -362,9 +359,8 @@ export const CreateCar = ({ car, cars, userInfo }) => {
                 <small>Початковий, км</small>
               </label>
               <input
-                id="important"
                 type="number"
-                className="form-control"
+                className="form-control important"
                 placeholder="Км старт"
                 value={form.carIndicatorFirst}
                 name="carIndicatorFirst"
@@ -412,9 +408,8 @@ export const CreateCar = ({ car, cars, userInfo }) => {
                 <small>Початкові мотогодини</small>
               </label>
               <input
-                id="important"
                 type="number"
-                className="form-control"
+                className="form-control important"
                 placeholder="Початкові м/г"
                 value={form.carTimeStart}
                 name="carTimeStart"
@@ -461,9 +456,8 @@ export const CreateCar = ({ car, cars, userInfo }) => {
                 <small>Палива на км, л</small>
               </label>
               <input
-                id="important"
                 type="number"
-                className="form-control"
+                className="form-control important"
                 placeholder="На км/л"
                 value={form.fuelActiveСonsumption}
                 name="fuelActiveСonsumption"
@@ -478,9 +472,8 @@ export const CreateCar = ({ car, cars, userInfo }) => {
                 <small>Палива на год, л</small>
               </label>
               <input
-                id="important"
                 type="number"
-                className="form-control"
+                className="form-control important"
                 placeholder="На год, л"
                 value={form.fuelPassiveСonsumption}
                 name="fuelPassiveСonsumption"
@@ -741,9 +734,8 @@ export const CreateCar = ({ car, cars, userInfo }) => {
               <small>Поточний стан</small>
             </label>
             <input
-              id="important"
               type="text"
-              className="form-control"
+              className="form-control important"
               placeholder="Стан"
               value={form.serviceability}
               name="serviceability"

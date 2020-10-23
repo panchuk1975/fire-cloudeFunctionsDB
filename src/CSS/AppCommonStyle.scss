@@ -1,10 +1,5 @@
 /*-------------------------Common properties-------------------------*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
+
 .justify-content-between {
   color: rgb(28, 28, 36);
 }
@@ -99,7 +94,7 @@ pre {
   margin: 0 32px 0 0;
   text-align: center;
 }
-#important {
+.important {
   background-color: lightgreen;
 }
 #important:hover {
