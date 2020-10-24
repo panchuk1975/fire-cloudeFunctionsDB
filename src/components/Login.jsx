@@ -32,7 +32,7 @@ class Login extends Component {
   login = (event) => {
     event.preventDefault();
     fire
-      .auth()
+      .auth
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .catch((error) => {
         this.setState({ fireErrors: error.message });

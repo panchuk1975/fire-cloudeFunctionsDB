@@ -7,7 +7,7 @@ const newLogo = require("../pictures/newLogo.png");
 export const Navbar = memo(() => {
   const [showBtn, setBtn] = useState("item");
   let logout = () => {
-    fire.auth().signOut();
+    fire.auth.signOut();
   };
   let setClass = () => {
     if (showBtn === "showBtn") {

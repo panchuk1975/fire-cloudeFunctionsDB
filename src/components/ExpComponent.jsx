@@ -52,7 +52,7 @@ export const ExpComponent = memo(
       }
     };
     //--------------------------------Create user data---------------------------------//
-    var owner = fire.auth().currentUser.uid;
+    var owner = fire.auth.currentUser.uid;
     let userInfo = userInfos.find((info) => info.owner === owner);
     if (!userInfo) {
       return null;

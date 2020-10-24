@@ -6,8 +6,8 @@ import fire from "../config/Fire";
 
 const Home = memo(({ windowWidth }) => {
     let email = "";
-    if(fire.auth().currentUser){
-        email = fire.auth().currentUser.email;
+    if(fire.auth.currentUser){
+        email = fire.auth.currentUser.email;
         email = email.split("@")[0];
     } 
   const {

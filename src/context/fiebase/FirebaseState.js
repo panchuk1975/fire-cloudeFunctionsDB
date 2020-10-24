@@ -30,13 +30,12 @@ import {
   OPEN_ROUTE,
 } from "../types";
 
-//const url = "https://tehsupport-react-firebase.firebaseio.com";
 const url = "https://fire-cloudefunctionsdb.firebaseio.com";
 
 export const FirebaseState = ({ children }) => {
   //-----------------------Get Car Owner ID = userID-----------------------//
-  if (fire.auth().currentUser) {
-    var owner = fire.auth().currentUser.uid;
+  if (fire.auth.currentUser) {
+    var owner = fire.auth.currentUser.uid;
   }
   //-------------------------------Init State------------------------------//
   const initialState = {
@@ -682,14 +681,18 @@ export const FirebaseState = ({ children }) => {
   };
   //-------------------------Userinfo functions---------------------------//
   const addUserInfo = async (newInfo) => {
+    showLoader();
     const userInfo = {
       ...newInfo,
     };
     try {
-      const res = await axios.post(`${url}/userInfos.json`, userInfo);
+      const res = await fire.db
+        .collection("usersInfos")
+        .add(userInfo)
+        .catch((err) => console.log(err));
+        console.log(res)
       const payload = {
         ...newInfo,
-        id: res.data.name,
       };
       dispatch({
         type: ADD_USERINFO,
@@ -701,18 +704,20 @@ export const FirebaseState = ({ children }) => {
   };
   //------------------------------------------------------------------------//
   const changeUserInfo = async (newUserInfo) => {
+    showLoader();
     const userInfo = {
-      ...newUserInfo,
-      owner,
-    };
+           ...newUserInfo,
+         };
+         console.log(userInfo.id);
     try {
-      const res = await axios.patch(
-        `${url}/userInfos/${userInfo.id}.json`,
-        userInfo
-      );
+      await fire.db
+        .collection("usersInfos").doc(userInfo.id)
+        .update(userInfo)
+        .catch((err) => console.log(err));
       const payload = {
-        ...res.data,
+        ...userInfo,
       };
+      console.log(payload);
       dispatch({
         type: CHANGE_USERINFO,
         payload,
@@ -721,27 +726,38 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
+  //     const res = await axios.patch(
+  //       `${url}/userInfos/${userInfo.id}.json`,
+  //       userInfo
+  //     );
   //------------------------------------------------------------------------//
   const fetchUsersInfo = async () => {
     showLoader();
-    const res = await axios.get(`${url}/userInfos.json`);
-    if (!res.data) {
-      res.data = {};
-    }
-    const payload = Object.keys(res.data).map((key) => {
-      return {
-        ...res.data[key],
-        id: key,
-      };
-    });
+    const res = await fire.db
+    .collection("usersInfos")//.doc(id)
+    .get()
+    .catch((err) => console.log(err));
+    const payload = []
+    res.forEach(doc => {
+     payload.push({...doc.data(), id:doc.id});
+    })
+    // const payload = Object.keys(res).map((key) => {
+    //   return {
+    //     ...res.data[key],
+    //     id: key,
+    //   };
+    // });
     dispatch({
       type: FETCHED_USERINFO,
       payload,
     });
-  };
+  }
   //-----------------------------------------------------------------------//
   const removeUserInfos = async (id) => {
-    await axios.delete(`${url}/userInfos/${id}.json`);
+    await fire.db
+        .collection("usersInfos").doc(id)
+        .delete()
+        .catch((err) => console.log(err));
     dispatch({
       type: REMOVE_USERINFOS,
       payload: id,

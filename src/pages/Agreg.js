@@ -5,7 +5,7 @@ import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
 
 const Agreg = memo(({ contentWidth, windowWidth }) => {
-  let email = fire.auth().currentUser.email;
+  let email = fire.auth.currentUser.email;
   email = email.split("@")[0];
   const {
     loading,

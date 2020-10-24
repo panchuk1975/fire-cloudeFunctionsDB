@@ -32,8 +32,8 @@ export const ProfileComponent = memo(
     removeUserInfos,
   }) => {
     //-----------------------------User data----------------------------//
-    const user = fire.auth().currentUser;
-    const owner = fire.auth().currentUser.uid;
+    const user = fire.auth.currentUser;
+    const owner = fire.auth.currentUser.uid;
     const firebase = useContext(FirebaseContext);
     const userCars = cars.filter((car) => car.owner === owner);
     localStorage.setItem("carsLength", JSON.stringify(userCars.length));
@@ -45,7 +45,7 @@ export const ProfileComponent = memo(
     } else {
       userInfo = JSON.parse(localStorage.getItem("userInfo"));
     }
-    let currentUserEmail = fire.auth().currentUser.email;
+    let currentUserEmail = fire.auth.currentUser.email;
     let cutEmail = currentUserEmail.split("@")[0];
     //------------------------------Alert box-----------------------------//
     let [alertClass, setAlertClass] = useState("modal");
@@ -63,7 +63,16 @@ export const ProfileComponent = memo(
     };
     if (userInfo) {
       if (userInfo.owner === owner) {
-        initialForm = userInfo;
+        initialForm = {
+          firstName:userInfo.firstName,
+          secondName: userInfo.secondName,
+          mobilePhon: userInfo.mobilePhon,
+          company: userInfo.company,
+          jointCompany:userInfo.jointCompany,
+          email: currentUserEmail,
+          carID: userInfo.carID,
+          owner,
+        };
       }
     }
 
@@ -92,7 +101,8 @@ export const ProfileComponent = memo(
         firebase
           .addUserInfo({ ...form })
           .then(() => {})
-          .catch(() => {
+          .catch((err) => {
+            console.log(err)
             setAlertText("Ошибка сервера!");
             setAlertClass("open");
           });
@@ -256,12 +266,12 @@ export const ProfileComponent = memo(
                 <small>Email</small>
               </label>
               <input
-                id="email"
                 type="email"
                 className="form-control"
                 placeholder="Email"
                 value={form.email}
                 onChange={changeHandler}
+                name="email"
               />
             </div>
             <div className="form-group">
@@ -269,7 +279,7 @@ export const ProfileComponent = memo(
                 <small>Окремий ID</small>
               </label>
               <input
-                type="id"
+                type="text"
                 className="form-control"
                 placeholder="ID"
                 value={form.carID}

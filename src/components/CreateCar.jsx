@@ -81,7 +81,7 @@ export const CreateCar = ({ car, cars, userInfo }) => {
     100;
   //-------------------------Create Car function------------------------//
   const createHandler = (event) => {
-    var owner = fire.auth().currentUser.uid;
+    var owner = fire.auth.currentUser.uid;
     cars = cars.filter((car) => car.owner === owner);
     let isCarExists = !!cars.filter(
       // eslint-disable-next-line

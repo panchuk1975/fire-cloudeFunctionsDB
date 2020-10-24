@@ -33,10 +33,10 @@ export class Register extends Component {
   register = (event) => {
     event.preventDefault();
     fire
-      .auth()
+      .auth
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(function () {
-        let user = fire.auth().currentUser;
+        let user = fire.auth.currentUser;
         console.log(user)
         user.sendEmailVerification();
         })

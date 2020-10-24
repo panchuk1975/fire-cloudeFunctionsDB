@@ -22,8 +22,8 @@ const Help = () => {
     106.6952733;
   let imgWidth = `${contentWidthNumber + 6}%`;
   let email = "";
-  if (fire.auth().currentUser) {
-    email = fire.auth().currentUser.email;
+  if (fire.auth.currentUser) {
+    email = fire.auth.currentUser.email;
     email = email.split("@")[0];
   }
   return (

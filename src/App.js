@@ -70,7 +70,7 @@ class App extends Component {
   }
 
   authListener() {
-        fire.auth().onAuthStateChanged((user) => {
+        fire.auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
       } else {
@@ -87,7 +87,6 @@ class App extends Component {
       0.1046586 * window.innerWidth +
       106.6952733
     }%`;
-    console.log(this.state);
     return (
       <FirebaseState>
         <BrowserRouter>

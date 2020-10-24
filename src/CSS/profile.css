@@ -1,0 +1,48 @@
+.userInfoBasis {
+  margin: 0px 0 0px 0;
+  padding: 20px;
+  border: 1px solid #bfbfbf;
+  border-radius: 5px;
+  background-position: top;
+  background-size: cover;
+  -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.75); }
+
+#allSpace {
+  margin: 0 20px 0 0; }
+
+#fieldSpase {
+  margin: 0;
+  height: 20px;
+  width: 156px;
+  border-radius: 4px;
+  background-color: #b3afaf;
+  border: 1px solid lightgrey; }
+
+#fieldSpase:hover {
+  background-color: #fbfcfa; }
+
+#fieldSpase span {
+  text-align: justify;
+  font-size: 11px;
+  margin: -13px 0 0 0;
+  padding: 0 0 0 5px; }
+
+#fieldSpase input {
+  font-size: 12px;
+  margin: 0 0 0 0; }
+
+#changeInfoBtn {
+  width: 100%;
+  margin: 15px 2px 0 2px;
+  padding: 0; }
+
+#id:hover,
+#fieldSpase:hover,
+#email:hover,
+#identifisy:hover {
+  background-color: red; }
+
+#TransitionGroup {
+  color: #a8a6a6; }
