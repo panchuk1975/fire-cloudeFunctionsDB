@@ -121,14 +121,23 @@ export const FirebaseState = ({ children }) => {
   const addCar = async (newCar) => {
     const car = {
       ...newCar,
-      owner,
+      owner
     };
     try {
-      const res = await axios.post(`${url}/cars.json`, car);
+      const res = await fire.db
+        .collection("cars")
+        .add(car)
+        .catch((err) => console.log(err));
+        console.log(res)
       const payload = {
         ...car,
-        id: res.data.name,
       };
+    // try {
+    //   const res = await axios.post(`${url}/cars.json`, car);
+    //   const payload = {
+    //     ...car,
+    //     id: res.data.name,
+    //   };
       dispatch({
         type: ADD_CAR,
         payload,
@@ -177,7 +186,11 @@ export const FirebaseState = ({ children }) => {
   };
   //------------------------------------------------------------------------//
   const removeCar = async (id) => {
-    await axios.delete(`${url}/cars/${id}.json`);
+    await fire.db
+        .collection("cars").doc(id)
+        .delete()
+        .catch((err) => console.log(err));
+    //await axios.delete(`${url}/cars/${id}.json`);
     dispatch({
       type: REMOVE_CAR,
       payload: id,
@@ -186,16 +199,24 @@ export const FirebaseState = ({ children }) => {
   //------------------------------------------------------------------------//
   const fetchCars = async () => {
     showLoader();
-    const res = await axios.get(`${url}/cars.json`);
-    if (!res.data) {
-      res.data = {};
-    }
-    const payload = Object.keys(res.data).map((key) => {
-      return {
-        ...res.data[key],
-        id: key,
-      };
-    });
+    const res = await fire.db
+    .collection("cars")//.doc(id)
+    .get()
+    .catch((err) => console.log(err));
+    const payload = []
+    res.forEach(doc => {
+     payload.push({...doc.data(), id:doc.id});
+    })
+    // const res = await axios.get(`${url}/cars.json`);
+    // if (!res.data) {
+    //   res.data = {};
+    // }
+    // const payload = Object.keys(res.data).map((key) => {
+    //   return {
+    //     ...res.data[key],
+    //     id: key,
+    //   };
+    // });
     dispatch({
       type: FETCHED_CARS,
       payload,

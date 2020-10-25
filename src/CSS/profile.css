@@ -1,13 +1,13 @@
 .userInfoBasis {
   margin: 0px 0 0px 0;
   padding: 20px;
-  border: 1px solid #bfbfbf;
+  border: 1px solid #0cb520;
   border-radius: 5px;
   background-position: top;
   background-size: cover;
-  -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.75); }
+  -webkit-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
+  -moz-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
+  box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99); }
 
 #allSpace {
   margin: 0 20px 0 0; }
@@ -46,3 +46,6 @@
 
 #TransitionGroup {
   color: #a8a6a6; }
+
+.hr {
+  margin: 7px 0 7px 0; }

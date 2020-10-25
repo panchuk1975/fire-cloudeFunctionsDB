@@ -13,7 +13,6 @@ import { CreateCar } from "./CreateCar";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
-import "../CSS/ObjCompStyle.scss";
 var moment = require("moment");
 
 export const AgrComponent = memo(

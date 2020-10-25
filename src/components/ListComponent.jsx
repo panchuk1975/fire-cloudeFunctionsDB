@@ -36,7 +36,7 @@ export const ListComponent = memo(
   }) => {
     let dataListWarningText =
       "Видалення листа! Для видалення авто необхідно видалити всі листи!!!";
-    let owner = fire.auth().currentUser.uid;
+    let owner = fire.auth.currentUser.uid;
     let ownerDates = dates.find((date) => date.owner === owner);
     if (!ownerDates) {
       ownerDates = { 

@@ -33,9 +33,9 @@ const Help = () => {
       </div>
       <div className="helpContent">
         <div className="textConteiner">
-          <h3>FORAS-LAND DB 1.0.0</h3>
+         <h3>FORAS-LAND DB 1.0.0</h3>
           <p></p>
-          <div className="helpDescription">
+          {/*  <div className="helpDescription">
             <div>
               <div className="helpStart">
                 <a href="#start">
@@ -518,7 +518,7 @@ const Help = () => {
               витрати", відємне значення у формі "Пробіг без вантажу"
               (відповідно "0" у формі "Пробіг") залишаються незмінними.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

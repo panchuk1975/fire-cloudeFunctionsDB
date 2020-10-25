@@ -12,7 +12,6 @@ import { CreateCar } from "./CreateCar";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
-import "../CSS/ObjCompStyle.scss";
 import { ListComponent } from "./ListComponent";
 var moment = require("moment");
 
@@ -184,8 +183,7 @@ export const CarsComponent = memo(
                   <CSSTransition key={car.id} classNames={"note"} timeout={800}>
                     <li
                       key={car.id}
-                      id="carInnerLi"
-                      className="list-group-item"
+                      className="list-group-item carInnerLi"
                     >
                       <form
                         id="carBasis"
@@ -448,7 +446,7 @@ export const CarsComponent = memo(
             csvData={carListLiquidsExelInfo(cars, lists, routes)}
             fileName={"пммЛист"}
             textCSV="листи.xlx"
-          />
+          />   
         </div>
       </div>
     );

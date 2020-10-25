@@ -11,7 +11,6 @@ import { CreateCar } from "./CreateCar";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
-import "../CSS/ObjCompStyle.scss";
 import { ListComponent } from "./ListComponent";
 var moment = require("moment");
 

@@ -4,7 +4,7 @@ nav {
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  background: rgb(35, 33, 37);
+  background: rgb(23, 19, 51);
   padding: 0px 10px 0px 10px;
   z-index: 999;
   //background: url("../pictures/2-headerBG.jpg");
@@ -42,7 +42,7 @@ nav {
   color: white;
   text-decoration: none;
   &:hover {
-    color: rgb(221, 14, 14);
+    color: rgb(12, 181, 32);
   }
 }
 nav ul li.item {
@@ -57,7 +57,7 @@ nav ul li.item {
 }
 .active,
 nav ul li.item:hover {
-  color: rgb(221, 14, 14);
+  color: rgb(12, 181, 32);
   border-radius: 5px;
   -webkit-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
   -moz-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
@@ -65,12 +65,12 @@ nav ul li.item:hover {
 }
 nav ul li.btn {
   height: 50px;
-  color: white;
+  color: rgb(12, 181, 32);
   font-size: 25px;
   display: none;
   padding: 0 10px;
   &:hover {
-    color: white;
+    color: rgb(12, 181, 32);
     border-radius: 5px;
     -webkit-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
     -moz-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
@@ -117,7 +117,7 @@ nav ul li.showBtn {
   line-height: 50px;
 }
 nav ul li.showBtn:hover {
-  color: rgb(221, 14, 14);
+  color: rgb(12, 181, 32);
   border-radius: 5px;
   -webkit-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
   -moz-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;

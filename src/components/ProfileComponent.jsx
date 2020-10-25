@@ -326,7 +326,7 @@ export const ProfileComponent = memo(
             )}
           </div>
         </div>
-        <hr className="hr" />
+        <hr className="hrProfile" />
         <TransitionGroup
           id="TransitionGroup"
           component="ul"

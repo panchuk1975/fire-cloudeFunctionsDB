@@ -4,7 +4,7 @@ nav {
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  background: #232125;
+  background: #171333;
   padding: 0px 10px 0px 10px;
   z-index: 999;
   background-size: cover;
@@ -40,7 +40,7 @@ nav {
   color: white;
   text-decoration: none; }
   .nav-link:hover {
-    color: #dd0e0e; }
+    color: #0cb520; }
 
 nav ul li.item {
   height: 50px;
@@ -54,7 +54,7 @@ nav ul li.item {
 
 .active,
 nav ul li.item:hover {
-  color: #dd0e0e;
+  color: #0cb520;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
   -moz-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
@@ -62,12 +62,12 @@ nav ul li.item:hover {
 
 nav ul li.btn {
   height: 50px;
-  color: white;
+  color: #0cb520;
   font-size: 25px;
   display: none;
   padding: 0 10px; }
   nav ul li.btn:hover {
-    color: white;
+    color: #0cb520;
     border-radius: 5px;
     -webkit-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
     -moz-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
@@ -108,7 +108,7 @@ nav ul li.showBtn {
   line-height: 50px; }
 
 nav ul li.showBtn:hover {
-  color: #dd0e0e;
+  color: #0cb520;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
   -moz-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
