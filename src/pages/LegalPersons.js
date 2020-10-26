@@ -4,7 +4,7 @@ import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
 
-const Home = memo(({ windowWidth }) => {
+const LegalPersons = memo(({ windowWidth }) => {
     let email = "";
     if(fire.auth.currentUser){
         email = fire.auth.currentUser.email;
@@ -70,4 +70,4 @@ const Home = memo(({ windowWidth }) => {
   );
 });
 
-export default Home;
+export default LegalPersons;

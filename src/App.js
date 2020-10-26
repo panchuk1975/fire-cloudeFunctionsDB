@@ -8,12 +8,13 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import { Loader } from "./components/Loader";
 import { NavLink } from "react-router-dom";
 
-const Home = React.lazy(() => import("./pages/Home"));
+const CreateNew = React.lazy(() => import("./pages/CreateNew"));
+const LegalPersons  = React.lazy(() => import("./pages/LegalPersons"));
+
 const AutoAgr = React.lazy(() => import("./pages/AutoAgr"));
 const Agreg = React.lazy(() => import("./pages/Agreg"));
 const Liquids = React.lazy(() => import("./pages/Liquids"));
 const Exploutation = React.lazy(() => import("./pages/Exploutation"));
-const CreateNew = React.lazy(() => import("./pages/CreateNew"));
 const About = React.lazy(() => import("./components/About"));
 const Help = React.lazy(() => import("./components/Help"));
 const Login = React.lazy(() => import("./components/Login"));
@@ -112,7 +113,7 @@ class App extends Component {
                     }}
                   />
                   <Route
-                    path={"/home"}
+                    path={"/legalpersons"}
                     render={() => {
                       return (
                         <React.Suspense
@@ -122,7 +123,7 @@ class App extends Component {
                             </div>
                           }
                         >
-                          <Home
+                          <LegalPersons
                             contentWidth={contentWidth}
                             windowWidth={window.innerWidth}
                           />

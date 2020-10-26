@@ -7,7 +7,7 @@ import {
   instExelInfo,
   instTimeExelInfo,
 } from "../mathfunctions/liquidsFunctions";
-import { CreateCar } from "./CreateCar";
+import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
@@ -364,7 +364,7 @@ export const ExpComponent = memo(
                     )}
                     <form>
                       {car.openCar && (
-                        <CreateCar car={car} cars={cars} userInfo={userInfo} />
+                        <CreateComponent car={car} cars={cars} userInfo={userInfo} />
                       )}
                     </form>
                   </li>

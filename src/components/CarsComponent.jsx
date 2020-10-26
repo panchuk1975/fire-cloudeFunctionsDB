@@ -8,7 +8,7 @@ import {
   carLiquidsExelInfo,
   carListLiquidsExelInfo,
 } from "../mathfunctions/liquidsFunctions";
-import { CreateCar } from "./CreateCar";
+import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
@@ -395,7 +395,7 @@ export const CarsComponent = memo(
                       )}
                       <form>
                         {car.openCar && (
-                          <CreateCar
+                          <CreateComponent
                             car={car}
                             cars={cars}
                             userInfo={userInfo}

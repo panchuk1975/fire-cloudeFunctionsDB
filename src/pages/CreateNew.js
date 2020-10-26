@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, memo } from "react";
-import { CreateCar } from "../components/CreateCar";
+import { CreateComponent } from "../components/CreateComponent";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
@@ -20,7 +20,7 @@ const CreateNew = memo(() => {
   return (
     <div>
       <small>{email}</small>
-      {loading ? <Loader /> : <CreateCar cars={cars} userInfo={userInfo} />}
+      {loading ? <Loader /> : <CreateComponent cars={cars} userInfo={userInfo} />}
     </div>
   );
 });

@@ -61,7 +61,7 @@ export const FirebaseState = ({ children }) => {
     };
     console.log(dates)
     try {
-      const res = await fire.db
+      await fire.db
       .collection("dates")
       .add(dates)
       .catch((err) => console.log(err));
@@ -150,7 +150,7 @@ export const FirebaseState = ({ children }) => {
       owner
     };
     try {
-      const res = await fire.db
+      await fire.db
         .collection("cars")
         .add(car)
         .catch((err) => console.log(err));

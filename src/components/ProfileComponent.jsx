@@ -2,7 +2,7 @@ import React, { memo, useState, useContext } from "react";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
-import { CreateCar } from "./CreateCar";
+import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { ListComponent } from "./ListComponent";
 import { AlertBox } from "./AlertBox";
@@ -1195,7 +1195,7 @@ export const ProfileComponent = memo(
                     )}
                     <form>
                       {car.openCar && (
-                        <CreateCar car={car} cars={cars} userInfo={userInfo} />
+                        <CreateComponent car={car} cars={cars} userInfo={userInfo} />
                       )}
                     </form>
                   </li>

@@ -1,26 +1,26 @@
 import React from "react";
 import fire from "../config/Fire";
-const operator = require("../pictures/operator.png");
-const about2 = require("../pictures/about2.png");
-const about3 = require("../pictures/createNewAuto.png");
-const about4 = require("../pictures/createOpen.png");
-const about5 = require("../pictures/openCar.png");
-const about6 = require("../pictures/openCarForm.png");
-const about7 = require("../pictures/openListForm.png");
-const about8 = require("../pictures/createNewDocument.png");
-const about9 = require("../pictures/routeStandart.png");
-const about10 = require("../pictures/routeNoStandart.png");
-const pmm = require("../pictures/pmm.png");
+// const operator = require("../pictures/operator.png");
+// const about2 = require("../pictures/about2.png");
+// const about3 = require("../pictures/createNewAuto.png");
+// const about4 = require("../pictures/createOpen.png");
+// const about5 = require("../pictures/openCar.png");
+// const about6 = require("../pictures/openCarForm.png");
+// const about7 = require("../pictures/openListForm.png");
+// const about8 = require("../pictures/createNewDocument.png");
+// const about9 = require("../pictures/routeStandart.png");
+// const about10 = require("../pictures/routeNoStandart.png");
+// const pmm = require("../pictures/pmm.png");
 
 const Help = () => {
-  let contentWidthNumber =
-    7.2096691 * Math.pow(10, -14) * Math.pow(window.innerWidth, 5) -
-    3.8875191 * Math.pow(10, -10) * Math.pow(window.innerWidth, 4) +
-    7.5708477 * Math.pow(10, -7) * Math.pow(window.innerWidth, 3) -
-    6.0702864 * Math.pow(10, -4) * Math.pow(window.innerWidth, 2) +
-    0.1046586 * window.innerWidth +
-    106.6952733;
-  let imgWidth = `${contentWidthNumber + 6}%`;
+  //let contentWidthNumber =
+    // 7.2096691 * Math.pow(10, -14) * Math.pow(window.innerWidth, 5) -
+    // 3.8875191 * Math.pow(10, -10) * Math.pow(window.innerWidth, 4) +
+    // 7.5708477 * Math.pow(10, -7) * Math.pow(window.innerWidth, 3) -
+    // 6.0702864 * Math.pow(10, -4) * Math.pow(window.innerWidth, 2) +
+    // 0.1046586 * window.innerWidth +
+    // 106.6952733;
+  //let imgWidth = `${contentWidthNumber + 6}%`;
   let email = "";
   if (fire.auth.currentUser) {
     email = fire.auth.currentUser.email;

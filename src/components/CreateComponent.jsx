@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import fire from "../config/Fire";
 var moment = require("moment");
 
-export const CreateCar = ({ car, cars, userInfo }) => {
+export const CreateComponent = ({ car, cars, userInfo }) => {
   //-----------------------------Call stand by--------------------------------//
   const firebase = useContext(FirebaseContext);
   let history = useHistory();
