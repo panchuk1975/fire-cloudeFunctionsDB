@@ -54,16 +54,26 @@ export const FirebaseState = ({ children }) => {
   const changeCreate = () => dispatch({ type: CHANGE_CREATE });
   //---------------------------------Date----------------------------------//
   const addDates = async (newDates) => {
+    console.log(newDates)
     const dates = {
       ...newDates,
       owner,
     };
+    console.log(dates)
     try {
-      const res = await axios.post(`${url}/dates.json`, dates);
-      const payload = {
-        ...dates,
-        id: res.data.name,
-      };
+      const res = await fire.db
+      .collection("dates")
+      .add(dates)
+      .catch((err) => console.log(err));
+    const payload = {
+      ...dates,
+    };
+      // const res = await axios.post(`${url}/dates.json`, dates);
+      // const payload = {
+      //   ...dates,
+      //   id: res.data.name,
+      // };
+
       dispatch({
         type: ADD_DATES,
         payload,
@@ -78,11 +88,15 @@ export const FirebaseState = ({ children }) => {
       ...newDates,
       owner,
     };
-    try {
-      const res = await axios.patch(`${url}/dates/${dates.owner}.json`, dates);
-      const payload = {
-        ...res.data,
-      };
+      try {
+        await fire.db
+          .collection("dates").doc(dates.id)
+          .update(dates)
+          .catch((err) => console.log(err));
+        const payload = {
+          ...dates
+        };
+      //const res = await axios.patch(`${url}/dates/${dates.owner}.json`, dates);
       dispatch({
         type: CHANGE_DATES,
         payload,
@@ -93,7 +107,11 @@ export const FirebaseState = ({ children }) => {
   };
   //------------------------------------------------------------------------//
   const removeDates = async (id) => {
-    await axios.delete(`${url}/dates/${id}.json`);
+    await fire.db
+    .collection("dates").doc(id)
+    .delete()
+    .catch((err) => console.log(err));
+    //await axios.delete(`${url}/dates/${id}.json`);
     dispatch({
       type: REMOVE_DATES,
       payload: id,
@@ -102,16 +120,24 @@ export const FirebaseState = ({ children }) => {
   //------------------------------------------------------------------------//
   const fetchDates = async () => {
     showLoader();
-    const res = await axios.get(`${url}/dates.json`);
+    const res = await fire.db
+    .collection("dates")//.doc(id)
+    .get()
+    .catch((err) => console.log(err));
     if (!res.data) {
       res.data = {};
     }
-    const payload = Object.keys(res.data).map((key) => {
-      return {
-        ...res.data[key],
-        id: key,
-      };
-    });
+    const payload = []
+    res.forEach(doc => {
+     payload.push({...doc.data(), id:doc.id});
+    })
+    // const res = await axios.get(`${url}/dates.json`);
+    // const payload = Object.keys(res.data).map((key) => {
+    //   return {
+    //     ...res.data[key],
+    //     id: key,
+    //   };
+    // });
     dispatch({
       type: FETCHED_DATES,
       payload,
@@ -128,7 +154,6 @@ export const FirebaseState = ({ children }) => {
         .collection("cars")
         .add(car)
         .catch((err) => console.log(err));
-        console.log(res)
       const payload = {
         ...car,
       };

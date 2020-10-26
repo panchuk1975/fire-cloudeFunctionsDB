@@ -6,11 +6,14 @@ import { CountStartDensity } from "../mathfunctions/liquidsFunctions";
 import { ExportReactCSV } from "../mathfunctions/liquidsFunctions";
 import "../CSS/LiqCompStyle.scss";
 
+var moment = require("moment");
+
 export const LiquidsComponent = memo(
   ({
     ownerRoutes,
     listLiquids,
     ownerDates,
+    ownerInitialDates,
     liquidWidth,
     ownerAllLists,
     ownerAllRoutes,
@@ -29,7 +32,7 @@ export const LiquidsComponent = memo(
     let [alertClass, setAlertClass] = useState("modal");
     let [alertText, setAlertText] = useState("");
     let [form, setForm] = useState({
-      ...ownerDates,
+      ...ownerInitialDates,
     });
     if (Object.keys(form).length === 0) {
       form = JSON.parse(localStorage.getItem("date"));
@@ -38,6 +41,7 @@ export const LiquidsComponent = memo(
     }
     const changeHandler = (event) => {
       setForm({ ...form, [event.target.name]: event.target.value });
+      console.log(event.target.name, event.target.value);
     };
     //------------------------Set deleted Data-----------------------//
     let holdTime = new Date();
@@ -90,6 +94,7 @@ export const LiquidsComponent = memo(
           .addDates({ ...form })
           .then(() => {})
           .catch(() => {
+            console.log("Error");
             setAlertText("Ошибка сервера!");
             setAlertClass("open");
           });
@@ -97,7 +102,7 @@ export const LiquidsComponent = memo(
         setAlertClass("open");
       } else {
         firebase
-          .changeDates({ ...form })
+          .changeDates({ ...form, id: ownerDates.id })
           .then(() => {})
           .catch(() => {
             setAlertText("Ошибка сервера!");
@@ -157,7 +162,7 @@ export const LiquidsComponent = memo(
                 type="date"
                 className="form-control"
                 placeholder="Початкова дата"
-                value={form.dateStart || ""}
+                value={moment(form.dateStart).format("YYYY-MM-DD")}
                 name="dateStart"
                 onChange={changeHandler}
               />
@@ -171,7 +176,7 @@ export const LiquidsComponent = memo(
                 type="date"
                 className="form-control"
                 placeholder="Кінцева дата"
-                value={form.dateFinish || ""}
+                value={moment(form.dateFinish).format("YYYY-MM-DD")}
                 name="dateFinish"
                 onChange={changeHandler}
               />

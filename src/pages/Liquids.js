@@ -16,7 +16,8 @@ const Liquids = memo(() => {
     0.1046586 * window.innerWidth +
     106.6952733;
   let liquidWidth = `${contentWidthNumber + 4}%`;
-  let email = fire.auth().currentUser.email;
+  let email = fire.auth.currentUser.email;
+
   email = email.split("@")[0];
   const {
     loading,
@@ -29,12 +30,13 @@ const Liquids = memo(() => {
     cars,
     fetchCars,
   } = useContext(FirebaseContext);
-  let owner = fire.auth().currentUser.uid;
+  let owner = fire.auth.currentUser.uid;
   let ownerDates = dates.find((date) => date.owner === owner);
   let ownerAllRoutes = routes.filter((route) => route.owner === owner);
   let ownerAllLists = lists.filter((list) => list.owner === owner);
+  let ownerInitialDates = {};
   if (!ownerDates) {
-    ownerDates = {
+    ownerInitialDates = {
       dateStart: "1950.01.01",
       dateOfEnd: 36,
       dateFinish: "2080.01.01",
@@ -66,6 +68,7 @@ const Liquids = memo(() => {
           ownerRoutes={ownerRoutes}
           listLiquids={listLiquids}
           ownerDates={ownerDates}
+          ownerInitialDates={ownerInitialDates}
           liquidWidth={liquidWidth}
           ownerAllRoutes={ownerAllRoutes}
           ownerAllLists={ownerAllLists}
