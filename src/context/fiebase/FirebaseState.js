@@ -7,12 +7,20 @@ import {
   CHANGE_DATES,
   FETCHED_DATES,
   SHOW_LOADER,
-  REMOVE_CAR,
+ 
   REMOVE_LIST,
   REMOVE_ROUTE,
   REMOVE_DATES,
   REMOVE_USERINFOS,
-  ADD_CAR,
+
+
+  ADD_CLIENT,
+  CHANGE_CLIENT,
+  OPEN_CLIENT,
+  CLOUSE_CLIENT,
+  REMOVE_CLIENT,
+  FETCH_CLIENTS,
+
   ADD_LIST,
   ADD_ROUTE,
   ADD_DATES,
@@ -20,13 +28,13 @@ import {
   CHANGE_USERINFO,
   CHANGE_INFO,
   FETCHED_USERINFO,
-  FETCHED_CARS,
+ 
   FETCHED_LISTS,
   FETCHED_ROUTES,
   CHANGE_CREATE,
   CHANGE_LIST,
   CHANGE_ROUTE,
-  OPEN_CAR,
+  
   OPEN_ROUTE,
 } from "../types";
 
@@ -39,7 +47,7 @@ export const FirebaseState = ({ children }) => {
   }
   //-------------------------------Init State------------------------------//
   const initialState = {
-    cars: [],
+    clients: [],
     lists: [],
     routes: [],
     dates: [],
@@ -143,110 +151,155 @@ export const FirebaseState = ({ children }) => {
       payload,
     });
   };
-  //-----------------------------Car functions-----------------------------//
-  const addCar = async (newCar) => {
-    const car = {
-      ...newCar,
+
+
+
+
+
+
+
+
+
+
+  //-------------------------CLIENT FUNCTIONS---------------------------//
+  const addClient = async (newClient) => {
+    //showLoader();
+    const client = {
+      ...newClient,
       owner
     };
     try {
       await fire.db
-        .collection("cars")
-        .add(car)
+        .collection("clients")
+        .add(client)
         .catch((err) => console.log(err));
       const payload = {
-        ...car,
+        ...client,
       };
-    // try {
-    //   const res = await axios.post(`${url}/cars.json`, car);
-    //   const payload = {
-    //     ...car,
-    //     id: res.data.name,
-    //   };
       dispatch({
-        type: ADD_CAR,
+        type: ADD_CLIENT,
         payload,
       });
     } catch (e) {
       throw new Error(e.message);
     }
   };
-  //------------------------------------------------------------------------//
-  const openCar = async (car) => {
-    car = {
-      ...car,
-      openCar: true,
+  //---CHANGE CLIENT
+  const changeClient = async (newClient) => {
+    showLoader();
+    const client = {
+      ...newClient,
+      owner,
+    };
+      try {
+        await fire.db
+          .collection("clients").doc(client.id)
+          .update(client)
+          .catch((err) => console.log(err));
+        const payload = {
+          ...client
+        };
+      dispatch({
+        type: CHANGE_CLIENT,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //---OPEN CLIENT
+  const openClient = async (changedClient) => {
+    showLoader();
+    let client = {
+      ...changedClient,
+      openClient: true,
     };
     try {
-      const res = await axios.patch(`${url}/cars/${car.id}.json`, car);
-      const payload = {
-        ...res.data,
-      };
+      await fire.db
+          .collection("clients").doc(client.id)
+          .update(client)
+          .catch((err) => console.log(err));
+        const payload = {
+          ...client
+        };
       dispatch({
-        type: OPEN_CAR,
+        type: OPEN_CLIENT,
+        payload,
+      });
+      dispatch({
+        type: OPEN_CLIENT,
         payload,
       });
     } catch (e) {
       throw new Error(e.message);
     }
   };
-  //------------------------------------------------------------------------//
-  const closeCar = async (car) => {
-    car = {
-      ...car,
-      openCar: false,
+  //---CLOUSE CLIENT
+  const clouseClient = async (changedClient) => {
+    showLoader();
+    let client = {
+      ...changedClient,
+      openClient: false,
     };
     try {
-      const res = await axios.patch(`${url}/cars/${car.id}.json`, car);
-      const payload = {
-        ...res.data,
-      };
+      await fire.db
+          .collection("clients").doc(client.id)
+          .update(client)
+          .catch((err) => console.log(err));
+        const payload = {
+          ...client
+        };
       dispatch({
-        type: OPEN_CAR,
+        type: CLOUSE_CLIENT,
         payload,
       });
     } catch (e) {
       throw new Error(e.message);
     }
   };
-  //------------------------------------------------------------------------//
-  const removeCar = async (id) => {
+  //---REMOVE CLIENT
+  const removeClient = async (id) => {
+    showLoader();
     await fire.db
-        .collection("cars").doc(id)
+        .collection("clients").doc(id)
         .delete()
         .catch((err) => console.log(err));
-    //await axios.delete(`${url}/cars/${id}.json`);
     dispatch({
-      type: REMOVE_CAR,
+      type: REMOVE_CLIENT,
       payload: id,
     });
   };
-  //------------------------------------------------------------------------//
-  const fetchCars = async () => {
+  //---FETCH CLIENTS
+  const fetchClients = async () => {
     showLoader();
     const res = await fire.db
-    .collection("cars")//.doc(id)
+    .collection("clients")
     .get()
     .catch((err) => console.log(err));
     const payload = []
     res.forEach(doc => {
      payload.push({...doc.data(), id:doc.id});
     })
-    // const res = await axios.get(`${url}/cars.json`);
-    // if (!res.data) {
-    //   res.data = {};
-    // }
-    // const payload = Object.keys(res.data).map((key) => {
-    //   return {
-    //     ...res.data[key],
-    //     id: key,
-    //   };
-    // });
     dispatch({
-      type: FETCHED_CARS,
+      type: FETCH_CLIENTS,
       payload,
     });
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //-----------------------------Lists functions----------------------------//
   const openNewList = async (car) => {
     car = {
@@ -259,7 +312,7 @@ export const FirebaseState = ({ children }) => {
         ...res.data,
       };
       dispatch({
-        type: OPEN_CAR,
+        type: OPEN_CLIENT,
         payload,
       });
     } catch (e) {
@@ -278,7 +331,7 @@ export const FirebaseState = ({ children }) => {
         ...res.data,
       };
       dispatch({
-        type: OPEN_CAR,
+        type: CLOUSE_CLIENT,
         payload,
       });
     } catch (e) {
@@ -501,7 +554,7 @@ export const FirebaseState = ({ children }) => {
         ...res.data,
       };
       dispatch({
-        type: OPEN_CAR,
+        type: OPEN_CLIENT,
         payload,
       });
     } catch (e) {
@@ -535,7 +588,7 @@ export const FirebaseState = ({ children }) => {
         ...res.data,
       };
       dispatch({
-        type: OPEN_CAR,
+        type: OPEN_CLIENT,
         payload,
       });
     } catch (e) {
@@ -576,7 +629,7 @@ export const FirebaseState = ({ children }) => {
         ...res.data,
       };
       dispatch({
-        type: OPEN_CAR,
+        type: OPEN_CLIENT,
         payload,
       });
     } catch (e) {
@@ -816,7 +869,15 @@ export const FirebaseState = ({ children }) => {
     <FirebaseContext.Provider
       value={{
         showLoader,
-        addCar,
+
+        addClient,
+        changeClient,
+        openClient,
+        clouseClient,
+        removeClient,
+        fetchClients,
+
+
         addList,
         addRoute,
         addDates,
@@ -830,16 +891,12 @@ export const FirebaseState = ({ children }) => {
         addCarRouteTime,
         removeCarRouteTime,
         rewriteCarRouteTime,
-        openCar,
         openList,
         openRoute,
         closeList,
         closeRoute,
-        closeCar,
-        removeCar,
         removeList,
         removeRoute,
-        fetchCars,
         fetchLists,
         fetchRoutes,
         changeCreate,
@@ -852,7 +909,7 @@ export const FirebaseState = ({ children }) => {
         removeDates,
         removeUserInfos,
         loading: state.loading,
-        cars: state.cars,
+        clients: state.clients,
         lists: state.lists,
         routes: state.routes,
         dates: state.dates,

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import fire from "../config/Fire";
 var moment = require("moment");
 
-export const CreateComponent = ({ car, cars, userInfo }) => {
+export const CreateComponent = ({ client, clients, userInfo }) => {
   //-----------------------------Call stand by--------------------------------//
   const firebase = useContext(FirebaseContext);
   let history = useHistory();
@@ -14,55 +14,66 @@ export const CreateComponent = ({ car, cars, userInfo }) => {
   let [alertText, setAlertText] = useState("");
   //--------------------------------Car form----------------------------------//
   let initialForm = {};
-  if (!car) {
+  if (!client) {
     initialForm = {
-      typeOfCar: "",
-      governmentCarNumber: "",
-      factoryCarNumber: "",
-      dateOfRegistration: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
-      carEngineNumber: "",
-      carPassportNumber: "",
-      specialCarEquipment: "Відсутній",
-      specialCarEquipmentNumber: "-----",
-      carOwnerName: "",
-      dateOfCarProduction: "",
-      operatingGroup: "",
-      category: "2",
-      carIndicatorFirst: 0,
-      carIndicatorLast: 0,
-      totalCarMileage: 0,
-      carTimeStart: 0,
-      carTimeFinish: 0,
-      carTimeTotal: 0,
-      fuelActiveСonsumption: "",
-      fuelPassiveСonsumption: "",
-      carIndicatorLastTO2: 0,
-      carIndicatorLastTO1: 0,
-      routeToTO2: 0,
-      routeToTO1: 0,
-      carTimeLastTO2: 0,
-      carTimeLastTO1: 0,
-      nextTimeTO2: 0,
-      nextTimeTO1: 0,
-      carIndicatorLastКР: 0,
-      carIndicatorLastСР: 0,
-      routeToКР: 0,
-      routeToСР: 0,
-      carTimeLastКР: 0,
-      carTimeLastСР: 0,
-      nextTimeКР: 0,
-      nextTimeСР: 0,
-      driver: "Автомобіль",
-      serviceability: "Справний",
-      objectPassword: "",
-      serviceabilityreason: "",
-      openCar: false,
+      clientType: "Фізичний",// driver
+      companyName: "",// typeOfCar
+      secName: "", //carEngineNumber
+      firstName: "",// govermentCarNumber
+      thirdName: "", //factoryCarNumber,
+      contractNumber: "", //carPassportNumber,
+      adress: "", //operatingGroup,
+      phonNumber: "",//specialCarEquipmentNumber,
+      addPhonNumber: "",//specialCarEquipmentNumber,
+      dateOfNegotiations: moment(new Date()).format("YYYY-MM-DD"),
+      negotiationsResult: "Не узгоджено",
+      incomingSourse: "Телефонний дзвінок",
+      dateOfSignContract: moment(new Date()).format("YYYY-MM-DD"),
+      contractPeriod: 0,
+      registrationDate: moment(new Date()).format("YYYY-MM-DD"),
+      ipNumber: 0,
+      passportNumber:"",
+    
+      // nextTimeКР,
+      // specialCarEquipment: "Відсутній",
+      // carOwnerName: "",
+      // dateOfCarProduction: "",
+      // category: "2",
+      // carIndicatorFirst: 0,
+      // carIndicatorLast: 0,
+      // totalCarMileage: 0,
+      // carTimeStart: 0,
+      // carTimeFinish: 0,
+      // carTimeTotal: 0,
+      // fuelActiveСonsumption: "",
+      // fuelPassiveСonsumption: "",
+      // carIndicatorLastTO2: 0,
+      // carIndicatorLastTO1: 0,
+      // routeToTO2: 0,
+      // routeToTO1: 0,
+      // carTimeLastTO2: 0,
+      // carTimeLastTO1: 0,
+      // nextTimeTO2: 0,
+      // nextTimeTO1: 0,
+      // carIndicatorLastКР: 0,
+      // carIndicatorLastСР: 0,
+      // routeToКР: 0,
+      // routeToСР: 0,
+      // carTimeLastКР: 0,
+      // carTimeLastСР: 0,
+      // nextTimeСР: 0,
+      // serviceability: "Справний",
+      // objectPassword: "",
+      // serviceabilityreason: "",
+
+
+      openClient: false,
       openList: false,
     };
   } else {
     initialForm = {
-      ...car,
-      openCar: false,
+      ...client,
+      openClient: false,
       openList: false,
     };
   }
@@ -70,43 +81,33 @@ export const CreateComponent = ({ car, cars, userInfo }) => {
   let [form, setForm] = useState({ ...initialForm });
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.currentTarget.value });
-  };
-  //--------------------------Math functions----------------------------//
-  form.carIndicatorLast =
-    parseInt(
-      (Number(form.carIndicatorFirst) + Number(form.totalCarMileage)) * 100
-    ) / 100;
-  form.carTimeFinish =
-    parseInt((Number(form.carTimeStart) + Number(form.carTimeTotal)) * 100) /
-    100;
+     };
   //-------------------------Create Car function------------------------//
   const createHandler = (event) => {
     var owner = fire.auth.currentUser.uid;
-    cars = cars.filter((car) => car.owner === owner);
-    let isCarExists = !!cars.filter(
+    clients = clients.filter((client) => client.owner === owner);
+    let isClientExists = !!clients.filter(
       // eslint-disable-next-line
-      (car) => car.governmentCarNumber == form.governmentCarNumber
+      (client) => client.contractNumber === form.contractNumber
     ).length;
-    !form.governmentCarNumber && setAlertText("Обліковий номер обовязковий!");
-    !form.typeOfCar && setAlertText("Найменування обовязкове!");
-    !form.governmentCarNumber && setAlertClass("open");
-    !form.typeOfCar && setAlertClass("open");
+    !form.secName && setAlertText("Призвіще  обовязкове!");
+    !form.secName && setAlertClass("open");
     event.preventDefault();
-    if (form.governmentCarNumber) {
-      if (!car) {
-        if (!isCarExists) {
+    if (form.secName) {
+      if (!client) {
+        if (!isClientExists) {
           if (userInfo.company === userInfo.jointCompany) {
             firebase
-              .addCar(form)
+              .addClient(form)
               .then(() => {
-                firebase.changeCreate();
+              //  firebase.changeCreate();
               })
               .catch(() => {
                 setAlertText("Ошибка сервера!");
                 setAlertClass("open");
               });
-            setAlertText("Новий виріб створено!");
-            setAlertClass("open");
+              setAlertText("Нового кліента створено!");
+              setAlertClass("open");
           } else {
             setAlertText("У Вас відсутні права вносити зміни в документи!");
             setAlertClass("open");
@@ -114,42 +115,42 @@ export const CreateComponent = ({ car, cars, userInfo }) => {
           }
         } else {
           setAlertText(
-            "Виріб з таким номером вже існує! Оберіть інший або внесіть зміни!"
+            "Договір з таким номером вже існує! Оберіть інший або внесіть зміни!"
           );
           setAlertClass("open");
           return;
         }
-        if (form.driver === "Автомобіль") {
+        if (form.clientType === "Юрідичний") {
           setAlertText(
-            "Новий автомобіль створено! Для перегляду перейдіть на вкладку Авто."
+            "Нового кліента створено! Для перегляду перейдіть до юридичних осіб."
           );
           setAlertClass("open");
-        } else if (form.driver === "Автомобіль-агрегат") {
+        } else if (form.clientType ===  "Фізичний") {
           setAlertText(
-            "Новий автомобіль створено! Для перегляду перейдіть на вкладку Авто-агрегати."
+            "Нового кліента створено! Для перегляду перейдіть до фізичних осіб."
           );
           setAlertClass("open");
-        } else if (form.driver === "Агрегат") {
-            setAlertText(
-                "Новий електроагрегат створено! Для перегляду перейдіть на вкладку Агрегати."
-              );
-              setAlertClass("open");
-        } else if (form.driver === "Електроприлад") {
-            setAlertText(
-                "Новий прилад створено! Для перегляду перейдіть на вкладку Електроприлади."
-              );
-              setAlertClass("open");
-        } else {
+        // } else if (form.driver === "Агрегат") {
+        //     setAlertText(
+        //         "Новий електроагрегат створено! Для перегляду перейдіть на вкладку Агрегати."
+        //       );
+        //       setAlertClass("open");
+        // } else if (form.driver === "Електроприлад") {
+        //     setAlertText(
+        //         "Новий прилад створено! Для перегляду перейдіть на вкладку Електроприлади."
+        //       );
+        //       setAlertClass("open");
+         } else {
           history.push("/home");
           setAlertClass("modal");
         }
       } else {
         if (
           (userInfo.company === userInfo.jointCompany) &
-          (userInfo.owner === car.owner)
+          (userInfo.owner === client.owner)
         ) {
           firebase
-            .closeCar(form)
+            .closeClient(form)
             .then(() => {})
             .catch(() => {
               setAlertText("Ошибка сервера!");
@@ -170,7 +171,7 @@ export const CreateComponent = ({ car, cars, userInfo }) => {
   };
   //-----------------------------Change car basis----------------------------//
   let classCarBasis = null;
-  if (!car) {
+  if (!client) {
     classCarBasis = "createCarBasis";
   } else {
     classCarBasis = "modifyCarForm";
@@ -181,56 +182,249 @@ export const CreateComponent = ({ car, cars, userInfo }) => {
       <div id="carMainForm">
         <div className="d-flex flex-wrap justify-content-between">
           <div className="form-group">
-            <label htmlFor="driver">
-              <small>Оберіть тип виробу:</small>
+            <label htmlFor="clientType">
+              <small>Оберіть статус кліента:</small>
             </label>
             <div>
               <select
                 type="text"
-                name="driver"
-                value={form.driver}
+                name="clientType"
+                value={form.clientType}
                 onChange={changeHandler}
                 className="custom-select custom-select-sm important"
               >
-                <option className="main" value="Автомобіль">
-                  Автомобіль
+                <option className="main" value="Юрідичний">
+                  Юрідичний
                 </option>
-                <option value="Автомобіль">Автомобіль</option>
-                <option value="Агрегат">Агрегат</option>
-                <option value="Автомобіль-агрегат">Авто-агрегат</option>
-                <option value="Електроприлад">Електроприлад</option>
+                <option value="Юрідичний">Юрідичний</option>
+                <option value="Фізичний">Фізичний</option>
+                {/* <option value="Автомобіль-агрегат">Авто-агрегат</option>
+                <option value="Електроприлад">Електроприлад</option> */}
               </select>
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="typeOfCar">
-              <small>Найменування</small>
+            <label htmlFor="compamyName">
+              <small>Найменування  компанії</small>
             </label>
             <input
               type="text"
               className="form-control important"
-              placeholder="Найменування"
-              value={form.typeOfCar}
-              name="typeOfCar"
+              placeholder="Найменування компанії"
+              value={form.companyName || ""}
+              name="companyName"
+              onChange={changeHandler}
+            />
+          </div><div className="form-group">
+            <label htmlFor="secName">
+            <small>Призвіще</small>
+            </label>
+            <input
+              type="text"
+              className="form-control important"
+              placeholder="Призвіще"
+              value={form.secName}
+              name="secName"
               onChange={changeHandler}
               required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="governmentCarNumber">
-              <small>Обліковий номер</small>
+            <label htmlFor="firstName">
+              <small>Ім'я</small>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Ім'я"
+              value={form.firstName}
+              name="firstName"
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="thirdName">
+              <small>По батькові</small>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="По батькові"
+              value={form.thirdName}
+              name="thirdName"
+              onChange={changeHandler}
+             // required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="contractNumber">
+              <small>Номер договору</small>
             </label>
             <input
               type="text"
               className="form-control important"
-              placeholder="Номер"
-              value={form.governmentCarNumber}
-              name="governmentCarNumber"
+              placeholder="Номер договору"
+              value={form.contractNumber}
+              name="contractNumber"
               onChange={changeHandler}
-              required
+             // required
             />
           </div>
-          {(form.driver === "Автомобіль" ||
+          <div className="form-group">
+            <label htmlFor="adress">
+              <small>Адреса</small>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Адреса"
+              value={form.adress}
+              name="adress"
+              onChange={changeHandler}
+             // required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phonNumber">
+              <small>Телефон</small>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Телефон"
+              value={form.phonNumber}
+              name="phonNumber"
+              onChange={changeHandler}
+             // required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="addPhonNumber">
+              <small>Додатковтий телефон</small>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Додатковтий телефон"
+              value={form.addPhonNumber}
+              name="addPhonNumber"
+              onChange={changeHandler}
+             // required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="dateOfNegotiations">
+              <small>Дата переговорів</small>
+            </label>
+            <input
+              type="date"
+              className="form-control"
+              placeholder="Дата переговорів"
+              value={moment(form.dateOfNegotiations).format("YYYY-MM-DD")}
+              name="dateOfNegotiations"
+              onChange={changeHandler}
+             // required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="negotiationsResult">
+              <small>Результат переговорів</small>
+            </label>
+            <div>
+              <select
+                type="text"
+                name="negotiationsResult"
+                value={form.negotiationsResult}
+                onChange={changeHandler}
+                className="custom-select custom-select-sm"
+              >
+                <option className="main" value="Не узгоджено">
+                Не узгоджено
+                </option>
+                <option value="Узгоджено">Узгоджено</option>
+                <option value="Відкладено">Відкладено</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="incomingSourse">
+              <small>Джерело надходження</small>
+            </label>
+            <div>
+              <select
+                type="text"
+                name="incomingSourse"
+                value={form.incomingSourse}
+                onChange={changeHandler}
+                className="custom-select custom-select-sm"
+              >
+                <option className="main" value="Телефонний дзвінок">
+                Телефонний дзвінок
+                </option>
+                <option value="Інтернет сайт">Інтернет сайт</option>
+                <option value="Ютюб реклама">Ютюб реклама</option>
+                <option value="Інші джерела">Інші джерела</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="dateOfSignContract">
+              <small>Дата укладання договору</small>
+            </label>
+            <input
+              type="date"
+              className="form-control"
+              placeholder="Дата укладання договору"
+              value={moment(form.dateOfSignContract).format("YYYY-MM-DD")}
+              name="dateOfSignContract"
+              onChange={changeHandler}
+             // required
+            />
+          </div>
+          <div className="form-group">
+              <label htmlFor="contractPeriod">
+                <small>Строк дії догшовору, міс</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Строк дії догшовору, міс"
+                value={form.contractPeriod}
+                name="contractPeriod"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="ipNumber">
+                <small>ІПН</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="ІПН"
+                value={form.ipNumber}
+                name="ipNumber"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+            <label htmlFor="passportNumber">
+              <small>Серія та номер паспорту</small>
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Серія та номер паспорту"
+              value={form.passportNumber}
+              name="passportNumber"
+              onChange={changeHandler}
+             // required
+            />
+          </div>
+            
+         
+
+          {/* {(form.driver === "Автомобіль" ||
             form.driver === "Автомобіль-агрегат") && (
             <div className="form-group">
               <label htmlFor="factoryCarNumber">
@@ -754,7 +948,7 @@ export const CreateComponent = ({ car, cars, userInfo }) => {
               name="objectPassword"
               onChange={changeHandler}
             />
-          </div>
+          </div> */}
         </div>
         <div id="serviceabilityCarReasonConteiner" className="form-group">
           <label htmlFor="serviceabilityReason">
@@ -779,8 +973,8 @@ export const CreateComponent = ({ car, cars, userInfo }) => {
           name="submit"
           onClick={createHandler}
         >
-          {!car && "Створити новий виріб"}
-          {car && "Зберегти дані"}
+          {!client && "Створити новий виріб"}
+          {client && "Зберегти дані"}
         </button>
       </div>
       <AlertBox

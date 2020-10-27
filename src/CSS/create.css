@@ -1,7 +1,7 @@
 .createCarBasis {
   margin: 0;
   padding: 20px 0 0 0;
-  background: #2b293a;
+  background: #2b283d;
   color: white;
   border-radius: 5px;
   background-position: top;
@@ -53,10 +53,10 @@
   height: 25px;
   margin: -4px 46px 0 0; }
 
-#dateOfObjRegistration {
+registrationD {
   padding-right: 0px;
   font-size: 8px;
-  width: 120px;
+  width: 60px;
   text-align: center; }
 
 #modifyCarForm {

@@ -7,20 +7,20 @@ import fire from "../config/Fire";
 const CreateNew = memo(() => {
   let email = fire.auth.currentUser.email;
   email = email.split("@")[0];
-  const { loading, cars, fetchCars, userInfos, fetchUsersInfo } = useContext(
+  const { loading, clients, fetchClients, userInfos, fetchUsersInfo } = useContext(
     FirebaseContext
   );
   var owner = fire.auth.currentUser.uid;
   let userInfo = userInfos.find((info) => info.owner === owner);
   useEffect(() => {
-    fetchCars();
+    fetchClients();
     fetchUsersInfo();
     // eslint-disable-next-line
   }, []); 
   return (
     <div>
       <small>{email}</small>
-      {loading ? <Loader /> : <CreateComponent cars={cars} userInfo={userInfo} />}
+      {loading ? <Loader /> : <CreateComponent clients={clients} userInfo={userInfo} />}
     </div>
   );
 });
