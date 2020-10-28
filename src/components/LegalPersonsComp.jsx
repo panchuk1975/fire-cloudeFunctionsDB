@@ -69,12 +69,12 @@ export const LegalPersonsComp = memo(
     //------------------------------Create clients data array------------------------------//
     clients = clients.filter((client) => client.owner === userInUse.owner);
     clients = clients.filter((client) => client.clientType === "Юрідичний");
-    // clients.sort(
-    //   (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
-    // );
     clients.sort(
-      (a, b) => (b.registrationDate - a.registrationDate)
+      (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
     );
+    // clients.sort(
+    //   (a, b) => (b.registrationDate - a.registrationDate)
+    // );
     let clientsExists = clients.length;
     if (clientsExists === 0) {
       return null;

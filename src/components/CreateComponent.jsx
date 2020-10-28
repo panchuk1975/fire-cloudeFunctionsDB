@@ -28,7 +28,7 @@ export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => 
       incomingSourse: "Телефонний дзвінок",
       dateOfSignContract: moment(new Date()).format("YYYY-MM-DD"),
       contractPeriod: 12,
-      registrationDate: moment(new Date()).format("YYYYY-MM-DDTHH:mm"),
+      registrationDate: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
       ipNumber: 22345678865555,
       passportNumber:"АБ 345678",
       openClient: false,
@@ -131,7 +131,7 @@ export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => 
   }
   //-------------------------------GSX car form------------------------------//
   return (
-    <div className={classCarBasis}>
+    <div className="createCarBasis">
       <div id="carMainForm">
         <div className="d-flex flex-wrap justify-content-between">
           <div className="form-group">
