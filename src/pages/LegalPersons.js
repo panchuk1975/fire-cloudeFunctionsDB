@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, memo } from "react";
-import { CarsComponent } from "../components/LegalPessons";
+import { CarsComponent } from "../components/LegalPersons";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
