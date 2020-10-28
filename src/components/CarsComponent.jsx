@@ -1,43 +1,45 @@
-import React, { memo, useState, useContext } from "react";
+import React, { memo, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
+//import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
 import {
   ExportReactCSV,
   carExelInfo,
-  carLiquidsExelInfo,
-  carListLiquidsExelInfo,
+  //carLiquidsExelInfo,
+  //carListLiquidsExelInfo,
 } from "../mathfunctions/liquidsFunctions";
 import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
-import { ListComponent } from "./ListComponent";
+//import { ListComponent } from "./ListComponent";
 var moment = require("moment");
 
 export const CarsComponent = memo(
   ({
-    cars,
+    clients,
     dates,
-    lists,
-    routes,
-    openCar,
-    closeCar,
-    openNewList,
-    clouseNewList,
-    openNewRoute,
-    closeNewRoute,
-    openList,
-    closeList,
-    openRoute,
-    closeRoute,
-    windowWidth,
     userInfos,
+    removeClient,
+    openClientFunc,
+    closeClientFunc,
+    windowWidth,
+
+    //lists,
+    //routes,
+    // openNewList,
+    // clouseNewList,
+    // openNewRoute,
+    // closeNewRoute,
+    // openList,
+    // closeList,
+    // openRoute,
+    // closeRoute,
+   
+    
   }) => {
     //------------------------------Alert functions block------------------------------//
     const dataWarningText =
       "Ви намагаєтеся видалити дані! Після видалення відновлення даних буде не можливим!";
-    const { removeCar, removeList } = useContext(FirebaseContext);
     let [alertClass, setAlertClass] = useState("modal");
     let [alertText, setAlertText] = useState("");
     let [modalClass, setClass] = useState("modal");
@@ -63,14 +65,14 @@ export const CarsComponent = memo(
     if (!userInUse) {
       return null;
     }
-    //------------------------------Create cars data array------------------------------//
-    cars = cars.filter((car) => car.owner === userInUse.owner);
-    cars = cars.filter((car) => car.driver === "Автомобіль");
-    cars.sort(
-      (a, b) => new Date(b.dateOfRegistration) - new Date(a.dateOfRegistration)
+    //------------------------------Create clients data array------------------------------//
+    clients = clients.filter((client) => client.owner === userInUse.owner);
+    clients = clients.filter((client) => client.clientType === "Юрідичний");
+    clients.sort(
+      (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
     );
-    let carExists = cars.length;
-    if (carExists === 0) {
+    let clientsExists = clients.length;
+    if (clientsExists === 0) {
       return null;
     }
     //---------------------------------Cars JSX block----------------------------------//
@@ -78,185 +80,109 @@ export const CarsComponent = memo(
       <div>
         <div>
           <TransitionGroup component="ul" className="list-group">
-            {carExists &&
-              cars.map((car) => {
-                //--------------------Create car lists and routes-----------------------//
-                let newLists = lists.filter(
-                  (list) => list.listOwner === car.id
-                );
-                newLists.sort((a, b) => a.listNumber - b.listNumber);
-                let carRoutes = routes.filter(
-                  (route) => route.listOwner === car.id
-                );
-                //---------------------------Car liquids array---------------------------//
-                let listCarLiquids = NewListLiquidsCount(carRoutes);
-                //-----------------------------Data for TO--------------------------------//
-                let TO2 =
-                  parseInt(
-                    (Number(car.carIndicatorLastTO2) + Number(car.routeToTO2)) *
-                      100,
-                    10
-                  ) / 100;
-                let routeToTO2 =
-                  parseInt(
-                    (Number(car.carIndicatorLastTO2) +
-                      Number(car.routeToTO2) -
-                      Number(car.carIndicatorLast)) *
-                      100,
-                    10
-                  ) / 100;
-                let TO1 =
-                  parseInt(
-                    (Number(car.carIndicatorLastTO1) + Number(car.routeToTO1)) *
-                      100,
-                    10
-                  ) / 100;
-                let routeToTO1 =
-                  parseInt(
-                    (Number(car.carIndicatorLastTO1) +
-                      Number(car.routeToTO1) -
-                      Number(car.carIndicatorLast)) *
-                      100,
-                    10
-                  ) / 100;
-                let КР =
-                  parseInt(
-                    (Number(car.carIndicatorLastКР) + Number(car.routeToКР)) *
-                      100,
-                    10
-                  ) / 100;
-                let routeToКР =
-                  parseInt(
-                    (Number(car.carIndicatorLastКР) +
-                      Number(car.routeToКР) -
-                      Number(car.carIndicatorLast)) *
-                      100,
-                    10
-                  ) / 100;
-                let СР =
-                  parseInt(
-                    (Number(car.carIndicatorLastСР) + Number(car.routeToСР)) *
-                      100,
-                    10
-                  ) / 100;
-                let routeToСР =
-                  parseInt(
-                    (Number(car.carIndicatorLastСР) +
-                      Number(car.routeToСР) -
-                      Number(car.carIndicatorLast)) *
-                      100,
-                    10
-                  ) / 100;
+            {clientsExists &&
+              clients.map((client) => {
+                // //--------------------Create client lists and routes-----------------------//
+                // let newLists = lists.filter(
+                //   (list) => list.listOwner === client.id
+                // );
+                // newLists.sort((a, b) => a.listNumber - b.listNumber);
+                // let carRoutes = routes.filter(
+                //   (route) => route.listOwner === client.id
+                // );
+                // //---------------------------Car liquids array---------------------------//
+                // let listCarLiquids = NewListLiquidsCount(carRoutes);
                 //------------------------Color alert types for TO----------------------//
-                let carType = null;
-                if (car.serviceability === "Справний") {
-                  carType = "head";
+                let clientType = null;
+                if (client.clientType === "Юрідичний") {
+                  clientType = "legalClients";
                 } else {
-                  carType = "carBrocken";
-                }
-                let typeRouteTO1 = null;
-                if (car.carIndicatorLast > TO1) {
-                  typeRouteTO1 = "carBrocken";
-                } else {
-                  typeRouteTO1 = "routeTO2";
-                }
-                let typeRouteTO2 = null;
-                if (car.carIndicatorLast > TO2) {
-                  typeRouteTO2 = "carBrocken";
-                } else {
-                  typeRouteTO2 = "routeTO2";
-                }
-                let typeRouteКР = null;
-                if (car.carIndicatorLast > КР) {
-                  typeRouteКР = "carBrocken";
-                } else {
-                  typeRouteКР = "routeTO2";
-                }
-                let typeRouteСР = null;
-                if (car.carIndicatorLast > СР) {
-                  typeRouteСР = "carBrocken";
-                } else {
-                  typeRouteСР = "routeTO2";
+                  clientType = "unlegalClients";
                 }
                 //--------------------------------JSX Car--------------------------------//
                 return (
-                  <CSSTransition key={car.id} classNames={"note"} timeout={800}>
+                  <CSSTransition key={client.id} classNames={"note"} timeout={800}>
                     <li
-                      key={car.id}
-                      className="list-group-item carInnerLi"
+                      key={client.id}
+                      className="list-group-item clientInnerLi"
                     >
                       <form
                         id="carBasis"
-                        className="d-flex  justify-content-between"
+                        className="d-flex justify-content-between clientInnerForm"
                       >
-                        {!car.openCar && (
+                        {!client.openClient && (
                           <div
                             onClick={() => {
-                              openCar(car);
+                              openClientFunc(client);
                             }}
                           >
-                            <table className="carTable">
+                            <table className="clientTable">
                               <tbody>
                                 <tr align="center">
                                   {windowWidth > 265 && (
-                                    <td width="100">
-                                      <small className={carType}>
-                                        {car.typeOfCar}
+                                    <td width="150">
+                                      <small className={clientType}>
+                                        {client.companyName}
                                       </small>
                                     </td>
                                   )}
-                                  <td width="88">
-                                    <small className={carType}>
-                                      {car.governmentCarNumber}
+                                  <td width="100">
+                                    <small>
+                                      {client.secName}
                                     </small>
                                   </td>
-                                  {windowWidth > 315 && (
-                                    <td width="60">
-                                      <small>{car.carIndicatorLast}</small>
+                                  {windowWidth > 330 && (
+                                    <td width="80">
+                                      <small>{client.firstName}</small>
                                     </td>
                                   )}
-                                  {windowWidth > 370 && (
-                                    <td width="50">
-                                      <small>{car.totalCarMileage}</small>
+                                  {windowWidth > 390 && (
+                                    <td width="120">
+                                      <small>{client.thirdName}</small>
                                     </td>
                                   )}
-                                  {windowWidth > 452 && (
+                                  {windowWidth > 522 && (
                                     <td width="82">
                                       <small>
                                         {`${moment(
-                                          car.dateOfRegistration
+                                          client.dateOfRegistration
                                         ).format("DD.MM HH:mm")}`}
                                       </small>
                                     </td>
                                   )}
                                   {windowWidth > 532 && (
                                     <td width="80">
-                                      <small>{car.carPassportNumber}</small>
+                                      <small>{client.contractNumber}</small>
+                                    </td>
+                                  )}
+                                  {windowWidth > 762 && (
+                                    <td width="300">
+                                      <small>{client.adress}</small>
                                     </td>
                                   )}
                                   {windowWidth > 762 && (
                                     <td width="90">
-                                      <small>{car.factoryCarNumber}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 762 && (
-                                    <td width="50">
-                                      <small>{car.dateOfCarProduction}</small>
+                                      <small>{client.phonNumber}</small>
                                     </td>
                                   )}
                                   {windowWidth > 992 && (
                                     <td width="90">
-                                      <small>{car.specialCarEquipment}</small>
+                                      <small>{client.dateOfNegotiations}</small>
                                     </td>
                                   )}
                                   {windowWidth > 992 && (
                                     <td width="90">
-                                      <small>{car.carOwnerName}</small>
+                                      <small>{client.contractPeriod}</small>
                                     </td>
                                   )}
-                                  {windowWidth > 1201 && (
+                                   {windowWidth > 992 && (
                                     <td width="90">
-                                      <small className={carType}>ТО1: </small>
+                                      <small>{client.dateOfSignContract}</small>
+                                    </td>
+                                  )}
+                                  {/* {windowWidth > 1201 && (
+                                    <td width="90">
+                                      <small className={clientType}>ТО1: </small>
                                       <small className={typeRouteTO1}>
                                         {TO1}
                                       </small>
@@ -269,7 +195,7 @@ export const CarsComponent = memo(
                                   )}
                                   {windowWidth > 1201 && (
                                     <td width="90">
-                                      <small className={carType}>ТО2: </small>
+                                      <small className={clientType}>ТО2: </small>
                                       <small className={typeRouteTO2}>
                                         {TO2}
                                       </small>
@@ -279,22 +205,21 @@ export const CarsComponent = memo(
                                     <td width="42" className={typeRouteTO2}>
                                       <small>{routeToTO2}</small>
                                     </td>
-                                  )}
+                                  )} */}
                                 </tr>
                               </tbody>
                             </table>
                           </div>
                         )}
                         <div>
-                          {!car.openCar &
-                            !newLists.length &
+                          {!client.openClient &
+                           // !newLists.length &
                             (userInfo.company === userInfo.jointCompany) && (
                             <button
-                              id="deleteCarBtn"
                               type="button"
-                              className="btn btn-outline-danger btn-sm"
+                              className="btn btn-outline-danger btn-sm deleteCarBtn"
                               onClick={() => {
-                                setId(car.id);
+                                setId(client.id);
                                 setFunct("removeCar");
                                 setModalText(dataWarningText);
                                 setModalClass();
@@ -306,69 +231,69 @@ export const CarsComponent = memo(
                         </div>
                       </form>
                       <form className="addingObjTable">
-                        {car.openCar && (
+                        {client.openClient && (
                           <table
                             className="carTable"
                             onClick={() => {
-                              closeCar(car);
+                              closeClientFunc(client);
                             }}
                           >
                             <tbody>
                               <tr align="center">
                                 <td width="100">
-                                  <small className={carType}>КР: </small>
-                                  <small className={typeRouteКР}>{КР}</small>
+                                  <small className={clientType}>КР: </small>
+                                  {/* <small className={typeRouteКР}>{КР}</small> */}
                                 </td>
-                                {windowWidth > 247 && (
+                                {/* {windowWidth > 247 && (
                                   <td width="50" className={typeRouteКР}>
                                     <small>{routeToКР}</small>
                                   </td>
-                                )}
+                                )} */}
                                 {windowWidth > 327 && (
                                   <td width="100">
-                                    <small className={carType}>СР: </small>
-                                    <small className={typeRouteСР}>{СР}</small>
+                                    <small className={clientType}>СР: </small>
+                                    {/* <small className={typeRouteСР}>{СР}</small> */}
                                   </td>
                                 )}
-                                {windowWidth > 377 && (
+                                {/* {windowWidth > 377 && (
                                   <td width="50" className={typeRouteСР}>
                                     <small>{routeToСР}</small>
                                   </td>
-                                )}
+                                )} */}
                                 {windowWidth > 477 && (
                                   <td width="100">
-                                    <small className={carType}>ТО1: </small>
-                                    <small className={typeRouteTO1}>
+                                    <small className={clientType}>ТО1: </small>
+                                    {/* <small className={typeRouteTO1}>
                                       {TO1}
-                                    </small>
+                                    </small> */}
                                   </td>
                                 )}
-                                {windowWidth > 527 && (
+                                {/* {windowWidth > 527 && (
                                   <td width="50" className={typeRouteTO1}>
                                     <small>{routeToTO1}</small>
                                   </td>
-                                )}
+                                )} */}
                                 {windowWidth > 770 && (
                                   <td width="100">
-                                    <small className={carType}>ТО2: </small>
-                                    <small className={typeRouteTO2}>
+                                    <small className={clientType}>ТО2: </small>
+                                    {/* <small className={typeRouteTO2}>
                                       {TO2}
-                                    </small>
+                                    </small> */}
                                   </td>
                                 )}
-                                {windowWidth > 770 && (
+                                {/* {windowWidth > 770 && (
                                   <td width="50" className={typeRouteTO2}>
                                     <small>{routeToTO2}</small>
                                   </td>
-                                )}
+                                )} */}
                               </tr>
                             </tbody>
                           </table>
                         )}
                       </form>
-                      {!car.openCar && (
+                      {/* {!client.openClient && (
                         <ListComponent
-                          car={car}
+                          client={client}
                           dates={dates}
                           routes={routes}
                           newLists={newLists}
@@ -392,12 +317,12 @@ export const CarsComponent = memo(
                           listCarLiquids={listCarLiquids}
                           userInfo={userInfo}
                         />
-                      )}
+                      )} */}
                       <form>
-                        {car.openCar && (
+                        {client.openClient && (
                           <CreateComponent
-                            car={car}
-                            cars={cars}
+                            client={client}
+                            clients={clients}
                             userInfo={userInfo}
                           />
                         )}
@@ -412,10 +337,10 @@ export const CarsComponent = memo(
                 modalText={textModal}
                 modalFunction={setClass}
                 Id={Id}
-                innerFunction={removeCar}
+                innerFunction={removeClient}
               />
             )}
-            {fun === "removeList" && (
+            {/* {fun === "removeList" && (
               <ModalBox
                 modalClass={modalClass}
                 modalText={textModal}
@@ -423,7 +348,7 @@ export const CarsComponent = memo(
                 Id={Id}
                 innerFunction={removeList}
               />
-            )}
+            )} */}
             <AlertBox
               modalClass={alertClass}
               modalText={alertText}
@@ -433,20 +358,20 @@ export const CarsComponent = memo(
         </div>
         <div className="d-flex justify-content-between">
           <ExportReactCSV
-            csvData={carExelInfo(cars)}
+            csvData={carExelInfo(clients)}
             fileName={"авто"}
             textCSV="авто.xlx"
           />
-          <ExportReactCSV
-            csvData={carLiquidsExelInfo(cars, lists, routes)}
+          {/* <ExportReactCSV
+            csvData={carLiquidsExelInfo(clients, lists, routes)}
             fileName={"пммАвто"}
             textCSV="пмм.xlx"
-          />
-          <ExportReactCSV
-            csvData={carListLiquidsExelInfo(cars, lists, routes)}
+          /> */}
+          {/* <ExportReactCSV
+            csvData={carListLiquidsExelInfo(clients, lists, routes)}
             fileName={"пммЛист"}
             textCSV="листи.xlx"
-          />   
+          />    */}
         </div>
       </div>
     );

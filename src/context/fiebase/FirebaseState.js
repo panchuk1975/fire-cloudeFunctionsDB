@@ -163,7 +163,6 @@ export const FirebaseState = ({ children }) => {
 
   //-------------------------CLIENT FUNCTIONS---------------------------//
   const addClient = async (newClient) => {
-    //showLoader();
     const client = {
       ...newClient,
       owner
@@ -186,7 +185,6 @@ export const FirebaseState = ({ children }) => {
   };
   //---CHANGE CLIENT
   const changeClient = async (newClient) => {
-    showLoader();
     const client = {
       ...newClient,
       owner,
@@ -209,7 +207,6 @@ export const FirebaseState = ({ children }) => {
   };
   //---OPEN CLIENT
   const openClient = async (changedClient) => {
-    showLoader();
     let client = {
       ...changedClient,
       openClient: true,
@@ -236,7 +233,6 @@ export const FirebaseState = ({ children }) => {
   };
   //---CLOUSE CLIENT
   const clouseClient = async (changedClient) => {
-    showLoader();
     let client = {
       ...changedClient,
       openClient: false,
@@ -259,7 +255,6 @@ export const FirebaseState = ({ children }) => {
   };
   //---REMOVE CLIENT
   const removeClient = async (id) => {
-    showLoader();
     await fire.db
         .collection("clients").doc(id)
         .delete()

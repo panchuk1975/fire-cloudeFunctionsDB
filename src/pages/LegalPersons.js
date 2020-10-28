@@ -11,34 +11,37 @@ const LegalPersons = memo(({ windowWidth }) => {
         email = email.split("@")[0];
     } 
   const {
-    loading,
-    cars,
+    clients,
     dates,
-    lists,
-    routes,
     userInfos,
-    fetchCars,
+
+    loading,
+    fetchClients,
     fetchDates,
-    fetchLists,
-    fetchRoutes,
-    openCar,
-    closeCar,
-    openList,
-    closeList,
-    openRoute,
-    closeRoute,
-    openNewList,
-    openNewRoute,
-    closeNewRoute,
-    clouseNewList,
     fetchUsersInfo,
+
+    openClient,
+    closeClient,
+    removeClient,
+    //lists,
+    //routes,
+    //fetchLists,
+    //fetchRoutes,
+    // openList,
+    // closeList,
+    // openRoute,
+    // closeRoute,
+    // openNewList,
+    // openNewRoute,
+    // closeNewRoute,
+    // clouseNewList, 
   } = useContext(FirebaseContext);
   useEffect(() => {
-    fetchCars();
-    fetchLists();
-    fetchRoutes();
+    fetchClients();
     fetchDates();
     fetchUsersInfo();
+    //fetchLists();
+    //fetchRoutes();
     // eslint-disable-next-line
   }, []);
   return (
@@ -48,22 +51,25 @@ const LegalPersons = memo(({ windowWidth }) => {
         <Loader />
       ) : (
         <CarsComponent
-          cars={cars}
-          lists={lists}
-          routes={routes}
-          openCar={openCar}
-          closeCar={closeCar}
-          openList={openList}
-          closeList={closeList}
-          openRoute={openRoute}
-          closeRoute={closeRoute}
-          openNewList={openNewList}
-          clouseNewList={clouseNewList}
-          openNewRoute={openNewRoute}
-          windowWidth={windowWidth}
-          closeNewRoute={closeNewRoute}
+          clients={clients}
           dates={dates}
           userInfos={userInfos}
+          openClient={openClient}
+          closeClient={closeClient}
+          removeClient={removeClient}
+          
+          windowWidth={windowWidth}
+          //lists={lists}
+          //routes={routes}
+          //openList={openList}
+          //closeList={closeList}
+          //openRoute={openRoute}
+          //closeRoute={closeRoute}
+          //openNewList={openNewList}
+          //clouseNewList={clouseNewList}
+          //openNewRoute={openNewRoute}
+          //closeNewRoute={closeNewRoute}
+         
         />
       )}
     </div>

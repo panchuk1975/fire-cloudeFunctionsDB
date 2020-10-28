@@ -1,11 +1,10 @@
-@import "app";
-@import "navbar";
-@import "help";
-@import "create";
-@import "logreg";
-@import "profile";
-@import "clientTabl";
-@import "client";
+@import "_app";
+@import "_navbar";
+@import "_help";
+@import "_create";
+@import "_logreg";
+@import "_profile";
+@import '_client';
 //--------------------------Сброс стилей--------------------------//
 /* Указываем box sizing */
 *,
