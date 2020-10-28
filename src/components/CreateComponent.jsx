@@ -32,7 +32,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
       contractPeriod: 0,
       registrationDate: moment(new Date()).format("YYYY-MM-DD"),
       ipNumber: 0,
-      passportNumber:"",
+      passportNumber:"gdgsgsdgsdgsdg",///bxbbvb
     
       // nextTimeКР,
       // specialCarEquipment: "Відсутній",
