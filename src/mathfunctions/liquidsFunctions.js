@@ -26,9 +26,8 @@ export const ExportReactCSV = ({ csvData, fileName, textCSV }) => {
   };
   return (
     <button
-      id="createExelBtn"
       onClick={(e) => exportToCSV(csvData, fileName)}
-      className="btn btn-success"
+      className="btn btn-success createExelBtn"
     >
       <small>{textCSV}</small>
     </button>
