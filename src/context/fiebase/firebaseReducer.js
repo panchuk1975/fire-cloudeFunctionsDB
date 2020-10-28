@@ -1,15 +1,19 @@
 import {
+  ADD_CLIENT,
+  CHANGE_CLIENT,
+  OPEN_CLIENT,
+  CLOUSE_CLIENT,
+  FETCH_CLIENTS,
+  REMOVE_CLIENT,
+
+
   SHOW_LOADER,
-  ADD_CAR,
   ADD_DATES,
-  FETCHED_CARS,
-  REMOVE_CAR,
   REMOVE_LIST,
   REMOVE_ROUTE,
   CHANGE_CREATE,
   CHANGE_DATES,
   CHANGE_LIST,
-  OPEN_CAR,
   ADD_LIST,
   FETCHED_LISTS,
   FETCHED_ROUTES,
@@ -30,6 +34,45 @@ import {
 
 const handlers = {
   [SHOW_LOADER]: (state) => ({ ...state, loading: true }),
+
+  //---CLIENTS STATE
+  [ADD_CLIENT]: (state, { payload }) => ({
+    ...state,
+    clients: [...state.clients, payload],
+    //loading: false,
+  }),
+  [CHANGE_CLIENT]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients.filter((client) => client.id !== payload.id).concat([payload]),
+    loading: false,
+  }),
+  [OPEN_CLIENT]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients.filter((client) => client.id !== payload.id).concat([payload]),
+    loading: false,
+  }),
+  [CLOUSE_CLIENT]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients.filter((client) => client.id !== payload.id).concat([payload]),
+    loading: false,
+  }),
+  [FETCH_CLIENTS]: (state, { payload }) => ({
+    ...state,
+    clients: payload,
+    loading: false,
+  }),
+  [REMOVE_CLIENT]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients.filter((client) => client.id !== payload),
+    loading: false,
+  }),
+
+
+
+
+
+
+
   [CHANGE_CREATE]: (state) => ({ ...state, create: !state.create }),
 
   [OPEN_DENSITY]: (state, { payload }) => ({
@@ -46,10 +89,7 @@ const handlers = {
     ...state,
     densities: payload,
   }),
-  [ADD_CAR]: (state, { payload }) => ({
-    ...state,
-    cars: [...state.cars, payload],
-  }),
+  
   [ADD_DATES]: (state, { payload }) => ({
     ...state,
     dates: [...state.dates, payload],
@@ -68,23 +108,12 @@ const handlers = {
     ...state,
     dates: state.dates.filter((date) => date.id !== payload),
   }),
-  [FETCHED_CARS]: (state, { payload }) => ({
-    ...state,
-    cars: payload,
-    loading: false,
-  }),
-  [REMOVE_CAR]: (state, { payload }) => ({
-    ...state,
-    cars: state.cars.filter((car) => car.id !== payload),
-  }),
+ 
   [REMOVE_LIST]: (state, { payload }) => ({
     ...state,
     lists: state.lists.filter((list) => list.id !== payload),
   }),
-  [OPEN_CAR]: (state, { payload }) => ({
-    ...state,
-    cars: state.cars.filter((car) => car.id !== payload.id).concat([payload]),
-  }),
+  
   [ADD_LIST]: (state, { payload }) => ({
     ...state,
     lists: [...state.lists, payload],

@@ -7,11 +7,17 @@ export const CHANGE_DATES = "CHANGE_DATE";
 export const FETCHED_DATES = "FETCHED_DATES";
 export const REMOVE_DATES = "REMOVE_DATES";
 
+
+
+
+export const ADD_CLIENT = "ADD_CLIENT";
+export const CHANGE_CLIENT = "CHANGE_CLIENT";
+export const OPEN_CLIENT = "OPEN_CLIENT";
+export const CLOUSE_CLIENT = "CLOUSE_CLIENT";
+export const FETCH_CLIENTS = "FETCH_CLIENTS";
+export const REMOVE_CLIENT = "REMOVE_CLIENT";
+
 export const CHANGE_CREATE = "CHANGE_CREATE";
-export const OPEN_CAR = "OPEN_CAR";
-export const ADD_CAR = "ADD_CAR";
-export const FETCHED_CARS = "FETCHED_CARS";
-export const REMOVE_CAR = "REMOVE_CAR";
 
 export const CHANGE_LIST = "CHANGE_LIST";
 export const ADD_LIST = "ADD_LIST";
