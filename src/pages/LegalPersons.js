@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, memo } from "react";
-import { CarsComponent } from "../components/LegalPersons";
+import { LegalPersonsComp } from "../components/LegalPersonsComp";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
@@ -50,7 +50,7 @@ const LegalPersons = memo(({ windowWidth }) => {
       {loading ? (
         <Loader />
       ) : (
-        <CarsComponent
+        <LegalPersonsComp
           clients={clients}
           dates={dates}
           userInfos={userInfos}

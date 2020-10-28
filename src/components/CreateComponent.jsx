@@ -4,7 +4,7 @@ import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
 var moment = require("moment");
 
-export const CreateComponent = ({ client, clients, userInfo }) => {
+export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => {
   //-----------------------------Call stand by--------------------------------//
   const firebase = useContext(FirebaseContext);
   //------------------------------Alert block---------------------------------//
@@ -28,7 +28,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
       incomingSourse: "Телефонний дзвінок",
       dateOfSignContract: moment(new Date()).format("YYYY-MM-DD"),
       contractPeriod: 12,
-      registrationDate: moment(new Date()).format("YYYY-MM-DD"),
+      registrationDate: moment(new Date()).format("YYYYY-MM-DDTHH:mm"),
       ipNumber: 22345678865555,
       passportNumber:"АБ 345678",
       openClient: false,
@@ -103,7 +103,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
           (userInfo.owner === client.owner)
         ) {
           firebase
-            .closeClient(form)
+            .clouseClient(form)
             .then(() => {})
             .catch(() => {
               setAlertText("Ошибка сервера!");

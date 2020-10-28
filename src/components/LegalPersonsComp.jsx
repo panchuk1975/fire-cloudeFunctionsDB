@@ -14,15 +14,16 @@ import fire from "../config/Fire";
 //import { ListComponent } from "./ListComponent";
 var moment = require("moment");
 
-export const CarsComponent = memo(
+export const LegalPersonsComp = memo(
   ({
     clients,
     dates,
     userInfos,
     removeClient,
-    openClientFunc,
-    closeClientFunc,
+    openClient,
+    closeClient,
     windowWidth,
+    clouseClient,
 
     //lists,
     //routes,
@@ -68,8 +69,11 @@ export const CarsComponent = memo(
     //------------------------------Create clients data array------------------------------//
     clients = clients.filter((client) => client.owner === userInUse.owner);
     clients = clients.filter((client) => client.clientType === "Юрідичний");
+    // clients.sort(
+    //   (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
+    // );
     clients.sort(
-      (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
+      (a, b) => (b.registrationDate - a.registrationDate)
     );
     let clientsExists = clients.length;
     if (clientsExists === 0) {
@@ -113,7 +117,7 @@ export const CarsComponent = memo(
                         {!client.openClient && (
                           <div
                             onClick={() => {
-                              openClientFunc(client);
+                              openClient(client);
                             }}
                           >
                             <table className="clientTable">
@@ -145,7 +149,7 @@ export const CarsComponent = memo(
                                     <td width="82">
                                       <small>
                                         {`${moment(
-                                          client.dateOfRegistration
+                                          client.registrationDate
                                         ).format("DD.MM HH:mm")}`}
                                       </small>
                                     </td>
@@ -235,7 +239,7 @@ export const CarsComponent = memo(
                           <table
                             className="carTable"
                             onClick={() => {
-                              closeClientFunc(client);
+                              closeClient(client);
                             }}
                           >
                             <tbody>

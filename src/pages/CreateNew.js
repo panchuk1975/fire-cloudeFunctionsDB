@@ -4,7 +4,9 @@ import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
 
-const CreateNew = memo(() => {
+const CreateNew = memo(({
+  clouseClient
+}) => {
   let email = fire.auth.currentUser.email;
   email = email.split("@")[0];
   const { loading, clients, fetchClients, userInfos, fetchUsersInfo } = useContext(
@@ -20,7 +22,10 @@ const CreateNew = memo(() => {
   return (
     <div>
       <small>{email}</small>
-      {loading ? <Loader /> : <CreateComponent clients={clients} userInfo={userInfo} />}
+      {loading ? <Loader /> : <CreateComponent 
+      clients={clients}
+      userInfo={userInfo} 
+      clouseClient={clouseClient}/>}
     </div>
   );
 });
