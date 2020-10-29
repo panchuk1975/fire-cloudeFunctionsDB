@@ -11,7 +11,7 @@ import {
   CommonListRoute,
   CommonListTime,
 } from "../mathfunctions/listFunctions";
-import "../CSS/CreateRouteStyle.scss";
+//import "../CSS/CreateRouteStyle.scss";
 var moment = require("moment");
 
 export const CreateRoute = ({

@@ -4,7 +4,7 @@ import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import { CountStartDensity } from "../mathfunctions/liquidsFunctions";
 import { ExportReactCSV } from "../mathfunctions/liquidsFunctions";
-import "../CSS/LiqCompStyle.scss";
+//import "../CSS/LiqCompStyle.scss";
 
 var moment = require("moment");
 

@@ -21,9 +21,8 @@ export const LegalPersonsComp = memo(
     userInfos,
     removeClient,
     openClient,
-    closeClient,
-    windowWidth,
     clouseClient,
+    windowWidth,
 
     //lists,
     //routes,
@@ -111,16 +110,12 @@ export const LegalPersonsComp = memo(
                       className="list-group-item clientInnerLi"
                     >
                       <form
-                        id="carBasis"
                         className="d-flex justify-content-between clientInnerForm"
                       >
                         {!client.openClient && (
-                          <div
-                            onClick={() => {
+                            <table className="clientTable"  onClick={() => {
                               openClient(client);
-                            }}
-                          >
-                            <table className="clientTable">
+                            }}>
                               <tbody>
                                 <tr align="center">
                                   {windowWidth > 265 && (
@@ -192,28 +187,10 @@ export const LegalPersonsComp = memo(
                                       </small>
                                     </td>
                                   )}
-                                  {windowWidth > 1201 && (
-                                    <td width="42" className={typeRouteTO1}>
-                                      <small>{routeToTO1}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1201 && (
-                                    <td width="90">
-                                      <small className={clientType}>ТО2: </small>
-                                      <small className={typeRouteTO2}>
-                                        {TO2}
-                                      </small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1201 && (
-                                    <td width="42" className={typeRouteTO2}>
-                                      <small>{routeToTO2}</small>
-                                    </td>
-                                  )} */}
+                                */}
                                 </tr>
                               </tbody>
                             </table>
-                          </div>
                         )}
                         <div>
                           {!client.openClient &
@@ -232,68 +209,59 @@ export const LegalPersonsComp = memo(
                               &times;
                             </button>
                           )}
-                        </div>
-                      </form>
-                      <form className="addingObjTable">
-                        {client.openClient && (
+                          {client.openClient && (
                           <table
-                            className="carTable"
+                            className="clientTable"
                             onClick={() => {
-                              closeClient(client);
+                              clouseClient(client);
                             }}
                           >
                             <tbody>
                               <tr align="center">
-                                <td width="100">
-                                  <small className={clientType}>КР: </small>
+                                <td width="200">
+                                  <small className={clientType}>For close</small>
                                   {/* <small className={typeRouteКР}>{КР}</small> */}
                                 </td>
-                                {/* {windowWidth > 247 && (
-                                  <td width="50" className={typeRouteКР}>
-                                    <small>{routeToКР}</small>
+                                {windowWidth > 247 && (
+                                  <td width="100" className={clientType}>
+                                   <small>Info</small>
                                   </td>
-                                )} */}
-                                {windowWidth > 327 && (
-                                  <td width="100">
-                                    <small className={clientType}>СР: </small>
-                                    {/* <small className={typeRouteСР}>{СР}</small> */}
+                                )} 
+                                 {windowWidth > 247 && (
+                                  <td width="100" className={clientType}>
+                                   <small>Info</small>
                                   </td>
-                                )}
-                                {/* {windowWidth > 377 && (
-                                  <td width="50" className={typeRouteСР}>
-                                    <small>{routeToСР}</small>
+                                )} 
+                                 {windowWidth > 247 && (
+                                  <td width="100" className={clientType}>
+                                   <small>Info</small>
                                   </td>
-                                )} */}
-                                {windowWidth > 477 && (
-                                  <td width="100">
-                                    <small className={clientType}>ТО1: </small>
-                                    {/* <small className={typeRouteTO1}>
-                                      {TO1}
-                                    </small> */}
+                                )} 
+                                 {windowWidth > 247 && (
+                                  <td width="100" className={clientType}>
+                                   <small>Info</small>
                                   </td>
-                                )}
-                                {/* {windowWidth > 527 && (
-                                  <td width="50" className={typeRouteTO1}>
-                                    <small>{routeToTO1}</small>
+                                )} 
+                                 {windowWidth > 247 && (
+                                  <td width="100" className={clientType}>
+                                   <small>Info</small>
                                   </td>
-                                )} */}
-                                {windowWidth > 770 && (
-                                  <td width="100">
-                                    <small className={clientType}>ТО2: </small>
-                                    {/* <small className={typeRouteTO2}>
-                                      {TO2}
-                                    </small> */}
-                                  </td>
-                                )}
-                                {/* {windowWidth > 770 && (
-                                  <td width="50" className={typeRouteTO2}>
-                                    <small>{routeToTO2}</small>
-                                  </td>
-                                )} */}
+                                )} 
                               </tr>
                             </tbody>
                           </table>
                         )}
+                              {client.openClient && (
+                                 <CreateComponent
+                                   client={client}
+                                   clients={clients}
+                                   userInfo={userInfo}
+                                 />
+                               )}
+                                
+                        </div>
+                      </form>
+                      <form className="addingObjTable">
                       </form>
                       {/* {!client.openClient && (
                         <ListComponent
@@ -322,15 +290,7 @@ export const LegalPersonsComp = memo(
                           userInfo={userInfo}
                         />
                       )} */}
-                      <form>
-                        {client.openClient && (
-                          <CreateComponent
-                            client={client}
-                            clients={clients}
-                            userInfo={userInfo}
-                          />
-                        )}
-                      </form>
+    
                     </li>
                   </CSSTransition>
                 );

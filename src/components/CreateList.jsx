@@ -1,6 +1,6 @@
 import React, { useState, useContext, memo } from "react";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import "../CSS/CreateListStyle.scss";
+//import "../CSS/CreateListStyle.scss";
 var moment = require("moment");
 
 export const CreateList = memo(

@@ -4,7 +4,7 @@ import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
 import { CreateList } from "./CreateList";
 import { RouteComponent } from "./RouteComponent";
 import fire from "../config/Fire";
-import "../CSS/ListCompStyle.scss";
+//import "../CSS/ListCompStyle.scss";
 var moment = require("moment");
 
 export const ListComponent = memo(

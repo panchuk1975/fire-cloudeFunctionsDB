@@ -21,7 +21,7 @@ const LegalPersons = memo(({ windowWidth }) => {
     fetchUsersInfo,
 
     openClient,
-    closeClient,
+    clouseClient,
     removeClient,
     //lists,
     //routes,
@@ -55,7 +55,7 @@ const LegalPersons = memo(({ windowWidth }) => {
           dates={dates}
           userInfos={userInfos}
           openClient={openClient}
-          closeClient={closeClient}
+          clouseClient={clouseClient}
           removeClient={removeClient}
           
           windowWidth={windowWidth}

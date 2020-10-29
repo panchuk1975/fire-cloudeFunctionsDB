@@ -1,4 +1,5 @@
 @import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+// SET BACKGROUND ----------------------->
 * {
   margin: 0;
   padding: 0;
@@ -6,12 +7,12 @@
   font-family: "Poppins", sans-serif;
 }
 .bg-fon {
-    background-color:white;
-    height:100%;
-    position:fixed;
-    width:100%;
-    top:0;
-    left:0;
+  background-color: white;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 .bg-img {
   padding: 10px 25px 10px 25px;
@@ -26,6 +27,71 @@
   min-width: 100%;
   min-height: 100%;
 }
+// SET COMMON FORM STYLE ----------------------->
+.form-group {
+  width:250px; // 122 - MEDIA
+}
+.form-group input {
+  font-size: 14px;
+  height: 35px;
+  border-radius: 0px;
+}
+.form-group label {
+  //   background-color: rgb(25, 136, 68);
+  font-size: 14px;
+  margin:0;
+  color: rgb(0, 0, 0);
+  &:hover {
+    color: limegreen;
+  }
+}
+.form-control {
+  margin: 0;
+  padding: 0 2px 0 2px;
+  width: 100%;
+  text-align: center;
+  background: rgb(172, 170, 170);
+  &:hover {
+    background: rgb(248, 248, 248);
+    color: black;
+    font-weight: 500;
+  }
+}
+@media all and (max-width: 870px) {
+  .form-group {
+    width: 134px; // 122
+    padding: 0 0 0 0;
+    margin: 0 2px 0 0;
+  }
+  .custom-select-sm {
+    width: 100%;
+    margin: -5px 0 0 0;
+    padding: 0 0 0 5px;
+    color: rgb(73, 72, 72);
+    font-size: 12px;
+    height: 35px;
+    border-radius: 0px;
+  }
+  .custom-select-sm,
+  .form-group input {
+    font-size: 12px;
+    height:20px;
+  }
+}
+textarea {
+  border-radius:   0;
+}
+
+
+
+
+
+
+
+
+
+
+
 details {
   color: rgb(42, 173, 42);
   font-size: 11px;
@@ -47,45 +113,6 @@ pre {
 }
 .carBrocken {
   color: red;
-}
-.form-group {
-  width: 250px;// 122
-//   border: 1px solid white;
-//   background-color: rgb(5, 74, 97);
-  padding: 0 0 0 0;
-  margin: 0 2px 0 0;
-}
-.form-group input {
-  font-size: 14px;
-  height: 35px;
-}
-// @media all and (max-width: 900px) {
-//   .form-group input {
-//     font-size: 14px;
-//     height: 20px;
-//   }
-// }
-.form-group  label {
-//   background-color: rgb(25, 136, 68);
-  font-size: 14px;
-  padding: 0;
-  margin: 0;
-  color: rgb(206, 202, 202);
-}
-.form-group label:hover {
-  color: limegreen;
-}
-.form-control {
-  margin: 0;
-  padding: 0 2px 0 2px;
-  width: 100%;
-  text-align: center;
-  background: rgb(172, 170, 170);
-}
-.form-control:hover {
-  background: rgb(248, 248, 248);
-  color: black;
-  font-weight: 500;
 }
 #date {
   background-color: rgb(139, 236, 139);
@@ -130,9 +157,5 @@ pre {
   background-color: rgb(210, 241, 210);
 }
 #danger:hover {
-    background-color: rgb(226, 26, 26);
-  }
-
-
-
-  
+  background-color: rgb(226, 26, 26);
+}

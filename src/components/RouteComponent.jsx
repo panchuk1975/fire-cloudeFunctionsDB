@@ -6,7 +6,7 @@ import {
   CommonListRoute,
   CommonListTime,
 } from "../mathfunctions/listFunctions";
-import "../CSS/RouteCompStyle.scss";
+//import "../CSS/RouteCompStyle.scss";
 var moment = require("moment");
 
 export const RouteComponent = memo(

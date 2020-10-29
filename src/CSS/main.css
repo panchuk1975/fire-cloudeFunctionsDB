@@ -26,6 +26,53 @@
   min-width: 100%;
   min-height: 100%; }
 
+.form-group {
+  width: 250px; }
+
+.form-group input {
+  font-size: 14px;
+  height: 35px;
+  border-radius: 0px; }
+
+.form-group label {
+  font-size: 14px;
+  margin: 0;
+  color: black; }
+  .form-group label:hover {
+    color: limegreen; }
+
+.form-control {
+  margin: 0;
+  padding: 0 2px 0 2px;
+  width: 100%;
+  text-align: center;
+  background: #acaaaa; }
+  .form-control:hover {
+    background: #f8f8f8;
+    color: black;
+    font-weight: 500; }
+
+@media all and (max-width: 870px) {
+  .form-group {
+    width: 134px;
+    padding: 0 0 0 0;
+    margin: 0 2px 0 0; }
+  .custom-select-sm {
+    width: 100%;
+    margin: -5px 0 0 0;
+    padding: 0 0 0 5px;
+    color: #494848;
+    font-size: 12px;
+    height: 35px;
+    border-radius: 0px; }
+  .custom-select-sm,
+  .form-group input {
+    font-size: 12px;
+    height: 20px; } }
+
+textarea {
+  border-radius: 0; }
+
 details {
   color: #2aad2a;
   font-size: 11px;
@@ -47,36 +94,6 @@ pre {
 
 .carBrocken {
   color: red; }
-
-.form-group {
-  width: 250px;
-  padding: 0 0 0 0;
-  margin: 0 2px 0 0; }
-
-.form-group input {
-  font-size: 14px;
-  height: 35px; }
-
-.form-group label {
-  font-size: 14px;
-  padding: 0;
-  margin: 0;
-  color: #cecaca; }
-
-.form-group label:hover {
-  color: limegreen; }
-
-.form-control {
-  margin: 0;
-  padding: 0 2px 0 2px;
-  width: 100%;
-  text-align: center;
-  background: #acaaaa; }
-
-.form-control:hover {
-  background: #f8f8f8;
-  color: black;
-  font-weight: 500; }
 
 #date {
   background-color: #8bec8b;
@@ -324,74 +341,6 @@ nav ul li.showBtn:hover {
 .helpDescriptionImg.layer {
   -webkit-transition-duration: 0.8s; }
 
-.createCarBasis {
-  margin: 0;
-  padding: 20px 0 0 0;
-  background: #2b283d;
-  color: white;
-  border-radius: 5px;
-  background-position: top;
-  background-size: cover; }
-
-#createCarBtn,
-#saveCarBtn {
-  font-size: 15px;
-  width: 100%;
-  padding: 0;
-  color: black; }
-
-#createCarBtn {
-  margin: -5px 15px 10px 15px; }
-
-#saveCarBtn {
-  font-size: 15px;
-  width: 100%;
-  margin: -5px 35px 5px 30px;
-  color: black; }
-
-#carMainForm {
-  margin: -10px 0 15px 0;
-  padding: 0 13px 0 16px; }
-
-#serviceabilityCarReason {
-  margin: 0 0px 0 0px;
-  width: 100%;
-  height: auto;
-  text-align: left;
-  vertical-align: text-top;
-  background: #adadad; }
-
-#serviceabilityCarReason:hover {
-  background: #f8f8f8;
-  color: black;
-  font-weight: 500; }
-
-#serviceabilityCarReasonConteiner {
-  width: auto; }
-
-.custom-select-sm {
-  width: 100%;
-  margin: 0 0 0 0;
-  padding: 0 0 0 15px;
-  color: #494848;
-  font-size: 12px;
-  font-weight: 700;
-  height: 25px;
-  margin: -4px 46px 0 0; }
-
-#dateOfObjRegistration {
-  padding-right: 0px;
-  font-size: 8px;
-  width: 60px;
-  text-align: center; }
-
-#modifyCarForm {
-  margin: -5px 0 15px 0;
-  padding: 0 15px 0 30px; }
-
-.addingObjTable {
-  margin: 0 0 0 25px; }
-
 .content {
   position: relative;
   top: 35%;
@@ -568,7 +517,6 @@ input[type="submit"]:hover {
   margin: 0px 0 0px 0;
   padding: 20px;
   border: 1px solid #0cb520;
-  border-radius: 5px;
   background-position: top;
   background-size: cover;
   -webkit-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
@@ -583,7 +531,6 @@ input[type="submit"]:hover {
   height: 20px;
   width: 156px;
   border-radius: 4px;
-  background-color: #b3afaf;
   border: 1px solid lightgrey; }
 
 #fieldSpase:hover {
@@ -616,32 +563,67 @@ input[type="submit"]:hover {
 .hr {
   margin: 7px 0 7px 0; }
 
+.createClientBasis {
+  margin: 10px 0 0 0;
+  padding: 0;
+  color: white; }
+
+.clientMainForm {
+  margin: -10px 0 5px 0;
+  padding: 0 0px 0 0px; }
+
+.additionalInfo {
+  margin: 0 0px 10px 0px;
+  width: 100%;
+  height: auto;
+  text-align: left;
+  vertical-align: text-top;
+  background: #adadad; }
+
+.additionalInfo:hover {
+  background: #f8f8f8;
+  color: black;
+  font-weight: 500; }
+
+.additionalInfoConteiner {
+  width: auto;
+  padding-bottom: 1px; }
+
+.createSaveClientBtn {
+  font-size: 15px;
+  width: 100%;
+  padding: 0;
+  color: black;
+  margin: 0px 0px 10px 0px; }
+
 .list-group {
-  border: 2px solid #f83d3d; }
+  border-radius: 0; }
 
 .clientInnerLi {
-  padding: 5px 5px 5px 5px;
-  background-color: lightgreen;
-  margin: 10px 0 10px 0; }
+  padding: 0; }
 
-.clientInnerForm {
-  background-color: #79c2d8; }
+.clientInnerForm div {
+  font-size: 0; }
+
+.modifyClientBasis {
+  margin: 10px 0 0px 0; }
 
 .clientTable {
-  background-color: #cf35ee;
-  font-size: 16px;
-  padding: 0;
-  margin: 5px 5px 5px 5px; }
+  background-color: #ffffff;
+  font-size: 16px; }
+
+.clientTable tbody tr:hover {
+  cursor: pointer;
+  background-color: lightgrey; }
 
 .clientTable tbody tr td {
-  cursor: pointer;
   border: 2px solid #030303; }
 
 .legalClients {
   color: blue; }
 
 .unlegalClients {
-  color: blue; }
+  color: #19a114; }
 
 .deleteCarBtn {
   font-size: 10px;
@@ -665,10 +647,7 @@ input[type="submit"]:hover {
   margin: 10px 2px 5px 2px; }
   .createExelBtn:hover {
     color: #25e946;
-    border: 1px solid #25e946;
-    -webkit-box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.75); }
+    border: 1px solid #25e946; }
 
 /* Указываем box sizing */
 *,

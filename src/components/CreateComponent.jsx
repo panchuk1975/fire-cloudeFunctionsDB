@@ -4,7 +4,7 @@ import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
 var moment = require("moment");
 
-export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => {
+export const CreateComponent = ({ client, clients, userInfo }) => {
   //-----------------------------Call stand by--------------------------------//
   const firebase = useContext(FirebaseContext);
   //------------------------------Alert block---------------------------------//
@@ -31,6 +31,7 @@ export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => 
       registrationDate: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
       ipNumber: 22345678865555,
       passportNumber:"АБ 345678",
+      additionalInfo: "",
       openClient: false,
       openList: false,
     };
@@ -103,7 +104,7 @@ export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => 
           (userInfo.owner === client.owner)
         ) {
           firebase
-            .clouseClient(form)
+            .changeClient(form)
             .then(() => {})
             .catch(() => {
               setAlertText("Ошибка сервера!");
@@ -123,16 +124,16 @@ export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => 
     }
   };
   //-----------------------------Change car basis----------------------------//
-  let classCarBasis = null;
+  let classClientBasis = null;
   if (!client) {
-    classCarBasis = "createCarBasis";
+    classClientBasis = "createClientBasis";
   } else {
-    classCarBasis = "modifyCarForm";
+    classClientBasis = "modifyClientBasis";
   }
   //-------------------------------GSX car form------------------------------//
   return (
-    <div className="createCarBasis">
-      <div id="carMainForm">
+    <div className={classClientBasis}>
+      <div className="clientMainForm">
         <div className="d-flex flex-wrap justify-content-between">
           <div className="form-group">
             <label htmlFor="clientType">
@@ -311,8 +312,8 @@ export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => 
                 onChange={changeHandler}
                 className="custom-select custom-select-sm"
               >
-                <option className="main" value="Телефонний дзвінок">
-                Телефонний дзвінок
+                <option className="main" value="Телефон">
+                Телефон
                 </option>
                 <option value="Інтернет сайт">Інтернет сайт</option>
                 <option value="Ютюб реклама">Ютюб реклама</option>
@@ -375,25 +376,23 @@ export const CreateComponent = ({ client, clients, userInfo, clouseClient }) => 
             />
           </div>
         </div>
-        <div id="serviceabilityCarReasonConteiner" className="form-group">
-          <label htmlFor="serviceabilityReason">
+        <div  className="form-group additionalInfoConteiner">
+          <label htmlFor="additionalInfo">
             <small>Додаткові дані</small>
           </label>
           <textarea
-            id="serviceabilityCarReason"
             type="text"
-            className="form-control"
+            className="form-control additionalInfo"
             placeholder="Додатково"
-            value={form.serviceabilityReason}
-            name="serviceabilityReason"
+            value={form.additionalInfo}
+            name="additionalInfo"
             onChange={changeHandler}
           />
         </div>
       </div>
       <div className="d-flex justify-content-between">
         <button
-          id="createCarBtn"
-          className="btn btn-success"
+          className="btn btn-success createSaveClientBtn"
           value="Enter"
           name="submit"
           onClick={createHandler}
