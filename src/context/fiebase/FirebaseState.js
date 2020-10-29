@@ -21,7 +21,10 @@ import {
   REMOVE_CLIENT,
   FETCH_CLIENTS,
 
-  ADD_LIST,
+  ADD_PROJECT,
+  FETCH_PROJECTS,
+
+
   ADD_ROUTE,
   ADD_DATES,
   ADD_USERINFO,
@@ -29,7 +32,7 @@ import {
   CHANGE_INFO,
   FETCHED_USERINFO,
  
-  FETCHED_LISTS,
+ 
   FETCHED_ROUTES,
   CHANGE_CREATE,
   CHANGE_LIST,
@@ -48,7 +51,7 @@ export const FirebaseState = ({ children }) => {
   //-------------------------------Init State------------------------------//
   const initialState = {
     clients: [],
-    lists: [],
+    projects: [],
     routes: [],
     dates: [],
     userInfos: [],
@@ -158,10 +161,7 @@ export const FirebaseState = ({ children }) => {
 
 
 
-
-
-
-  //-------------------------CLIENT FUNCTIONS---------------------------//
+  //-CLIENT FUNCTIONS----------------------------------------------->
   const addClient = async (newClient) => {
     const client = {
       ...newClient,
@@ -294,7 +294,29 @@ export const FirebaseState = ({ children }) => {
 
 
 
-
+  //--PROJECT FUNCTIONS-------------------------------------->
+  const addProject = async (newProject, client) => {
+    const project = {
+      ...newProject,
+      owner: client.owner,
+      projectOwner: client.id,
+    };
+    try {
+      await fire.db
+      .collection("projects")
+      .add(project)
+      .catch((err) => console.log(err));
+    const payload = {
+      ...project,
+    };
+      dispatch({
+        type: ADD_PROJECT,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
   //-----------------------------Lists functions----------------------------//
   const openNewList = async (car) => {
     car = {
@@ -333,27 +355,7 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-  //------------------------------------------------------------------------//
-  const addList = async (newList, car) => {
-    const list = {
-      ...newList,
-      owner: car.owner,
-      listOwner: car.id,
-    };
-    try {
-      const res = await axios.post(`${url}/lists.json`, list);
-      const payload = {
-        ...list,
-        id: res.data.name,
-      };
-      dispatch({
-        type: ADD_LIST,
-        payload,
-      });
-    } catch (e) {
-      throw new Error(e.message);
-    }
-  };
+
   //------------------------------------------------------------------------//
   const removeList = async (id) => {
     await axios.delete(`${url}/lists/${id}.json`);
@@ -400,6 +402,36 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
+  //------------------------------------------------------------------------//
+  const fetchProjects = async () => {
+    showLoader();
+    const res = await fire.db
+    .collection("projects")
+    .get()
+    .catch((err) => console.log(err));
+    const payload = []
+    res.forEach(proj => {
+     payload.push({...proj.data(), id:proj.id});
+     console.log(proj.data())
+    })
+    dispatch({
+      type: FETCH_PROJECTS,
+      payload,
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
   //------------------------------------------------------------------------//
   const changeListRouteTime = async (
     form,
@@ -631,24 +663,6 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-  //------------------------------------------------------------------------//
-  const fetchLists = async () => {
-    showLoader();
-    const res = await axios.get(`${url}/lists.json`);
-    if (!res.data) {
-      res.data = {};
-    }
-    const payload = Object.keys(res.data).map((key) => {
-      return {
-        ...res.data[key],
-        id: key,
-      };
-    });
-    dispatch({
-      type: FETCHED_LISTS,
-      payload,
-    });
-  };
   //-----------------------------Routes functions----------------------------//
   const openNewRoute = async (list) => {
     list = {
@@ -873,7 +887,10 @@ export const FirebaseState = ({ children }) => {
         fetchClients,
 
 
-        addList,
+        addProject,
+        fetchProjects,
+
+
         addRoute,
         addDates,
         openNewList,
@@ -892,7 +909,6 @@ export const FirebaseState = ({ children }) => {
         closeRoute,
         removeList,
         removeRoute,
-        fetchLists,
         fetchRoutes,
         changeCreate,
         changeDates,
@@ -905,7 +921,7 @@ export const FirebaseState = ({ children }) => {
         removeUserInfos,
         loading: state.loading,
         clients: state.clients,
-        lists: state.lists,
+        projects: state.projects,
         routes: state.routes,
         dates: state.dates,
         userInfos: state.userInfos,

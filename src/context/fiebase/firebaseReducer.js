@@ -14,7 +14,7 @@ import {
   CHANGE_CREATE,
   CHANGE_DATES,
   CHANGE_LIST,
-  ADD_LIST,
+  ADD_PROJECT,
   FETCHED_LISTS,
   FETCHED_ROUTES,
   FETCHED_DATES,
@@ -30,6 +30,7 @@ import {
   CHANGE_USERINFO,
   REMOVE_DATES,
   REMOVE_USERINFOS,
+  FETCH_PROJECTS,
 } from "../types";
 
 const handlers = {
@@ -66,6 +67,19 @@ const handlers = {
     clients: state.clients.filter((client) => client.id !== payload),
     loading: false,
   }),
+
+
+
+  [ADD_PROJECT]: (state, { payload }) => ({
+    ...state,
+    projects: [...state.projects, payload],
+  }),
+  [FETCH_PROJECTS]: (state, { payload }) => ({
+    ...state,
+    projects: payload,
+    loading: false,
+  }),
+
 
 
 
@@ -114,21 +128,14 @@ const handlers = {
     lists: state.lists.filter((list) => list.id !== payload),
   }),
   
-  [ADD_LIST]: (state, { payload }) => ({
-    ...state,
-    lists: [...state.lists, payload],
-  }),
+  
   [CHANGE_LIST]: (state, { payload }) => ({
     ...state,
     lists: state.lists
       .filter((list) => list.id !== payload.id)
       .concat([payload]),
   }),
-  [FETCHED_LISTS]: (state, { payload }) => ({
-    ...state,
-    lists: payload,
-    loading: false,
-  }),
+ 
   [OPEN_ROUTE]: (state, { payload }) => ({
     ...state,
     lists: state.lists

@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
-import { CreateList } from "./CreateList";
+import { CreateProject } from "./CreateProject";
 import { RouteComponent } from "./RouteComponent";
 import fire from "../config/Fire";
 //import "../CSS/ListCompStyle.scss";
@@ -9,9 +9,27 @@ var moment = require("moment");
 
 export const ListComponent = memo(
   ({
-    car,
+    client,
     dates,
-    routes,
+    userInfo,
+    addProject,
+
+
+    windowWidth,
+    setAlertClass,
+    setAlertText,
+    setFunct,
+    setModalText,
+    setModalClass,
+    setId,
+    modalClass,
+
+
+
+
+
+    carRoutes,
+    //routes,
     openNewList,
     clouseNewList,
     openNewRoute,
@@ -20,19 +38,9 @@ export const ListComponent = memo(
     closeList,
     openRoute,
     closeRoute,
-    windowWidth,
-    setAlertClass,
-    setAlertText,
-    setFunct,
-    setModalText,
-    setModalClass,
-    setId,
-    newLists,
+    newProjects,
     changeListRouteTime,
-    modalClass,
-    carRoutes,
-    listCarLiquids,
-    userInfo,
+    //listCarLiquids,
   }) => {
     let dataListWarningText =
       "Видалення листа! Для видалення авто необхідно видалити всі листи!!!";
@@ -43,11 +51,12 @@ export const ListComponent = memo(
           dateStart: "1970-01-01T00:00", 
           dateFinish: "2070-01-01T00:00" };
     }
-    newLists = newLists.filter((list) => list.listDate >= ownerDates.dateStart);
-    newLists = newLists.filter(
-      (list) => list.listDate <= ownerDates.dateFinish
-    );
-    let newCarRoutes = routes.filter((route) => route.listOwner === car.id);
+    let listCarLiquids = [];
+    // newProjects = newProjects.filter((project) => project.progecgtDate >= ownerDates.dateStart);
+    // newProjects = newProjects.filter(
+    //   (project) => project.listDate <= ownerDates.dateFinish
+    // );
+    // let newCarRoutes = routes.filter((route) => route.listOwner === car.id);
     return (
       <form>
         <details>
@@ -59,13 +68,12 @@ export const ListComponent = memo(
               <small id="small">Листи</small>
               {userInfo.company === userInfo.jointCompany && (
                 <small id="small" className="smallEnd">
-                  {car.objectPassword}
+                  {/* {car.objectPassword} */}
                 </small>
               )}
             </div>
           </summary>
           <div className="d-flex justify-content-between">
-            {car.driver === "Автомобіль-агрегат" && (
               <table className="headTable">
                 <tbody>
                   <tr align="center">
@@ -138,266 +146,95 @@ export const ListComponent = memo(
                   </tr>
                 </tbody>
               </table>
-            )}
-            {car.driver === "Автомобіль" && (
-              <table className="headTable">
-                <tbody>
-                  <tr align="center">
-                    <td width="60">
-                      <small>№</small>
-                    </td>
-                    <td width="60">
-                      <small>Дата</small>
-                    </td>
-
-                    {windowWidth > 245 && (
-                      <td width="55">
-                        <small>Км</small>
-                      </td>
-                    )}
-                    {windowWidth > 300 && (
-                      <td width="55">
-                        <small>Км+</small>
-                      </td>
-                    )}
-                    {windowWidth > 340 && (
-                      <td width="40">
-                        <small>Пробіг</small>
-                      </td>
-                    )}
-                    {windowWidth > 440 && (
-                      <td width="100">
-                        <small>Початий</small>
-                      </td>
-                    )}
-                    {windowWidth > 540 && (
-                      <td width="100">
-                        <small>Закінчений</small>
-                      </td>
-                    )}
-                    {windowWidth > 770 && (
-                      <td width="130">
-                        <small>Водій</small>
-                      </td>
-                    )}
-                    {windowWidth > 995 && (
-                      <td width="130">
-                        <small>Старший</small>
-                      </td>
-                    )}
-                    {windowWidth > 1205 && (
-                      <td width="170">
-                        <small>Звідки(зауваження)</small>
-                      </td>
-                    )}
-                    {windowWidth > 1205 && (
-                      <td width="170">
-                        <small>Куди(мета)</small>
-                      </td>
-                    )}
-                  </tr>
-                </tbody>
-              </table>
-            )}
-            {car.driver === "Агрегат" && (
-              <table className="headTable">
-                <tbody>
-                  <tr align="center">
-                    <td width="60">
-                      <small>№</small>
-                    </td>
-                    <td width="60">
-                      <small>Дата</small>
-                    </td>
-
-                    {windowWidth > 245 && (
-                      <td width="55">
-                        <small>Год</small>
-                      </td>
-                    )}
-                    {windowWidth > 300 && (
-                      <td width="55">
-                        <small>Год+</small>
-                      </td>
-                    )}
-                    {windowWidth > 340 && (
-                      <td width="40">
-                        <small>М/год</small>
-                      </td>
-                    )}
-                    {windowWidth > 440 && (
-                      <td width="100">
-                        <small>Початий</small>
-                      </td>
-                    )}
-                    {windowWidth > 540 && (
-                      <td width="100">
-                        <small>Закінчений</small>
-                      </td>
-                    )}
-                    {windowWidth > 770 && (
-                      <td width="140">
-                        <small>Старший</small>
-                      </td>
-                    )}
-                    {windowWidth > 995 && (
-                      <td width="280">
-                        <small>Проблеми та зауваження</small>
-                      </td>
-                    )}
-                    {windowWidth > 1205 && (
-                      <td width="180">
-                        <small>Призначення(мета)</small>
-                      </td>
-                    )}
-                  </tr>
-                </tbody>
-              </table>
-            )}
-            {car.driver === "Електроприлад" && (
-              <table className="headTable">
-                <tbody>
-                  <tr align="center">
-                    <td width="60">
-                      <small>№</small>
-                    </td>
-                    <td width="60">
-                      <small>Дата</small>
-                    </td>
-
-                    {windowWidth > 245 && (
-                      <td width="55">
-                        <small>Год</small>
-                      </td>
-                    )}
-                    {windowWidth > 300 && (
-                      <td width="55">
-                        <small>Год+</small>
-                      </td>
-                    )}
-                    {windowWidth > 340 && (
-                      <td width="40">
-                        <small>М/год</small>
-                      </td>
-                    )}
-                    {windowWidth > 440 && (
-                      <td width="100">
-                        <small>Початий</small>
-                      </td>
-                    )}
-                    {windowWidth > 540 && (
-                      <td width="100">
-                        <small>Закінчений</small>
-                      </td>
-                    )}
-                    {windowWidth > 770 && (
-                      <td width="140">
-                        <small>Старший</small>
-                      </td>
-                    )}
-                    {windowWidth > 995 && (
-                      <td width="280">
-                        <small>Проблеми та зауваження</small>
-                      </td>
-                    )}
-                    {windowWidth > 1205 && (
-                      <td width="180">
-                        <small>Призначення(мета)</small>
-                      </td>
-                    )}
-                  </tr>
-                </tbody>
-              </table>
-            )}
           </div>
-          <TransitionGroup component="ul" className="list-group">
-            {newLists.map((list) => {
-              let newRoutes = routes.filter(
-                (route) => route.routeOwner === list.id
-              );
+          <TransitionGroup component="ul" className="project-group">
+            {newProjects.map((project) => {
+              let newRoutes = [];
+              // let newRoutes = routes.filter(
+              //   (route) => route.routeOwner === project.id
+              // );
               newRoutes.sort((a, b) => a.routNumber - b.routNumber);
               let listLiquids = NewListLiquidsCount(newRoutes);
               return (
-                <CSSTransition key={list.id} classNames={"note"} timeout={800}>
-                  <li id="innerLi" key={list.id} className="list-group-item">
-                    {!list.openList && (
-                      <div key={list.id} className="listBasis">
+                <CSSTransition key={project.id} classNames={"note"} timeout={800}>
+                  <li id="innerLi" key={project.id} className="project-group-item">
+                    {!project.openList && (
+                      <div key={project.id} className="listBasis">
                         <div className="d-flex justify-content-between">
-                          {car.driver === "Автомобіль-агрегат" && (
                             <table
                               className="listTable"
-                              onClick={() => openList(list)}
+                              onClick={() => openList(project)}
                             >
                               <tbody>
                                 <tr align="center">
                                   <td width="50" className="head">
-                                    <small>{list.listNumber}</small>
+                                    <small>{project.listNumber}</small>
                                   </td>
                                   <td width="58" className="head">
-                                    <small>{`${moment(list.listDate).format(
+                                    {/* <small>{`${moment(project.projectNumber).format(
                                       "DD.MM.YY"
-                                    )}`}</small>
+                                    )}`}</small> */}
                                   </td>
-                                  {windowWidth > 995 && (
+                                  {windowWidth > 295 && (
                                     <td width="52">
-                                      <small>{list.indicatorListStart}</small>
+                                      <small>{project.id}</small>
                                     </td>
                                   )}
                                   {windowWidth > 226 && (
                                     <td width="52">
-                                      <small>{list.indicatorListFinish}</small>
+                                      <small>{project.projectNumber}</small>
                                     </td>
                                   )}
                                   {windowWidth > 995 && (
                                     <td width="52">
-                                      <small>{list.timeListFirst}</small>
+                                      <small>{project.timeListFirst}</small>
                                     </td>
                                   )}
                                   {windowWidth > 280 && (
                                     <td width="52">
-                                      <small>{list.timeListLast}</small>
+                                      <small>{project.timeListLast}</small>
                                     </td>
                                   )}
                                   {windowWidth > 333 && (
                                     <td width="52">
-                                      <small>{list.totalListMileage}</small>
+                                      <small>{project.totalListMileage}</small>
                                     </td>
                                   )}
                                   {windowWidth > 383 && (
                                     <td width="52">
-                                      <small>{list.timeListTotal}</small>
+                                      <small>{project.timeListTotal}</small>
                                     </td>
                                   )}
                                   {windowWidth > 490 && (
                                     <td width="107">
-                                      <small>{list.driverName}</small>
+                                      <small>{project.driverName}</small>
                                     </td>
                                   )}
                                   {windowWidth > 767 && (
                                     <td width="107">
-                                      <small>{list.seniorName}</small>
+                                      <small>{project.seniorName}</small>
                                     </td>
                                   )}
                                   {windowWidth > 995 && (
                                     <td width="103">
-                                      <small>{list.listRouteFrom}</small>
+                                      <small>{project.listRouteFrom}</small>
                                     </td>
                                   )}
                                   {windowWidth > 767 && (
                                     <td width="103">
-                                      <small>{list.listRouteTo}</small>
+                                      <small>{project.listRouteTo}</small>
                                     </td>
                                   )}
                                   {windowWidth > 1205 && (
                                     <td width="102">
-                                      <small>{`${moment(list.departure).format(
+                                      <small>{`${moment(project.departure).format(
                                         "DD.MM.YY HH.mm"
                                       )}`}</small>
                                     </td>
                                   )}
                                   {windowWidth > 1205 && (
                                     <td width="102">
-                                      <small>{`${moment(list.arrival).format(
+                                      <small>{`${moment(project.arrival).format(
                                         "DD.MM.YY HH.mm"
                                       )}`}</small>
                                     </td>
@@ -405,211 +242,16 @@ export const ListComponent = memo(
                                 </tr>
                               </tbody>
                             </table>
-                          )}
-                          {car.driver === "Автомобіль" && (
-                            <table
-                              className="listTable"
-                              onClick={() => openList(list)}
-                            >
-                              <tbody>
-                                <tr align="center">
-                                  <td width="60" className="head">
-                                    <small>{list.listNumber}</small>
-                                  </td>
-                                  <td width="60" className="head">
-                                    <small>{`${moment(list.listDate).format(
-                                      "DD.MM.YY"
-                                    )}`}</small>
-                                  </td>
-                                  {windowWidth > 245 && (
-                                    <td width="55">
-                                      <small>{list.indicatorListStart}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 300 && (
-                                    <td width="55">
-                                      <small>{list.indicatorListFinish}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 340 && (
-                                    <td width="40">
-                                      <small>{list.totalListMileage}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 440 && (
-                                    <td width="100">
-                                      <small>{`${moment(list.departure).format(
-                                        "DD.MM.YY HH.mm"
-                                      )}`}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 540 && (
-                                    <td width="100">
-                                      <small>{`${moment(list.arrival).format(
-                                        "DD.MM.YY HH.mm"
-                                      )}`}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 770 && (
-                                    <td width="130">
-                                      <small>{list.driverName}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 995 && (
-                                    <td width="130">
-                                      <small>{list.seniorName}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1205 && (
-                                    <td width="170">
-                                      <small>{list.listRouteFrom}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1205 && (
-                                    <td width="170">
-                                      <small>{list.listRouteTo}</small>
-                                    </td>
-                                  )}
-                                </tr>
-                              </tbody>
-                            </table>
-                          )}
-                          {car.driver === "Агрегат" && (
-                            <table
-                              className="listTable"
-                              onClick={() => openList(list)}
-                            >
-                              <tbody>
-                                <tr align="center">
-                                  <td width="60" className="head">
-                                    <small>{list.listNumber}</small>
-                                  </td>
-                                  <td width="60" className="head">
-                                    <small>{`${moment(list.listDate).format(
-                                      "DD.MM.YY"
-                                    )}`}</small>
-                                  </td>
-                                  {windowWidth > 245 && (
-                                    <td width="55">
-                                      <small>{list.timeListFirst}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 300 && (
-                                    <td width="55">
-                                      <small>{list.timeListLast}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 340 && (
-                                    <td width="40">
-                                      <small>{list.timeListTotal}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 440 && (
-                                    <td width="100">
-                                      <small>{`${moment(list.departure).format(
-                                        "DD.MM.YY HH.mm"
-                                      )}`}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 540 && (
-                                    <td width="100">
-                                      <small>{`${moment(list.arrival).format(
-                                        "DD.MM.YY HH.mm"
-                                      )}`}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 770 && (
-                                    <td width="140">
-                                      <small>{list.seniorName}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 995 && (
-                                    <td width="280">
-                                      <small>{list.listRouteFrom}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1205 && (
-                                    <td width="180">
-                                      <small>{list.listRouteTo}</small>
-                                    </td>
-                                  )}
-                                </tr>
-                              </tbody>
-                            </table>
-                          )}
-                          {car.driver === "Електроприлад" && (
-                            <table
-                              className="listTable"
-                              onClick={() => openList(list)}
-                            >
-                              <tbody>
-                                <tr align="center">
-                                  <td width="60" className="head">
-                                    <small>{list.listNumber}</small>
-                                  </td>
-                                  <td width="60" className="head">
-                                    <small>{`${moment(list.listDate).format(
-                                      "DD.MM.YY"
-                                    )}`}</small>
-                                  </td>
-                                  {windowWidth > 245 && (
-                                    <td width="55">
-                                      <small>{list.timeListFirst}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 300 && (
-                                    <td width="55">
-                                      <small>{list.timeListLast}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 340 && (
-                                    <td width="40">
-                                      <small>{list.timeListTotal}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 440 && (
-                                    <td width="100">
-                                      <small>{`${moment(list.departure).format(
-                                        "DD.MM.YY HH.mm"
-                                      )}`}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 540 && (
-                                    <td width="100">
-                                      <small>{`${moment(list.arrival).format(
-                                        "DD.MM.YY HH.mm"
-                                      )}`}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 770 && (
-                                    <td width="140">
-                                      <small>{list.seniorName}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 995 && (
-                                    <td width="280">
-                                      <small>{list.listRouteFrom}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1205 && (
-                                    <td width="180">
-                                      <small>{list.listRouteTo}</small>
-                                    </td>
-                                  )}
-                                </tr>
-                              </tbody>
-                            </table>
-                          )}
-                          {!list.openList &
+                          {!project.openList &
                             !newRoutes.length &
                             (userInfo.company === userInfo.jointCompany) &
-                            (userInfo.owner === car.owner) && (
+                            (userInfo.owner === client.owner) && (
                             <button
                               id="deleteListBtn"
                               type="button"
                               className="btn btn-outline-danger btn-sm"
                               onClick={() => {
-                                setId(list.id);
+                                setId(project.id);
                                 setFunct("removeList");
                                 setModalText(dataListWarningText);
                                 setModalClass();
@@ -623,10 +265,10 @@ export const ListComponent = memo(
                     )}
                     <div>
                       <div className="clouseListFormBasis">
-                        {list.openList && (
+                        {project.openList && (
                           <table
                             className="clouseListForm"
-                            onClick={() => closeList(list)}
+                            onClick={() => closeList(project)}
                           >
                             <tbody>
                               <tr className="listTable">
@@ -636,23 +278,23 @@ export const ListComponent = memo(
                           </table>
                         )}
                       </div>
-                      {list.openList && (
-                        <CreateList
-                          car={car}
-                          list={list}
+                      {project.openProject && (
+                        <CreateProject
+                          client={client}
+                          project={project}
                           setAlertText={setAlertText}
                           setAlertClass={setAlertClass}
-                          newLists={newLists}
+                          newProjects={newProjects}
                           userInfo={userInfo}
                         />
                       )}
                     </div>
-                    <RouteComponent
+                    {/* <RouteComponent
                       car={car}
-                      list={list}
+                      project={project}
                       setId={setId}
                       newRoutes={newRoutes}
-                      newCarRoutes={newCarRoutes}
+                      //newCarRoutes={newCarRoutes}
                       openRoute={openRoute}
                       closeRoute={closeRoute}
                       openNewRoute={openNewRoute}
@@ -669,7 +311,7 @@ export const ListComponent = memo(
                       carRoutes={carRoutes}
                       clouseNewList={clouseNewList}
                       userInfo={userInfo}
-                    />
+                    /> */}
                   </li>
                 </CSSTransition>
               );
@@ -722,30 +364,30 @@ export const ListComponent = memo(
               type="button"
               id="addListBtn"
               className="btn btn-outline-primary btn-sm"
-              onClick={() => openNewList(car)}
+              onClick={() => addProject(client)}
               style={{ marginRight: 4 }}
             >
-              + Лист
+              + Проект
             </button>
             <button
               type="button"
               id="closeListFormBtn"
               className="btn btn-outline-info btn-sm"
-              onClick={() => clouseNewList(car)}
+              onClick={() => clouseNewList(client)}
               style={{ marginRight: 4 }}
             >
               Закрити
             </button>
           </div>
-          {car.openList && (
-            <CreateList
-              car={car}
+           {client.openProject && (
+            <CreateProject
+              client={client}
               setAlertText={setAlertText}
               setAlertClass={setAlertClass}
-              newLists={newLists}
+              newProjects={newProjects}
               userInfo={userInfo}
             />
-          )}
+          )} 
         </details>
       </form>
     );

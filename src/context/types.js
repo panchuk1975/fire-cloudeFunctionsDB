@@ -7,9 +7,6 @@ export const CHANGE_DATES = "CHANGE_DATE";
 export const FETCHED_DATES = "FETCHED_DATES";
 export const REMOVE_DATES = "REMOVE_DATES";
 
-
-
-
 export const ADD_CLIENT = "ADD_CLIENT";
 export const CHANGE_CLIENT = "CHANGE_CLIENT";
 export const OPEN_CLIENT = "OPEN_CLIENT";
@@ -17,11 +14,14 @@ export const CLOUSE_CLIENT = "CLOUSE_CLIENT";
 export const FETCH_CLIENTS = "FETCH_CLIENTS";
 export const REMOVE_CLIENT = "REMOVE_CLIENT";
 
+export const ADD_PROJECT = "ADD_PROJECT";
+export const FETCH_PROJECTS = "FETCH_PROJECTS";
+
 export const CHANGE_CREATE = "CHANGE_CREATE";
 
 export const CHANGE_LIST = "CHANGE_LIST";
-export const ADD_LIST = "ADD_LIST";
-export const FETCHED_LISTS = "FETCHED_LISTS";
+
+
 export const REMOVE_LIST = "REMOVE_LIST";
 
 export const FETCHED_ROUTES = "FETCHED_ROUTES";

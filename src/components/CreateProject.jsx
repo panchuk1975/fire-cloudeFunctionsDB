@@ -1,26 +1,30 @@
 import React, { useState, useContext, memo } from "react";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
-//import "../CSS/CreateListStyle.scss";
 var moment = require("moment");
 
-export const CreateList = memo(
-  ({ car, list, setAlertText, setAlertClass, newLists, userInfo }) => {
+export const CreateProject = memo(
+  ({ client, project, setAlertText, setAlertClass, newProjects, userInfo }) => {
     const firebase = useContext(FirebaseContext);
     let initialForm = {};
-    if (!list) {
+    if (!project) {
       initialForm = {
-        listNumber: "",
-        listDate: moment(new Date()).format("YYYY-MM-DD"),
-        driverName: "Штатний",
-        listRouteFrom: "Планово",
-        listRouteTo: "Планово",
-        seniorName: "Штатний",
+        projectNumber: "",
+        projectDate: moment(new Date()).format("YYYY-MM-DD"),
+        typesOfLandWorks: "",
+        projectCost: 0,
+        contractExistence: "В наявності",
+        signaturуOfAct: "В наявності",
+        paymentDate: moment(new Date()).format("YYYY-MM-DD"),
+        аmountOfPayments: 0,
+        amountOfDebt: 0,
+        fullCalculation: 0,
+
         departure: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
         arrival: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
-        indicatorListStart: car.carIndicatorLast,
+        indicatorListStart: client.carIndicatorLast,
         indicatorListFinish: 0,
         totalListMileage: 0,
-        timeListFirst: car.carTimeFinish,
+        timeListFirst: client.carTimeFinish,
         timeListLast: 0,
         timeListTotal: 0,
         season: 1,
@@ -29,9 +33,9 @@ export const CreateList = memo(
       };
     } else {
       initialForm = {
-        ...list,
-        openList: false,
-        openRoute: false,
+        ...project,
+        openProject: false,
+        openTask: false,
       };
     }
     let [form, setForm] = useState({ ...initialForm });
@@ -39,24 +43,24 @@ export const CreateList = memo(
       setForm({ ...form, [event.target.name]: event.target.value });
     };
     const createHandler = (event) => {
-      let isListExists = !!newLists.filter(
+      let isListExists = !!newProjects.filter(
         // eslint-disable-next-line
-        (list) => Number(list.listNumber) == Number(form.listNumber)
+        (project) => Number(project.projectNumber) == Number(form.projectNumber)
       ).length;
       event.preventDefault();
       !form.listNumber && setAlertText("Номер листа обовязковий!");
       !form.listNumber && setAlertClass("open");
       if (form.listNumber) {
-        if (!list) {
+        if (!project) {
           if (!isListExists) {
             if (
               (userInfo.company === userInfo.jointCompany) &
-              (userInfo.owner === car.owner)
+              (userInfo.owner === client.owner)
             ) {
               firebase
-                .addList(form, car)
+                .addList(form, client)
                 .then(() => {
-                  firebase.clouseNewList(car);
+                  firebase.clouseNewList(client);
                 })
                 .catch(() => {
                   setAlertText("Ошибка сервера!");
@@ -77,7 +81,7 @@ export const CreateList = memo(
         } else {
           if (
             (userInfo.company === userInfo.jointCompany) &
-            (userInfo.owner === car.owner)
+            (userInfo.owner === client.owner)
           ) {
             firebase
               .closeList(form)
@@ -100,7 +104,7 @@ export const CreateList = memo(
       }
     };
     let classListBasis = null;
-    if (!list) {
+    if (!project) {
       classListBasis = "CreateListStyle";
     } else {
       classListBasis = "ModifyListStyle";
@@ -110,92 +114,98 @@ export const CreateList = memo(
         <div>
           <div className="d-flex  flex-wrap justify-content-between">
             <div className="form-group">
-              <label htmlFor="listNumber">
-                <small>Номер листа</small>
+              <label htmlFor="projectNumber">
+                <small>Номер проекту</small>
               </label>
               <input
-                id="important"
-                type="number"
-                className="form-control"
-                placeholder="Номер листа"
-                value={form.listNumber}
-                name="listNumber"
+                type="text"
+                className="form-control important"
+                placeholder="Номер проекту"
+                value={form.projectNumber}
+                name="projectNumber"
                 onChange={changeHandler}
                 required
               />
             </div>
             <div className="form-group">
-              <label htmlFor="listDate">
-                <small>Дата листа</small>
+              <label htmlFor="projectDate">
+                <small>Дата проекту</small>
               </label>
               <input
-                id="date"
                 type="date"
                 className="form-control"
                 placeholder="Дата листа"
-                value={form.listDate}
-                name="listDate"
+                value={moment(form.projectDate).format("YYYY-MM-DD")}
+                name="projectDate"
                 onChange={changeHandler}
-                required
               />
             </div>
-            {(car.driver === "Автомобіль" ||
-              car.driver === "Автомобіль-агрегат") && (
               <div className="form-group">
-                <label htmlFor="driverName">
-                  <small>Водій(механік)</small>
+                <label htmlFor="typesOfLandWorks">
+                  <small>Види землевпорядних робіт</small>
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Водій"
-                  value={form.driverName}
-                  name="driverName"
+                  placeholder="Види робіт"
+                  value={form.typesOfLandWorks}
+                  name="typesOfLandWorks"
                   onChange={changeHandler}
                 />
               </div>
-            )}
             <div className="form-group">
-              <label htmlFor="seniorName">
-                <small>Старший(механік)</small>
+              <label htmlFor="projectCost">
+                <small>Ціна проекту</small>
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                placeholder="Відповідальний"
-                value={form.seniorName}
-                name="seniorName"
+                placeholder="Ціна проекту"
+                value={form.projectCost}
+                name="projectCost"
                 onChange={changeHandler}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="listRouteFrom">
-                <small>Звідки(зауваження)</small>
+              <label htmlFor="contractExistence">
+                <small>Наявність договору</small>
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Звідки"
-                value={form.listRouteFrom}
-                name="listRouteFrom"
+                placeholder="Наявність договору"
+                value={form.contractExistence}
+                name="contractExistence"
                 onChange={changeHandler}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="listRouteTo">
-                <small>Куди(мета роботи)</small>
+              <label htmlFor="signaturуOfAct">
+                <small>Наявність підпису</small>
               </label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Куди"
-                value={form.listRouteTo}
-                name="listRouteTo"
+                placeholder="виконаних робіт"
+                value={form.signaturуOfAct}
+                name="signaturуOfAct"
                 onChange={changeHandler}
               />
             </div>
-            {(car.driver === "Автомобіль" ||
-              car.driver === "Автомобіль-агрегат") && (
+            <div className="form-group">
+              <label htmlFor="paymentDate">
+                <small>Дата оплати</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата оплати"
+                value={moment(form.paymentDate).format("YYYY-MM-DD")}
+                name="paymentDate"
+                onChange={changeHandler}
+              />
+            </div>
+{/* 
               <div id="datetime-local" className="form-group">
                 <label htmlFor="departure">
                   <small>Час початку</small>
@@ -208,26 +218,53 @@ export const CreateList = memo(
                   name="departure"
                   onChange={changeHandler}
                 />
-              </div>
-            )}
-            {(car.driver === "Автомобіль" ||
-              car.driver === "Автомобіль-агрегат") && (
-              <div id="datetime-local" className="form-group">
-                <label htmlFor="arrival">
-                  <small>Час закінчення</small>
+              </div> */}
+              <div  className="form-group">
+                <label htmlFor="аmountOfPayments">
+                  <small>Сумма оплати</small>
                 </label>
                 <input
-                  type="datetime-local"
+                  type="number"
                   className="form-control"
-                  placeholder="Час закінчення"
-                  value={form.arrival}
-                  name="arrival"
+                  placeholder="Сумма оплати"
+                  value={form.аmountOfPayments}
+                  name="аmountOfPayments"
                   onChange={changeHandler}
                 />
               </div>
-            )}
-            {(car.driver === "Автомобіль" ||
-              car.driver === "Автомобіль-агрегат") && (
+              <div  className="form-group">
+                <label htmlFor="amountOfDebt">
+                  <small>Сума заборгованості</small>
+                </label>
+                <input
+                  type="amountOfDebt"
+                  className="form-control"
+                  placeholder="Сума заборгованості"
+                  value={form.amountOfDebt}
+                  name="amountOfDebt"
+                  onChange={changeHandler}
+                />
+              </div>
+              <div className="form-group">
+              <label htmlFor="fullCalculation">
+                <small>Повний розрахунок</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Повний розрахунок"
+                value={form.fullCalculation}
+                name="fullCalculation"
+                onChange={changeHandler}
+              />
+            </div>
+
+
+
+            
+         
+            {(client.driver === "Автомобіль" ||
+              client.driver === "Автомобіль-агрегат") && (
               <div className="form-group">
                 <label htmlFor="indicatorListStart">
                   <small>Показники убуття</small>
@@ -243,8 +280,8 @@ export const CreateList = memo(
                 />
               </div>
             )}
-            {(car.driver === "Автомобіль" ||
-              car.driver === "Автомобіль-агрегат") && (
+            {(client.driver === "Автомобіль" ||
+              client.driver === "Автомобіль-агрегат") && (
               <div className="form-group">
                 <label htmlFor="indicatorListFinish">
                   <small>Показники прибуття</small>
@@ -260,8 +297,8 @@ export const CreateList = memo(
                 />
               </div>
             )}
-            {(car.driver === "Автомобіль" ||
-              car.driver === "Автомобіль-агрегат") && (
+            {(client.driver === "Автомобіль" ||
+              client.driver === "Автомобіль-агрегат") && (
               <div className="form-group">
                 <label htmlFor="totalListMileage">
                   <small>Пробіг по листу</small>
@@ -277,9 +314,9 @@ export const CreateList = memo(
                 />
               </div>
             )}
-            {(car.driver === "Електроприлад" ||
-              car.driver === "Автомобіль-агрегат" ||
-              car.driver === "Агрегат") && (
+            {(client.driver === "Електроприлад" ||
+              client.driver === "Автомобіль-агрегат" ||
+              client.driver === "Агрегат") && (
               <div className="form-group">
                 <label htmlFor="timeListFirst">
                   <small>Початковий час</small>
@@ -295,9 +332,9 @@ export const CreateList = memo(
                 />
               </div>
             )}
-            {(car.driver === "Електроприлад" ||
-              car.driver === "Автомобіль-агрегат" ||
-              car.driver === "Агрегат") && (
+            {(client.driver === "Електроприлад" ||
+              client.driver === "Автомобіль-агрегат" ||
+              client.driver === "Агрегат") && (
               <div className="form-group">
                 <label htmlFor="timeListLast">
                   <small>Загальний час</small>
@@ -313,9 +350,9 @@ export const CreateList = memo(
                 />
               </div>
             )}
-            {(car.driver === "Електроприлад" ||
-              car.driver === "Автомобіль-агрегат" ||
-              car.driver === "Агрегат") && (
+            {(client.driver === "Електроприлад" ||
+              client.driver === "Автомобіль-агрегат" ||
+              client.driver === "Агрегат") && (
               <div className="form-group">
                 <label htmlFor="timeListTotal">
                   <small>Час роботи</small>
@@ -331,9 +368,9 @@ export const CreateList = memo(
                 />
               </div>
             )}
-            {(car.driver === "Автомобіль" ||
-              car.driver === "Автомобіль-агрегат" ||
-              car.driver === "Агрегат") && (
+            {(client.driver === "Автомобіль" ||
+              client.driver === "Автомобіль-агрегат" ||
+              client.driver === "Агрегат") && (
               <div className="form-group">
                 <label htmlFor="season">
                   <small>Коефіцієнт сезону</small>
@@ -359,8 +396,8 @@ export const CreateList = memo(
             name="submit"
             onClick={createHandler}
           >
-            {!list && "Створити лист"}
-            {list && "Зберегти дані"}
+            {!project && "Створити лист"}
+            {project && "Зберегти дані"}
           </button>
         </div>
       </div>

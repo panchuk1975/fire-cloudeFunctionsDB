@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, memo } from "react";
-import { LegalPersonsComp } from "../components/LegalPersonsComp";
+import { PersonsComp } from "../components/PersonsComp";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
@@ -24,9 +24,9 @@ const UnlegalPersons = memo(({ windowWidth }) => {
     openClient,
     clouseClient,
     removeClient,
-    //lists,
+    projects,
     //routes,
-    //fetchLists,
+    fetchProjects,
     //fetchRoutes,
     // openList,
     // closeList,
@@ -41,7 +41,7 @@ const UnlegalPersons = memo(({ windowWidth }) => {
     fetchClients();
     fetchDates();
     fetchUsersInfo();
-    //fetchLists();
+    fetchProjects();
     //fetchRoutes();
     // eslint-disable-next-line
   }, []);
@@ -51,7 +51,7 @@ const UnlegalPersons = memo(({ windowWidth }) => {
       {loading ? (
         <Loader />
       ) : (
-        <LegalPersonsComp
+        <PersonsComp
           clients={clients}
           dates={dates}
           userInfos={userInfos}
@@ -61,7 +61,7 @@ const UnlegalPersons = memo(({ windowWidth }) => {
           
           clientType={clientType}
           windowWidth={windowWidth}
-          //lists={lists}
+          projects={projects}
           //routes={routes}
           //openList={openList}
           //closeList={closeList}

@@ -397,7 +397,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
           name="submit"
           onClick={createHandler}
         >
-          {!client && "Створити новий виріб"}
+          {!client && "Створити нового клієнта"}
           {client && "Зберегти дані"}
         </button>
       </div>

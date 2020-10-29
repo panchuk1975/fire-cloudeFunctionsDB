@@ -11,10 +11,10 @@ import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
-//import { ListComponent } from "./ListComponent";
+import { ListComponent } from "./ListComponent";
 var moment = require("moment");
 
-export const LegalPersonsComp = memo(
+export const PersonsComp = memo(
   ({
     clients,
     dates,
@@ -25,7 +25,7 @@ export const LegalPersonsComp = memo(
     windowWidth,
 
     clientType,
-    //lists,
+    projects,
     //routes,
     // openNewList,
     // clouseNewList,
@@ -86,11 +86,11 @@ export const LegalPersonsComp = memo(
           <TransitionGroup component="ul" className="list-group">
             {clientsExists &&
               clients.map((client) => {
-                // //--------------------Create client lists and routes-----------------------//
-                // let newLists = lists.filter(
-                //   (list) => list.listOwner === client.id
-                // );
-                // newLists.sort((a, b) => a.listNumber - b.listNumber);
+                //--------------------Create client projects and routes-----------------------//
+                let newProjects = projects.filter(
+                  (project) => project.projectOwner === client.id
+                );
+                newProjects.sort((a, b) => a.projectNumber - b.projectNumber);
                 // let carRoutes = routes.filter(
                 //   (route) => route.listOwner === client.id
                 // );
@@ -195,7 +195,7 @@ export const LegalPersonsComp = memo(
                         )}
                         <div>
                           {!client.openClient &
-                           // !newLists.length &
+                            !newProjects.length &
                             (userInfo.company === userInfo.jointCompany) && (
                             <button
                               type="button"
@@ -264,20 +264,20 @@ export const LegalPersonsComp = memo(
                       </form>
                       <form className="addingObjTable">
                       </form>
-                      {/* {!client.openClient && (
+                       {!client.openClient && (
                         <ListComponent
                           client={client}
                           dates={dates}
-                          routes={routes}
-                          newLists={newLists}
-                          openNewList={openNewList}
-                          clouseNewList={clouseNewList}
-                          openNewRoute={openNewRoute}
-                          closeNewRoute={closeNewRoute}
-                          openList={openList}
-                          closeList={closeList}
-                          openRoute={openRoute}
-                          closeRoute={closeRoute}
+                          //routes={routes}
+                          newProjects={newProjects}
+                          //openNewList={openNewList}
+                          //clouseNewList={clouseNewList}
+                          //openNewRoute={openNewRoute}
+                          //closeNewRoute={closeNewRoute}
+                          //openList={openList}
+                          //closeList={closeList}
+                          //openRoute={openRoute}
+                          //closeRoute={closeRoute}
                           windowWidth={windowWidth}
                           setAlertClass={setAlertClass}
                           setAlertText={setAlertText}
@@ -286,12 +286,11 @@ export const LegalPersonsComp = memo(
                           setModalClass={setModalClass}
                           setId={setId}
                           modalClass={modalClass}
-                          carRoutes={carRoutes}
-                          listCarLiquids={listCarLiquids}
+                          //carRoutes={carRoutes}
+                          //listCarLiquids={listCarLiquids}
                           userInfo={userInfo}
                         />
-                      )} */}
-    
+                      )}
                     </li>
                   </CSSTransition>
                 );
