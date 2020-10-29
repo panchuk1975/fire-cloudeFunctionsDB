@@ -1,11 +1,11 @@
   // NEW CLIENT FORM STYLE --------------------------------->
   .createClientBasis {
-    margin: 10px 0 0 0;
+    margin: 0px 0 0 0;
     padding: 0;
     color: white;
   }
   .clientMainForm {
-    margin: -10px 0 5px 0;
+    margin: -5px 0 5px 0;
     padding: 0 0px 0 0px;
   }
   .additionalInfo {
@@ -45,7 +45,11 @@
     }
   }
   .modifyClientBasis {
-    margin:10px 0 0px 0;
+    padding: 5px 0 0px 0;
+    .custom-select-sm {
+        width: 100%;
+        margin: 0px 0 0 0;
+      }
   }
 .clientTable {
     background-color: #ffffff;

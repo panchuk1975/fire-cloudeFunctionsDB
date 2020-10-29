@@ -4,8 +4,8 @@ import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
 
-const LegalPersons = memo(({ windowWidth }) => {
-    const clientType = "Юрідичний";
+const UnlegalPersons = memo(({ windowWidth }) => {
+  const clientType = "Фізичний";
     let email = "";
     if(fire.auth.currentUser){
         email = fire.auth.currentUser.email;
@@ -78,4 +78,5 @@ const LegalPersons = memo(({ windowWidth }) => {
   );
 });
 
-export default LegalPersons;
+export default UnlegalPersons;
+

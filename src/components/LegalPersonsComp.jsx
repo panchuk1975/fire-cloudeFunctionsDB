@@ -24,6 +24,7 @@ export const LegalPersonsComp = memo(
     clouseClient,
     windowWidth,
 
+    clientType,
     //lists,
     //routes,
     // openNewList,
@@ -67,7 +68,7 @@ export const LegalPersonsComp = memo(
     }
     //------------------------------Create clients data array------------------------------//
     clients = clients.filter((client) => client.owner === userInUse.owner);
-    clients = clients.filter((client) => client.clientType === "Юрідичний");
+    clients = clients.filter((client) => client.clientType === clientType);
     clients.sort(
       (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
     );

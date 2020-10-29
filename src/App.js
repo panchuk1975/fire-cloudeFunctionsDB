@@ -10,8 +10,8 @@ import { NavLink } from "react-router-dom";
 
 const CreateNew = React.lazy(() => import("./pages/CreateNew"));
 const LegalPersons  = React.lazy(() => import("./pages/LegalPersons"));
+const UnlegalPersons = React.lazy(() => import("./pages/UnlegalPersons"));
 
-const AutoAgr = React.lazy(() => import("./pages/AutoAgr"));
 const Agreg = React.lazy(() => import("./pages/Agreg"));
 const Liquids = React.lazy(() => import("./pages/Liquids"));
 const Exploutation = React.lazy(() => import("./pages/Exploutation"));
@@ -132,7 +132,7 @@ class App extends Component {
                     }}
                   />
                   <Route
-                    path={"/autoagr"}
+                    path={"/unlegalpersons"}
                     render={() => {
                       return (
                         <React.Suspense
@@ -142,7 +142,7 @@ class App extends Component {
                             </div>
                           }
                         >
-                          <AutoAgr
+                          <UnlegalPersons
                             contentWidth={contentWidth}
                             windowWidth={window.innerWidth}
                           />

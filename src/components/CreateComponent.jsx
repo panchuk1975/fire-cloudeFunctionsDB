@@ -15,7 +15,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
   if (!client) {
     initialForm = {
       clientType: "Юрідичний",// driver
-      companyName: "Форес",// typeOfCar
+      companyName: "-----",// typeOfCar
       secName: "Іванов", //carEngineNumber
       firstName: "Іван",// govermentCarNumber
       thirdName: "Іванович", //factoryCarNumber,

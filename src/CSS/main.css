@@ -52,19 +52,24 @@
     color: black;
     font-weight: 500; }
 
+.custom-select-sm {
+  width: 100%;
+  margin: -5px 0 0 0;
+  padding: 0 0 0 5px;
+  color: #494848;
+  font-size: 12px;
+  height: 35px;
+  border-radius: 0px; }
+
+.custom-select-sm,
+.form-group input {
+  font-size: 12px; }
+
 @media all and (max-width: 870px) {
   .form-group {
     width: 134px;
     padding: 0 0 0 0;
     margin: 0 2px 0 0; }
-  .custom-select-sm {
-    width: 100%;
-    margin: -5px 0 0 0;
-    padding: 0 0 0 5px;
-    color: #494848;
-    font-size: 12px;
-    height: 35px;
-    border-radius: 0px; }
   .custom-select-sm,
   .form-group input {
     font-size: 12px;
@@ -564,12 +569,12 @@ input[type="submit"]:hover {
   margin: 7px 0 7px 0; }
 
 .createClientBasis {
-  margin: 10px 0 0 0;
+  margin: 0px 0 0 0;
   padding: 0;
   color: white; }
 
 .clientMainForm {
-  margin: -10px 0 5px 0;
+  margin: -5px 0 5px 0;
   padding: 0 0px 0 0px; }
 
 .additionalInfo {
@@ -606,7 +611,10 @@ input[type="submit"]:hover {
   font-size: 0; }
 
 .modifyClientBasis {
-  margin: 10px 0 0px 0; }
+  padding: 5px 0 0px 0; }
+  .modifyClientBasis .custom-select-sm {
+    width: 100%;
+    margin: 0px 0 0 0; }
 
 .clientTable {
   background-color: #ffffff;
