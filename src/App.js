@@ -9,7 +9,7 @@ import { Loader } from "./components/Loader";
 import { NavLink } from "react-router-dom";
 
 const CreateNew = React.lazy(() => import("./pages/CreateNew"));
-const LegalPersons  = React.lazy(() => import("./pages/LegalPersons"));
+const LegalPersons = React.lazy(() => import("./pages/LegalPersons"));
 const UnlegalPersons = React.lazy(() => import("./pages/UnlegalPersons"));
 
 const Agreg = React.lazy(() => import("./pages/Agreg"));
@@ -71,7 +71,7 @@ class App extends Component {
   }
 
   authListener() {
-        fire.auth.onAuthStateChanged((user) => {
+    fire.auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
       } else {
@@ -247,7 +247,7 @@ class App extends Component {
               <div>
                 <Switch>
                   <Route
-                     path={"/register"}
+                    path={"/register"}
                     render={() => {
                       return (
                         <React.Suspense
@@ -257,9 +257,9 @@ class App extends Component {
                             </div>
                           }
                         >
-                           <Register /> 
+                          <Register />
                           <div
-                          style={{ width: contentWidth }}
+                            style={{ width: contentWidth }}
                             className="fireAuthConteinerRegister"
                           >
                             <StyledFirebaseAuth
@@ -311,8 +311,8 @@ class App extends Component {
                               firebaseAuth={firebase.auth()}
                             />
                             <div className="signup">
-                           <p></p>
-                           Return to:
+                              <p></p>
+                              Return to:
                               <NavLink to={"/login"}>
                                 <span>Login</span>
                               </NavLink>

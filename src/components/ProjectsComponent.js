@@ -19,7 +19,6 @@ export const ProjectsComponent = memo(
     openCurrentProject,
     clouseCurrentProject,
 
-
     windowWidth,
     setAlertClass,
     setAlertText,
@@ -29,9 +28,6 @@ export const ProjectsComponent = memo(
     setId,
     modalClass,
     openClientTableClass,
-
-
-
 
     carRoutes,
     //routes,
@@ -43,7 +39,7 @@ export const ProjectsComponent = memo(
     closeList,
     openRoute,
     closeRoute,
- 
+
     changeListRouteTime,
     //listCarLiquids,
   }) => {
@@ -52,9 +48,10 @@ export const ProjectsComponent = memo(
     let owner = fire.auth.currentUser.uid;
     let ownerDates = dates.find((date) => date.owner === owner);
     if (!ownerDates) {
-      ownerDates = { 
-          dateStart: "1970-01-01T00:00", 
-          dateFinish: "2070-01-01T00:00" };
+      ownerDates = {
+        dateStart: "1970-01-01T00:00",
+        dateFinish: "2070-01-01T00:00",
+      };
     }
     //let listCarLiquids = [];
     // newProjects = newProjects.filter((project) => project.progectDate >= ownerDates.dateStart);
@@ -62,17 +59,32 @@ export const ProjectsComponent = memo(
     //   (project) => project.listDate <= ownerDates.dateFinish
     // );
     // let newCarRoutes = routes.filter((route) => route.listOwner === car.id);
-    const sizeArray = [120, 60, 100, 50, 50, 50, 100, 100, 100, 100, 100, 100, 100, 150];
+    const sizeArray = [
+      120,
+      60,
+      100,
+      50,
+      50,
+      50,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      100,
+      150,
+    ];
     const summArray = (numb, sizeArray) => {
-      let i=0;
+      let i = 0;
       let summ = 0;
-      while (i<numb){
-      summ = summ + sizeArray[i];
-      i++
+      while (i < numb) {
+        summ = summ + sizeArray[i];
+        i++;
       }
       return summ;
-    }
-    console.log(summArray(1, sizeArray))
+    };
+    console.log(summArray(1, sizeArray));
     return (
       <form>
         <details>
@@ -90,82 +102,82 @@ export const ProjectsComponent = memo(
             </div>
           </summary>
           <div className="d-flex justify-content-between">
-              <table className="headTable">
-                <tbody>
-                  <tr align="center">
-                  {windowWidth > (70+summArray(1, sizeArray))  && (
+            <table className="headTable">
+              <tbody>
+                <tr align="center">
+                  {windowWidth > 70 + summArray(1, sizeArray) && (
                     <td width={sizeArray[0]}>
                       <small>№ проекту</small>
                     </td>
-                    )}
-                     {windowWidth >  (70+summArray(2, sizeArray))  && (
+                  )}
+                  {windowWidth > 70 + summArray(2, sizeArray) && (
                     <td width={sizeArray[1]}>
                       <small>Дата</small>
                     </td>
-                      )}
-                    {windowWidth >  (70+summArray(3, sizeArray))  && (
-                      <td width={sizeArray[2]}>
-                        <small>Види робіт</small>
-                      </td>
-                    )}
-                    {windowWidth > (70+summArray(4, sizeArray)) && (
-                      <td width={sizeArray[3]}>
-                        <small>Ціна</small>
-                      </td>
-                    )}
-                    {windowWidth > (summArray(6, sizeArray)) && (
-                      <td width={sizeArray[4]}>
-                        <small>Договір</small>
-                      </td>
-                    )}
-                    {windowWidth > (summArray(7, sizeArray)) && (
-                      <td width={sizeArray[5]}>
-                        <small>Підпис</small>
-                      </td>
-                    )}
-                    {windowWidth > 1350 && (
-                      <td width={sizeArray[6]}>
-                        <small>Дата</small>
-                      </td>
-                    )}
-                    {windowWidth > 1350 && (
-                      <td width={sizeArray[7]}>
-                        <small>Сумма</small>
-                      </td>
-                    )}
-                    {windowWidth > 1350 && (
-                      <td width={sizeArray[8]}>
-                        <small>Сумма</small>
-                      </td>
-                    )}
-                    {windowWidth > 1350 && (
-                      <td width={sizeArray[9]}>
-                        <small>Розрахунок</small>
-                      </td>
-                    )}
-                    {windowWidth > 1350 && (
-                      <td width={sizeArray[10]}>
-                        <small>Відповідальний</small>
-                      </td>
-                    )}
-                    {windowWidth > 1350 && (
-                      <td width={sizeArray[11]}>
-                        <small>Виконавець</small>
-                      </td>
-                    )}
-                    {windowWidth > 1350 && (
-                      <td width={sizeArray[12]}>
-                        <small>Термін</small>
-                      </td>
-                    )}
-                    {windowWidth > 1350 && (
-                      <td width={sizeArray[13]}>
-                        <small>Термін</small>
-                      </td>
-                    )}
-                  </tr>
-                </tbody>
-              </table>
+                  )}
+                  {windowWidth > 70 + summArray(3, sizeArray) && (
+                    <td width={sizeArray[2]}>
+                      <small>Види робіт</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(4, sizeArray) && (
+                    <td width={sizeArray[3]}>
+                      <small>Ціна</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(5, sizeArray) && (
+                    <td width={sizeArray[4]}>
+                      <small>Договір</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(6, sizeArray) && (
+                    <td width={sizeArray[5]}>
+                      <small>Підпис</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(7, sizeArray) && (
+                    <td width={sizeArray[6]}>
+                      <small>Дата</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(8, sizeArray) && (
+                    <td width={sizeArray[7]}>
+                      <small>Сумма</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(9, sizeArray) && (
+                    <td width={sizeArray[8]}>
+                      <small>Сумма</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(10, sizeArray) && (
+                    <td width={sizeArray[9]}>
+                      <small>Розрахунок</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(11, sizeArray) && (
+                    <td width={sizeArray[10]}>
+                      <small>Відповідальний</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(12, sizeArray) && (
+                    <td width={sizeArray[11]}>
+                      <small>Виконавець</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(13, sizeArray) && (
+                    <td width={sizeArray[12]}>
+                      <small>Термін</small>
+                    </td>
+                  )}
+                  {windowWidth > 70 + summArray(14, sizeArray) && (
+                    <td width={sizeArray[13]}>
+                      <small>Термін</small>
+                    </td>
+                  )}
+                </tr>
+              </tbody>
+            </table>
           </div>
           <TransitionGroup component="ul" className="project-group">
             {newProjects.map((project) => {
@@ -176,91 +188,109 @@ export const ProjectsComponent = memo(
               newRoutes.sort((a, b) => a.routNumber - b.routNumber);
               //let listLiquids = NewListLiquidsCount(newRoutes);
               return (
-                <CSSTransition key={project.id} classNames={"note"} timeout={800}>
-                  <li key={project.id} className="project-group-item projectInnerLi">
+                <CSSTransition
+                  key={project.id}
+                  classNames={"note"}
+                  timeout={800}
+                >
+                  <li
+                    key={project.id}
+                    className="project-group-item projectInnerLi"
+                  >
                     {!project.openProject && (
                       <div key={project.id} className="projectBasis">
                         <div className="d-flex justify-content-between">
-                            <table
-                              className="projectTable"
-                              onClick={() => openCurrentProject(project)}
-                            >
-                              <tbody>
-                                <tr align="center">
+                          <table
+                            className="projectTable"
+                            onClick={() => openCurrentProject(project)}
+                          >
+                            <tbody>
+                              <tr align="center">
+                                {windowWidth > 70 + summArray(1, sizeArray) && (
                                   <td width={sizeArray[0]} className="head">
                                     <small>{project.projectNumber}</small>
                                   </td>
+                                )}
+                                {windowWidth > 70 + summArray(2, sizeArray) && (
                                   <td width={sizeArray[1]} className="head">
-                                    <small>{`${moment(project.projectDate).format(
-                                      "DD.MM.YY"
-                                    )}`}</small>
+                                    <small>{`${moment(
+                                      project.projectDate
+                                    ).format("DD.MM.YY")}`}</small>
                                   </td>
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[2]}>
-                                      <small>{project.typesOfLandWorks}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[3]}>
-                                      <small>{project.projectCost}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[4]}>
-                                      <small>{project.contractExistence}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[5]}>
-                                      <small>{project.signaturуOfAct}</small>
-                                    </td>
-                                  )}
-                                   {windowWidth > 1350 && (
-                                   <td width={sizeArray[6]} className="head">
-                                   <small>{`${moment(project.paymentDate).format(
-                                     "DD.MM.YY"
-                                   )}`}</small>
-                                 </td>
-                                  )}
-                                   
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[7]}>
-                                      <small>{project.аmountOfPayments}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[8]}>
-                                      <small>{project.amountOfDebt}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[9]}>
-                                      <small>{project.fullCalculation}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[10]}>
-                                      <small>{project.responsibleForLandManage}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[11]}>
-                                      <small>{project.contractor}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 1350 && (
-                                    <td width={sizeArray[12]}>
-                                      <small>{project.termOfPerformance}</small>
-                                    </td>
-                                  )}
-                                   {windowWidth > 1350 && (
-                                    <td width={sizeArray[13]}>
-                                      <small>{project.termOfPerformance}</small>
-                                    </td>
-                                  )}
-                                </tr>
-                              </tbody>
-                            </table>
+                                )}
+                                {windowWidth > 70 + summArray(3, sizeArray) && (
+                                  <td width={sizeArray[2]}>
+                                    <small>{project.typesOfLandWorks}</small>
+                                  </td>
+                                )}
+                                {windowWidth > 70 + summArray(4, sizeArray) && (
+                                  <td width={sizeArray[3]}>
+                                    <small>{project.projectCost}</small>
+                                  </td>
+                                )}
+                                {windowWidth > 70 + summArray(5, sizeArray) && (
+                                  <td width={sizeArray[4]}>
+                                    <small>{project.contractExistence}</small>
+                                  </td>
+                                )}
+                                {windowWidth > 70 + summArray(6, sizeArray) && (
+                                  <td width={sizeArray[5]}>
+                                    <small>{project.signaturуOfAct}</small>
+                                  </td>
+                                )}
+                                {windowWidth > 70 + summArray(7, sizeArray) && (
+                                  <td width={sizeArray[6]} className="head">
+                                    <small>{`${moment(
+                                      project.paymentDate
+                                    ).format("DD.MM.YY")}`}</small>
+                                  </td>
+                                )}
+
+                                {windowWidth > 70 + summArray(8, sizeArray) && (
+                                  <td width={sizeArray[7]}>
+                                    <small>{project.аmountOfPayments}</small>
+                                  </td>
+                                )}
+                                {windowWidth > 70 + summArray(9, sizeArray) && (
+                                  <td width={sizeArray[8]}>
+                                    <small>{project.amountOfDebt}</small>
+                                  </td>
+                                )}
+                                {windowWidth >
+                                  70 + summArray(10, sizeArray) && (
+                                  <td width={sizeArray[9]}>
+                                    <small>{project.fullCalculation}</small>
+                                  </td>
+                                )}
+                                {windowWidth >
+                                  70 + summArray(11, sizeArray) && (
+                                  <td width={sizeArray[10]}>
+                                    <small>
+                                      {project.responsibleForLandManage}
+                                    </small>
+                                  </td>
+                                )}
+                                {windowWidth >
+                                  70 + summArray(12, sizeArray) && (
+                                  <td width={sizeArray[11]}>
+                                    <small>{project.contractor}</small>
+                                  </td>
+                                )}
+                                {windowWidth >
+                                  70 + summArray(13, sizeArray) && (
+                                  <td width={sizeArray[12]}>
+                                    <small>{project.termOfPerformance}</small>
+                                  </td>
+                                )}
+                                {windowWidth >
+                                  70 + summArray(14, sizeArray) && (
+                                  <td width={sizeArray[13]}>
+                                    <small>{project.termOfPerformance}</small>
+                                  </td>
+                                )}
+                              </tr>
+                            </tbody>
+                          </table>
                           {!project.openProject &
                             !newRoutes.length &
                             (userInfo.company === userInfo.jointCompany) &
@@ -283,14 +313,14 @@ export const ProjectsComponent = memo(
                       </div>
                     )}
                     <div>
-                      <div className="clouseProjectBasis">
+                      <div
+                        className="clouseProjectBasis"
+                        onClick={() => clouseCurrentProject(project)}
+                      >
                         {project.openProject && (
-                          <table
-                            className="clouseProjectForm"
-                            onClick={() => clouseCurrentProject(project)}
-                          >
+                          <table className="clouseProjectForm">
                             <tbody>
-                              <tr className="projectTable">
+                              <tr className="clouseProjectTableButton">
                                 <td>Закрити форму проекта</td>
                               </tr>
                             </tbody>
@@ -397,7 +427,7 @@ export const ProjectsComponent = memo(
               Закрити
             </button>
           </div>
-           {client.openProject && (
+          {client.openProject && (
             <CreateProject
               client={client}
               setAlertText={setAlertText}
@@ -405,7 +435,7 @@ export const ProjectsComponent = memo(
               newProjects={newProjects}
               userInfo={userInfo}
             />
-          )} 
+          )}
         </details>
       </form>
     );

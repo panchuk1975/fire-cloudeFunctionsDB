@@ -1,113 +1,136 @@
 //-- CREATE PROJECT STYLE --------------------->
 .projectInnerLi {
-        margin: 5px 0 0 0;
-        padding: 0;
-        background: none;
+  margin: 5px 0 0 0;
+  padding: 0;
+  background: lightslategray;
+  &:hover {
+    background: rgb(136, 155, 174);
+  }
 }
 .CreateProjectStyle {
-    margin: 5px 12px 0 15px;
+  margin: 5px 12px 0 15px;
 }
 .clouseProjectBasis {
-    padding: 0 5px 0 5px;
+  padding: 5px 5px 0 5px;
+  cursor: pointer;
+}
+.clouseProjectForm {
+  background-color: rgb(8, 28, 71);
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  &:hover {
+    background-color: rgb(10, 35, 90);
   }
-  .clouseProjectForm {
-    width: 100%;
-    text-align: center;
-    margin: 0px 0px 0px 0px;
+}
+.clouseProjectTableButton {
+  font-size: 14px;
+  color: white;
+  height: 25px;
+  &:hover {
+    color: rgb(228, 196, 12);
   }
+}
 .projectTable {
-    cursor: pointer;
-    font-size: 14px;
-    color: rgb(0, 0, 0);
-    padding: 0 5px 0 5px;
-    //border: 1px solid black;
-    //border-radius: 5px;
-    // -webkit-box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
-    // -moz-box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
-    // box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
-    &:hover {
-    color: rgb(3, 192, 192);
+  cursor: pointer;
+  font-size: 14px;
+  color: rgb(0, 0, 0);
+  padding: 0 5px 0 5px;
+  //border: 1px solid black;
+  //border-radius: 5px;
+  // -webkit-box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
+  // -moz-box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
+  // box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
+  &:hover {
+    color: rgb(11, 32, 148);
     //border-radius: 5px;
     // -webkit-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
     // -moz-box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
     // box-shadow: 0 0 5px #33ffff, 0 0 5px #66ffff;
-    }
   }
+}
 .deleteProjectBtn {
-    font-size: 7px;
-    padding: 0 5px 0 5px;
-    margin: 2px 0 2px 0;
-    color: #ff2400;
-  }
+  font-size: 7px;
+  padding: 0 5px 0 5px;
+  margin: 2px 0 2px 0;
+  color: #ff2400;
+}
 .deleteProjectBtn:hover {
-    color: black;
-  }
-.projectButtonsGrup{
-    padding: 0 3px 2px 5px;
-  }
-.projectButtonsGrup button {
-    font-size: 12px;
-    color: rgb(0, 0, 0);
-  }
-.headTable{
-  color: rgb(4, 51, 4);
+  color: black;
+}
+.projectButtonsGrup {
+  padding: 0 3px 2px 5px;
+}
+.headTable {
+  color: rgb(228, 196, 12);
   font-size: 12px;
   font-weight: 600;
   background-color: none;
   margin: 2px 0 0 0;
   user-select: none;
 }
-.headTable td,  
-.projectTable td{
-  border: 1px solid black;
+.headTable td {
+  border: 1px solid rgb(45, 52, 58);
 }
-  // .head {
-  //   color: rgb(41, 168, 41);
-  // }
+.projectTable td {
+  border: 1px solid rgb(142, 164, 184);
+}
+// .head {
+//   color: rgb(41, 168, 41);
+// }
 //--MODIFY PROJECT STYLE --------------------->
 .ModifyProjectStyle {
-    margin: 5px 5px 0 5px;
-  }
+  margin: 5px 5px 0 5px;
+}
 .saveProjectBtn {
-    font-size: 15px;
-    width: 100%;
-    margin: 10px 2px 5px 0;
-    padding: 0;
-    color: black;
-  }
+  font-size: 15px;
+  width: 100%;
+  margin: 10px 2px 5px 0;
+  padding: 0;
+  color: black;
+}
+//--BUTTONS BLOCK ----------------------------->
+.projectButtonsGrup button {
+  font-size: 12px;
+}
 .addProjectBtn,
 .closeProjectBtn {
-    width: 50%;
-    padding: 0;   
-    color: black;
-    margin: 5px 0 0 0;
-  }
-  //---SUMMARU HTML-------------------> 
-details {
-  color: rgb(12, 12, 12);
-  font-size: 10px;
-  margin:2px 0 0 0;
+  width: 50%;
   padding: 0;
+  margin: 5px 0 0 0;
 }
-details:hover {
-  color: rgb(110, 247, 110);
+//---SUMMARU HTML------------------->
+details {
   font-size: 10px;
   margin: 2px 0 0 0;
+  padding: 0;
+
+  &:active {
+    color: rgb(60, 60, 60);
+    border: none;
+  }
 }
 #summary {
+  color: rgb(34, 34, 34);
+  width: 15%;
   display: flex;
 }
 #summaryConteiner {
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  border: none;
+}
+#small {
+  color: rgb(17, 209, 24);
+  font-weight: bold;
+  &:active {
+    border: none;
+  }
+  &:hover {
+    color: rgb(248, 223, 33);
+  }
 }
 
-
-
-
-
-  
 // .routeHeadTable {
 //     user-select: none;
 //     color: #539ab6;
@@ -134,5 +157,3 @@ details:hover {
 // .liquidValue {
 //     color: rgb(146, 145, 145);
 //   }
-  
-  

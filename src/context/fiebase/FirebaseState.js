@@ -7,14 +7,12 @@ import {
   CHANGE_DATES,
   FETCHED_DATES,
   SHOW_LOADER,
- 
   ADD_CLIENT,
   CHANGE_CLIENT,
   OPEN_CLIENT,
   CLOUSE_CLIENT,
   REMOVE_CLIENT,
   FETCH_CLIENTS,
-
   ADD_PROJECT,
   CHANGE_PROJECT,
   FETCH_PROJECTS,
@@ -23,14 +21,6 @@ import {
   REMOVE_PROJECT,
   OPEN_CURRENT_PROJECT,
   CLOUSE_CURRENT_PROJECT,
-
-
-
-
-
-
-
- 
   REMOVE_ROUTE,
   REMOVE_DATES,
   REMOVE_USERINFOS,
@@ -40,13 +30,10 @@ import {
   CHANGE_USERINFO,
   CHANGE_INFO,
   FETCHED_USERINFO,
- 
- 
   FETCHED_ROUTES,
   CHANGE_CREATE,
   CHANGE_LIST,
   CHANGE_ROUTE,
-  
   OPEN_ROUTE,
 } from "../types";
 
@@ -74,20 +61,20 @@ export const FirebaseState = ({ children }) => {
   const changeCreate = () => dispatch({ type: CHANGE_CREATE });
   //---------------------------------Date----------------------------------//
   const addDates = async (newDates) => {
-    console.log(newDates)
+    console.log(newDates);
     const dates = {
       ...newDates,
       owner,
     };
-    console.log(dates)
+    console.log(dates);
     try {
       await fire.db
-      .collection("dates")
-      .add(dates)
-      .catch((err) => console.log(err));
-    const payload = {
-      ...dates,
-    };
+        .collection("dates")
+        .add(dates)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...dates,
+      };
       // const res = await axios.post(`${url}/dates.json`, dates);
       // const payload = {
       //   ...dates,
@@ -108,14 +95,15 @@ export const FirebaseState = ({ children }) => {
       ...newDates,
       owner,
     };
-      try {
-        await fire.db
-          .collection("dates").doc(dates.id)
-          .update(dates)
-          .catch((err) => console.log(err));
-        const payload = {
-          ...dates
-        };
+    try {
+      await fire.db
+        .collection("dates")
+        .doc(dates.id)
+        .update(dates)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...dates,
+      };
       //const res = await axios.patch(`${url}/dates/${dates.owner}.json`, dates);
       dispatch({
         type: CHANGE_DATES,
@@ -128,9 +116,10 @@ export const FirebaseState = ({ children }) => {
   //------------------------------------------------------------------------//
   const removeDates = async (id) => {
     await fire.db
-    .collection("dates").doc(id)
-    .delete()
-    .catch((err) => console.log(err));
+      .collection("dates")
+      .doc(id)
+      .delete()
+      .catch((err) => console.log(err));
     //await axios.delete(`${url}/dates/${id}.json`);
     dispatch({
       type: REMOVE_DATES,
@@ -141,16 +130,16 @@ export const FirebaseState = ({ children }) => {
   const fetchDates = async () => {
     showLoader();
     const res = await fire.db
-    .collection("dates")//.doc(id)
-    .get()
-    .catch((err) => console.log(err));
+      .collection("dates") //.doc(id)
+      .get()
+      .catch((err) => console.log(err));
     if (!res.data) {
       res.data = {};
     }
-    const payload = []
-    res.forEach(doc => {
-     payload.push({...doc.data(), id:doc.id});
-    })
+    const payload = [];
+    res.forEach((doc) => {
+      payload.push({ ...doc.data(), id: doc.id });
+    });
     // const res = await axios.get(`${url}/dates.json`);
     // const payload = Object.keys(res.data).map((key) => {
     //   return {
@@ -164,17 +153,11 @@ export const FirebaseState = ({ children }) => {
     });
   };
 
-
-
-
-
-
-
   //-CLIENT FUNCTIONS----------------------------------------------->
   const addClient = async (newClient) => {
     const client = {
       ...newClient,
-      owner
+      owner,
     };
     try {
       const res = await fire.db
@@ -183,7 +166,7 @@ export const FirebaseState = ({ children }) => {
         .catch((err) => console.log(err));
       const payload = {
         ...client,
-        id: res.id
+        id: res.id,
       };
       dispatch({
         type: ADD_CLIENT,
@@ -199,14 +182,15 @@ export const FirebaseState = ({ children }) => {
       ...newClient,
       owner,
     };
-      try {
-        await fire.db
-          .collection("clients").doc(client.id)
-          .update(client)
-          .catch((err) => console.log(err));
-        const payload = {
-          ...client
-        };
+    try {
+      await fire.db
+        .collection("clients")
+        .doc(client.id)
+        .update(client)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...client,
+      };
       dispatch({
         type: CHANGE_CLIENT,
         payload,
@@ -223,12 +207,13 @@ export const FirebaseState = ({ children }) => {
     };
     try {
       await fire.db
-          .collection("clients").doc(client.id)
-          .update(client)
-          .catch((err) => console.log(err));
-        const payload = {
-          ...client
-        };
+        .collection("clients")
+        .doc(client.id)
+        .update(client)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...client,
+      };
       dispatch({
         type: OPEN_CLIENT,
         payload,
@@ -249,12 +234,13 @@ export const FirebaseState = ({ children }) => {
     };
     try {
       await fire.db
-          .collection("clients").doc(client.id)
-          .update(client)
-          .catch((err) => console.log(err));
-        const payload = {
-          ...client
-        };
+        .collection("clients")
+        .doc(client.id)
+        .update(client)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...client,
+      };
       dispatch({
         type: CLOUSE_CLIENT,
         payload,
@@ -266,9 +252,10 @@ export const FirebaseState = ({ children }) => {
   //---REMOVE CLIENT
   const removeClient = async (id) => {
     await fire.db
-        .collection("clients").doc(id)
-        .delete()
-        .catch((err) => console.log(err));
+      .collection("clients")
+      .doc(id)
+      .delete()
+      .catch((err) => console.log(err));
     dispatch({
       type: REMOVE_CLIENT,
       payload: id,
@@ -278,31 +265,18 @@ export const FirebaseState = ({ children }) => {
   const fetchClients = async () => {
     showLoader();
     const res = await fire.db
-    .collection("clients")
-    .get()
-    .catch((err) => console.log(err));
-    const payload = []
-    res.forEach(doc => {
-     payload.push({...doc.data(), id:doc.id});
-    })
+      .collection("clients")
+      .get()
+      .catch((err) => console.log(err));
+    const payload = [];
+    res.forEach((doc) => {
+      payload.push({ ...doc.data(), id: doc.id });
+    });
     dispatch({
       type: FETCH_CLIENTS,
       payload,
     });
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   //--PROJECT FUNCTIONS-------------------------------------->
   const addProject = async (newProject, client) => {
@@ -313,13 +287,13 @@ export const FirebaseState = ({ children }) => {
     };
     try {
       const res = await fire.db
-      .collection("projects")
-      .add(project)
-      .catch((err) => console.log(err));
-    const payload = {
-      ...project,
-      id: res.id,
-    };
+        .collection("projects")
+        .add(project)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...project,
+        id: res.id,
+      };
       dispatch({
         type: ADD_PROJECT,
         payload,
@@ -335,18 +309,19 @@ export const FirebaseState = ({ children }) => {
       owner: client.owner,
       projectOwner: client.id,
     };
-      try {
-        await fire.db
-          .collection("projects").doc(id)
-          .update(project)
-          .catch((err) => console.log(err));
-        const payload = {
-          ...project,
-        };
+    try {
+      await fire.db
+        .collection("projects")
+        .doc(id)
+        .update(project)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...project,
+      };
       dispatch({
         type: CHANGE_PROJECT,
         payload,
-        id
+        id,
       });
     } catch (e) {
       throw new Error(e.message);
@@ -360,12 +335,13 @@ export const FirebaseState = ({ children }) => {
     };
     try {
       await fire.db
-      .collection("clients").doc(client.id)
-      .update(client)
-      .catch((err) => console.log(err));
-    const payload = {
-      ...client,
-    };
+        .collection("clients")
+        .doc(client.id)
+        .update(client)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...client,
+      };
       dispatch({
         type: OPEN_PROJECT,
         payload,
@@ -382,12 +358,13 @@ export const FirebaseState = ({ children }) => {
     };
     try {
       await fire.db
-      .collection("clients").doc(client.id)
-      .update(client)
-      .catch((err) => console.log(err));
-    const payload = {
-      ...client,
-    };
+        .collection("clients")
+        .doc(client.id)
+        .update(client)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...client,
+      };
       dispatch({
         type: CLOUSE_PROJECT,
         payload,
@@ -395,7 +372,7 @@ export const FirebaseState = ({ children }) => {
     } catch (e) {
       throw new Error(e.message);
     }
-  };//--OPEN CURRENT PROJECT FORM ----------------->
+  }; //--OPEN CURRENT PROJECT FORM ----------------->
   const openCurrentProject = async (currentProject) => {
     let updateProject = {
       ...currentProject,
@@ -403,12 +380,13 @@ export const FirebaseState = ({ children }) => {
     };
     try {
       await fire.db
-      .collection("projects").doc(updateProject.id)
-      .update(updateProject)
-      .catch((err) => console.log(err));
-    const payload = {
-      ...updateProject,
-    };
+        .collection("projects")
+        .doc(updateProject.id)
+        .update(updateProject)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...updateProject,
+      };
       dispatch({
         type: OPEN_CURRENT_PROJECT,
         payload,
@@ -425,12 +403,13 @@ export const FirebaseState = ({ children }) => {
     };
     try {
       await fire.db
-      .collection("projects").doc(updateProject.id)
-      .update(updateProject)
-      .catch((err) => console.log(err));
-    const payload = {
-      ...updateProject,
-    };
+        .collection("projects")
+        .doc(updateProject.id)
+        .update(updateProject)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...updateProject,
+      };
       dispatch({
         type: CLOUSE_CURRENT_PROJECT,
         payload,
@@ -441,48 +420,36 @@ export const FirebaseState = ({ children }) => {
   };
   //---REMOVE PROJECT ---------------------->
   const removeProject = async (id) => {
-    if (id){
+    if (id) {
       await fire.db
-      .collection("projects").doc(id)
-      .delete()
-      .catch((err) => console.log(err));
-  dispatch({
-    type: REMOVE_PROJECT,
-    payload: id,
-  });
+        .collection("projects")
+        .doc(id)
+        .delete()
+        .catch((err) => console.log(err));
+      dispatch({
+        type: REMOVE_PROJECT,
+        payload: id,
+      });
     } else {
       return null;
     }
-   
   };
   // ---FETCH PROJECTS -------------------->
   const fetchProjects = async () => {
     showLoader();
     const res = await fire.db
-    .collection("projects")
-    .get()
-    .catch((err) => console.log(err));
-    const payload = []
-    res.forEach(proj => {
-     payload.push({...proj.data(), id:proj.id});
-    })
+      .collection("projects")
+      .get()
+      .catch((err) => console.log(err));
+    const payload = [];
+    res.forEach((proj) => {
+      payload.push({ ...proj.data(), id: proj.id });
+    });
     dispatch({
       type: FETCH_PROJECTS,
       payload,
     });
   };
-
-
-
-
-
-
-
-
-
-
-
-
 
   //------------------------------------------------------------------------//
   const clouseNewList = async (car) => {
@@ -503,7 +470,6 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-
 
   //------------------------------------------------------------------------//
   const openList = async (list) => {
@@ -544,19 +510,6 @@ export const FirebaseState = ({ children }) => {
     }
   };
   //------------------------------------------------------------------------//
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   //------------------------------------------------------------------------//
   const changeListRouteTime = async (
@@ -924,7 +877,7 @@ export const FirebaseState = ({ children }) => {
         .collection("usersInfos")
         .add(userInfo)
         .catch((err) => console.log(err));
-        console.log(res)
+      console.log(res);
       const payload = {
         ...newInfo,
       };
@@ -940,12 +893,13 @@ export const FirebaseState = ({ children }) => {
   const changeUserInfo = async (newUserInfo) => {
     showLoader();
     const userInfo = {
-           ...newUserInfo,
-         };
-         console.log(userInfo.id);
+      ...newUserInfo,
+    };
+    console.log(userInfo.id);
     try {
       await fire.db
-        .collection("usersInfos").doc(userInfo.id)
+        .collection("usersInfos")
+        .doc(userInfo.id)
         .update(userInfo)
         .catch((err) => console.log(err));
       const payload = {
@@ -968,13 +922,13 @@ export const FirebaseState = ({ children }) => {
   const fetchUsersInfo = async () => {
     showLoader();
     const res = await fire.db
-    .collection("usersInfos")//.doc(id)
-    .get()
-    .catch((err) => console.log(err));
-    const payload = []
-    res.forEach(doc => {
-     payload.push({...doc.data(), id:doc.id});
-    })
+      .collection("usersInfos") //.doc(id)
+      .get()
+      .catch((err) => console.log(err));
+    const payload = [];
+    res.forEach((doc) => {
+      payload.push({ ...doc.data(), id: doc.id });
+    });
     // const payload = Object.keys(res).map((key) => {
     //   return {
     //     ...res.data[key],
@@ -985,13 +939,14 @@ export const FirebaseState = ({ children }) => {
       type: FETCHED_USERINFO,
       payload,
     });
-  }
+  };
   //-----------------------------------------------------------------------//
   const removeUserInfos = async (id) => {
     await fire.db
-        .collection("usersInfos").doc(id)
-        .delete()
-        .catch((err) => console.log(err));
+      .collection("usersInfos")
+      .doc(id)
+      .delete()
+      .catch((err) => console.log(err));
     dispatch({
       type: REMOVE_USERINFOS,
       payload: id,
@@ -1012,7 +967,6 @@ export const FirebaseState = ({ children }) => {
         removeClient,
         fetchClients,
 
-
         addProject,
         changeProject,
         openProject,
@@ -1021,11 +975,10 @@ export const FirebaseState = ({ children }) => {
         clouseCurrentProject,
         removeProject,
         fetchProjects,
-        
 
         addRoute,
         addDates,
-       
+
         openNewRoute,
         closeNewRoute,
         clouseNewList,
@@ -1039,7 +992,7 @@ export const FirebaseState = ({ children }) => {
         openRoute,
         closeList,
         closeRoute,
-       
+
         removeRoute,
         fetchRoutes,
         changeCreate,

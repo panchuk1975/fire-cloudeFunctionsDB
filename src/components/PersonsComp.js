@@ -1,11 +1,10 @@
 import React, { memo, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import {
- // ExportReactCSV,
-  //carExelInfo,
-  //carLiquidsExelInfo,
-  //carListLiquidsExelInfo,
-} from "../mathfunctions/liquidsFunctions";
+import // ExportReactCSV,
+//carExelInfo,
+//carLiquidsExelInfo,
+//carListLiquidsExelInfo,
+"../mathfunctions/liquidsFunctions";
 import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
@@ -35,7 +34,6 @@ export const PersonsComp = memo(
     openCurrentProject,
     clouseCurrentProject,
 
-    
     //routes,
     // openNewList,
     // clouseNewList,
@@ -77,7 +75,9 @@ export const PersonsComp = memo(
     //--Create clients data array--------------->
     clients = clients.filter((client) => client.owner === userInUse.owner);
     clients = clients.filter((client) => client.clientType === clientType);
-    clients.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
+    clients.sort(
+      (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
+    );
     let clientsExists = clients.length;
     if (clientsExists === 0) {
       return null;
@@ -99,7 +99,7 @@ export const PersonsComp = memo(
                 // );
                 // //---------------------------Car liquids array---------------------------//
                 // let listCarLiquids = NewListLiquidsCount(carRoutes);
-               
+
                 //--CLIENT TYPE DYNAMIC CLASSIS ----------->
                 let clientType = null;
                 if (client.clientType === "Юрідичний") {
@@ -110,117 +110,120 @@ export const PersonsComp = memo(
                 //--DYNAMIC CLASSIS---------------------->
                 //--TABLE----->
                 let openClientTableClass = null;
-                 if (client.openClient) {
+                if (client.openClient) {
                   openClientTableClass = "tableItemsAreClouse";
-                } 
+                }
                 //--DELETE BUTTON -->
                 let openDeleteButtonClass = null;
                 if (client.openClient) {
                   openDeleteButtonClass = "deleteButtonItemAreClouse";
-                } 
-                if (newProjects.length){
+                }
+                if (newProjects.length) {
                   openDeleteButtonClass = "deleteButtonItemAreClouse";
                 }
-                if (userInfo.company !== userInfo.jointCompany){
+                if (userInfo.company !== userInfo.jointCompany) {
                   openDeleteButtonClass = "deleteButtonItemAreClouse";
                 }
                 //--DISABLE BUTTON--->
                 let disableDeleteButtonClass = "deleteButtonItemAreClouse";
-                if (newProjects.length){
+                if (newProjects.length) {
                   disableDeleteButtonClass = "";
                 }
-                if (userInfo.company !== userInfo.jointCompany){
+                if (userInfo.company !== userInfo.jointCompany) {
                   disableDeleteButtonClass = "";
                 }
                 if (client.openClient) {
                   disableDeleteButtonClass = "deleteButtonItemAreClouse";
-                } 
+                }
                 //---------------------------CLIENTS RENDER----------------------------//
                 return (
-                  <CSSTransition key={client.id} classNames={"note"} timeout={800}>
+                  <CSSTransition
+                    key={client.id}
+                    classNames={"note"}
+                    timeout={800}
+                  >
                     <li
                       key={client.id}
                       className="list-group-item clientInnerLi"
                     >
-                      <form
-                        className="d-flex justify-content-between clientInnerForm"
-                      >
-                            <table 
-                            className={`clientTable ${openClientTableClass}`}  
-                            onClick={() => {
+                      <form className="d-flex justify-content-between clientInnerForm">
+                        <table
+                          className={`clientTable ${openClientTableClass}`}
+                          onClick={() => {
                             openClient(client);
-                            }}>
-                              <tbody>
-                                <tr align="center">
-                                <td width="180">
-                                      <small className={clientType}>
-                                        {client.companyName}
-                                      </small>
-                                    </td>
-                                  {windowWidth > 359 && (
-                                   <td width="105">
-                                   <small>
-                                     {client.secName}
-                                   </small>
-                                 </td>
-                                  )}
-                                  {windowWidth > 1030 && (
-                                    <td width="80">
-                                    <small>{client.firstName}</small>
-                                  </td>
-                                  )}
-                                    {windowWidth > 1150 && (
-                                    <td width="120">
-                                      <small>{client.thirdName}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 450 && (
-                                    <td width="90">
-                                      <small>{client.phonNumber}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 530 && (
-                                     <td width="80">
-                                     <small>{client.contractNumber}</small>
-                                   </td>
-                                  )}
-                                  {windowWidth > 570 && (
-                                     <td width="40">
-                                     <small>{client.contractPeriod}</small>
-                                   </td>
-                                  )}
-                                  {windowWidth > 650 && (
-                                    <td width="80">
-                                      <small>
-                                        {`${moment(
-                                          client.registrationDate
-                                        ).format("DD.MM HH:mm")}`}
-                                      </small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 950 && (
-                                    <td width="300">
-                                      <small>{client.adress}</small>
-                                    </td>
-                                  )}
-                               
-                                  {windowWidth > 1240 && (
-                                    <td width="70">
-                                      <small>{client.incomingSourse}</small>
-                                    </td>
-                                  )}
-                              
-                                   {windowWidth > 1310 && (
-                                    <td width="70">
-                                      <small>{client.dateOfSignContract}</small>
-                                    </td>
-                                  )}
-                                   {windowWidth > 1360 && (
-                                    <td width="70">
-                                      <small className="negotiationsResult">{client.negotiationsResult}</small>
-                                    </td>
-                                  )}
-                                  {/* {windowWidth > 1201 && (
+                          }}
+                        >
+                          <tbody>
+                            <tr align="center">
+                              <td width="180">
+                                <small className={clientType}>
+                                  {client.companyName}
+                                </small>
+                              </td>
+                              {windowWidth > 359 && (
+                                <td width="105">
+                                  <small>{client.secName}</small>
+                                </td>
+                              )}
+                              {windowWidth > 1030 && (
+                                <td width="80">
+                                  <small>{client.firstName}</small>
+                                </td>
+                              )}
+                              {windowWidth > 1150 && (
+                                <td width="120">
+                                  <small>{client.thirdName}</small>
+                                </td>
+                              )}
+                              {windowWidth > 450 && (
+                                <td width="90">
+                                  <small>{client.phonNumber}</small>
+                                </td>
+                              )}
+                              {windowWidth > 530 && (
+                                <td width="80">
+                                  <small>{client.contractNumber}</small>
+                                </td>
+                              )}
+                              {windowWidth > 570 && (
+                                <td width="40">
+                                  <small>{client.contractPeriod}</small>
+                                </td>
+                              )}
+                              {windowWidth > 650 && (
+                                <td width="80">
+                                  <small>
+                                    {`${moment(client.registrationDate).format(
+                                      "DD.MM HH:mm"
+                                    )}`}
+                                  </small>
+                                </td>
+                              )}
+                              {windowWidth > 950 && (
+                                <td width="300">
+                                  <small>{client.adress}</small>
+                                </td>
+                              )}
+
+                              {windowWidth > 1240 && (
+                                <td width="70">
+                                  <small>{client.incomingSourse}</small>
+                                </td>
+                              )}
+
+                              {windowWidth > 1310 && (
+                                <td width="70">
+                                  <small>{client.dateOfSignContract}</small>
+                                </td>
+                              )}
+                              {windowWidth > 1360 && (
+                                <td width="70">
+                                  <small className="negotiationsResult">
+                                    {client.negotiationsResult}
+                                  </small>
+                                </td>
+                              )}
+                              {/* {windowWidth > 1201 && (
                                     <td width="90">
                                       <small className={clientType}>ТО1: </small>
                                       <small className={typeRouteTO1}>
@@ -229,84 +232,84 @@ export const PersonsComp = memo(
                                     </td>
                                   )}
                                 */}
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div>
+                          <button
+                            type="button"
+                            className={`btn btn-outline-danger btn-sm deleteCarBtn ${openDeleteButtonClass}`}
+                            onClick={() => {
+                              setId(client.id);
+                              setFunct("removeCar");
+                              setModalText(dataWarningText);
+                              setModalClass();
+                            }}
+                          >
+                            &times;
+                          </button>
+                          <button
+                            type="button"
+                            className={`btn btn-outline-secondary btn-sm deleteCarBtn ${disableDeleteButtonClass}`}
+                            disabled
+                          >
+                            &times;
+                          </button>
+                          {client.openClient && (
+                            <table
+                              className="clientTable"
+                              onClick={() => {
+                                clouseClient(client);
+                              }}
+                            >
+                              <tbody>
+                                <tr align="center">
+                                  <td width="200">
+                                    <small className={clientType}>
+                                      For close
+                                    </small>
+                                    {/* <small className={typeRouteКР}>{КР}</small> */}
+                                  </td>
+                                  {windowWidth > 247 && (
+                                    <td width="100" className={clientType}>
+                                      <small>Info</small>
+                                    </td>
+                                  )}
+                                  {windowWidth > 247 && (
+                                    <td width="100" className={clientType}>
+                                      <small>Info</small>
+                                    </td>
+                                  )}
+                                  {windowWidth > 247 && (
+                                    <td width="100" className={clientType}>
+                                      <small>Info</small>
+                                    </td>
+                                  )}
+                                  {windowWidth > 247 && (
+                                    <td width="100" className={clientType}>
+                                      <small>Info</small>
+                                    </td>
+                                  )}
+                                  {windowWidth > 247 && (
+                                    <td width="100" className={clientType}>
+                                      <small>Info</small>
+                                    </td>
+                                  )}
                                 </tr>
                               </tbody>
                             </table>
-                        <div>   
-                            <button
-                              type="button"
-                              className={`btn btn-outline-danger btn-sm deleteCarBtn ${openDeleteButtonClass}`}
-                              onClick={() => {
-                                setId(client.id);
-                                setFunct("removeCar");
-                                setModalText(dataWarningText);
-                                setModalClass();
-                              }}
-                            >
-                              &times;
-                            </button>
-                            <button
-                              type="button"
-                              className={`btn btn-outline-secondary btn-sm deleteCarBtn ${disableDeleteButtonClass}`}
-                              disabled
-                            >
-                              &times;
-                            </button>
+                          )}
                           {client.openClient && (
-                          <table
-                            className="clientTable"
-                            onClick={() => {
-                              clouseClient(client);
-                            }}
-                          >
-                            <tbody>
-                              <tr align="center">
-                                <td width="200">
-                                  <small className={clientType}>For close</small>
-                                  {/* <small className={typeRouteКР}>{КР}</small> */}
-                                </td>
-                                {windowWidth > 247 && (
-                                  <td width="100" className={clientType}>
-                                   <small>Info</small>
-                                  </td>
-                                )} 
-                                 {windowWidth > 247 && (
-                                  <td width="100" className={clientType}>
-                                   <small>Info</small>
-                                  </td>
-                                )} 
-                                 {windowWidth > 247 && (
-                                  <td width="100" className={clientType}>
-                                   <small>Info</small>
-                                  </td>
-                                )} 
-                                 {windowWidth > 247 && (
-                                  <td width="100" className={clientType}>
-                                   <small>Info</small>
-                                  </td>
-                                )} 
-                                 {windowWidth > 247 && (
-                                  <td width="100" className={clientType}>
-                                   <small>Info</small>
-                                  </td>
-                                )} 
-                              </tr>
-                            </tbody>
-                          </table>
-                        )}
-                              {client.openClient && (
-                                 <CreateComponent
-                                   client={client}
-                                   clients={clients}
-                                   userInfo={userInfo}
-                                 />
-                               )}
-                                
+                            <CreateComponent
+                              client={client}
+                              clients={clients}
+                              userInfo={userInfo}
+                            />
+                          )}
                         </div>
                       </form>
-                      <form className="addingObjTable">
-                      </form>
-                       {!client.openClient && (
+                      <form className="addingObjTable"></form>
+                      {!client.openClient && (
                         <ProjectsComponent
                           client={client}
                           dates={dates}

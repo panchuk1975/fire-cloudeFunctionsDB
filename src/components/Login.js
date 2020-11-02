@@ -31,8 +31,7 @@ class Login extends Component {
   };
   login = (event) => {
     event.preventDefault();
-    fire
-      .auth
+    fire.auth
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .catch((error) => {
         this.setState({ fireErrors: error.message });
@@ -77,7 +76,11 @@ class Login extends Component {
     }%`;
     return (
       <div className="bg-img">
-        <div id="loginConteiner" className="content" style={{ width: contentWidth }}>
+        <div
+          id="loginConteiner"
+          className="content"
+          style={{ width: contentWidth }}
+        >
           <header>FORASLEND DB</header>
           <form action="#" onSubmit={this.login}>
             <div className="field">
@@ -122,7 +125,7 @@ class Login extends Component {
             </div>
             {errorNotification}
             <div className="signup">
-            Forgot password?
+              Forgot password?
               <NavLink to={"/forgotpassword"}>
                 <span> Use form here!</span>
               </NavLink>

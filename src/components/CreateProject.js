@@ -152,19 +152,19 @@ export const CreateProject = memo(
                 onChange={changeHandler}
               />
             </div>
-              <div className="form-group">
-                <label htmlFor="typesOfLandWorks">
-                  <small>Види робіт</small>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Види робіт"
-                  value={form.typesOfLandWorks}
-                  name="typesOfLandWorks"
-                  onChange={changeHandler}
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="typesOfLandWorks">
+                <small>Види робіт</small>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Види робіт"
+                value={form.typesOfLandWorks}
+                name="typesOfLandWorks"
+                onChange={changeHandler}
+              />
+            </div>
             <div className="form-group">
               <label htmlFor="projectCost">
                 <small>Ціна проекту</small>
@@ -217,33 +217,33 @@ export const CreateProject = memo(
                 onChange={changeHandler}
               />
             </div>
-              <div  className="form-group">
-                <label htmlFor="аmountOfPayments">
-                  <small>Сумма оплати</small>
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="Сумма оплати"
-                  value={form.аmountOfPayments}
-                  name="аmountOfPayments"
-                  onChange={changeHandler}
-                />
-              </div>
-              <div  className="form-group">
-                <label htmlFor="amountOfDebt">
-                  <small>Сума заборгованості</small>
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  placeholder="Сума заборгованості"
-                  value={form.amountOfDebt}
-                  name="amountOfDebt"
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="form-group">
+            <div className="form-group">
+              <label htmlFor="аmountOfPayments">
+                <small>Сумма оплати</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Сумма оплати"
+                value={form.аmountOfPayments}
+                name="аmountOfPayments"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="amountOfDebt">
+                <small>Сума заборгованості</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Сума заборгованості"
+                value={form.amountOfDebt}
+                name="amountOfDebt"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
               <label htmlFor="fullCalculation">
                 <small>Повний розрахунок</small>
               </label>

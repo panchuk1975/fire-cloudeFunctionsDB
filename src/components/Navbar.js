@@ -28,13 +28,9 @@ export const Navbar = memo(() => {
   return (
     <nav>
       <div className="logo">
-      <img
-                className="logoPicture"
-                alt="ForasLand"
-                src={newLogo}
-              />
+        <img className="logoPicture" alt="ForasLand" src={newLogo} />
       </div>
-              <small className="blockBeetween"></small>
+      <small className="blockBeetween"></small>
       <ul className="headerBlock">
         {/* <li className="logo">FORAS-LAND DB</li> */}
         <li className="btn">
@@ -69,11 +65,11 @@ export const Navbar = memo(() => {
             Завдання
           </NavLink>
         </li>
-         <li className={showBtn} onClick={() => setClass()}>
+        <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/exploutation">
             Резерв
           </NavLink>
-        </li> 
+        </li>
         <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/liquids">
             Статистика

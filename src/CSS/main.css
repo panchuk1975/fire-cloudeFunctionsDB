@@ -27,17 +27,18 @@
   min-height: 100%; }
 
 .form-group {
-  width: 250px; }
+  width: 250px;
+  margin: 0; }
 
 .form-group input {
   font-size: 14px;
-  height: 35px;
+  height: 25px;
   border-radius: 0px; }
 
 .form-group label {
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
-  color: black; }
+  color: white; }
   .form-group label:hover {
     color: limegreen; }
 
@@ -173,7 +174,7 @@ nav {
   color: white;
   text-decoration: none; }
   .nav-link:hover {
-    color: #0cb520; }
+    color: #e4c40c; }
 
 nav ul li.item {
   height: 50px;
@@ -187,7 +188,7 @@ nav ul li.item {
 
 .active,
 nav ul li.item:hover {
-  color: #0cb520;
+  color: #e4c40c;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
   -moz-box-shadow: 0 0 5px #ececec, 0 0 5px #ececec;
@@ -555,7 +556,7 @@ input[type="submit"]:hover {
   margin: 7px 0 7px 0; }
 
 .createClientBasis {
-  margin: 0px 0 0 0;
+  margin: 0;
   padding: 0;
   color: white; }
 
@@ -591,7 +592,12 @@ input[type="submit"]:hover {
   border-radius: 0; }
 
 .clientInnerLi {
-  padding: 0; }
+  background: #171333;
+  padding: 0;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
+  -moz-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
+  box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99); }
 
 .clientInnerForm div {
   font-size: 0; }
@@ -603,15 +609,15 @@ input[type="submit"]:hover {
     margin: 0px 0 0 0; }
 
 .clientTable {
-  background-color: #ffffff;
+  color: #d8dde2;
   font-size: 16px; }
 
 .clientTable tbody tr:hover {
   cursor: pointer;
-  background-color: lightgrey; }
+  color: #e4c40c; }
 
 .clientTable tbody tr td {
-  border: 2px solid #030303; }
+  border: 2px solid #1d1f50; }
 
 .legalClients {
   color: blue; }
@@ -653,18 +659,31 @@ input[type="submit"]:hover {
 .projectInnerLi {
   margin: 5px 0 0 0;
   padding: 0;
-  background: none; }
+  background: lightslategray; }
+  .projectInnerLi:hover {
+    background: #889bae; }
 
 .CreateProjectStyle {
   margin: 5px 12px 0 15px; }
 
 .clouseProjectBasis {
-  padding: 0 5px 0 5px; }
+  padding: 5px 5px 0 5px;
+  cursor: pointer; }
 
 .clouseProjectForm {
+  background-color: #081c47;
   width: 100%;
   text-align: center;
-  margin: 0px 0px 0px 0px; }
+  margin: 0px; }
+  .clouseProjectForm:hover {
+    background-color: #0a235a; }
+
+.clouseProjectTableButton {
+  font-size: 14px;
+  color: white;
+  height: 25px; }
+  .clouseProjectTableButton:hover {
+    color: #e4c40c; }
 
 .projectTable {
   cursor: pointer;
@@ -672,7 +691,7 @@ input[type="submit"]:hover {
   color: black;
   padding: 0 5px 0 5px; }
   .projectTable:hover {
-    color: #03c0c0; }
+    color: #0b2094; }
 
 .deleteProjectBtn {
   font-size: 7px;
@@ -686,21 +705,19 @@ input[type="submit"]:hover {
 .projectButtonsGrup {
   padding: 0 3px 2px 5px; }
 
-.projectButtonsGrup button {
-  font-size: 12px;
-  color: black; }
-
 .headTable {
-  color: #043304;
+  color: #e4c40c;
   font-size: 12px;
   font-weight: 600;
   background-color: none;
   margin: 2px 0 0 0;
   user-select: none; }
 
-.headTable td,
+.headTable td {
+  border: 1px solid #2d343a; }
+
 .projectTable td {
-  border: 1px solid black; }
+  border: 1px solid #8ea4b8; }
 
 .ModifyProjectStyle {
   margin: 5px 5px 0 5px; }
@@ -712,31 +729,40 @@ input[type="submit"]:hover {
   padding: 0;
   color: black; }
 
+.projectButtonsGrup button {
+  font-size: 12px; }
+
 .addProjectBtn,
 .closeProjectBtn {
   width: 50%;
   padding: 0;
-  color: black;
   margin: 5px 0 0 0; }
 
 details {
-  color: #0c0c0c;
   font-size: 10px;
   margin: 2px 0 0 0;
   padding: 0; }
-
-details:hover {
-  color: #6ef76e;
-  font-size: 10px;
-  margin: 2px 0 0 0; }
+  details:active {
+    color: #3c3c3c;
+    border: none; }
 
 #summary {
+  color: #222222;
+  width: 15%;
   display: flex; }
 
 #summaryConteiner {
-  width: 100%;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  border: none; }
+
+#small {
+  color: #11d118;
+  font-weight: bold; }
+  #small:active {
+    border: none; }
+  #small:hover {
+    color: #f8df21; }
 
 /* Указываем box sizing */
 *,
@@ -807,14 +833,14 @@ select {
     scroll-behavior: auto !important; } }
 
 body {
-  background-color: white;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: #a0a0a0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace; }
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
 
 .note {
   display: flex;

@@ -32,19 +32,18 @@ export class Register extends Component {
   };
   register = (event) => {
     event.preventDefault();
-    fire
-      .auth
+    fire.auth
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(function () {
         let user = fire.auth.currentUser;
-        console.log(user)
+        console.log(user);
         user.sendEmailVerification();
-        })
-        .catch(function(error) {
-          console.log(error.message,7000);
-          });
-          console.log(`Validation link was sent to email.`);
-          }
+      })
+      .catch(function (error) {
+        console.log(error.message, 7000);
+      });
+    console.log(`Validation link was sent to email.`);
+  };
   updateDimensions = () => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };

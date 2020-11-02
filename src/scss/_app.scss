@@ -29,18 +29,19 @@
 }
 // SET COMMON FORM STYLE ----------------------->
 .form-group {
-  width:250px; // 122 - MEDIA
+  width: 250px; // 122 - MEDIA
+  margin: 0;
 }
 .form-group input {
   font-size: 14px;
-  height: 35px;
+  height: 25px;
   border-radius: 0px;
 }
 .form-group label {
   //   background-color: rgb(25, 136, 68);
-  font-size: 14px;
-  margin:0;
-  color: rgb(0, 0, 0);
+  font-size: 13px;
+  margin: 0;
+  color: rgb(255, 255, 255);
   &:hover {
     color: limegreen;
   }
@@ -74,27 +75,17 @@
   .form-group {
     width: 134px; // 122
     padding: 0 0 0 0;
-    margin:0 2px 0 0;
-  }          
+    margin: 0 2px 0 0;
+  }
   .custom-select-sm,
   .form-group input {
     font-size: 12px;
-    height:20px;
+    height: 20px;
   }
 }
 textarea {
-  border-radius:   0;
+  border-radius: 0;
 }
-
-
-
-
-
-
-
-
-
-
 
 pre {
   margin: 0;

@@ -5,13 +5,11 @@ import {
   CLOUSE_CLIENT,
   FETCH_CLIENTS,
   REMOVE_CLIENT,
-
   OPEN_PROJECT,
   CLOUSE_PROJECT,
   REMOVE_PROJECT,
   OPEN_CURRENT_PROJECT,
   CLOUSE_CURRENT_PROJECT,
-
   SHOW_LOADER,
   ADD_DATES,
   REMOVE_LIST,
@@ -20,8 +18,6 @@ import {
   CHANGE_DATES,
   CHANGE_PROJECT,
   ADD_PROJECT,
-
-  
   FETCHED_ROUTES,
   FETCHED_DATES,
   ADD_ROUTE,
@@ -50,16 +46,22 @@ const handlers = {
   }),
   [CHANGE_CLIENT]: (state, { payload }) => ({
     ...state,
-    clients: state.clients.filter((client) => client.id !== payload.id).concat([payload]),
+    clients: state.clients
+      .filter((client) => client.id !== payload.id)
+      .concat([payload]),
   }),
   [OPEN_CLIENT]: (state, { payload }) => ({
     ...state,
-    clients: state.clients.filter((client) => client.id !== payload.id).concat([payload]),
+    clients: state.clients
+      .filter((client) => client.id !== payload.id)
+      .concat([payload]),
     loading: false,
   }),
   [CLOUSE_CLIENT]: (state, { payload }) => ({
     ...state,
-    clients: state.clients.filter((client) => client.id !== payload.id).concat([payload]),
+    clients: state.clients
+      .filter((client) => client.id !== payload.id)
+      .concat([payload]),
     loading: false,
   }),
   [FETCH_CLIENTS]: (state, { payload }) => ({
@@ -73,15 +75,15 @@ const handlers = {
     loading: false,
   }),
 
-
-
   [ADD_PROJECT]: (state, { payload }) => ({
     ...state,
     projects: [...state.projects, payload],
   }),
   [CHANGE_PROJECT]: (state, { payload }) => ({
     ...state,
-    projects: state.projects.filter((project) => project.id !== payload.id).concat([payload]),
+    projects: state.projects
+      .filter((project) => project.id !== payload.id)
+      .concat([payload]),
   }),
   [FETCH_PROJECTS]: (state, { payload }) => ({
     ...state,
@@ -118,13 +120,6 @@ const handlers = {
       .concat([payload]),
   }),
 
-
-
-
-
-
-
-
   [CHANGE_CREATE]: (state) => ({ ...state, create: !state.create }),
 
   [OPEN_DENSITY]: (state, { payload }) => ({
@@ -141,7 +136,7 @@ const handlers = {
     ...state,
     densities: payload,
   }),
-  
+
   [ADD_DATES]: (state, { payload }) => ({
     ...state,
     dates: [...state.dates, payload],
@@ -160,15 +155,12 @@ const handlers = {
     ...state,
     dates: state.dates.filter((date) => date.id !== payload),
   }),
- 
+
   [REMOVE_LIST]: (state, { payload }) => ({
     ...state,
     lists: state.lists.filter((list) => list.id !== payload),
   }),
-  
-  
 
- 
   [OPEN_ROUTE]: (state, { payload }) => ({
     ...state,
     lists: state.lists
