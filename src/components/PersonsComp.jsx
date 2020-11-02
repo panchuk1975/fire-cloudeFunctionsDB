@@ -11,7 +11,7 @@ import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
-import { ListComponent } from "./ListComponent";
+import { ProjectsComponent } from "./ProjectsComponent";
 var moment = require("moment");
 
 export const PersonsComp = memo(
@@ -26,6 +26,13 @@ export const PersonsComp = memo(
 
     clientType,
     projects,
+    addProject,
+    openProject,
+    clouseProject,
+    removeProject,
+    openCurrentProject,
+    clouseCurrentProject,
+
     //routes,
     // openNewList,
     // clouseNewList,
@@ -265,17 +272,19 @@ export const PersonsComp = memo(
                       <form className="addingObjTable">
                       </form>
                        {!client.openClient && (
-                        <ListComponent
+                        <ProjectsComponent
                           client={client}
                           dates={dates}
                           //routes={routes}
                           newProjects={newProjects}
-                          //openNewList={openNewList}
-                          //clouseNewList={clouseNewList}
                           //openNewRoute={openNewRoute}
                           //closeNewRoute={closeNewRoute}
-                          //openList={openList}
-                          //closeList={closeList}
+                          addProject={addProject}
+                          openProject={openProject}
+                          clouseProject={clouseProject}
+                          removeProject={removeProject}
+                          openCurrentProject={openCurrentProject}
+                          clouseCurrentProject={clouseCurrentProject}
                           //openRoute={openRoute}
                           //closeRoute={closeRoute}
                           windowWidth={windowWidth}
@@ -304,15 +313,15 @@ export const PersonsComp = memo(
                 innerFunction={removeClient}
               />
             )}
-            {/* {fun === "removeList" && (
+            {fun === "removeList" && (
               <ModalBox
                 modalClass={modalClass}
                 modalText={textModal}
                 modalFunction={setClass}
                 Id={Id}
-                innerFunction={removeList}
+                innerFunction={removeProject}
               />
-            )} */}
+            )}
             <AlertBox
               modalClass={alertClass}
               modalText={alertText}

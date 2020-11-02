@@ -6,6 +6,11 @@ import {
   FETCH_CLIENTS,
   REMOVE_CLIENT,
 
+  OPEN_PROJECT,
+  CLOUSE_PROJECT,
+  REMOVE_PROJECT,
+  OPEN_CURRENT_PROJECT,
+  CLOUSE_CURRENT_PROJECT,
 
   SHOW_LOADER,
   ADD_DATES,
@@ -79,6 +84,35 @@ const handlers = {
     projects: payload,
     loading: false,
   }),
+  [OPEN_PROJECT]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients
+      .filter((client) => client.id !== payload.id)
+      .concat([payload]),
+  }),
+  [CLOUSE_PROJECT]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients
+      .filter((client) => client.id !== payload.id)
+      .concat([payload]),
+  }),
+  [REMOVE_PROJECT]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects.filter((project) => project.id !== payload),
+    loading: false,
+  }),
+  [OPEN_CURRENT_PROJECT]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects
+      .filter((project) => project.id !== payload.id)
+      .concat([payload]),
+  }),
+  [CLOUSE_CURRENT_PROJECT]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects
+      .filter((project) => project.id !== payload.id)
+      .concat([payload]),
+  }),
 
 
 
@@ -129,12 +163,7 @@ const handlers = {
   }),
   
   
-  [CHANGE_LIST]: (state, { payload }) => ({
-    ...state,
-    lists: state.lists
-      .filter((list) => list.id !== payload.id)
-      .concat([payload]),
-  }),
+
  
   [OPEN_ROUTE]: (state, { payload }) => ({
     ...state,

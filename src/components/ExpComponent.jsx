@@ -11,7 +11,7 @@ import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
-import { ListComponent } from "./ListComponent";
+import { ProjectsComponent } from "./ProjectsComponent";
 var moment = require("moment");
 
 export const ExpComponent = memo(
@@ -336,7 +336,7 @@ export const ExpComponent = memo(
                       )}
                     </form>
                     {!car.openCar && (
-                      <ListComponent
+                      <ProjectsComponent
                         car={car}
                         dates={dates}
                         routes={routes}

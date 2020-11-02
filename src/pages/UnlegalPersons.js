@@ -25,8 +25,15 @@ const UnlegalPersons = memo(({ windowWidth }) => {
     clouseClient,
     removeClient,
     projects,
-    //routes,
+    addProject,
+    openProject,
+    clouseProject,
+    removeProject,
     fetchProjects,
+    openCurrentProject,
+    clouseCurrentProject,
+    //routes,
+    
     //fetchRoutes,
     // openList,
     // closeList,
@@ -58,10 +65,15 @@ const UnlegalPersons = memo(({ windowWidth }) => {
           openClient={openClient}
           clouseClient={clouseClient}
           removeClient={removeClient}
-          
+          addProject={addProject}
+          openProject={openProject}
+          clouseProject={clouseProject}
+          removeProject={removeProject}
           clientType={clientType}
           windowWidth={windowWidth}
           projects={projects}
+          openCurrentProject={openCurrentProject}
+          clouseCurrentProject={clouseCurrentProject}
           //routes={routes}
           //openList={openList}
           //closeList={closeList}

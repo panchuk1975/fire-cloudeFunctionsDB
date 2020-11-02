@@ -7,12 +7,17 @@ import fire from "../config/Fire";
 //import "../CSS/ListCompStyle.scss";
 var moment = require("moment");
 
-export const ListComponent = memo(
+export const ProjectsComponent = memo(
   ({
     client,
     dates,
     userInfo,
-    addProject,
+    newProjects,
+
+    openProject,
+    clouseProject,
+    openCurrentProject,
+    clouseCurrentProject,
 
 
     windowWidth,
@@ -38,12 +43,12 @@ export const ListComponent = memo(
     closeList,
     openRoute,
     closeRoute,
-    newProjects,
+ 
     changeListRouteTime,
     //listCarLiquids,
   }) => {
     let dataListWarningText =
-      "Видалення листа! Для видалення авто необхідно видалити всі листи!!!";
+      "Видалення проекту! Для видалення клієнту необхідно видалити всі проекти!!!";
     let owner = fire.auth.currentUser.uid;
     let ownerDates = dates.find((date) => date.owner === owner);
     if (!ownerDates) {
@@ -52,7 +57,7 @@ export const ListComponent = memo(
           dateFinish: "2070-01-01T00:00" };
     }
     let listCarLiquids = [];
-    // newProjects = newProjects.filter((project) => project.progecgtDate >= ownerDates.dateStart);
+    // newProjects = newProjects.filter((project) => project.progectDate >= ownerDates.dateStart);
     // newProjects = newProjects.filter(
     //   (project) => project.listDate <= ownerDates.dateFinish
     // );
@@ -65,7 +70,7 @@ export const ListComponent = memo(
               id="summaryConteiner"
               className="d-flex justify-content-between"
             >
-              <small id="small">Листи</small>
+              <small id="small">Проекти</small>
               {userInfo.company === userInfo.jointCompany && (
                 <small id="small" className="smallEnd">
                   {/* {car.objectPassword} */}
@@ -77,70 +82,70 @@ export const ListComponent = memo(
               <table className="headTable">
                 <tbody>
                   <tr align="center">
-                    <td width="51">
-                      <small>№</small>
+                    <td width="120">
+                      <small>№ проекту</small>
                     </td>
-                    <td width="58">
+                    <td width="50">
                       <small>Дата</small>
                     </td>
                     {windowWidth > 995 && (
-                      <td width="52">
-                        <small>Км</small>
+                      <td width="100">
+                        <small>Види робіт</small>
                       </td>
                     )}
                     {windowWidth > 226 && (
-                      <td width="52">
-                        <small>Км+</small>
+                      <td width="50">
+                        <small>Ціна</small>
                       </td>
                     )}
                     {windowWidth > 995 && (
-                      <td width="52">
-                        <small>Год</small>
+                      <td width="50">
+                        <small>Договір</small>
                       </td>
                     )}
                     {windowWidth > 280 && (
-                      <td width="52">
-                        <small>Год+</small>
+                      <td width="50">
+                        <small>Підпис</small>
                       </td>
                     )}
                     {windowWidth > 333 && (
-                      <td width="52">
-                        <small>Пробіг</small>
+                      <td width="100">
+                        <small>Дата</small>
                       </td>
                     )}
                     {windowWidth > 383 && (
-                      <td width="52">
-                        <small>М/год</small>
+                      <td width="100">
+                        <small>Сумма</small>
                       </td>
                     )}
                     {windowWidth > 490 && (
-                      <td width="107">
-                        <small>Водій</small>
+                      <td width="100">
+                        <small>Сумма</small>
                       </td>
                     )}
                     {windowWidth > 767 && (
-                      <td width="107">
-                        <small>Старший</small>
-                      </td>
-                    )}
-                    {windowWidth > 995 && (
-                      <td width="103">
-                        <small>Звідки</small>
+                      <td width="100">
+                        <small>Розрахунок</small>
                       </td>
                     )}
                     {windowWidth > 767 && (
-                      <td width="103">
-                        <small>Куди</small>
+                      <td width="100">
+                        <small>Відповідальний</small>
                       </td>
                     )}
                     {windowWidth > 1205 && (
                       <td width="102">
-                        <small>Вибув</small>
+                        <small>Виконавець</small>
                       </td>
                     )}
                     {windowWidth > 1205 && (
-                      <td width="102">
-                        <small>Прибув</small>
+                      <td width="100">
+                        <small>Термін</small>
+                      </td>
+                    )}
+                    {windowWidth > 1205 && (
+                      <td width="150">
+                        <small>Термін</small>
                       </td>
                     )}
                   </tr>
@@ -157,99 +162,95 @@ export const ListComponent = memo(
               let listLiquids = NewListLiquidsCount(newRoutes);
               return (
                 <CSSTransition key={project.id} classNames={"note"} timeout={800}>
-                  <li id="innerLi" key={project.id} className="project-group-item">
-                    {!project.openList && (
-                      <div key={project.id} className="listBasis">
+                  <li key={project.id} className="project-group-item projectInnerLi">
+                    {!project.openProject && (
+                      <div key={project.id} className="projectBasis">
                         <div className="d-flex justify-content-between">
                             <table
-                              className="listTable"
-                              onClick={() => openList(project)}
+                              className="projectTable"
+                              onClick={() => openCurrentProject(project)}
                             >
                               <tbody>
                                 <tr align="center">
-                                  <td width="50" className="head">
-                                    <small>{project.listNumber}</small>
+                                  <td width="120" className="head">
+                                    <small>{project.projectNumber}</small>
                                   </td>
-                                  <td width="58" className="head">
-                                    {/* <small>{`${moment(project.projectNumber).format(
+                                  <td width="50" className="head">
+                                    <small>{`${moment(project.projectDate).format(
                                       "DD.MM.YY"
-                                    )}`}</small> */}
+                                    )}`}</small>
                                   </td>
                                   {windowWidth > 295 && (
-                                    <td width="52">
-                                      <small>{project.id}</small>
+                                    <td width="100">
+                                      <small>{project.typesOfLandWorks}</small>
                                     </td>
                                   )}
                                   {windowWidth > 226 && (
-                                    <td width="52">
-                                      <small>{project.projectNumber}</small>
+                                    <td width="50">
+                                      <small>{project.projectCost}</small>
                                     </td>
                                   )}
                                   {windowWidth > 995 && (
-                                    <td width="52">
-                                      <small>{project.timeListFirst}</small>
+                                    <td width="50">
+                                      <small>{project.contractExistence}</small>
                                     </td>
                                   )}
                                   {windowWidth > 280 && (
-                                    <td width="52">
-                                      <small>{project.timeListLast}</small>
+                                    <td width="50">
+                                      <small>{project.signaturуOfAct}</small>
                                     </td>
                                   )}
+                                   <td width="100" className="head">
+                                    <small>{`${moment(project.paymentDate).format(
+                                      "DD.MM.YY"
+                                    )}`}</small>
+                                  </td>
                                   {windowWidth > 333 && (
-                                    <td width="52">
-                                      <small>{project.totalListMileage}</small>
+                                    <td width="100">
+                                      <small>{project.аmountOfPayments}</small>
                                     </td>
                                   )}
                                   {windowWidth > 383 && (
-                                    <td width="52">
-                                      <small>{project.timeListTotal}</small>
+                                    <td width="100">
+                                      <small>{project.amountOfDebt}</small>
                                     </td>
                                   )}
                                   {windowWidth > 490 && (
-                                    <td width="107">
-                                      <small>{project.driverName}</small>
+                                    <td width="100">
+                                      <small>{project.fullCalculation}</small>
                                     </td>
                                   )}
                                   {windowWidth > 767 && (
-                                    <td width="107">
-                                      <small>{project.seniorName}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 995 && (
-                                    <td width="103">
-                                      <small>{project.listRouteFrom}</small>
+                                    <td width="100">
+                                      <small>{project.responsibleForLandManage}</small>
                                     </td>
                                   )}
                                   {windowWidth > 767 && (
-                                    <td width="103">
-                                      <small>{project.listRouteTo}</small>
+                                    <td width="100">
+                                      <small>{project.contractor}</small>
                                     </td>
                                   )}
-                                  {windowWidth > 1205 && (
-                                    <td width="102">
-                                      <small>{`${moment(project.departure).format(
-                                        "DD.MM.YY HH.mm"
-                                      )}`}</small>
+                                  {windowWidth > 767 && (
+                                    <td width="100">
+                                      <small>{project.termOfPerformance}</small>
                                     </td>
                                   )}
-                                  {windowWidth > 1205 && (
-                                    <td width="102">
-                                      <small>{`${moment(project.arrival).format(
-                                        "DD.MM.YY HH.mm"
-                                      )}`}</small>
+                                   {windowWidth > 767 && (
+                                    <td width="150">
+                                      <small>{project.termOfPerformance}</small>
                                     </td>
                                   )}
                                 </tr>
                               </tbody>
                             </table>
-                          {!project.openList &
+                          {!project.openProject &
                             !newRoutes.length &
                             (userInfo.company === userInfo.jointCompany) &
                             (userInfo.owner === client.owner) && (
                             <button
-                              id="deleteListBtn"
+                              id="deleteProjectBtn"
                               type="button"
-                              className="btn btn-outline-danger btn-sm"
+                              className="btn btn-outline-danger btn-sm deleteProjectBtn"
                               onClick={() => {
                                 setId(project.id);
                                 setFunct("removeList");
@@ -264,15 +265,15 @@ export const ListComponent = memo(
                       </div>
                     )}
                     <div>
-                      <div className="clouseListFormBasis">
-                        {project.openList && (
+                      <div className="clouseProjectBasis">
+                        {project.openProject && (
                           <table
-                            className="clouseListForm"
-                            onClick={() => closeList(project)}
+                            className="clouseProjectForm"
+                            onClick={() => clouseCurrentProject(project)}
                           >
                             <tbody>
-                              <tr className="listTable">
-                                <td>Закрити форму листа</td>
+                              <tr className="projectTable">
+                                <td>Закрити форму проекта</td>
                               </tr>
                             </tbody>
                           </table>
@@ -317,11 +318,11 @@ export const ListComponent = memo(
               );
             })}
           </TransitionGroup>
-          <div id="countRoutesGroup" className="d-flex justify-content-between">
+          {/* <div id="countRoutesGroup" className="d-flex justify-content-between">
             {windowWidth > 995 &&
               listCarLiquids.map((liquid) => {
                 return (
-                  <pre key={liquid.name} className="listLiquidв">
+                  <pre key={liquid.name} className="listLiquids">
                     {" "}
                     <small className="liquidValue"> {liquid.name}</small>
                     <small className="headStart"> {liquid.balanceStart}</small>
@@ -331,7 +332,7 @@ export const ListComponent = memo(
             {windowWidth > 512 &&
               listCarLiquids.map((liquid) => {
                 return (
-                  <pre key={liquid.name} className="listLiquidв">
+                  <pre key={liquid.name} className="listLiquids">
                     {" "}
                     <small className="liquidValue"> {liquid.name}</small>
                     <small className="headAdd"> {liquid.received}</small>
@@ -341,7 +342,7 @@ export const ListComponent = memo(
             {windowWidth > 770 &&
               listCarLiquids.map((liquid) => {
                 return (
-                  <pre key={liquid.name} className="listLiquidв">
+                  <pre key={liquid.name} className="listLiquids">
                     {" "}
                     <small className="liquidValue"> {liquid.name}</small>
                     <small className="headExpended"> {liquid.expended}</small>
@@ -351,29 +352,27 @@ export const ListComponent = memo(
             {windowWidth > 335 &&
               listCarLiquids.map((liquid) => {
                 return (
-                  <pre key={liquid.name} className="listLiquidв">
+                  <pre key={liquid.name} className="listLiquids">
                     {" "}
                     <small className="liquidValue"> {liquid.name}</small>
                     <small className="headEnd"> {liquid.balanceFinish}</small>
                   </pre>
                 );
               })}
-          </div>
-          <div id="listButtonsGrup" className="d-flex justify-content-between">
+          </div> */}
+          <div className="d-flex justify-content-between projectButtonsGrup">
             <button
               type="button"
-              id="addListBtn"
-              className="btn btn-outline-primary btn-sm"
-              onClick={() => addProject(client)}
+              className="btn btn-outline-primary btn-sm addProjectBtn"
+              onClick={() => openProject(client)}
               style={{ marginRight: 4 }}
             >
               + Проект
             </button>
             <button
               type="button"
-              id="closeListFormBtn"
-              className="btn btn-outline-info btn-sm"
-              onClick={() => clouseNewList(client)}
+              className="btn btn-outline-info btn-sm closeProjectBtn"
+              onClick={() => clouseProject(client)}
               style={{ marginRight: 4 }}
             >
               Закрити

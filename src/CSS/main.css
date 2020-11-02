@@ -78,24 +78,10 @@
 textarea {
   border-radius: 0; }
 
-details {
-  color: #2aad2a;
-  font-size: 11px;
-  margin: 4px 0 0 0;
-  padding: 0; }
-
-details:hover {
-  color: #6ef76e;
-  font-size: 11px;
-  margin: 4px 0 0 0; }
-
 pre {
   margin: 0;
   font-weight: 550;
   font-family: "Montserrat", sans-serif; }
-
-.head {
-  color: #29a829; }
 
 .carBrocken {
   color: red; }
@@ -656,6 +642,91 @@ input[type="submit"]:hover {
   .createExelBtn:hover {
     color: #25e946;
     border: 1px solid #25e946; }
+
+.projectInnerLi {
+  margin: 5px 0 0 0;
+  padding: 0;
+  background: none; }
+
+.CreateProjectStyle {
+  margin: 5px 12px 0 15px; }
+
+.clouseProjectBasis {
+  padding: 0 5px 0 5px; }
+
+.clouseProjectForm {
+  width: 100%;
+  text-align: center;
+  margin: 0px 0px 0px 0px; }
+
+.projectTable {
+  cursor: pointer;
+  font-size: 14px;
+  color: black;
+  padding: 0 5px 0 5px;
+  border: 1px solid black; }
+  .projectTable:hover {
+    color: #03c0c0; }
+
+.deleteProjectBtn {
+  font-size: 7px;
+  padding: 0 5px 0 5px;
+  margin: 2px 0 2px 0;
+  color: #ff2400; }
+
+.deleteProjectBtn:hover {
+  color: black; }
+
+.projectButtonsGrup {
+  padding: 0 3px 2px 5px; }
+
+.projectButtonsGrup button {
+  font-size: 12px;
+  color: black; }
+
+.headTable {
+  color: #2b9e2b;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: none;
+  margin: 2px 0 0 0;
+  user-select: none; }
+
+.ModifyProjectStyle {
+  margin: 5px 5px 0 5px; }
+
+.saveProjectBtn {
+  font-size: 15px;
+  width: 100%;
+  margin: 10px 2px 5px 0;
+  padding: 0;
+  color: black; }
+
+.addProjectBtn,
+.closeProjectBtn {
+  width: 50%;
+  padding: 0;
+  color: black;
+  margin: 5px 0 0 0; }
+
+details {
+  color: #0c0c0c;
+  font-size: 10px;
+  margin: 2px 0 0 0;
+  padding: 0; }
+
+details:hover {
+  color: #6ef76e;
+  font-size: 10px;
+  margin: 2px 0 0 0; }
+
+#summary {
+  display: flex; }
+
+#summaryConteiner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
 
 /* Указываем box sizing */
 *,

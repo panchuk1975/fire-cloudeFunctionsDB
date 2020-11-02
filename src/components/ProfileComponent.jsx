@@ -4,7 +4,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
 import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
-import { ListComponent } from "./ListComponent";
+import { ProjectsComponent } from "./ProjectsComponent";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
 var normalize = require("normalize-object");
@@ -1167,7 +1167,7 @@ export const ProfileComponent = memo(
                       )}
                     </form>
                     {!car.openCar && (
-                      <ListComponent
+                      <ProjectsComponent
                         car={car}
                         dates={dates}
                         routes={routes}

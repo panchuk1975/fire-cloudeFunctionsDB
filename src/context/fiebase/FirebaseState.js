@@ -8,12 +8,6 @@ import {
   FETCHED_DATES,
   SHOW_LOADER,
  
-  REMOVE_LIST,
-  REMOVE_ROUTE,
-  REMOVE_DATES,
-  REMOVE_USERINFOS,
-
-
   ADD_CLIENT,
   CHANGE_CLIENT,
   OPEN_CLIENT,
@@ -23,8 +17,22 @@ import {
 
   ADD_PROJECT,
   FETCH_PROJECTS,
+  OPEN_PROJECT,
+  CLOUSE_PROJECT,
+  REMOVE_PROJECT,
+  OPEN_CURRENT_PROJECT,
+  CLOUSE_CURRENT_PROJECT,
 
 
+
+
+
+
+
+ 
+  REMOVE_ROUTE,
+  REMOVE_DATES,
+  REMOVE_USERINFOS,
   ADD_ROUTE,
   ADD_DATES,
   ADD_USERINFO,
@@ -317,25 +325,117 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-  //-----------------------------Lists functions----------------------------//
-  const openNewList = async (car) => {
-    car = {
-      ...car,
-      openList: true,
+  //--OPEN NEW PROJECT FORM ----------------->
+  const openProject = async (currentClient) => {
+    let client = {
+      ...currentClient,
+      openProject: true,
     };
     try {
-      const res = await axios.patch(`${url}/cars/${car.id}.json`, car);
-      const payload = {
-        ...res.data,
-      };
+      await fire.db
+      .collection("clients").doc(client.id)
+      .update(client)
+      .catch((err) => console.log(err));
+    const payload = {
+      ...client,
+    };
       dispatch({
-        type: OPEN_CLIENT,
+        type: OPEN_PROJECT,
         payload,
       });
     } catch (e) {
       throw new Error(e.message);
     }
   };
+  //--CLOUSE NEW PROJECT FORM ----------------->
+  const clouseProject = async (currentClient) => {
+    let client = {
+      ...currentClient,
+      openProject: false,
+    };
+    try {
+      await fire.db
+      .collection("clients").doc(client.id)
+      .update(client)
+      .catch((err) => console.log(err));
+    const payload = {
+      ...client,
+    };
+      dispatch({
+        type: CLOUSE_PROJECT,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };//--OPEN CURRENT PROJECT FORM ----------------->
+  const openCurrentProject = async (currentProject) => {
+    let updateProject = {
+      ...currentProject,
+      openProject: true,
+    };
+    try {
+      await fire.db
+      .collection("projects").doc(updateProject.id)
+      .update(updateProject)
+      .catch((err) => console.log(err));
+    const payload = {
+      ...updateProject,
+    };
+      dispatch({
+        type: OPEN_CURRENT_PROJECT,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //--CLOUSE NEW PROJECT FORM ----------------->
+  const clouseCurrentProject = async (currentProject) => {
+    let updateProject = {
+      ...currentProject,
+      openProject: false,
+    };
+    try {
+      await fire.db
+      .collection("projects").doc(updateProject.id)
+      .update(updateProject)
+      .catch((err) => console.log(err));
+    const payload = {
+      ...updateProject,
+    };
+      dispatch({
+        type: CLOUSE_CURRENT_PROJECT,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //---REMOVE PROJECT ---------------------->
+  const removeProject = async (id) => {
+    await fire.db
+        .collection("projects").doc(id)
+        .delete()
+        .catch((err) => console.log(err));
+    dispatch({
+      type: REMOVE_PROJECT,
+      payload: id,
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
   //------------------------------------------------------------------------//
   const clouseNewList = async (car) => {
     car = {
@@ -356,14 +456,7 @@ export const FirebaseState = ({ children }) => {
     }
   };
 
-  //------------------------------------------------------------------------//
-  const removeList = async (id) => {
-    await axios.delete(`${url}/lists/${id}.json`);
-    dispatch({
-      type: REMOVE_LIST,
-      payload: id,
-    });
-  };
+
   //------------------------------------------------------------------------//
   const openList = async (list) => {
     list = {
@@ -888,12 +981,17 @@ export const FirebaseState = ({ children }) => {
 
 
         addProject,
+        openProject,
+        clouseProject,
+        openCurrentProject,
+        clouseCurrentProject,
+        removeProject,
         fetchProjects,
-
+        
 
         addRoute,
         addDates,
-        openNewList,
+       
         openNewRoute,
         closeNewRoute,
         clouseNewList,
@@ -907,7 +1005,7 @@ export const FirebaseState = ({ children }) => {
         openRoute,
         closeList,
         closeRoute,
-        removeList,
+       
         removeRoute,
         fetchRoutes,
         changeCreate,

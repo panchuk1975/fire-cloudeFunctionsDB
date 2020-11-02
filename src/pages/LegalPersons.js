@@ -24,9 +24,17 @@ const LegalPersons = memo(({ windowWidth }) => {
     openClient,
     clouseClient,
     removeClient,
+
     projects,
-    //routes,
+    addProject,
+    openProject,
+    clouseProject,
+    openCurrentProject,
+    clouseCurrentProject,
+    removeProject,
     fetchProjects,
+    //routes,
+    
     //fetchRoutes,
     // openList,
     // closeList,
@@ -58,10 +66,15 @@ const LegalPersons = memo(({ windowWidth }) => {
           openClient={openClient}
           clouseClient={clouseClient}
           removeClient={removeClient}
-          
+          addProject={addProject}
+          openProject={openProject}
+          clouseProject={clouseProject}
+          removeProject={removeProject}
           clientType={clientType}
           windowWidth={windowWidth}
           projects={projects}
+          openCurrentProject={openCurrentProject}
+          clouseCurrentProject={clouseCurrentProject}
           //routes={routes}
           //openList={openList}
           //closeList={closeList}

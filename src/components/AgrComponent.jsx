@@ -8,7 +8,7 @@ import {
   carLiquidsExelInfo,
   carListLiquidsExelInfo,
 } from "../mathfunctions/liquidsFunctions";
-import { ListComponent } from "./ListComponent";
+import { ProjectsComponent } from "./ProjectsComponent";
 import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
@@ -349,7 +349,7 @@ export const AgrComponent = memo(
                       )}
                     </form>
                     {!car.openCar && (
-                      <ListComponent
+                      <ProjectsComponent
                         car={car}
                         dates={dates}
                         routes={routes}

@@ -18,22 +18,34 @@ export const CreateProject = memo(
         аmountOfPayments: 0,
         amountOfDebt: 0,
         fullCalculation: 0,
-
-        departure: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
-        arrival: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
-        indicatorListStart: client.carIndicatorLast,
-        indicatorListFinish: 0,
-        totalListMileage: 0,
-        timeListFirst: client.carTimeFinish,
-        timeListLast: 0,
-        timeListTotal: 0,
-        season: 1,
+        responsibleForLandManage: "",
+        contractor: "",
+        termOfPerformance: 0,
+        percentageOfWork: 0,
+        dateStart: moment(new Date()).format("YYYY-MM-DD"),
+        departureDate: moment(new Date()).format("YYYY-MM-DD"),
+        XMLdevelopment: moment(new Date()).format("YYYY-MM-DD"),
+        documentationDev: moment(new Date()).format("YYYY-MM-DD"),
+        customerApproval: moment(new Date()).format("YYYY-MM-DD"),
+        dateOfsubmissionToDZK: moment(new Date()).format("YYYY-MM-DD"),
+        dateOfExtractFromDZK: moment(new Date()).format("YYYY-MM-DD"),
+        extraterritorialApprovalDate: moment(new Date()).format("YYYY-MM-DD"),
+        dateOfSubmission: moment(new Date()).format("YYYY-MM-DD"),
+        correctionOfComments: moment(new Date()).format("YYYY-MM-DD"),
+        dateOfReceipt: moment(new Date()).format("YYYY-MM-DD"),
+        dateOfExamination: moment(new Date()).format("YYYY-MM-DD"),
+        correctOfExamination: moment(new Date()).format("YYYY-MM-DD"),
+        dateFromExamination: moment(new Date()).format("YYYY-MM-DD"),
+        submissionToDRRP: moment(new Date()).format("YYYY-MM-DD"),
+        dateOfReceiptFromDRRP: moment(new Date()).format("YYYY-MM-DD"),
+        projectReadinessDate: moment(new Date()).format("YYYY-MM-DD"),
         openList: false,
-        openRoute: false,
+        openProject: false,
       };
     } else {
       initialForm = {
         ...project,
+        projectDate: client.dateOfSignContract,
         openProject: false,
         openTask: false,
       };
@@ -43,30 +55,30 @@ export const CreateProject = memo(
       setForm({ ...form, [event.target.name]: event.target.value });
     };
     const createHandler = (event) => {
-      let isListExists = !!newProjects.filter(
+      let isProjectExists = !!newProjects.filter(
         // eslint-disable-next-line
         (project) => Number(project.projectNumber) == Number(form.projectNumber)
       ).length;
       event.preventDefault();
-      !form.listNumber && setAlertText("Номер листа обовязковий!");
-      !form.listNumber && setAlertClass("open");
-      if (form.listNumber) {
+      !form.projectNumber && setAlertText("Номер проекта обовязковий!");
+      !form.projectNumber && setAlertClass("open");
+      if (form.projectNumber) {
         if (!project) {
-          if (!isListExists) {
+          if (!isProjectExists) {
             if (
               (userInfo.company === userInfo.jointCompany) &
               (userInfo.owner === client.owner)
             ) {
               firebase
-                .addList(form, client)
+                .addProject(form, client)
                 .then(() => {
-                  firebase.clouseNewList(client);
+                  firebase.clouseProject(client);
                 })
                 .catch(() => {
                   setAlertText("Ошибка сервера!");
                   setAlertClass("open");
                 });
-              setAlertText("Новий лист створено!");
+              setAlertText("Новий проект створено!");
               setAlertClass("open");
             } else {
               setAlertText("У Вас відсутні права вносити зміни в документи!");
@@ -74,7 +86,7 @@ export const CreateProject = memo(
               return;
             }
           } else {
-            setAlertText("Такий лист вже існує!");
+            setAlertText("Такий проект вже існує!");
             setAlertClass("open");
             return;
           }
@@ -84,7 +96,7 @@ export const CreateProject = memo(
             (userInfo.owner === client.owner)
           ) {
             firebase
-              .closeList(form)
+              .saveProject(form)
               .then(() => {})
               .catch(() => {
                 setAlertText("Ошибка сервера!");
@@ -103,14 +115,14 @@ export const CreateProject = memo(
         }, 1000);
       }
     };
-    let classListBasis = null;
+    let classProjectBasis = null;
     if (!project) {
-      classListBasis = "CreateListStyle";
+      classProjectBasis = "CreateProjectStyle";
     } else {
-      classListBasis = "ModifyListStyle";
+      classProjectBasis = "ModifyProjectStyle";
     }
     return (
-      <div id={classListBasis}>
+      <div className={classProjectBasis}>
         <div>
           <div className="d-flex  flex-wrap justify-content-between">
             <div className="form-group">
@@ -134,7 +146,7 @@ export const CreateProject = memo(
               <input
                 type="date"
                 className="form-control"
-                placeholder="Дата листа"
+                placeholder="Дата проекту"
                 value={moment(form.projectDate).format("YYYY-MM-DD")}
                 name="projectDate"
                 onChange={changeHandler}
@@ -142,7 +154,7 @@ export const CreateProject = memo(
             </div>
               <div className="form-group">
                 <label htmlFor="typesOfLandWorks">
-                  <small>Види землевпорядних робіт</small>
+                  <small>Види робіт</small>
                 </label>
                 <input
                   type="text"
@@ -167,7 +179,7 @@ export const CreateProject = memo(
               />
             </div>
             <div className="form-group">
-              <label htmlFor="contractExistence">
+              <label htmlFor="scontractExistence">
                 <small>Наявність договору</small>
               </label>
               <input
@@ -205,20 +217,6 @@ export const CreateProject = memo(
                 onChange={changeHandler}
               />
             </div>
-{/* 
-              <div id="datetime-local" className="form-group">
-                <label htmlFor="departure">
-                  <small>Час початку</small>
-                </label>
-                <input
-                  type="datetime-local"
-                  className="form-control"
-                  placeholder="Час початку"
-                  value={form.departure}
-                  name="departure"
-                  onChange={changeHandler}
-                />
-              </div> */}
               <div  className="form-group">
                 <label htmlFor="аmountOfPayments">
                   <small>Сумма оплати</small>
@@ -237,7 +235,7 @@ export const CreateProject = memo(
                   <small>Сума заборгованості</small>
                 </label>
                 <input
-                  type="amountOfDebt"
+                  type="number"
                   className="form-control"
                   placeholder="Сума заборгованості"
                   value={form.amountOfDebt}
@@ -258,117 +256,254 @@ export const CreateProject = memo(
                 onChange={changeHandler}
               />
             </div>
-
-
-
-            
-         
-            {(client.driver === "Автомобіль" ||
-              client.driver === "Автомобіль-агрегат") && (
-              <div className="form-group">
-                <label htmlFor="indicatorListStart">
-                  <small>Показники убуття</small>
-                </label>
-                <input
-                  id="danger"
-                  type="number"
-                  className="form-control"
-                  placeholder="Показники убуття"
-                  value={form.indicatorListStart}
-                  name="indicatorListStart"
-                  onChange={changeHandler}
-                />
-              </div>
-            )}
-            {(client.driver === "Автомобіль" ||
-              client.driver === "Автомобіль-агрегат") && (
-              <div className="form-group">
-                <label htmlFor="indicatorListFinish">
-                  <small>Показники прибуття</small>
-                </label>
-                <input
-                  id="danger"
-                  type="number"
-                  className="form-control"
-                  placeholder="Показники прибуття"
-                  value={form.indicatorListFinish}
-                  name="indicatorListFinish"
-                  onChange={changeHandler}
-                />
-              </div>
-            )}
-            {(client.driver === "Автомобіль" ||
-              client.driver === "Автомобіль-агрегат") && (
-              <div className="form-group">
-                <label htmlFor="totalListMileage">
-                  <small>Пробіг по листу</small>
-                </label>
-                <input
-                  id="danger"
-                  type="text"
-                  className="form-control"
-                  placeholder="Пробіг по листу"
-                  value={form.totalListMileage}
-                  name="totalListMileage"
-                  onChange={changeHandler}
-                />
-              </div>
-            )}
-            {(client.driver === "Електроприлад" ||
-              client.driver === "Автомобіль-агрегат" ||
-              client.driver === "Агрегат") && (
-              <div className="form-group">
-                <label htmlFor="timeListFirst">
-                  <small>Початковий час</small>
-                </label>
-                <input
-                  id="danger"
-                  type="text"
-                  className="form-control"
-                  placeholder="Початковий час"
-                  value={form.timeListFirst}
-                  name="timeListFirst"
-                  onChange={changeHandler}
-                />
-              </div>
-            )}
-            {(client.driver === "Електроприлад" ||
-              client.driver === "Автомобіль-агрегат" ||
-              client.driver === "Агрегат") && (
-              <div className="form-group">
-                <label htmlFor="timeListLast">
-                  <small>Загальний час</small>
-                </label>
-                <input
-                  id="danger"
-                  type="number"
-                  className="form-control"
-                  placeholder="Загальний час"
-                  value={form.timeListLast}
-                  name="timeListLast"
-                  onChange={changeHandler}
-                />
-              </div>
-            )}
-            {(client.driver === "Електроприлад" ||
-              client.driver === "Автомобіль-агрегат" ||
-              client.driver === "Агрегат") && (
-              <div className="form-group">
-                <label htmlFor="timeListTotal">
-                  <small>Час роботи</small>
-                </label>
-                <input
-                  id="danger"
-                  type="number"
-                  className="form-control"
-                  placeholder="Час роботи"
-                  value={form.timeListTotal}
-                  name="timeListTotal"
-                  onChange={changeHandler}
-                />
-              </div>
-            )}
-            {(client.driver === "Автомобіль" ||
+            <div className="form-group">
+              <label htmlFor="responsibleForLandManage">
+                <small>Відповідальний</small>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="з землеустрою"
+                value={form.responsibleForLandManage}
+                name="responsibleForLandManage"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="contractor">
+                <small>Виконавець робіт</small>
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Виконавець робіт"
+                value={form.contractor}
+                name="contractor"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="termOfPerformance">
+                <small>Термін виконання, міс</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Термін виконання"
+                value={form.termOfPerformance}
+                name="termOfPerformance"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="percentageOfWork">
+                <small>Відсоток виконання</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Відсоток виконання"
+                value={form.percentageOfWork}
+                name="percentageOfWork"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateStart">
+                <small>Дата початку робіт</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата початку"
+                value={moment(form.dateStart).format("YYYY-MM-DD")}
+                name="dateStart"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="departureDate">
+                <small>Дата виїзду</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата виїзду"
+                value={moment(form.departureDate).format("YYYY-MM-DD")}
+                name="departureDate"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="XMLdevelopment">
+                <small>Розробка XML</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Розробка XML"
+                value={moment(form.XMLdevelopment).format("YYYY-MM-DD")}
+                name="XMLdevelopment"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="documentationDev">
+                <small>Розробка документації</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Розробка документації"
+                value={moment(form.documentationDev).format("YYYY-MM-DD")}
+                name="documentationDev"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="customerApproval">
+                <small>Погодження замовником</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Погодження замовником"
+                value={moment(form.customerApproval).format("YYYY-MM-DD")}
+                name="customerApproval"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateOfsubmissionToDZK">
+                <small>Дата подачі до ДЗК</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата подачі до ДЗК"
+                value={moment(form.dateOfsubmissionToDZK).format("YYYY-MM-DD")}
+                name="dateOfsubmissionToDZK"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateOfExtractFromDZK">
+                <small>Дата отримання з ДЗК</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата отримання з ДЗК"
+                value={moment(form.dateOfExtractFromDZK).format("YYYY-MM-DD")}
+                name="dateOfExtractFromDZK"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateOfSubmission">
+                <small>Подача на погодження</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Подача на погодження"
+                value={moment(form.dateOfSubmission).format("YYYY-MM-DD")}
+                name="dateOfSubmission"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="correctionOfComments">
+                <small>Виправлення зауважень</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Виправлення зауважень"
+                value={moment(form.correctionOfComments).format("YYYY-MM-DD")}
+                name="correctionOfComments"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateOfReceipt">
+                <small>Дата отримання висновку</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата висновку"
+                value={moment(form.dateOfReceipt).format("YYYY-MM-DD")}
+                name="dateOfReceipt"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateOfExamination">
+                <small>Подача на експертизу</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Подача на експертиз"
+                value={moment(form.dateOfExamination).format("YYYY-MM-DD")}
+                name="dateOfExamination"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="correctOfExamination">
+                <small>Виправлення зауважень</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Виправлення зауважень"
+                value={moment(form.correctOfExamination).format("YYYY-MM-DD")}
+                name="correctOfExamination"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateFromExamination">
+                <small>Отримання з експертизи</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Отримання з експертизи"
+                value={moment(form.dateFromExamination).format("YYYY-MM-DD")}
+                name="dateFromExamination"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="submissionToDRRP">
+                <small>Дата подачі до ДРРП </small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата подачі до ДРРП "
+                value={moment(form.submissionToDRRP).format("YYYY-MM-DD")}
+                name="submissionToDRRP"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dprojectReadinessDate">
+                <small>Дата готовності</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата готовності"
+                value={moment(form.projectReadinessDate).format("YYYY-MM-DD")}
+                name="projectReadinessDate"
+                onChange={changeHandler}
+              />
+            </div>
+            {/* {(client.driver === "Автомобіль" ||
               client.driver === "Автомобіль-агрегат" ||
               client.driver === "Агрегат") && (
               <div className="form-group">
@@ -385,19 +520,18 @@ export const CreateProject = memo(
                   onChange={changeHandler}
                 />
               </div>
-            )}
+            )} */}
           </div>
         </div>
         <div className="d-flex justify-content-between">
           <button
-            id="saveListBtn"
-            className="btn btn-success"
+            className="btn btn-success saveProjectBtn"
             value="Enter"
             name="submit"
             onClick={createHandler}
           >
-            {!project && "Створити лист"}
-            {project && "Зберегти дані"}
+            {!project && "Створити проект"}
+            {project && "Зберегти проект"}
           </button>
         </div>
       </div>
