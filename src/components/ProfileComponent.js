@@ -12,7 +12,7 @@ var moment = require("moment");
 
 export const ProfileComponent = memo(
   ({
-    cars,
+    clients,
     dates,
     lists,
     routes,
@@ -35,8 +35,8 @@ export const ProfileComponent = memo(
     const user = fire.auth.currentUser;
     const owner = fire.auth.currentUser.uid;
     const firebase = useContext(FirebaseContext);
-    const userCars = cars.filter((car) => car.owner === owner);
-    localStorage.setItem("carsLength", JSON.stringify(userCars.length));
+    let userClients = clients.filter((client) => client.owner === owner);
+    localStorage.setItem("userClientsLength", JSON.stringify(userClients.length));
     const date = dates.find((date) => date.owner === owner);
     let userInfo = normalize(userInfos.find((info) => info.owner === owner));
     let userInfoExsists = !!userInfo;
@@ -81,14 +81,14 @@ export const ProfileComponent = memo(
       ...initialForm,
     });
     //---------------------------Form change hendler----------------------//
-    let existsCars = false;
+    let existsuserClients = false;
     const changeHandler = (event) => {
       setForm({ ...form, [event.target.name]: event.target.value });
     };
     //---------------------------------Check ID-----------------------------//
     if(userInfoExsists){
         if (userInfo.company !== form.company) {
-            existsCars = !!userInfos.filter((info) => info.company === form.company)
+            existsuserClients = !!userInfos.filter((info) => info.company === form.company)
               .length;
           }
     }
@@ -118,11 +118,11 @@ export const ProfileComponent = memo(
       event.preventDefault();
       !form.company && setAlertText("Особистий ідентифікатор обовязковий!");
       !form.company && setAlertClass("open");
-      existsCars &&
+      existsuserClients &&
         setAlertText("Такий ідентифікатор вже існує, оберіть інший!");
-      existsCars && setAlertClass("open");
+      existsuserClients && setAlertClass("open");
       if (form.company) {
-        if (!existsCars) {
+        if (!existsuserClients) {
           firebase
             .changeUserInfo({ ...form, id: userInfo.id })
             .then(() => {})
@@ -142,8 +142,8 @@ export const ProfileComponent = memo(
     const dataAccountWarningText =
       "Ви намагаєтеся видалити дані аккаунта! Відновлення даних буде не можливим!!!";
     const removeAccounte = (user) => {
-      let carsLength = JSON.parse(localStorage.getItem("carsLength"));
-      if (carsLength === 0) {
+      let userClientsLength = JSON.parse(localStorage.getItem("userClientsLength"));
+      if (userClientsLength === 0) {
         user.delete().catch((error) => {
           setAlertText(error.message);
           setAlertClass("open");
@@ -181,14 +181,14 @@ export const ProfileComponent = memo(
     //------------------------------------Open car for ID-----------------------------//
     if (userInfo) {
       if (userInfo.carID) {
-        cars = cars.filter((car) => car.objectPassword === userInfo.carID);
+        userClients = userClients.filter((client) => client.objectPassword === userInfo.carID);
       } else {
-        cars = [];
+        userClients = [];
       }
     } else {
-      cars = [];
+      userClients = [];
     }
-    let carExists = !!cars.length;
+    let carExists = !!userClients.length;
     //-----------------------------------------JSX------------------------------------//
     return (
       <div>
@@ -333,7 +333,7 @@ export const ProfileComponent = memo(
           className="list-group"
         >
           {carExists &&
-            cars.map((car) => {
+            userClients.map((car) => {
               //---------------------------Car Data----------------------------------//
               let newLists = lists.filter((list) => list.listOwner === car.id);
               newLists.sort((a, b) => a.listNumber - b.listNumber);
@@ -1195,7 +1195,7 @@ export const ProfileComponent = memo(
                     )}
                     <form>
                       {car.openCar && (
-                        <CreateComponent car={car} cars={cars} userInfo={userInfo} />
+                        <CreateComponent car={car} userClients={userClients} userInfo={userInfo} />
                       )}
                     </form>
                   </li>

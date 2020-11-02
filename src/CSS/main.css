@@ -643,6 +643,13 @@ input[type="submit"]:hover {
     color: #25e946;
     border: 1px solid #25e946; }
 
+.tableItemsAreClouse,
+.deleteButtonItemAreClouse {
+  display: none; }
+
+.negotiationsResult {
+  font-size: 10px; }
+
 .projectInnerLi {
   margin: 5px 0 0 0;
   padding: 0;
@@ -663,8 +670,7 @@ input[type="submit"]:hover {
   cursor: pointer;
   font-size: 14px;
   color: black;
-  padding: 0 5px 0 5px;
-  border: 1px solid black; }
+  padding: 0 5px 0 5px; }
   .projectTable:hover {
     color: #03c0c0; }
 
@@ -685,12 +691,16 @@ input[type="submit"]:hover {
   color: black; }
 
 .headTable {
-  color: #2b9e2b;
+  color: #043304;
   font-size: 12px;
   font-weight: 600;
   background-color: none;
   margin: 2px 0 0 0;
   user-select: none; }
+
+.headTable td,
+.projectTable td {
+  border: 1px solid black; }
 
 .ModifyProjectStyle {
   margin: 5px 5px 0 5px; }

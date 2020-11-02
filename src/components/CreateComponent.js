@@ -15,7 +15,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
   if (!client) {
     initialForm = {
       clientType: "Юрідичний",// driver
-      companyName: "-----",// typeOfCar
+      companyName: "",// typeOfCar
       secName: "Іванов", //carEngineNumber
       firstName: "Іван",// govermentCarNumber
       thirdName: "Іванович", //factoryCarNumber,
@@ -25,7 +25,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
       addPhonNumber: "0532678909",//specialCarEquipmentNumber,
       dateOfNegotiations: moment(new Date()).format("YYYY-MM-DD"),
       negotiationsResult: "Не узгоджено",
-      incomingSourse: "Телефонний дзвінок",
+      incomingSourse: "",
       dateOfSignContract: moment(new Date()).format("YYYY-MM-DD"),
       contractPeriod: 12,
       registrationDate: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
@@ -65,7 +65,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
             firebase
               .addClient(form)
               .then(() => {
-              firebase.changeCreate();
+              //firebase.changeCreate();
               })
               .catch(() => {
                 setAlertText("Ошибка сервера!");
@@ -315,9 +315,9 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
                 <option className="main" value="Телефон">
                 Телефон
                 </option>
-                <option value="Інтернет сайт">Інтернет сайт</option>
-                <option value="Ютюб реклама">Ютюб реклама</option>
-                <option value="Інші джерела">Інші джерела</option>
+                <option value="Сайт">Сайт</option>
+                <option value="Ютюб">Ютюб</option>
+                <option value="Інше">Інше</option>
               </select>
             </div>
           </div>

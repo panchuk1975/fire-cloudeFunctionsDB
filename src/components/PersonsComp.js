@@ -1,9 +1,8 @@
 import React, { memo, useState } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-//import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
 import {
-  ExportReactCSV,
-  carExelInfo,
+ // ExportReactCSV,
+  //carExelInfo,
   //carLiquidsExelInfo,
   //carListLiquidsExelInfo,
 } from "../mathfunctions/liquidsFunctions";
@@ -16,16 +15,19 @@ var moment = require("moment");
 
 export const PersonsComp = memo(
   ({
-    clients,
+    //---COMMON DATES ----------------------->
+    windowWidth,
+    clientType,
+    //---COMMON STATE ----------------------->
     dates,
     userInfos,
+    clients,
+    projects,
+    //---CLIENT FUNCTIONS ------------------->
     removeClient,
     openClient,
     clouseClient,
-    windowWidth,
-
-    clientType,
-    projects,
+    //---PROJECTS FUNCTIONS ----------------->
     addProject,
     openProject,
     clouseProject,
@@ -33,6 +35,7 @@ export const PersonsComp = memo(
     openCurrentProject,
     clouseCurrentProject,
 
+    
     //routes,
     // openNewList,
     // clouseNewList,
@@ -42,10 +45,8 @@ export const PersonsComp = memo(
     // closeList,
     // openRoute,
     // closeRoute,
-   
-    
   }) => {
-    //------------------------------Alert functions block------------------------------//
+    //---Alert functions block---------------->
     const dataWarningText =
       "Ви намагаєтеся видалити дані! Після видалення відновлення даних буде не можливим!";
     let [alertClass, setAlertClass] = useState("modal");
@@ -61,7 +62,7 @@ export const PersonsComp = memo(
         setClass("modal");
       }
     };
-    //--------------------------------Create user data---------------------------------//
+    //--Create user data----------------------->
     var owner = fire.auth.currentUser.uid;
     let userInfo = userInfos.find((info) => info.owner === owner);
     if (!userInfo) {
@@ -73,15 +74,10 @@ export const PersonsComp = memo(
     if (!userInUse) {
       return null;
     }
-    //------------------------------Create clients data array------------------------------//
+    //--Create clients data array--------------->
     clients = clients.filter((client) => client.owner === userInUse.owner);
     clients = clients.filter((client) => client.clientType === clientType);
-    clients.sort(
-      (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
-    );
-    // clients.sort(
-    //   (a, b) => (b.registrationDate - a.registrationDate)
-    // );
+    clients.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
     let clientsExists = clients.length;
     if (clientsExists === 0) {
       return null;
@@ -103,14 +99,43 @@ export const PersonsComp = memo(
                 // );
                 // //---------------------------Car liquids array---------------------------//
                 // let listCarLiquids = NewListLiquidsCount(carRoutes);
-                //------------------------Color alert types for TO----------------------//
+               
+                //--CLIENT TYPE DYNAMIC CLASSIS ----------->
                 let clientType = null;
                 if (client.clientType === "Юрідичний") {
                   clientType = "legalClients";
                 } else {
                   clientType = "unlegalClients";
                 }
-                //--------------------------------JSX Car--------------------------------//
+                //--DYNAMIC CLASSIS---------------------->
+                //--TABLE----->
+                let openClientTableClass = null;
+                 if (client.openClient) {
+                  openClientTableClass = "tableItemsAreClouse";
+                } 
+                //--DELETE BUTTON -->
+                let openDeleteButtonClass = null;
+                if (client.openClient) {
+                  openDeleteButtonClass = "deleteButtonItemAreClouse";
+                } 
+                if (newProjects.length){
+                  openDeleteButtonClass = "deleteButtonItemAreClouse";
+                }
+                if (userInfo.company !== userInfo.jointCompany){
+                  openDeleteButtonClass = "deleteButtonItemAreClouse";
+                }
+                //--DISABLE BUTTON--->
+                let disableDeleteButtonClass = "deleteButtonItemAreClouse";
+                if (newProjects.length){
+                  disableDeleteButtonClass = "";
+                }
+                if (userInfo.company !== userInfo.jointCompany){
+                  disableDeleteButtonClass = "";
+                }
+                if (client.openClient) {
+                  disableDeleteButtonClass = "deleteButtonItemAreClouse";
+                } 
+                //---------------------------CLIENTS RENDER----------------------------//
                 return (
                   <CSSTransition key={client.id} classNames={"note"} timeout={800}>
                     <li
@@ -120,36 +145,52 @@ export const PersonsComp = memo(
                       <form
                         className="d-flex justify-content-between clientInnerForm"
                       >
-                        {!client.openClient && (
-                            <table className="clientTable"  onClick={() => {
-                              openClient(client);
+                            <table 
+                            className={`clientTable ${openClientTableClass}`}  
+                            onClick={() => {
+                            openClient(client);
                             }}>
                               <tbody>
                                 <tr align="center">
-                                  {windowWidth > 265 && (
-                                    <td width="150">
+                                <td width="180">
                                       <small className={clientType}>
                                         {client.companyName}
                                       </small>
                                     </td>
+                                  {windowWidth > 359 && (
+                                   <td width="105">
+                                   <small>
+                                     {client.secName}
+                                   </small>
+                                 </td>
                                   )}
-                                  <td width="100">
-                                    <small>
-                                      {client.secName}
-                                    </small>
-                                  </td>
-                                  {windowWidth > 330 && (
+                                  {windowWidth > 1030 && (
                                     <td width="80">
-                                      <small>{client.firstName}</small>
-                                    </td>
+                                    <small>{client.firstName}</small>
+                                  </td>
                                   )}
-                                  {windowWidth > 390 && (
+                                    {windowWidth > 1150 && (
                                     <td width="120">
                                       <small>{client.thirdName}</small>
                                     </td>
                                   )}
-                                  {windowWidth > 522 && (
-                                    <td width="82">
+                                  {windowWidth > 450 && (
+                                    <td width="90">
+                                      <small>{client.phonNumber}</small>
+                                    </td>
+                                  )}
+                                  {windowWidth > 530 && (
+                                     <td width="80">
+                                     <small>{client.contractNumber}</small>
+                                   </td>
+                                  )}
+                                  {windowWidth > 570 && (
+                                     <td width="40">
+                                     <small>{client.contractPeriod}</small>
+                                   </td>
+                                  )}
+                                  {windowWidth > 650 && (
+                                    <td width="80">
                                       <small>
                                         {`${moment(
                                           client.registrationDate
@@ -157,34 +198,26 @@ export const PersonsComp = memo(
                                       </small>
                                     </td>
                                   )}
-                                  {windowWidth > 532 && (
-                                    <td width="80">
-                                      <small>{client.contractNumber}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 762 && (
+                                  {windowWidth > 950 && (
                                     <td width="300">
                                       <small>{client.adress}</small>
                                     </td>
                                   )}
-                                  {windowWidth > 762 && (
-                                    <td width="90">
-                                      <small>{client.phonNumber}</small>
+                               
+                                  {windowWidth > 1240 && (
+                                    <td width="70">
+                                      <small>{client.incomingSourse}</small>
                                     </td>
                                   )}
-                                  {windowWidth > 992 && (
-                                    <td width="90">
-                                      <small>{client.dateOfNegotiations}</small>
-                                    </td>
-                                  )}
-                                  {windowWidth > 992 && (
-                                    <td width="90">
-                                      <small>{client.contractPeriod}</small>
-                                    </td>
-                                  )}
-                                   {windowWidth > 992 && (
-                                    <td width="90">
+                              
+                                   {windowWidth > 1310 && (
+                                    <td width="70">
                                       <small>{client.dateOfSignContract}</small>
+                                    </td>
+                                  )}
+                                   {windowWidth > 1360 && (
+                                    <td width="70">
+                                      <small className="negotiationsResult">{client.negotiationsResult}</small>
                                     </td>
                                   )}
                                   {/* {windowWidth > 1201 && (
@@ -199,14 +232,10 @@ export const PersonsComp = memo(
                                 </tr>
                               </tbody>
                             </table>
-                        )}
-                        <div>
-                          {!client.openClient &
-                            !newProjects.length &
-                            (userInfo.company === userInfo.jointCompany) && (
+                        <div>   
                             <button
                               type="button"
-                              className="btn btn-outline-danger btn-sm deleteCarBtn"
+                              className={`btn btn-outline-danger btn-sm deleteCarBtn ${openDeleteButtonClass}`}
                               onClick={() => {
                                 setId(client.id);
                                 setFunct("removeCar");
@@ -216,7 +245,13 @@ export const PersonsComp = memo(
                             >
                               &times;
                             </button>
-                          )}
+                            <button
+                              type="button"
+                              className={`btn btn-outline-secondary btn-sm deleteCarBtn ${disableDeleteButtonClass}`}
+                              disabled
+                            >
+                              &times;
+                            </button>
                           {client.openClient && (
                           <table
                             className="clientTable"
@@ -330,11 +365,11 @@ export const PersonsComp = memo(
           </TransitionGroup>
         </div>
         <div className="d-flex justify-content-between">
-          <ExportReactCSV
+          {/* <ExportReactCSV
             csvData={carExelInfo(clients)}
             fileName={"авто"}
             textCSV="авто.xlx"
-          />
+          /> */}
           {/* <ExportReactCSV
             csvData={carLiquidsExelInfo(clients, lists, routes)}
             fileName={"пммАвто"}

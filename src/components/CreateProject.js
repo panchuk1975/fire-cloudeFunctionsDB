@@ -12,8 +12,8 @@ export const CreateProject = memo(
         projectDate: moment(new Date()).format("YYYY-MM-DD"),
         typesOfLandWorks: "",
         projectCost: 0,
-        contractExistence: "В наявності",
-        signaturуOfAct: "В наявності",
+        contractExistence: "Так",
+        signaturуOfAct: "Так",
         paymentDate: moment(new Date()).format("YYYY-MM-DD"),
         аmountOfPayments: 0,
         amountOfDebt: 0,
@@ -74,8 +74,8 @@ export const CreateProject = memo(
                 .then(() => {
                   firebase.clouseProject(client);
                 })
-                .catch(() => {
-                  setAlertText("Ошибка сервера!");
+                .catch((err) => {
+                  setAlertText(`Ошибка сервера!${err}`);
                   setAlertClass("open");
                 });
               setAlertText("Новий проект створено!");
@@ -96,7 +96,7 @@ export const CreateProject = memo(
             (userInfo.owner === client.owner)
           ) {
             firebase
-              .saveProject(form)
+              .changeProject(form, client, project.id)
               .then(() => {})
               .catch(() => {
                 setAlertText("Ошибка сервера!");

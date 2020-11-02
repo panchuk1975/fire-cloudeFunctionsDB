@@ -7,15 +7,15 @@ const Home = memo(({ windowWidth }) => {
   let email = fire.auth.currentUser.email;
   email = email.split("@")[0];
   const {
-    cars,
+    clients,
     dates,
-    lists,
+    projects,
     routes,
     userInfos,
-    fetchCars,
+    fetchClients,
     fetchDates,
-    fetchLists,
-    fetchRoutes,
+    fetchProjects,
+    //fetchRoutes,
     openCar,
     closeCar,
     openList,
@@ -31,9 +31,9 @@ const Home = memo(({ windowWidth }) => {
     removeUserInfos,
   } = useContext(FirebaseContext);
   useEffect(() => {
-    fetchCars();
-    fetchLists();
-    fetchRoutes();
+    fetchClients();
+    fetchProjects();
+    //fetchRoutes();
     fetchDates();
     fetchUsersInfo();
     // eslint-disable-next-line
@@ -42,8 +42,8 @@ const Home = memo(({ windowWidth }) => {
     <div>
       <small>{email}</small>
       <ProfileComponent
-        cars={cars}
-        lists={lists}
+        clients={clients}
+        projects={projects}
         routes={routes}
         openCar={openCar}
         closeCar={closeCar}

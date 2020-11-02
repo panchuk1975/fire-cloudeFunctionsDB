@@ -18,9 +18,10 @@ import {
   REMOVE_ROUTE,
   CHANGE_CREATE,
   CHANGE_DATES,
-  CHANGE_LIST,
+  CHANGE_PROJECT,
   ADD_PROJECT,
-  FETCHED_LISTS,
+
+  
   FETCHED_ROUTES,
   FETCHED_DATES,
   ADD_ROUTE,
@@ -50,7 +51,6 @@ const handlers = {
   [CHANGE_CLIENT]: (state, { payload }) => ({
     ...state,
     clients: state.clients.filter((client) => client.id !== payload.id).concat([payload]),
-    loading: false,
   }),
   [OPEN_CLIENT]: (state, { payload }) => ({
     ...state,
@@ -78,6 +78,10 @@ const handlers = {
   [ADD_PROJECT]: (state, { payload }) => ({
     ...state,
     projects: [...state.projects, payload],
+  }),
+  [CHANGE_PROJECT]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects.filter((project) => project.id !== payload.id).concat([payload]),
   }),
   [FETCH_PROJECTS]: (state, { payload }) => ({
     ...state,

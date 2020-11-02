@@ -16,6 +16,7 @@ import {
   FETCH_CLIENTS,
 
   ADD_PROJECT,
+  CHANGE_PROJECT,
   FETCH_PROJECTS,
   OPEN_PROJECT,
   CLOUSE_PROJECT,
@@ -176,12 +177,13 @@ export const FirebaseState = ({ children }) => {
       owner
     };
     try {
-      await fire.db
+      const res = await fire.db
         .collection("clients")
         .add(client)
         .catch((err) => console.log(err));
       const payload = {
         ...client,
+        id: res.id
       };
       dispatch({
         type: ADD_CLIENT,
@@ -310,16 +312,41 @@ export const FirebaseState = ({ children }) => {
       projectOwner: client.id,
     };
     try {
-      await fire.db
+      const res = await fire.db
       .collection("projects")
       .add(project)
       .catch((err) => console.log(err));
     const payload = {
       ...project,
+      id: res.id,
     };
       dispatch({
         type: ADD_PROJECT,
         payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  // --SAVE PROJECT -------------------------->
+  const changeProject = async (newProject, client, id) => {
+    const project = {
+      ...newProject,
+      owner: client.owner,
+      projectOwner: client.id,
+    };
+      try {
+        await fire.db
+          .collection("projects").doc(id)
+          .update(project)
+          .catch((err) => console.log(err));
+        const payload = {
+          ...project,
+        };
+      dispatch({
+        type: CHANGE_PROJECT,
+        payload,
+        id
       });
     } catch (e) {
       throw new Error(e.message);
@@ -414,13 +441,34 @@ export const FirebaseState = ({ children }) => {
   };
   //---REMOVE PROJECT ---------------------->
   const removeProject = async (id) => {
-    await fire.db
-        .collection("projects").doc(id)
-        .delete()
-        .catch((err) => console.log(err));
+    if (id){
+      await fire.db
+      .collection("projects").doc(id)
+      .delete()
+      .catch((err) => console.log(err));
+  dispatch({
+    type: REMOVE_PROJECT,
+    payload: id,
+  });
+    } else {
+      return null;
+    }
+   
+  };
+  // ---FETCH PROJECTS -------------------->
+  const fetchProjects = async () => {
+    showLoader();
+    const res = await fire.db
+    .collection("projects")
+    .get()
+    .catch((err) => console.log(err));
+    const payload = []
+    res.forEach(proj => {
+     payload.push({...proj.data(), id:proj.id});
+    })
     dispatch({
-      type: REMOVE_PROJECT,
-      payload: id,
+      type: FETCH_PROJECTS,
+      payload,
     });
   };
 
@@ -496,22 +544,7 @@ export const FirebaseState = ({ children }) => {
     }
   };
   //------------------------------------------------------------------------//
-  const fetchProjects = async () => {
-    showLoader();
-    const res = await fire.db
-    .collection("projects")
-    .get()
-    .catch((err) => console.log(err));
-    const payload = []
-    res.forEach(proj => {
-     payload.push({...proj.data(), id:proj.id});
-     console.log(proj.data())
-    })
-    dispatch({
-      type: FETCH_PROJECTS,
-      payload,
-    });
-  };
+
 
 
 
@@ -981,6 +1014,7 @@ export const FirebaseState = ({ children }) => {
 
 
         addProject,
+        changeProject,
         openProject,
         clouseProject,
         openCurrentProject,

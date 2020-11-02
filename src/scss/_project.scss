@@ -20,7 +20,7 @@
     font-size: 14px;
     color: rgb(0, 0, 0);
     padding: 0 5px 0 5px;
-    border: 1px solid black;
+    //border: 1px solid black;
     //border-radius: 5px;
     // -webkit-box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
     // -moz-box-shadow: 0px 0px 4px 2px rgb(95, 94, 94);
@@ -50,12 +50,16 @@
     color: rgb(0, 0, 0);
   }
 .headTable{
-  color: rgb(43, 158, 43);
+  color: rgb(4, 51, 4);
   font-size: 12px;
   font-weight: 600;
   background-color: none;
   margin: 2px 0 0 0;
   user-select: none;
+}
+.headTable td,  
+.projectTable td{
+  border: 1px solid black;
 }
   // .head {
   //   color: rgb(41, 168, 41);
