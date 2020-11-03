@@ -60,11 +60,9 @@
 }
 .custom-select-sm {
   width: 100%;
-  margin: -5px 0 0 0;
-  padding: 0 0 0 5px;
   color: rgb(73, 72, 72);
   font-size: 12px;
-  height: 35px;
+  height: 25px;
   border-radius: 0px;
 }
 .custom-select-sm,
@@ -74,70 +72,76 @@
 @media all and (max-width: 870px) {
   .form-group {
     width: 134px; // 122
-    padding: 0 0 0 0;
-    margin: 0 2px 0 0;
   }
   .custom-select-sm,
   .form-group input {
-    font-size: 12px;
+    font-size:8px;
     height: 20px;
   }
-}
-textarea {
-  border-radius: 0;
-}
-
-pre {
-  margin: 0;
-  font-weight: 550;
-  font-family: "Montserrat", sans-serif;
+  .custom-select-sm label,
+  .form-group label{
+    font-size: 10px;
+  }
+  .custom-select-sm {
+    margin: -5px 0 0 0;
+  }
 }
 
-.carBrocken {
-  color: red;
-}
-#date {
-  background-color: rgb(139, 236, 139);
-  width: 100%;
-  margin: 0 25px 0 0;
-  text-align: center;
-}
-#date:hover {
-  background-color: rgb(210, 241, 210);
-}
-#time {
-  width: 197px;
-  margin: 0 0px 0 0px;
-  padding: 0 0px 0 0px;
-  text-align: center;
-}
-#time label {
-  padding: 0 0 0 0;
-  margin: 0 0 0 -130px;
-}
-#date {
-  width: 120px;
-  font-size: 13px;
-  padding: 0;
-}
-#datetime-local {
-  width: 122px;
-}
-#datetime-local input {
-  font-size: 8.5px;
-  padding: 0;
-}
-#dateOfCarRegistration {
-  width: 90%;
-  margin: 0 32px 0 0;
-  text-align: center;
-}
-.important {
-  background-color: lightgreen;
-}
-.important:hover {
-  background-color: rgb(210, 241, 210);
-}
-#danger:hover {
-  background-color: rgb(226, 26, 26);
-}
+// textarea {
+//   border-radius: 0;
+// }
+
+// pre {
+//   margin: 0;
+//   font-weight: 550;
+//   font-family: "Montserrat", sans-serif;
+// }
+
+// .carBrocken {
+//   color: red;
+// }
+// #date {
+//   background-color: rgb(139, 236, 139);
+//   width: 100%;
+//   margin: 0 25px 0 0;
+//   text-align: center;
+// }
+// #date:hover {
+//   background-color: rgb(210, 241, 210);
+// }
+// #time {
+//   width: 197px;
+//   margin: 0 0px 0 0px;
+//   padding: 0 0px 0 0px;
+//   text-align: center;
+// }
+// #time label {
+//   padding: 0 0 0 0;
+//   margin: 0 0 0 -130px;
+// }
+// #date {
+//   width: 120px;
+//   font-size: 13px;
+//   padding: 0;
+// }
+// #datetime-local {
+//   width: 122px;
+// }
+// #datetime-local input {
+//   font-size: 8.5px;
+//   padding: 0;
+// }
+// #dateOfCarRegistration {
+//   width: 90%;
+//   margin: 0 32px 0 0;
+//   text-align: center;
+// }
+// .important {
+//   background-color: lightgreen;
+// }
+// .important:hover {
+//   background-color: rgb(210, 241, 210);
+// }
+// #danger:hover {
+//   background-color: rgb(226, 26, 26);
+// }

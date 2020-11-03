@@ -16,7 +16,7 @@ export const CreateProject = memo(
         signaturуOfAct: "Так",
         paymentDate: moment(new Date()).format("YYYY-MM-DD"),
         аmountOfPayments: 0,
-        amountOfDebt: 0,
+        poketExistence: "Так",
         fullCalculation: 0,
         responsibleForLandManage: "",
         contractor: "",
@@ -244,18 +244,25 @@ export const CreateProject = memo(
               />
             </div>
             <div className="form-group">
-              <label htmlFor="fullCalculation">
-                <small>Повний розрахунок</small>
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Повний розрахунок"
-                value={form.fullCalculation}
-                name="fullCalculation"
+            <label htmlFor="poketExistence">
+            <small>Наявність пакету документів</small>
+            </label>
+            <div>
+              <select
+                type="text"
+                name="poketExistence"
+                value={form.poketExistence}
                 onChange={changeHandler}
-              />
+                className="custom-select custom-select-sm important"
+              >
+                <option className="main" value="Так">
+                 Так
+                </option>
+                <option  value="Так">Так</option>
+                <option  value="Ні">Ні</option>
+              </select>
             </div>
+          </div>
             <div className="form-group">
               <label htmlFor="responsibleForLandManage">
                 <small>Відповідальний</small>

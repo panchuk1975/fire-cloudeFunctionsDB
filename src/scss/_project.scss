@@ -79,8 +79,14 @@
 //   color: rgb(41, 168, 41);
 // }
 //--MODIFY PROJECT STYLE --------------------->
-.ModifyProjectStyle {
+.ModifyProjectStyle,
+.CreateProjectStyle {
   margin: 5px 5px 0 5px;
+  .d-flex{
+    .custom-select-sm{
+      margin: 0 0 0 0;
+    }
+  }
 }
 .saveProjectBtn {
   font-size: 15px;
@@ -129,6 +135,10 @@ details {
   &:hover {
     color: rgb(248, 223, 33);
   }
+}
+.good{
+  font-style: bold;
+  color: blue;
 }
 
 // .routeHeadTable {

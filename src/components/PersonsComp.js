@@ -135,6 +135,30 @@ export const PersonsComp = memo(
                 if (client.openClient) {
                   disableDeleteButtonClass = "deleteButtonItemAreClouse";
                 }
+                //----TABLE SIZE FUNCTION---------------->
+                const sizeArray = [
+                  180,
+                  105,
+                  80,
+                  120,
+                  90,
+                  80,
+                  40,
+                  80,
+                  300,
+                  70,
+                  90,
+                  90
+                ];
+                const summArray = (numb, sizeArray) => {
+                  let i = 0;
+                  let summ = 0;
+                  while (i < numb) {
+                    summ = summ + sizeArray[i];
+                    i++;
+                  }
+                  return summ;
+                };
                 //---------------------------CLIENTS RENDER----------------------------//
                 return (
                   <CSSTransition
@@ -155,43 +179,45 @@ export const PersonsComp = memo(
                         >
                           <tbody>
                             <tr align="center">
-                              <td width="180">
+                            {windowWidth > 70 + summArray(1, sizeArray) && (
+                              <td width={sizeArray[0]}>
                                 <small className={clientType}>
                                   {client.companyName}
                                 </small>
                               </td>
-                              {windowWidth > 359 && (
-                                <td width="105">
+                            )}
+                               {windowWidth > 70 + summArray(2, sizeArray) && (
+                                <td width={sizeArray[1]}>
                                   <small>{client.secName}</small>
                                 </td>
                               )}
-                              {windowWidth > 1030 && (
-                                <td width="80">
+                              {windowWidth > 70 + summArray(3, sizeArray) && (
+                                <td width={sizeArray[2]}>
                                   <small>{client.firstName}</small>
                                 </td>
                               )}
-                              {windowWidth > 1150 && (
-                                <td width="120">
+                              {windowWidth > 70 + summArray(4, sizeArray) && (
+                                <td width={sizeArray[3]}>
                                   <small>{client.thirdName}</small>
                                 </td>
                               )}
-                              {windowWidth > 450 && (
-                                <td width="90">
+                              {windowWidth > 70 + summArray(5, sizeArray) && (
+                                <td width={sizeArray[4]}>
                                   <small>{client.phonNumber}</small>
                                 </td>
                               )}
-                              {windowWidth > 530 && (
-                                <td width="80">
+                              {windowWidth > 70 + summArray(6, sizeArray) && (
+                                <td width={sizeArray[5]}>
                                   <small>{client.contractNumber}</small>
                                 </td>
                               )}
-                              {windowWidth > 570 && (
-                                <td width="40">
+                              {windowWidth > 70 + summArray(7, sizeArray) && (
+                                <td width={sizeArray[6]}>
                                   <small>{client.contractPeriod}</small>
                                 </td>
                               )}
-                              {windowWidth > 650 && (
-                                <td width="80">
+                              {windowWidth > 70 + summArray(8, sizeArray) && (
+                                <td width={sizeArray[7]}>
                                   <small>
                                     {`${moment(client.registrationDate).format(
                                       "DD.MM HH:mm"
@@ -199,25 +225,23 @@ export const PersonsComp = memo(
                                   </small>
                                 </td>
                               )}
-                              {windowWidth > 950 && (
-                                <td width="300">
+                              {windowWidth > 70 + summArray(9, sizeArray) && (
+                                <td width={sizeArray[8]}>
                                   <small>{client.adress}</small>
                                 </td>
                               )}
-
-                              {windowWidth > 1240 && (
-                                <td width="70">
+                              {windowWidth > 70 + summArray(10, sizeArray) && (
+                                <td width={sizeArray[9]}>
                                   <small>{client.incomingSourse}</small>
                                 </td>
                               )}
-
-                              {windowWidth > 1310 && (
-                                <td width="70">
+                              {windowWidth > 70 + summArray(11, sizeArray) && (
+                                <td width={sizeArray[10]}>
                                   <small>{client.dateOfSignContract}</small>
                                 </td>
                               )}
-                              {windowWidth > 1360 && (
-                                <td width="70">
+                              {windowWidth > 70 + summArray(12, sizeArray) && (
+                                <td width={sizeArray[11]}>
                                   <small className="negotiationsResult">
                                     {client.negotiationsResult}
                                   </small>

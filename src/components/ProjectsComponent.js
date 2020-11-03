@@ -59,12 +59,15 @@ export const ProjectsComponent = memo(
     //   (project) => project.listDate <= ownerDates.dateFinish
     // );
     // let newCarRoutes = routes.filter((route) => route.listOwner === car.id);
+
+    //--TABLE FUNCTION-------------------------->
     const sizeArray = [
-      120,
-      60,
-      100,
+      75,
       50,
-      50,
+      30,
+      30,
+      30,
+
       50,
       100,
       100,
@@ -84,7 +87,7 @@ export const ProjectsComponent = memo(
       }
       return summ;
     };
-    console.log(summArray(1, sizeArray));
+    //-----------------------RENDER----------------->
     return (
       <form>
         <details>
@@ -117,17 +120,17 @@ export const ProjectsComponent = memo(
                   )}
                   {windowWidth > 70 + summArray(3, sizeArray) && (
                     <td width={sizeArray[2]}>
-                      <small>Види робіт</small>
+                      <small>Дог.</small>
                     </td>
                   )}
                   {windowWidth > 70 + summArray(4, sizeArray) && (
                     <td width={sizeArray[3]}>
-                      <small>Ціна</small>
+                      <small>ПАВР</small>
                     </td>
                   )}
                   {windowWidth > 70 + summArray(5, sizeArray) && (
                     <td width={sizeArray[4]}>
-                      <small>Договір</small>
+                      <small>Пакет</small>
                     </td>
                   )}
                   {windowWidth > 70 + summArray(6, sizeArray) && (
@@ -187,6 +190,9 @@ export const ProjectsComponent = memo(
               // );
               newRoutes.sort((a, b) => a.routNumber - b.routNumber);
               //let listLiquids = NewListLiquidsCount(newRoutes);
+              //--DYNAMIC CLASSES ----------------------------->
+              let contractExistenceClass = project.contractExistence ? "good" : "bad"
+              console.log(contractExistenceClass)
               return (
                 <CSSTransition
                   key={project.id}
@@ -220,12 +226,12 @@ export const ProjectsComponent = memo(
                                 )}
                                 {windowWidth > 70 + summArray(3, sizeArray) && (
                                   <td width={sizeArray[2]}>
-                                    <small>{project.typesOfLandWorks}</small>
+                                    <small>{project.contractExistence}</small>
                                   </td>
                                 )}
                                 {windowWidth > 70 + summArray(4, sizeArray) && (
                                   <td width={sizeArray[3]}>
-                                    <small>{project.projectCost}</small>
+                                    <small>{project.signaturуOfAct}</small>
                                   </td>
                                 )}
                                 {windowWidth > 70 + summArray(5, sizeArray) && (
@@ -258,36 +264,36 @@ export const ProjectsComponent = memo(
                                 )}
                                 {windowWidth >
                                   70 + summArray(10, sizeArray) && (
-                                  <td width={sizeArray[9]}>
-                                    <small>{project.fullCalculation}</small>
-                                  </td>
-                                )}
+                                    <td width={sizeArray[9]}>
+                                      <small>{project.fullCalculation}</small>
+                                    </td>
+                                  )}
                                 {windowWidth >
                                   70 + summArray(11, sizeArray) && (
-                                  <td width={sizeArray[10]}>
-                                    <small>
-                                      {project.responsibleForLandManage}
-                                    </small>
-                                  </td>
-                                )}
+                                    <td width={sizeArray[10]}>
+                                      <small>
+                                        {project.responsibleForLandManage}
+                                      </small>
+                                    </td>
+                                  )}
                                 {windowWidth >
                                   70 + summArray(12, sizeArray) && (
-                                  <td width={sizeArray[11]}>
-                                    <small>{project.contractor}</small>
-                                  </td>
-                                )}
+                                    <td width={sizeArray[11]}>
+                                      <small>{project.contractor}</small>
+                                    </td>
+                                  )}
                                 {windowWidth >
                                   70 + summArray(13, sizeArray) && (
-                                  <td width={sizeArray[12]}>
-                                    <small>{project.termOfPerformance}</small>
-                                  </td>
-                                )}
+                                    <td width={sizeArray[12]}>
+                                      <small>{project.termOfPerformance}</small>
+                                    </td>
+                                  )}
                                 {windowWidth >
                                   70 + summArray(14, sizeArray) && (
-                                  <td width={sizeArray[13]}>
-                                    <small>{project.termOfPerformance}</small>
-                                  </td>
-                                )}
+                                    <td width={sizeArray[13]}>
+                                      <small>{project.termOfPerformance}</small>
+                                    </td>
+                                  )}
                               </tr>
                             </tbody>
                           </table>
@@ -295,20 +301,20 @@ export const ProjectsComponent = memo(
                             !newRoutes.length &
                             (userInfo.company === userInfo.jointCompany) &
                             (userInfo.owner === client.owner) && (
-                            <button
-                              id="deleteProjectBtn"
-                              type="button"
-                              className="btn btn-outline-danger btn-sm deleteProjectBtn"
-                              onClick={() => {
-                                setId(project.id);
-                                setFunct("removeList");
-                                setModalText(dataListWarningText);
-                                setModalClass();
-                              }}
-                            >
-                              Х
-                            </button>
-                          )}
+                              <button
+                                id="deleteProjectBtn"
+                                type="button"
+                                className="btn btn-outline-danger btn-sm deleteProjectBtn"
+                                onClick={() => {
+                                  setId(project.id);
+                                  setFunct("removeList");
+                                  setModalText(dataListWarningText);
+                                  setModalClass();
+                                }}
+                              >
+                                Х
+                              </button>
+                            )}
                         </div>
                       </div>
                     )}
