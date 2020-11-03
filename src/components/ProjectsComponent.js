@@ -61,28 +61,45 @@ export const ProjectsComponent = memo(
     // let newCarRoutes = routes.filter((route) => route.listOwner === car.id);
 
     //--TABLE FUNCTION-------------------------->
-    const sizeArray = [
-      75,
-      50,
-      30,
-      30,
-      30,
-
-      50,
-      100,
-      100,
-      100,
-      100,
-      100,
-      100,
-      100,
-      150,
+    let sizeArray = [
+      { size: 75, name: "№ проекту" },
+      { size: 50, name: "Строк дог." },
+      { size: 30, name: "Підп." },
+      { size: 30, name: "Пакет" },
+      { size: 25, name: "ТД" },
+      { size: 25, name: "Екс" },
+      { size: 25, name: "ДЗК" },
+      { size: 20, name: "%" },
+      { size: 50, name: "Сума" },
+      { size: 100, name: "Розрахунок " },
+      { size: 100, name: "Відповідальний" },
+      { size: 100, name: "Виконавець" },
+      { size: 100, name: "Термін" },
+      { size: 150, name: "Термін" },
     ];
+    if (windowWidth > 800) {
+      sizeArray = [
+        { size: 80, name: "№ проекту" },
+        { size: 80, name: "Строк договору" },
+        { size: 70, name: "Підпис клієнта" },
+        { size: 70, name: "Пакет докум." },
+        { size: 70, name: "Техн. док." },
+        { size: 70, name: "Екст. погод." },
+        { size: 70, name: "ДЗК" },
+        { size: 100, name: "%" },
+        { size: 100, name: "Сума" },
+        { size: 100, name: "Розрахунок " },
+        { size: 100, name: "Відповідальний" },
+        { size: 100, name: "Виконавець" },
+        { size: 100, name: "Термін" },
+        { size: 150, name: "Термін" },
+      ]
+    }
     const summArray = (numb, sizeArray) => {
       let i = 0;
       let summ = 0;
       while (i < numb) {
-        summ = summ + sizeArray[i];
+        summ = summ + sizeArray[i].size;
         i++;
       }
       return summ;
@@ -108,74 +125,74 @@ export const ProjectsComponent = memo(
             <table className="headTable">
               <tbody>
                 <tr align="center">
-                  {windowWidth > 70 + summArray(1, sizeArray) && (
-                    <td width={sizeArray[0]}>
-                      <small>№ проекту</small>
+                  {windowWidth > 75 + summArray(1, sizeArray) && (
+                    <td width={sizeArray[0].size}>
+                      <small>{sizeArray[0].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(2, sizeArray) && (
-                    <td width={sizeArray[1]}>
-                      <small>Дата</small>
+                  {windowWidth > 75 + summArray(2, sizeArray) && (
+                    <td width={sizeArray[1].size}>
+                      <small>{sizeArray[1].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(3, sizeArray) && (
-                    <td width={sizeArray[2]}>
-                      <small>Дог.</small>
+                  {windowWidth > 75 + summArray(3, sizeArray) && (
+                    <td width={sizeArray[2].size}>
+                      <small>{sizeArray[2].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(4, sizeArray) && (
-                    <td width={sizeArray[3]}>
-                      <small>ПАВР</small>
+                  {windowWidth > 75 + summArray(4, sizeArray) && (
+                    <td width={sizeArray[3].size}>
+                      <small>{sizeArray[3].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(5, sizeArray) && (
-                    <td width={sizeArray[4]}>
-                      <small>Пакет</small>
+                  {windowWidth > 75 + summArray(5, sizeArray) && (
+                    <td width={sizeArray[4].size}>
+                      <small>{sizeArray[4].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(6, sizeArray) && (
-                    <td width={sizeArray[5]}>
-                      <small>Підпис</small>
+                  {windowWidth > 75 + summArray(6, sizeArray) && (
+                    <td width={sizeArray[5].size}>
+                      <small>{sizeArray[5].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(7, sizeArray) && (
-                    <td width={sizeArray[6]}>
-                      <small>Дата</small>
+                  {windowWidth > 75 + summArray(7, sizeArray) && (
+                    <td width={sizeArray[6].size}>
+                      <small>{sizeArray[6].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(8, sizeArray) && (
-                    <td width={sizeArray[7]}>
-                      <small>Сумма</small>
+                  {windowWidth > 75 + summArray(8, sizeArray) && (
+                    <td width={sizeArray[7].size}>
+                      <small>{sizeArray[7].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(9, sizeArray) && (
-                    <td width={sizeArray[8]}>
-                      <small>Сумма</small>
+                  {windowWidth > 75 + summArray(9, sizeArray) && (
+                    <td width={sizeArray[8].size}>
+                      <small>{sizeArray[8].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(10, sizeArray) && (
-                    <td width={sizeArray[9]}>
-                      <small>Розрахунок</small>
+                  {windowWidth > 75 + summArray(10, sizeArray) && (
+                    <td width={sizeArray[9].size}>
+                      <small>{sizeArray[9].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(11, sizeArray) && (
-                    <td width={sizeArray[10]}>
-                      <small>Відповідальний</small>
+                  {windowWidth > 75 + summArray(11, sizeArray) && (
+                    <td width={sizeArray[10].size}>
+                      <small>{sizeArray[10].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(12, sizeArray) && (
-                    <td width={sizeArray[11]}>
-                      <small>Виконавець</small>
+                  {windowWidth > 75 + summArray(12, sizeArray) && (
+                    <td width={sizeArray[11].size}>
+                      <small>{sizeArray[11].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(13, sizeArray) && (
-                    <td width={sizeArray[12]}>
-                      <small>Термін</small>
+                  {windowWidth > 75 + summArray(13, sizeArray) && (
+                    <td width={sizeArray[12].size}>
+                      <small>{sizeArray[12].name}</small>
                     </td>
                   )}
-                  {windowWidth > 70 + summArray(14, sizeArray) && (
-                    <td width={sizeArray[13]}>
-                      <small>Термін</small>
+                  {windowWidth > 75 + summArray(14, sizeArray) && (
+                    <td width={sizeArray[13].size}>
+                      <small>{sizeArray[13].name}</small>
                     </td>
                   )}
                 </tr>
@@ -188,11 +205,33 @@ export const ProjectsComponent = memo(
               // let newRoutes = routes.filter(
               //   (route) => route.routeOwner === project.id
               // );
-              newRoutes.sort((a, b) => a.routNumber - b.routNumber);
+              //newRoutes.sort((a, b) => a.routNumber - b.routNumber);
               //let listLiquids = NewListLiquidsCount(newRoutes);
+
+              //--PROJECTS DATA ARRAY-------------------------->
+              const projectDataArray = [
+                project.projectNumber,
+                project.projectReadinessDate,
+                project.contractExistence,
+                project.signaturуOfAct,
+                project.poketExistence,
+                project.signaturуOfAct,
+                project.poketExistence,
+                project.percentageOfWork,
+                project.paymentDate,
+                project.amountOfDebt,
+                project.fullCalculation,
+                project.responsibleForLandManage,
+                project.contractor,
+                project.termOfPerformance,
+              ];
               //--DYNAMIC CLASSES ----------------------------->
-              let contractExistenceClass = project.contractExistence ? "good" : "bad"
-              console.log(contractExistenceClass)
+              let projectReadinessDateClass = (moment(new Date(project.projectReadinessDate))
+                .format("YYYY-MM-DD") >= moment(new Date())
+                  .format("YYYY-MM-DD")) ? "goodTime" : "badTime";
+              let signaturуOfActClass = (project.signaturуOfAct === "Так") ? "good" : "bad";
+              let poketExistenceClass = (project.poketExistence === "Так") ? "good" : "bad";
+              let contractExistenceClass = (project.contractExistence === "Так") ? "good" : "bad";
               return (
                 <CSSTransition
                   key={project.id}
@@ -212,86 +251,93 @@ export const ProjectsComponent = memo(
                           >
                             <tbody>
                               <tr align="center">
-                                {windowWidth > 70 + summArray(1, sizeArray) && (
-                                  <td width={sizeArray[0]} className="head">
-                                    <small>{project.projectNumber}</small>
+                                {windowWidth > 75 + summArray(1, sizeArray) && (
+                                  <td width={sizeArray[0].size} className="head">
+                                    <small className="projectName"
+                                    >{projectDataArray[0]}</small>
                                   </td>
                                 )}
-                                {windowWidth > 70 + summArray(2, sizeArray) && (
-                                  <td width={sizeArray[1]} className="head">
-                                    <small>{`${moment(
-                                      project.projectDate
+                                {windowWidth > 75 + summArray(2, sizeArray) && (
+                                  <td width={sizeArray[1].size}
+                                    className={`head ${projectReadinessDateClass}`}>
+                                    <small className="smallProjectDateBold"
+                                    >{`${moment(
+                                      projectDataArray[1]
                                     ).format("DD.MM.YY")}`}</small>
                                   </td>
                                 )}
-                                {windowWidth > 70 + summArray(3, sizeArray) && (
-                                  <td width={sizeArray[2]}>
-                                    <small>{project.contractExistence}</small>
+                                {windowWidth > 75 + summArray(3, sizeArray) && (
+                                  <td width={sizeArray[2].size}>
+                                    <small
+                                      className={contractExistenceClass}
+                                    >{projectDataArray[2]}</small>
                                   </td>
                                 )}
-                                {windowWidth > 70 + summArray(4, sizeArray) && (
-                                  <td width={sizeArray[3]}>
-                                    <small>{project.signaturуOfAct}</small>
+                                {windowWidth > 75 + summArray(4, sizeArray) && (
+                                  <td width={sizeArray[3].size}>
+                                    <small
+                                      className={signaturуOfActClass
+                                      }>{projectDataArray[3]}</small>
                                   </td>
                                 )}
-                                {windowWidth > 70 + summArray(5, sizeArray) && (
-                                  <td width={sizeArray[4]}>
-                                    <small>{project.contractExistence}</small>
+                                {windowWidth > 75 + summArray(5, sizeArray) && (
+                                  <td width={sizeArray[4].size}>
+                                    <small
+                                      className={poketExistenceClass}
+                                    >{projectDataArray[4]}</small>
                                   </td>
                                 )}
-                                {windowWidth > 70 + summArray(6, sizeArray) && (
-                                  <td width={sizeArray[5]}>
-                                    <small>{project.signaturуOfAct}</small>
+                                {windowWidth > 75 + summArray(6, sizeArray) && (
+                                  <td width={sizeArray[5].size}>
+                                    <small>{projectDataArray[5]}</small>
                                   </td>
                                 )}
-                                {windowWidth > 70 + summArray(7, sizeArray) && (
-                                  <td width={sizeArray[6]} className="head">
+                                {windowWidth > 75 + summArray(7, sizeArray) && (
+                                  <td width={sizeArray[6].size}>
+                                    <small>{projectDataArray[6]}</small>
+                                  </td>
+                                )}
+                                {windowWidth > 75 + summArray(8, sizeArray) && (
+                                  <td width={sizeArray[7].size}>
+                                    <small>{projectDataArray[7]}</small>
+                                  </td>
+                                )}
+                                {windowWidth > 75 + summArray(9, sizeArray) && (
+                                  <td width={sizeArray[8].size} className="head">
                                     <small>{`${moment(
-                                      project.paymentDate
+                                     projectDataArray[8]
                                     ).format("DD.MM.YY")}`}</small>
                                   </td>
                                 )}
-
-                                {windowWidth > 70 + summArray(8, sizeArray) && (
-                                  <td width={sizeArray[7]}>
-                                    <small>{project.аmountOfPayments}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 70 + summArray(9, sizeArray) && (
-                                  <td width={sizeArray[8]}>
-                                    <small>{project.amountOfDebt}</small>
+                                {windowWidth > 75 + summArray(10, sizeArray) && (
+                                  <td width={sizeArray[9].size}>
+                                    <small>{projectDataArray[9]}</small>
                                   </td>
                                 )}
                                 {windowWidth >
-                                  70 + summArray(10, sizeArray) && (
-                                    <td width={sizeArray[9]}>
-                                      <small>{project.fullCalculation}</small>
+                                  75 + summArray(11, sizeArray) && (
+                                    <td width={sizeArray[10].size}>
+                                      <small>{projectDataArray[10]}</small>
                                     </td>
                                   )}
                                 {windowWidth >
-                                  70 + summArray(11, sizeArray) && (
-                                    <td width={sizeArray[10]}>
+                                  75 + summArray(12, sizeArray) && (
+                                    <td width={sizeArray[11].size}>
                                       <small>
-                                        {project.responsibleForLandManage}
+                                        {projectDataArray[11]}
                                       </small>
                                     </td>
                                   )}
                                 {windowWidth >
-                                  70 + summArray(12, sizeArray) && (
-                                    <td width={sizeArray[11]}>
-                                      <small>{project.contractor}</small>
+                                  75 + summArray(13, sizeArray) && (
+                                    <td width={sizeArray[12].size}>
+                                      <small>{projectDataArray[12]}</small>
                                     </td>
                                   )}
                                 {windowWidth >
-                                  70 + summArray(13, sizeArray) && (
-                                    <td width={sizeArray[12]}>
-                                      <small>{project.termOfPerformance}</small>
-                                    </td>
-                                  )}
-                                {windowWidth >
-                                  70 + summArray(14, sizeArray) && (
-                                    <td width={sizeArray[13]}>
-                                      <small>{project.termOfPerformance}</small>
+                                  75 + summArray(14, sizeArray) && (
+                                    <td width={sizeArray[13].size}>
+                                      <small>{projectDataArray[13]}</small>
                                     </td>
                                   )}
                               </tr>

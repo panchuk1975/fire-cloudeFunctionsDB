@@ -97,7 +97,7 @@ export const CreateProject = memo(
           ) {
             firebase
               .changeProject(form, client, project.id)
-              .then(() => {})
+              .then(() => { })
               .catch(() => {
                 setAlertText("Ошибка сервера!");
                 setAlertClass("open");
@@ -179,30 +179,44 @@ export const CreateProject = memo(
               />
             </div>
             <div className="form-group">
-              <label htmlFor="scontractExistence">
+            <label htmlFor="contractExistence">
                 <small>Наявність договору</small>
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Наявність договору"
-                value={form.contractExistence}
-                name="contractExistence"
-                onChange={changeHandler}
-              />
+              <div>
+                <select
+                  type="text"
+                  name="contractExistence"
+                  value={form.contractExistence}
+                  onChange={changeHandler}
+                  className="custom-select custom-select-sm important"
+                >
+                  <option className="main" value="Так">
+                    Так
+                </option>
+                  <option value="Так">Так</option>
+                  <option value="Ні">Ні</option>
+                </select>
+              </div>
             </div>
             <div className="form-group">
-              <label htmlFor="signaturуOfAct">
-                <small>Наявність підпису</small>
+            <label htmlFor="signaturуOfAct">
+                <small>Наявність підпису АВР</small>
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="виконаних робіт"
-                value={form.signaturуOfAct}
-                name="signaturуOfAct"
-                onChange={changeHandler}
-              />
+              <div>
+                <select
+                  type="text"
+                  name="signaturуOfAct"
+                  value={form.signaturуOfAct}
+                  onChange={changeHandler}
+                  className="custom-select custom-select-sm important"
+                >
+                  <option className="main" value="Так">
+                    Так
+                </option>
+                  <option value="Так">Так</option>
+                  <option value="Ні">Ні</option>
+                </select>
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="paymentDate">
@@ -244,25 +258,25 @@ export const CreateProject = memo(
               />
             </div>
             <div className="form-group">
-            <label htmlFor="poketExistence">
-            <small>Наявність пакету документів</small>
-            </label>
-            <div>
-              <select
-                type="text"
-                name="poketExistence"
-                value={form.poketExistence}
-                onChange={changeHandler}
-                className="custom-select custom-select-sm important"
-              >
-                <option className="main" value="Так">
-                 Так
+              <label htmlFor="poketExistence">
+                <small>Наявність пакету документів</small>
+              </label>
+              <div>
+                <select
+                  type="text"
+                  name="poketExistence"
+                  value={form.poketExistence}
+                  onChange={changeHandler}
+                  className="custom-select custom-select-sm important"
+                >
+                  <option className="main" value="Так">
+                    Так
                 </option>
-                <option  value="Так">Так</option>
-                <option  value="Ні">Ні</option>
-              </select>
+                  <option value="Так">Так</option>
+                  <option value="Ні">Ні</option>
+                </select>
+              </div>
             </div>
-          </div>
             <div className="form-group">
               <label htmlFor="responsibleForLandManage">
                 <small>Відповідальний</small>

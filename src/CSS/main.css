@@ -717,8 +717,31 @@ details {
     color: #f8df21; }
 
 .good {
-  font-style: bold;
+  font-weight: bold;
   color: blue; }
+
+.bad {
+  font-weight: bold;
+  color: red;
+  padding: 1px 3px 1px 3px;
+  border: 2px solid red;
+  border-radius: 50%; }
+
+.badTime {
+  background-color: red;
+  font-weight: bold;
+  color: black; }
+
+.goodTime {
+  font-weight: bold;
+  color: blue;
+  padding: 1px 3px 1px 3px; }
+
+.projectName {
+  font-weight: bold; }
+
+.smallProjectDateBold {
+  font-weight: bold; }
 
 /* Указываем box sizing */
 *,
