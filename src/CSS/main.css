@@ -667,12 +667,8 @@ input[type="submit"]:hover {
 .projectTable td {
   border: 1px solid #8ea4b8; }
 
-.ModifyProjectStyle,
-.CreateProjectStyle {
-  margin: 5px 5px 0 5px; }
-  .ModifyProjectStyle .d-flex .custom-select-sm,
-  .CreateProjectStyle .d-flex .custom-select-sm {
-    margin: 0 0 0 0; }
+.custom-select-sm {
+  margin: 0 0 0 0; }
 
 .saveProjectBtn {
   font-size: 15px;

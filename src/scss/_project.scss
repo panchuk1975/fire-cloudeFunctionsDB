@@ -79,15 +79,10 @@
 //   color: rgb(41, 168, 41);
 // }
 //--MODIFY PROJECT STYLE --------------------->
-.ModifyProjectStyle,
-.CreateProjectStyle {
-  margin: 5px 5px 0 5px;
-  .d-flex{
-    .custom-select-sm{
-      margin: 0 0 0 0;
-    }
+
+.custom-select-sm {
+  margin: 0 0 0 0;
   }
-}
 .saveProjectBtn {
   font-size: 15px;
   width: 100%;
