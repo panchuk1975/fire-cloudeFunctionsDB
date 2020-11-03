@@ -11,10 +11,9 @@ import { NavLink } from "react-router-dom";
 const CreateNew = React.lazy(() => import("./pages/CreateNew"));
 const LegalPersons = React.lazy(() => import("./pages/LegalPersons"));
 const UnlegalPersons = React.lazy(() => import("./pages/UnlegalPersons"));
-
-const Agreg = React.lazy(() => import("./pages/Agreg"));
-const Liquids = React.lazy(() => import("./pages/Liquids"));
-const Exploutation = React.lazy(() => import("./pages/Exploutation"));
+const Projects = React.lazy(() => import("./pages/Projects"));
+//const Agreg = React.lazy(() => import("./pages/Agreg"));
+//const Liquids = React.lazy(() => import("./pages/Liquids"));
 const About = React.lazy(() => import("./components/About"));
 const Help = React.lazy(() => import("./components/Help"));
 const Login = React.lazy(() => import("./components/Login"));
@@ -150,7 +149,7 @@ class App extends Component {
                       );
                     }}
                   />
-                  <Route
+                  {/* <Route
                     path={"/agr"}
                     render={() => {
                       return (
@@ -168,9 +167,9 @@ class App extends Component {
                         </React.Suspense>
                       );
                     }}
-                  />
+                  /> */}
                   <Route
-                    path={"/exploutation"}
+                    path={"/projects"}
                     render={() => {
                       return (
                         <React.Suspense
@@ -180,7 +179,7 @@ class App extends Component {
                             </div>
                           }
                         >
-                          <Exploutation
+                          <Projects
                             contentWidth={contentWidth}
                             windowWidth={window.innerWidth}
                           />
@@ -188,7 +187,7 @@ class App extends Component {
                       );
                     }}
                   />
-                  <Route
+                  {/* <Route
                     path={"/liquids"}
                     render={() => {
                       return (
@@ -203,7 +202,7 @@ class App extends Component {
                         </React.Suspense>
                       );
                     }}
-                  />
+                  /> */}
                   <Route
                     path={"/profile"}
                     render={() => {
