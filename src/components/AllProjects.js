@@ -1,18 +1,8 @@
-import React, { memo, useState, useContext } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
-import {
-  ExportReactCSV,
-  instExelInfo,
-  instTimeExelInfo,
-} from "../mathfunctions/liquidsFunctions";
-import { CreateComponent } from "./CreateComponent";
+import React, { memo, useState } from "react";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
 import { AllProjectsComponent } from "./AllProjectsComponent";
-var moment = require("moment");
 
 export const AllProjects = memo(
   ({
@@ -35,8 +25,6 @@ export const AllProjects = memo(
     clouseCurrentProject,
   }) => {
     //---Alert functions block---------------->
-    const dataWarningText =
-      "Ви намагаєтеся видалити дані! Після видалення відновлення даних буде не можливим!";
     let [alertClass, setAlertClass] = useState("modal");
     let [alertText, setAlertText] = useState("");
     let [modalClass, setClass] = useState("modal");
@@ -64,7 +52,7 @@ export const AllProjects = memo(
     }
     //--Create clients data array--------------->
     clients = clients.filter((client) => client.owner === userInUse.owner);
-    //clients = clients.filter((client) => client.clientType === clientType);
+    clients = clients.filter((client) => client.clientType === clientType);
     clients.sort(
       (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
     );
