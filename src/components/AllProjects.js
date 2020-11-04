@@ -1,18 +1,8 @@
-import React, { memo, useState, useContext } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
-import {
-  ExportReactCSV,
-  instExelInfo,
-  instTimeExelInfo,
-} from "../mathfunctions/liquidsFunctions";
-import { CreateComponent } from "./CreateComponent";
+import React, { memo, useState } from "react";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
 import fire from "../config/Fire";
 import { AllProjectsComponent } from "./AllProjectsComponent";
-var moment = require("moment");
 
 export const AllProjects = memo(
   ({
@@ -35,8 +25,6 @@ export const AllProjects = memo(
     clouseCurrentProject,
   }) => {
     //---Alert functions block---------------->
-    const dataWarningText =
-      "Ви намагаєтеся видалити дані! Після видалення відновлення даних буде не можливим!";
     let [alertClass, setAlertClass] = useState("modal");
     let [alertText, setAlertText] = useState("");
     let [modalClass, setClass] = useState("modal");
@@ -72,8 +60,8 @@ export const AllProjects = memo(
     if (clientsExists === 0) {
       return null;
     }
-     //--TABLE FUNCTION-------------------------->
-     let sizeArray = [
+    //--TABLE FUNCTION-------------------------->
+    let sizeArray = [
       { size: 75, name: "№ проекту" },
       { size: 50, name: "Строк дог." },
       { size: 30, name: "Підп." },
@@ -116,127 +104,122 @@ export const AllProjects = memo(
       }
       return summ;
     };
+    //--------------------Create client projects and routes-----------------------//
+    // let newProjects = projects.filter(
+    //   (project) => project.projectOwner === client.id
+    // );
+    projects.sort(
+      (a, b) => new Date(a.projectReadinessDate) - new Date(b.projectReadinessDate)
+    );
     //---------------------------------Cars JSX block----------------------------------//
     return (
       <div>
         <li className="list-group-item clientInnerLi">
           <div>
-          <div className="d-flex justify-content-between">
-            <table className="headTable">
-              <tbody>
-                <tr align="center">
-                  {windowWidth > 75 + summArray(1, sizeArray) && (
-                    <td width={sizeArray[0].size}>
-                      <small>{sizeArray[0].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(2, sizeArray) && (
-                    <td width={sizeArray[1].size}>
-                      <small>{sizeArray[1].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(3, sizeArray) && (
-                    <td width={sizeArray[2].size}>
-                      <small>{sizeArray[2].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(4, sizeArray) && (
-                    <td width={sizeArray[3].size}>
-                      <small>{sizeArray[3].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(5, sizeArray) && (
-                    <td width={sizeArray[4].size}>
-                      <small>{sizeArray[4].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(6, sizeArray) && (
-                    <td width={sizeArray[5].size}>
-                      <small>{sizeArray[5].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(7, sizeArray) && (
-                    <td width={sizeArray[6].size}>
-                      <small>{sizeArray[6].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(8, sizeArray) && (
-                    <td width={sizeArray[7].size}>
-                      <small>{sizeArray[7].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(9, sizeArray) && (
-                    <td width={sizeArray[8].size}>
-                      <small>{sizeArray[8].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(10, sizeArray) && (
-                    <td width={sizeArray[9].size}>
-                      <small>{sizeArray[9].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(11, sizeArray) && (
-                    <td width={sizeArray[10].size}>
-                      <small>{sizeArray[10].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(12, sizeArray) && (
-                    <td width={sizeArray[11].size}>
-                      <small>{sizeArray[11].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(13, sizeArray) && (
-                    <td width={sizeArray[12].size}>
-                      <small>{sizeArray[12].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(14, sizeArray) && (
-                    <td width={sizeArray[13].size}>
-                      <small>{sizeArray[13].name}</small>
-                    </td>
-                  )}
-                </tr>
-              </tbody>
-            </table>
-          </div>
-            {clientsExists &&
-              clients.map((client) => {
-                //--------------------Create client projects and routes-----------------------//
-                let newProjects = projects.filter(
-                  (project) => project.projectOwner === client.id
-                );
-                newProjects.sort((a, b) => a.projectNumber - b.projectNumber);
-                //---------------------------CLIENTS RENDER----------------------------//
-                return (
-                  <AllProjectsComponent
-                    client={client}
-                    dates={dates}
-                    //routes={routes}
-                    newProjects={newProjects}
-                    //openNewRoute={openNewRoute}
-                    //closeNewRoute={closeNewRoute}
-                    addProject={addProject}
-                    openProject={openProject}
-                    clouseProject={clouseProject}
-                    removeProject={removeProject}
-                    openCurrentProject={openCurrentProject}
-                    clouseCurrentProject={clouseCurrentProject}
-                    //openRoute={openRoute}
-                    //closeRoute={closeRoute}
-                    windowWidth={windowWidth}
-                    setAlertClass={setAlertClass}
-                    setAlertText={setAlertText}
-                    setFunct={setFunct}
-                    setModalText={setModalText}
-                    setModalClass={setModalClass}
-                    setId={setId}
-                    modalClass={modalClass}
-                    //carRoutes={carRoutes}
-                    //listCarLiquids={listCarLiquids}
-                    userInfo={userInfo}
-                  />
-                );
-              })}
+            <div className="d-flex justify-content-between">
+              <table className="headTable">
+                <tbody>
+                  <tr align="center">
+                    {windowWidth > 75 + summArray(1, sizeArray) && (
+                      <td width={sizeArray[0].size}>
+                        <small>{sizeArray[0].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(2, sizeArray) && (
+                      <td width={sizeArray[1].size}>
+                        <small>{sizeArray[1].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(3, sizeArray) && (
+                      <td width={sizeArray[2].size}>
+                        <small>{sizeArray[2].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(4, sizeArray) && (
+                      <td width={sizeArray[3].size}>
+                        <small>{sizeArray[3].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(5, sizeArray) && (
+                      <td width={sizeArray[4].size}>
+                        <small>{sizeArray[4].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(6, sizeArray) && (
+                      <td width={sizeArray[5].size}>
+                        <small>{sizeArray[5].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(7, sizeArray) && (
+                      <td width={sizeArray[6].size}>
+                        <small>{sizeArray[6].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(8, sizeArray) && (
+                      <td width={sizeArray[7].size}>
+                        <small>{sizeArray[7].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(9, sizeArray) && (
+                      <td width={sizeArray[8].size}>
+                        <small>{sizeArray[8].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(10, sizeArray) && (
+                      <td width={sizeArray[9].size}>
+                        <small>{sizeArray[9].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(11, sizeArray) && (
+                      <td width={sizeArray[10].size}>
+                        <small>{sizeArray[10].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(12, sizeArray) && (
+                      <td width={sizeArray[11].size}>
+                        <small>{sizeArray[11].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(13, sizeArray) && (
+                      <td width={sizeArray[12].size}>
+                        <small>{sizeArray[12].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(14, sizeArray) && (
+                      <td width={sizeArray[13].size}>
+                        <small>{sizeArray[13].name}</small>
+                      </td>
+                    )}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <AllProjectsComponent
+              dates={dates}
+              //routes={routes}
+              newProjects={projects}
+              //openNewRoute={openNewRoute}
+              //closeNewRoute={closeNewRoute}
+              addProject={addProject}
+              openProject={openProject}
+              clouseProject={clouseProject}
+              removeProject={removeProject}
+              openCurrentProject={openCurrentProject}
+              clouseCurrentProject={clouseCurrentProject}
+              //openRoute={openRoute}
+              //closeRoute={closeRoute}
+              windowWidth={windowWidth}
+              setAlertClass={setAlertClass}
+              setAlertText={setAlertText}
+              setFunct={setFunct}
+              setModalText={setModalText}
+              setModalClass={setModalClass}
+              setId={setId}
+              modalClass={modalClass}
+              //carRoutes={carRoutes}
+              //listCarLiquids={listCarLiquids}
+              userInfo={userInfo}
+            />
             {fun === "removeCar" && (
               <ModalBox
                 modalClass={modalClass}
