@@ -63,5 +63,8 @@ node_modules/
 
 # dotenv environment variables file
 .env
-.fire
-/fire
+.Fire
+/Fire
+.build
+/build
+build
