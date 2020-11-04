@@ -62,7 +62,7 @@ export const Navbar = memo(() => {
         </li>
         <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/agr">
-            Завдання
+            Проекти
           </NavLink>
         </li>
         <li className={showBtn} onClick={() => setClass()}>

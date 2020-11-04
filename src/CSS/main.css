@@ -739,6 +739,9 @@ details {
 .smallProjectDateBold {
   font-weight: bold; }
 
+.projectBasis {
+  height: 18px; }
+
 /* Указываем box sizing */
 *,
 *::before,
