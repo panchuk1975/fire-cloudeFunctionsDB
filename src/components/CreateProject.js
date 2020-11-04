@@ -45,7 +45,7 @@ export const CreateProject = memo(
     } else {
       initialForm = {
         ...project,
-        projectDate: client.dateOfSignContract,
+        projectDate: moment(new Date()).format("YYYY-MM-DD"),
         openProject: false,
         openTask: false,
       };
@@ -66,8 +66,8 @@ export const CreateProject = memo(
         if (!project) {
           if (!isProjectExists) {
             if (
-              (userInfo.company === userInfo.jointCompany) &
-              (userInfo.owner === client.owner)
+              (userInfo.company === userInfo.jointCompany) 
+              //& (userInfo.owner === client.owner)
             ) {
               firebase
                 .addProject(form, client)
@@ -92,8 +92,8 @@ export const CreateProject = memo(
           }
         } else {
           if (
-            (userInfo.company === userInfo.jointCompany) &
-            (userInfo.owner === client.owner)
+            (userInfo.company === userInfo.jointCompany) 
+           // & (userInfo.owner === client.owner)
           ) {
             firebase
               .changeProject(form, client, project.id)

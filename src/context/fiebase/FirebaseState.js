@@ -280,10 +280,16 @@ export const FirebaseState = ({ children }) => {
 
   //--PROJECT FUNCTIONS-------------------------------------->
   const addProject = async (newProject, client) => {
+    let owner = newProject.owner;
+    let projectOwner = newProject.projectOwner;
+    if (client){
+      owner = client.owner;
+      projectOwner = client.id;
+    }
     const project = {
       ...newProject,
-      owner: client.owner,
-      projectOwner: client.id,
+      owner,
+      projectOwner,
     };
     try {
       const res = await fire.db
@@ -304,10 +310,16 @@ export const FirebaseState = ({ children }) => {
   };
   // --SAVE PROJECT -------------------------->
   const changeProject = async (newProject, client, id) => {
+    let owner = newProject.owner;
+    let projectOwner = newProject.projectOwner;
+    if (client){
+      owner = client.owner;
+      projectOwner = client.id;
+    }
     const project = {
       ...newProject,
-      owner: client.owner,
-      projectOwner: client.id,
+      owner,
+      projectOwner,
     };
     try {
       await fire.db

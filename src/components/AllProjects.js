@@ -1,8 +1,13 @@
 import React, { memo, useState } from "react";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
+import { ShowBox } from "./ShowBox";
 import fire from "../config/Fire";
 import { AllProjectsComponent } from "./AllProjectsComponent";
+<<<<<<< HEAD
+=======
+import {SizeNameArray} from "../helpComponents/dataFunctions";
+>>>>>>> 25ac539ec75a44abd3368784a46be9c8c17a6cba
 
 export const AllProjects = memo(
   ({
@@ -60,41 +65,8 @@ export const AllProjects = memo(
     if (clientsExists === 0) {
       return null;
     }
-     //--TABLE FUNCTION-------------------------->
-     let sizeArray = [
-      { size: 75, name: "№ проекту" },
-      { size: 50, name: "Строк дог." },
-      { size: 30, name: "Підп." },
-      { size: 30, name: "Пакет" },
-      { size: 25, name: "ТД" },
-      { size: 25, name: "Екс" },
-      { size: 25, name: "ДЗК" },
-      { size: 20, name: "%" },
-      { size: 50, name: "Сума" },
-      { size: 100, name: "Розрахунок " },
-      { size: 100, name: "Відповідальний" },
-      { size: 100, name: "Виконавець" },
-      { size: 100, name: "Термін" },
-      { size: 150, name: "Термін" },
-    ];
-    if (windowWidth > 800) {
-      sizeArray = [
-        { size: 80, name: "№ проекту" },
-        { size: 80, name: "Строк договору" },
-        { size: 70, name: "Підпис клієнта" },
-        { size: 70, name: "Пакет докум." },
-        { size: 70, name: "Техн. док." },
-        { size: 70, name: "Екст. погод." },
-        { size: 70, name: "ДЗК" },
-        { size: 100, name: "%" },
-        { size: 100, name: "Сума" },
-        { size: 100, name: "Розрахунок " },
-        { size: 100, name: "Відповідальний" },
-        { size: 100, name: "Виконавець" },
-        { size: 100, name: "Термін" },
-        { size: 150, name: "Термін" },
-      ]
-    }
+    //--TABLE FUNCTION-------------------------->
+    let sizeArray = SizeNameArray(windowWidth);
     const summArray = (numb, sizeArray) => {
       let i = 0;
       let summ = 0;
@@ -104,127 +76,208 @@ export const AllProjects = memo(
       }
       return summ;
     };
-    //---------------------------------Cars JSX block----------------------------------//
+    //--------------------Create projects----------------------->
+    // let newProjects = projects.filter(
+    //   (project) => project.projectOwner === client.id
+    // );
+    projects.sort(
+      (a, b) => new Date(a.projectReadinessDate) - new Date(b.projectReadinessDate)
+    );
+    //-------------------Progects render block------------------>
     return (
       <div>
         <li className="list-group-item clientInnerLi">
           <div>
-          <div className="d-flex justify-content-between">
-            <table className="headTable">
-              <tbody>
-                <tr align="center">
-                  {windowWidth > 75 + summArray(1, sizeArray) && (
-                    <td width={sizeArray[0].size}>
-                      <small>{sizeArray[0].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(2, sizeArray) && (
-                    <td width={sizeArray[1].size}>
-                      <small>{sizeArray[1].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(3, sizeArray) && (
-                    <td width={sizeArray[2].size}>
-                      <small>{sizeArray[2].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(4, sizeArray) && (
-                    <td width={sizeArray[3].size}>
-                      <small>{sizeArray[3].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(5, sizeArray) && (
-                    <td width={sizeArray[4].size}>
-                      <small>{sizeArray[4].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(6, sizeArray) && (
-                    <td width={sizeArray[5].size}>
-                      <small>{sizeArray[5].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(7, sizeArray) && (
-                    <td width={sizeArray[6].size}>
-                      <small>{sizeArray[6].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(8, sizeArray) && (
-                    <td width={sizeArray[7].size}>
-                      <small>{sizeArray[7].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(9, sizeArray) && (
-                    <td width={sizeArray[8].size}>
-                      <small>{sizeArray[8].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(10, sizeArray) && (
-                    <td width={sizeArray[9].size}>
-                      <small>{sizeArray[9].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(11, sizeArray) && (
-                    <td width={sizeArray[10].size}>
-                      <small>{sizeArray[10].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(12, sizeArray) && (
-                    <td width={sizeArray[11].size}>
-                      <small>{sizeArray[11].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(13, sizeArray) && (
-                    <td width={sizeArray[12].size}>
-                      <small>{sizeArray[12].name}</small>
-                    </td>
-                  )}
-                  {windowWidth > 75 + summArray(14, sizeArray) && (
-                    <td width={sizeArray[13].size}>
-                      <small>{sizeArray[13].name}</small>
-                    </td>
-                  )}
-                </tr>
-              </tbody>
-            </table>
-          </div>
-            {clientsExists &&
-              clients.map((client) => {
-                //--------------------Create client projects and routes-----------------------//
-                let newProjects = projects.filter(
-                  (project) => project.projectOwner === client.id
-                );
-                newProjects.sort((a, b) => a.projectNumber - b.projectNumber);
-                //---------------------------CLIENTS RENDER----------------------------//
-                return (
-                  <AllProjectsComponent
-                    client={client}
-                    dates={dates}
-                    //routes={routes}
-                    newProjects={newProjects}
-                    //openNewRoute={openNewRoute}
-                    //closeNewRoute={closeNewRoute}
-                    addProject={addProject}
-                    openProject={openProject}
-                    clouseProject={clouseProject}
-                    removeProject={removeProject}
-                    openCurrentProject={openCurrentProject}
-                    clouseCurrentProject={clouseCurrentProject}
-                    //openRoute={openRoute}
-                    //closeRoute={closeRoute}
-                    windowWidth={windowWidth}
-                    setAlertClass={setAlertClass}
-                    setAlertText={setAlertText}
-                    setFunct={setFunct}
-                    setModalText={setModalText}
-                    setModalClass={setModalClass}
-                    setId={setId}
-                    modalClass={modalClass}
-                    //carRoutes={carRoutes}
-                    //listCarLiquids={listCarLiquids}
-                    userInfo={userInfo}
-                  />
-                );
-              })}
+            <div className="d-flex justify-content-between">
+              <table className="headTable">
+                <tbody>
+                  <tr align="center">
+                    {windowWidth > 75 + summArray(1, sizeArray) && (
+                      <td width={sizeArray[0].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[0].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[0].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(2, sizeArray) && (
+                      <td width={sizeArray[1].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[1].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[1].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(3, sizeArray) && (
+                      <td width={sizeArray[2].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[2].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[2].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(4, sizeArray) && (
+                      <td
+                        width={sizeArray[3].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[3].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[3].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(5, sizeArray) && (
+                      <td
+                        width={sizeArray[4].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[4].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[4].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(6, sizeArray) && (
+                      <td width={sizeArray[5].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[5].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[5].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(7, sizeArray) && (
+                      <td width={sizeArray[6].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[6].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[6].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(8, sizeArray) && (
+                      <td width={sizeArray[7].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[7].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[7].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(9, sizeArray) && (
+                      <td width={sizeArray[8].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[8].fullName);
+                          setModalClass();
+                        }}>
+                        <small>{sizeArray[8].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(10, sizeArray) && (
+                      <td width={sizeArray[9].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[9].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[9].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(11, sizeArray) && (
+                      <td width={sizeArray[10].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[10].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[10].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(12, sizeArray) && (
+                      <td width={sizeArray[11].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[11].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[11].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(13, sizeArray) && (
+                      <td width={sizeArray[12].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[12].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[12].name}</small>
+                      </td>
+                    )}
+                    {windowWidth > 75 + summArray(14, sizeArray) && (
+                      <td width={sizeArray[13].size}
+                        onClick={() => {
+                          setFunct("showFunction");
+                          setModalText(sizeArray[13].fullName);
+                          setModalClass();
+                        }}
+                      >
+                        <small>{sizeArray[13].name}</small>
+                      </td>
+                    )}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <AllProjectsComponent
+              dates={dates}
+              //routes={routes}
+              newProjects={projects}
+              //openNewRoute={openNewRoute}
+              //closeNewRoute={closeNewRoute}
+              addProject={addProject}
+              openProject={openProject}
+              clouseProject={clouseProject}
+              removeProject={removeProject}
+              openCurrentProject={openCurrentProject}
+              clouseCurrentProject={clouseCurrentProject}
+              //openRoute={openRoute}
+              //closeRoute={closeRoute}
+              windowWidth={windowWidth}
+              setAlertClass={setAlertClass}
+              setAlertText={setAlertText}
+              setFunct={setFunct}
+              setModalText={setModalText}
+              setModalClass={setModalClass}
+              setId={setId}
+              modalClass={modalClass}
+              //carRoutes={carRoutes}
+              //listCarLiquids={listCarLiquids}
+              sizeArray={sizeArray}
+              userInfo={userInfo}
+            />
             {fun === "removeCar" && (
               <ModalBox
                 modalClass={modalClass}
@@ -241,6 +294,13 @@ export const AllProjects = memo(
                 modalFunction={setClass}
                 Id={Id}
                 innerFunction={removeProject}
+              />
+            )}
+            {fun === "showFunction" && (
+              <ShowBox
+                modalClass={modalClass}
+                modalText={textModal}
+                modalFunction={setClass}
               />
             )}
             <AlertBox

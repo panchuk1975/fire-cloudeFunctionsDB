@@ -8,6 +8,7 @@ import // ExportReactCSV,
 import { CreateComponent } from "./CreateComponent";
 import { ModalBox } from "./ModalBox";
 import { AlertBox } from "./AlertBox";
+import { ShowBox } from "./ShowBox";
 import fire from "../config/Fire";
 import { ProjectsComponent } from "./ProjectsComponent";
 var moment = require("moment");
@@ -382,6 +383,13 @@ export const PersonsComp = memo(
                 modalFunction={setClass}
                 Id={Id}
                 innerFunction={removeProject}
+              />
+            )}
+            {fun === "showFunction" && (
+              <ShowBox
+                modalClass={modalClass}
+                modalText={textModal}
+                modalFunction={setClass}
               />
             )}
             <AlertBox
