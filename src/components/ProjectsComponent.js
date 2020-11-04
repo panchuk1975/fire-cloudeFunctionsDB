@@ -3,13 +3,11 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 //import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
 import { CreateProject } from "./CreateProject";
 import { SizeNameArray, ProjectDataArray } from "../helpComponents/dataFunctions";
-
 //import { RouteComponent } from "./RouteComponent";
 import fire from "../config/Fire";
 var moment = require("moment");
 
 export const ProjectsComponent = memo(
-
   ({
     client,
     dates,
