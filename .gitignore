@@ -62,9 +62,5 @@ node_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
-.Fire
-/Fire
-.build
-/build
-build
+.envadd
+build/
