@@ -54,7 +54,6 @@ export const CreateProject = memo(
     const changeHandler = (event) => {
       setForm({ ...form, [event.target.name]: event.target.value });
     };
-    console.log(form)
     const createHandler = (event) => {
       let isProjectExists = !!newProjects.filter(
         // eslint-disable-next-line

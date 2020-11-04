@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { CreateProject } from "./CreateProject";
+import { ProjectDataArray } from "../helpComponents/dataFunctions";
 import fire from "../config/Fire";
 var moment = require("moment");
 
@@ -9,7 +10,7 @@ export const AllProjectsComponent = memo(
     dates,
     userInfo,
     newProjects,
-
+    sizeArray,
     openProject,
     clouseProject,
     openCurrentProject,
@@ -35,41 +36,6 @@ export const AllProjectsComponent = memo(
         dateFinish: "2070-01-01T00:00",
       };
     }
-    //--TABLE FUNCTION-------------------------->
-    let sizeArray = [
-      { size: 75, name: "№ проекту" },
-      { size: 50, name: "Строк дог." },
-      { size: 30, name: "Підп." },
-      { size: 30, name: "Пакет" },
-      { size: 25, name: "ТД" },
-      { size: 25, name: "Екс" },
-      { size: 25, name: "ДЗК" },
-      { size: 20, name: "%" },
-      { size: 50, name: "Сума" },
-      { size: 100, name: "Розрахунок " },
-      { size: 100, name: "Відповідальний" },
-      { size: 100, name: "Виконавець" },
-      { size: 100, name: "Термін" },
-      { size: 150, name: "Термін" },
-    ];
-    if (windowWidth > 800) {
-      sizeArray = [
-        { size: 80, name: "№ проекту" },
-        { size: 80, name: "Строк договору" },
-        { size: 70, name: "Підпис клієнта" },
-        { size: 70, name: "Пакет докум." },
-        { size: 70, name: "Техн. док." },
-        { size: 70, name: "Екст. погод." },
-        { size: 70, name: "ДЗК" },
-        { size: 100, name: "%" },
-        { size: 100, name: "Сума" },
-        { size: 100, name: "Розрахунок " },
-        { size: 100, name: "Відповідальний" },
-        { size: 100, name: "Виконавець" },
-        { size: 100, name: "Термін" },
-        { size: 150, name: "Термін" },
-      ]
-    }
     const summArray = (numb, sizeArray) => {
       let i = 0;
       let summ = 0;
@@ -92,22 +58,7 @@ export const AllProjectsComponent = memo(
             //let listLiquids = NewListLiquidsCount(newRoutes);
 
             //--PROJECTS DATA ARRAY-------------------------->
-            const projectDataArray = [
-              project.projectNumber,
-              project.projectReadinessDate,
-              project.contractExistence,
-              project.signaturуOfAct,
-              project.poketExistence,
-              project.signaturуOfAct,
-              project.poketExistence,
-              project.percentageOfWork,
-              project.paymentDate,
-              project.amountOfDebt,
-              project.fullCalculation,
-              project.responsibleForLandManage,
-              project.contractor,
-              project.projectReadinessDate,
-            ];
+            const projectDataArray = ProjectDataArray(project);
             //--DYNAMIC CLASSES ----------------------------->
             let projectReadinessDateClass = (moment(new Date(project.projectReadinessDate))
               .format("YYYY-MM-DD") >= moment(new Date())
