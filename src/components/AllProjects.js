@@ -4,10 +4,7 @@ import { AlertBox } from "./AlertBox";
 import { ShowBox } from "./ShowBox";
 import fire from "../config/Fire";
 import { AllProjectsComponent } from "./AllProjectsComponent";
-<<<<<<< HEAD
-=======
 import {SizeNameArray} from "../helpComponents/dataFunctions";
->>>>>>> 25ac539ec75a44abd3368784a46be9c8c17a6cba
 
 export const AllProjects = memo(
   ({
