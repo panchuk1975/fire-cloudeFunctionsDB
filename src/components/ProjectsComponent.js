@@ -3,12 +3,13 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 //import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
 import { CreateProject } from "./CreateProject";
 import { SizeNameArray, ProjectDataArray } from "../helpComponents/dataFunctions";
-//import { RouteComponent } from "./RouteComponent";
+import { PaymentComponent } from "./PaymentComponent";
 import fire from "../config/Fire";
 var moment = require("moment");
 
 export const ProjectsComponent = memo(
   ({
+    payments,
     client,
     dates,
     userInfo,
@@ -33,11 +34,14 @@ export const ProjectsComponent = memo(
     //routes,
     openNewList,
     clouseNewList,
-    openNewRoute,
+    addPayment,
     closeNewRoute,
     openList,
     closeList,
-    openRoute,
+    openPayment,
+    clousePayment,
+    openNewPayment,
+    clouseNewPayment,
     closeRoute,
 
     changeListRouteTime,
@@ -58,7 +62,7 @@ export const ProjectsComponent = memo(
     // newProjects = newProjects.filter(
     //   (project) => project.listDate <= ownerDates.dateFinish
     // );
-    // let newCarRoutes = routes.filter((route) => route.listOwner === car.id);
+    let currentClientPayments = payments.filter((pay) => pay.projectOwner === client.id);
 
     //--TABLE FUNCTION-------------------------->
     let sizeArray = SizeNameArray(windowWidth);
@@ -252,11 +256,10 @@ export const ProjectsComponent = memo(
           </div>
           <TransitionGroup component="ul" className="project-group">
             {newProjects.map((project) => {
-              let newRoutes = [];
-              // let newRoutes = routes.filter(
-              //   (route) => route.routeOwner === project.id
-              // );
-              //newRoutes.sort((a, b) => a.routNumber - b.routNumber);
+              let currentProjectPayments = currentClientPayments.filter(
+                (pay) => pay.paymentOwner === project.id
+              );
+              currentProjectPayments.sort((a, b) => a.payData - b.payData);
               //let listLiquids = NewListLiquidsCount(newRoutes);
 
               //--PROJECTS DATA ARRAY-------------------------->
@@ -268,6 +271,28 @@ export const ProjectsComponent = memo(
               let signaturуOfActClass = (project.signaturуOfAct === "Так") ? "good" : "bad";
               let poketExistenceClass = (project.poketExistence === "Так") ? "good" : "bad";
               let contractExistenceClass = (project.contractExistence === "Так") ? "good" : "bad";
+              //--DELETE BUTTON -->
+              let openDeleteProjectButtonClass = null;
+              if (project.openProject) {
+                openDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+              }
+              if (currentProjectPayments.length) {
+                openDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+              }
+              if (userInfo.company !== userInfo.jointCompany) {
+                openDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+              }
+              //--DISABLE BUTTON--->
+              let disableDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+              if (currentProjectPayments.length) {
+                disableDeleteProjectButtonClass = "";
+              }
+              if (userInfo.company !== userInfo.jointCompany) {
+                disableDeleteProjectButtonClass = "";
+              }
+              if (project.openProject) {
+                disableDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+              }
               return (
                 <CSSTransition
                   key={project.id}
@@ -378,9 +403,29 @@ export const ProjectsComponent = memo(
                                   )}
                               </tr>
                             </tbody>
-                          </table>
-                          {!project.openProject &
-                            !newRoutes.length &
+                          </table>  
+                          <button
+                             id="deleteProjectBtn"
+                             type="button"
+                            className={`btn btn-outline-danger btn-sm deleteProjectBtn ${openDeleteProjectButtonClass}`}
+                            onClick={() => {
+                              setId(project.id);
+                              setFunct("removeList");
+                              setModalText(dataListWarningText);
+                              setModalClass();
+                            }}
+                          >
+                            &times;
+                          </button>
+                          <button
+                            type="button"
+                            className={`bbtn btn-outline-secondary btn-sm deleteProjectBtn ${disableDeleteProjectButtonClass}`}
+                            disabled
+                          >
+                            &times;
+                          </button>
+                          {/* {!project.openProject &
+                            !currentProjectPayments.length &
                             (userInfo.company === userInfo.jointCompany) &
                             (userInfo.owner === client.owner) && (
                               <button
@@ -396,7 +441,7 @@ export const ProjectsComponent = memo(
                               >
                                 Х
                               </button>
-                            )}
+                            )} */}
                         </div>
                       </div>
                     )}
@@ -427,29 +472,32 @@ export const ProjectsComponent = memo(
                         />
                       )}
                     </div>
-                    {/* <RouteComponent
-                      car={car}
+                    <PaymentComponent
+                      client={client}
+                      payments={payments}
                       project={project}
                       setId={setId}
-                      newRoutes={newRoutes}
+                      currentProjectPayments={currentProjectPayments}
                       //newCarRoutes={newCarRoutes}
-                      openRoute={openRoute}
-                      closeRoute={closeRoute}
-                      openNewRoute={openNewRoute}
-                      closeNewRoute={closeNewRoute}
+                      openPayment={openPayment}
+                      clousePayment={clousePayment}
+                      openNewPayment={openNewPayment}
+                      clouseNewPayment={clouseNewPayment}
+                      addPayment={addPayment}
+                      //closeNewRoute={closeNewRoute}
                       setFunct={setFunct}
                       setModalClass={setModalClass}
                       setModalText={setModalText}
                       windowWidth={windowWidth}
                       setAlertText={setAlertText}
                       setAlertClass={setAlertClass}
-                      listLiquids={listLiquids}
-                      changeListRouteTime={changeListRouteTime}
+                      //listLiquids={listLiquids}
+                      //changeListRouteTime={changeListRouteTime}
                       modalClass={modalClass}
-                      carRoutes={carRoutes}
-                      clouseNewList={clouseNewList}
+                      //carRoutes={carRoutes}
+                      //clouseNewList={clouseNewList}
                       userInfo={userInfo}
-                    /> */}
+                    />
                   </li>
                 </CSSTransition>
               );

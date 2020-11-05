@@ -13,9 +13,11 @@ export const AllProjects = memo(
     clientType,
     //---COMMON STATE ----------------------->
     dates,
+    client,
     userInfos,
     clients,
     projects,
+    payments,
     //---CLIENT FUNCTIONS ------------------->
     removeClient,
     //---PROJECTS FUNCTIONS ----------------->
@@ -25,6 +27,12 @@ export const AllProjects = memo(
     removeProject,
     openCurrentProject,
     clouseCurrentProject,
+
+    addPayment,
+    openPayment,
+    openNewPayment,
+    clouseNewPayment,
+    clousePayment,
   }) => {
     //---Alert functions block---------------->
     let [alertClass, setAlertClass] = useState("modal");
@@ -74,9 +82,6 @@ export const AllProjects = memo(
       return summ;
     };
     //--------------------Create projects----------------------->
-    // let newProjects = projects.filter(
-    //   (project) => project.projectOwner === client.id
-    // );
     projects.sort(
       (a, b) => new Date(a.projectReadinessDate) - new Date(b.projectReadinessDate)
     );
@@ -250,7 +255,8 @@ export const AllProjects = memo(
             </div>
             <AllProjectsComponent
               dates={dates}
-              //routes={routes}
+              payments={payments}
+              client={client}
               newProjects={projects}
               //openNewRoute={openNewRoute}
               //closeNewRoute={closeNewRoute}
@@ -260,8 +266,11 @@ export const AllProjects = memo(
               removeProject={removeProject}
               openCurrentProject={openCurrentProject}
               clouseCurrentProject={clouseCurrentProject}
-              //openRoute={openRoute}
-              //closeRoute={closeRoute}
+              addPayment={addPayment}
+              openPayment={openPayment}
+              clousePayment={clousePayment}
+              openNewPayment={openNewPayment}
+              clouseNewPayment={clouseNewPayment}
               windowWidth={windowWidth}
               setAlertClass={setAlertClass}
               setAlertText={setAlertText}
@@ -270,7 +279,6 @@ export const AllProjects = memo(
               setModalClass={setModalClass}
               setId={setId}
               modalClass={modalClass}
-              //carRoutes={carRoutes}
               //listCarLiquids={listCarLiquids}
               sizeArray={sizeArray}
               userInfo={userInfo}

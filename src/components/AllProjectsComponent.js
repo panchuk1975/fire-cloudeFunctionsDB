@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { PaymentComponent } from "./PaymentComponent";
 import { CreateProject } from "./CreateProject";
 import { ProjectDataArray } from "../helpComponents/dataFunctions";
 import fire from "../config/Fire";
@@ -8,6 +9,8 @@ var moment = require("moment");
 export const AllProjectsComponent = memo(
   ({
     dates,
+    client,
+    payments,
     userInfo,
     newProjects,
     sizeArray,
@@ -25,7 +28,14 @@ export const AllProjectsComponent = memo(
     setId,
     modalClass,
     openClientTableClass,
+    
+    addPayment,
+    openPayment,
+    openNewPayment,
+    clouseNewPayment,
+    clousePayment,
   }) => {
+    console.log(client)
     let dataListWarningText =
       "Видалення проекту! Для видалення клієнту необхідно видалити всі проекти!!!";
     let owner = fire.auth.currentUser.uid;
@@ -59,6 +69,8 @@ export const AllProjectsComponent = memo(
 
             //--PROJECTS DATA ARRAY-------------------------->
             const projectDataArray = ProjectDataArray(project);
+            let currentProjectPayments = payments.filter((pay) => pay.paymentOwner === project.id);
+
             //--DYNAMIC CLASSES ----------------------------->
             let projectReadinessDateClass = (moment(new Date(project.projectReadinessDate))
               .format("YYYY-MM-DD") >= moment(new Date())
@@ -214,18 +226,44 @@ export const AllProjectsComponent = memo(
                         </table>
                       )}
                     </div>
-                    {project.openProject && (
+                    {/* {project.openProject && (
                       <CreateProject
                         className={openClientTableClass}
-                        //client={client}
+                        client={client}
                         project={project}
                         setAlertText={setAlertText}
                         setAlertClass={setAlertClass}
                         newProjects={newProjects}
                         userInfo={userInfo}
                       />
-                    )}
+                    )} */}
                   </div>
+                  <PaymentComponent
+                      client={client}
+                      payments={payments}
+                      project={project}
+                      setId={setId}
+                      currentProjectPayments={currentProjectPayments}
+                      //newCarRoutes={newCarRoutes}
+                      openPayment={openPayment}
+                      clousePayment={clousePayment}
+                      openNewPayment={openNewPayment}
+                      clouseNewPayment={clouseNewPayment}
+                      addPayment={addPayment}
+                      //closeNewRoute={closeNewRoute}
+                      setFunct={setFunct}
+                      setModalClass={setModalClass}
+                      setModalText={setModalText}
+                      windowWidth={windowWidth}
+                      setAlertText={setAlertText}
+                      setAlertClass={setAlertClass}
+                      //listLiquids={listLiquids}
+                      //changeListRouteTime={changeListRouteTime}
+                      modalClass={modalClass}
+                      //carRoutes={carRoutes}
+                      //clouseNewList={clouseNewList}
+                      userInfo={userInfo}
+                    />
                 </li>
               </CSSTransition>
             );

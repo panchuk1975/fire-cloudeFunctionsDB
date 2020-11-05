@@ -63,10 +63,7 @@ node_modules/
 .yarn-integrity
 
 # dotenv environment variables file
-<<<<<<< HEAD
 .env
 .Fire.js
-=======
 .envadd
 build/
->>>>>>> 50f5b0b885451a84a082701a03869a374e38a0ee

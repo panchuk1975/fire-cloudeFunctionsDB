@@ -39,7 +39,7 @@ export const CreateProject = memo(
         submissionToDRRP: moment(new Date()).format("YYYY-MM-DD"),
         dateOfReceiptFromDRRP: moment(new Date()).format("YYYY-MM-DD"),
         projectReadinessDate: moment(new Date()).format("YYYY-MM-DD"),
-        openList: false,
+        openPayment: false,
         openProject: false,
       };
     } else {

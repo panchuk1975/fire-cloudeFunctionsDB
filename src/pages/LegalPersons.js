@@ -5,14 +5,16 @@ import { Loader } from "../components/Loader";
 import fire from "../config/Fire";
 
 const LegalPersons = memo(({ windowWidth }) => {
-    const clientType = "Юрідичний";
-    let email = "";
-    if(fire.auth.currentUser){
-        email = fire.auth.currentUser.email;
-        email = email.split("@")[0];
-    } 
+  const clientType = "Юрідичний";
+  let email = "";
+  if (fire.auth.currentUser) {
+    email = fire.auth.currentUser.email;
+    email = email.split("@")[0];
+  }
   const {
     clients,
+    projects,
+    payments,
     dates,
     userInfos,
 
@@ -25,7 +27,6 @@ const LegalPersons = memo(({ windowWidth }) => {
     clouseClient,
     removeClient,
 
-    projects,
     addProject,
     openProject,
     clouseProject,
@@ -33,15 +34,21 @@ const LegalPersons = memo(({ windowWidth }) => {
     clouseCurrentProject,
     removeProject,
     fetchProjects,
+
+    addPayment,
+    openPayment,
+    openNewPayment,
+    clouseNewPayment,
+    clousePayment,
+    fetchPayments,
     //routes,
-    
     //fetchRoutes,
     // openList,
     // closeList,
     // openRoute,
     // closeRoute,
     // openNewList,
-    // openNewRoute,
+
     // closeNewRoute,
     // clouseNewList, 
   } = useContext(FirebaseContext);
@@ -49,8 +56,8 @@ const LegalPersons = memo(({ windowWidth }) => {
     fetchClients();
     fetchDates();
     fetchUsersInfo();
+    fetchPayments();
     fetchProjects();
-    //fetchRoutes();
     // eslint-disable-next-line
   }, []);
   return (
@@ -59,22 +66,28 @@ const LegalPersons = memo(({ windowWidth }) => {
       {loading ? (
         <Loader />
       ) : (
-        <PersonsComp
-          clients={clients}
-          dates={dates}
-          userInfos={userInfos}
-          openClient={openClient}
-          clouseClient={clouseClient}
-          removeClient={removeClient}
-          addProject={addProject}
-          openProject={openProject}
-          clouseProject={clouseProject}
-          removeProject={removeProject}
-          clientType={clientType}
-          windowWidth={windowWidth}
-          projects={projects}
-          openCurrentProject={openCurrentProject}
-          clouseCurrentProject={clouseCurrentProject}
+          <PersonsComp
+            dates={dates}
+            clients={clients}
+            projects={projects}
+            payments={payments}
+            userInfos={userInfos}
+            openClient={openClient}
+            clouseClient={clouseClient}
+            removeClient={removeClient}
+            addProject={addProject}
+            openProject={openProject}
+            clouseProject={clouseProject}
+            removeProject={removeProject}
+            clientType={clientType}
+            windowWidth={windowWidth}
+            openCurrentProject={openCurrentProject}
+            clouseCurrentProject={clouseCurrentProject}
+            addPayment={addPayment}
+            openPayment={openPayment}
+            clousePayment={clousePayment}
+            openNewPayment={openNewPayment}
+            clouseNewPayment={clouseNewPayment}
           //routes={routes}
           //openList={openList}
           //closeList={closeList}
@@ -84,9 +97,9 @@ const LegalPersons = memo(({ windowWidth }) => {
           //clouseNewList={clouseNewList}
           //openNewRoute={openNewRoute}
           //closeNewRoute={closeNewRoute}
-         
-        />
-      )}
+
+          />
+        )}
     </div>
   );
 });
