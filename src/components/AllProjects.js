@@ -54,7 +54,7 @@ export const AllProjects = memo(
     }
     //--Create clients data array--------------->
     clients = clients.filter((client) => client.owner === userInUse.owner);
-    //clients = clients.filter((client) => client.clientType === clientType);
+    clients = clients.filter((client) => client.clientType === clientType);
     clients.sort(
       (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
     );

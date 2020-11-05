@@ -57,7 +57,7 @@ export const CreateProject = memo(
     const createHandler = (event) => {
       let isProjectExists = !!newProjects.filter(
         // eslint-disable-next-line
-        (project) => Number(project.projectNumber) == Number(form.projectNumber)
+        (project) => project.projectNumber == form.projectNumber
       ).length;
       event.preventDefault();
       !form.projectNumber && setAlertText("Номер проекта обовязковий!");
