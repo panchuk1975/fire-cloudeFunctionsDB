@@ -34,6 +34,14 @@ export const PersonsComp = memo(
     removeProject,
     openCurrentProject,
     clouseCurrentProject,
+    //---PAYMENTS FUNCTIONS ------------------>
+    payments,
+    addPayment,
+    openPayment,
+    clousePayment,
+    openNewPayment,
+    clouseNewPayment,
+
 
     //routes,
     // openNewList,
@@ -338,9 +346,9 @@ export const PersonsComp = memo(
                         <ProjectsComponent
                           client={client}
                           dates={dates}
-                          //routes={routes}
+                          payments={payments}
                           newProjects={newProjects}
-                          //openNewRoute={openNewRoute}
+                          addPayment={addPayment}
                           //closeNewRoute={closeNewRoute}
                           addProject={addProject}
                           openProject={openProject}
@@ -348,8 +356,10 @@ export const PersonsComp = memo(
                           removeProject={removeProject}
                           openCurrentProject={openCurrentProject}
                           clouseCurrentProject={clouseCurrentProject}
-                          //openRoute={openRoute}
-                          //closeRoute={closeRoute}
+                          openPayment={openPayment}
+                          clousePayment={clousePayment}
+                          openNewPayment={openNewPayment}
+                          clouseNewPayment={clouseNewPayment}
                           windowWidth={windowWidth}
                           setAlertClass={setAlertClass}
                           setAlertText={setAlertText}

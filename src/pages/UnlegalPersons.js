@@ -13,6 +13,8 @@ const UnlegalPersons = memo(({ windowWidth }) => {
     } 
   const {
     clients,
+    projects,
+    payments,
     dates,
     userInfos,
 
@@ -24,23 +26,26 @@ const UnlegalPersons = memo(({ windowWidth }) => {
     openClient,
     clouseClient,
     removeClient,
-    projects,
+
     addProject,
     openProject,
     clouseProject,
     removeProject,
-    fetchProjects,
     openCurrentProject,
     clouseCurrentProject,
+    fetchProjects,
+    fetchPayments,
+    addPayment,
+    openPayment,
+    clousePayment,
+    openNewPayment,
+    clouseNewPayment,
     //routes,
-    
-    //fetchRoutes,
     // openList,
     // closeList,
     // openRoute,
     // closeRoute,
     // openNewList,
-    // openNewRoute,
     // closeNewRoute,
     // clouseNewList, 
   } = useContext(FirebaseContext);
@@ -48,8 +53,8 @@ const UnlegalPersons = memo(({ windowWidth }) => {
     fetchClients();
     fetchDates();
     fetchUsersInfo();
+    fetchPayments();
     fetchProjects();
-    //fetchRoutes();
     // eslint-disable-next-line
   }, []);
   return (
@@ -60,6 +65,8 @@ const UnlegalPersons = memo(({ windowWidth }) => {
       ) : (
         <PersonsComp
           clients={clients}
+          projects={projects}
+          payments={payments}
           dates={dates}
           userInfos={userInfos}
           openClient={openClient}
@@ -71,9 +78,14 @@ const UnlegalPersons = memo(({ windowWidth }) => {
           removeProject={removeProject}
           clientType={clientType}
           windowWidth={windowWidth}
-          projects={projects}
           openCurrentProject={openCurrentProject}
           clouseCurrentProject={clouseCurrentProject}
+          fetchPayments={fetchPayments}
+          addPayment={addPayment}
+          openPayment={openPayment}
+          clousePayment={clousePayment}
+          openNewPayment={openNewPayment}
+          clouseNewPayment={clouseNewPayment}
           //routes={routes}
           //openList={openList}
           //closeList={closeList}
@@ -81,7 +93,6 @@ const UnlegalPersons = memo(({ windowWidth }) => {
           //closeRoute={closeRoute}
           //openNewList={openNewList}
           //clouseNewList={clouseNewList}
-          //openNewRoute={openNewRoute}
           //closeNewRoute={closeNewRoute}
          
         />

@@ -21,20 +21,24 @@ import {
   REMOVE_PROJECT,
   OPEN_CURRENT_PROJECT,
   CLOUSE_CURRENT_PROJECT,
-  REMOVE_ROUTE,
+  REMOVE_PAYMENT,
   REMOVE_DATES,
   REMOVE_USERINFOS,
-  ADD_ROUTE,
+  ADD_PAYMENT,
+  CLOUSE_PAYMENT,
   ADD_DATES,
   ADD_USERINFO,
   CHANGE_USERINFO,
   CHANGE_INFO,
   FETCHED_USERINFO,
-  FETCHED_ROUTES,
+  FETCH_PAYMENTS,
   CHANGE_CREATE,
   CHANGE_LIST,
   CHANGE_ROUTE,
-  OPEN_ROUTE,
+  OPEN_PAYMENT,
+  CHANGE_PAYMENT,
+  OPEN_NEW_PAYMENT,
+  CLOUSE_NEW_PAYMENT,
 } from "../types";
 
 const url = "https://fire-cloudefunctionsdb.firebaseio.com";
@@ -48,7 +52,7 @@ export const FirebaseState = ({ children }) => {
   const initialState = {
     clients: [],
     projects: [],
-    routes: [],
+    payments: [],
     dates: [],
     userInfos: [],
     loading: false,
@@ -278,11 +282,15 @@ export const FirebaseState = ({ children }) => {
     });
   };
 
+
+
+
+
   //--PROJECT FUNCTIONS-------------------------------------->
   const addProject = async (newProject, client) => {
     let owner = newProject.owner;
     let projectOwner = newProject.projectOwner;
-    if (client){
+    if (client) {
       owner = client.owner;
       projectOwner = client.id;
     }
@@ -312,7 +320,7 @@ export const FirebaseState = ({ children }) => {
   const changeProject = async (newProject, client, id) => {
     let owner = newProject.owner;
     let projectOwner = newProject.projectOwner;
-    if (client){
+    if (client) {
       owner = client.owner;
       projectOwner = client.id;
     }
@@ -617,7 +625,7 @@ export const FirebaseState = ({ children }) => {
         (routeTotalTime -
           Number(route.routTotalTime) +
           Number(form.routTotalTime)) *
-          100
+        100
       ) / 100;
     list = {
       ...list,
@@ -729,7 +737,7 @@ export const FirebaseState = ({ children }) => {
         (routeTotalTime -
           Number(route.routTotalTime) +
           Number(form.routTotalTime)) *
-          100
+        100
       ) / 100;
     car = {
       ...car,
@@ -754,64 +762,191 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-  //-----------------------------Routes functions----------------------------//
-  const openNewRoute = async (list) => {
-    list = {
-      ...list,
-      openRoute: true,
+
+
+
+
+
+
+
+
+
+
+  //--------------------PAYMENT FUNCTIONS-------------------->
+  const addPayment = async (newPayment, project) => {
+    let owner = newPayment.owner;
+    let projectOwner = newPayment.projectOwner;
+    let paymentOwner = newPayment.paymentOwner;
+    if (project) {
+      owner = project.owner;
+      projectOwner = project.projectOwner;
+      paymentOwner = project.id;
+    }
+    const payment = {
+      ...newPayment,
+      owner,
+      projectOwner,
+      paymentOwner,
     };
     try {
-      const res = await axios.patch(`${url}/lists/${list.id}.json`, list);
+      const res = await fire.db
+        .collection("payments")
+        .add(payment)
+        .catch((err) => console.log(err));
       const payload = {
-        ...res.data,
+        ...payment,
+        id: res.id,
       };
       dispatch({
-        type: OPEN_ROUTE,
+        type: ADD_PAYMENT,
         payload,
       });
     } catch (e) {
       throw new Error(e.message);
     }
   };
-  //------------------------------------------------------------------------//
-  const fetchRoutes = async () => {
-    showLoader();
-    const res = await axios.get(`${url}/routes.json`);
-    if (!res.data) {
-      res.data = {};
-    }
-    const payload = Object.keys(res.data).map((key) => {
-      return {
-        ...res.data[key],
-        id: key,
+  //--OPEN PAYMENT FORM----------------------->
+  const openNewPayment = async (currentProject) => {
+    let project = {
+      ...currentProject,
+      openPayment: true,
+    };
+    try {
+      await fire.db
+        .collection("projects")
+        .doc(project.id)
+        .update(project)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...project,
       };
+      dispatch({
+        type: OPEN_NEW_PAYMENT,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+    //--CLOSE PAYMENT FORM----------------------->
+    const clouseNewPayment = async (currentProject) => {
+      let project = {
+        ...currentProject,
+        openPayment: false,
+      };
+      try {
+        await fire.db
+          .collection("projects")
+          .doc(project.id)
+          .update(project)
+          .catch((err) => console.log(err));
+        const payload = {
+          ...project,
+        };
+        dispatch({
+          type: CLOUSE_NEW_PAYMENT,
+          payload,
+        });
+      } catch (e) {
+        throw new Error(e.message);
+      }
+    };
+  //--OPEN PAYMENT FORM----------------------->
+  const openPayment = async (currentPay) => {
+    let pay = {
+      ...currentPay,
+      openPay: true,
+    };
+    try {
+      await fire.db
+        .collection("payments")
+        .doc(pay.id)
+        .update(pay)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...pay,
+      };
+      dispatch({
+        type: OPEN_PAYMENT,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+   //--CLOUSE PAYMENT FORM----------------------->
+   const clousePayment = async (currentPay) => {
+    let pay = {
+      ...currentPay,
+      openPay: false,
+    };
+    try {
+      await fire.db
+        .collection("payments")
+        .doc(pay.id)
+        .update(pay)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...pay,
+      };
+      dispatch({
+        type: CLOUSE_PAYMENT,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //--CHANGE PAYMENT---------------------------->
+  const changePayment = async (newPayment, project, id) => {
+    let owner = newPayment.owner;
+    let projectOwner = newPayment.projectOwner;
+    let paymentOwner = newPayment.paymentOwner;
+    if (project) {
+      owner = project.owner;
+      projectOwner = project.projectOwner;
+      paymentOwner = project.id;
+    }
+    const payment = {
+      ...newPayment,
+      openPay: false,
+      owner,
+      projectOwner,
+      paymentOwner
+    };
+    try {
+      await fire.db
+        .collection("payments")
+        .doc(id)
+        .update(payment)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...payment,
+      };
+      dispatch({
+        type: CHANGE_PAYMENT,
+        payload,
+        id,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //------------------------------------------------------------------------//
+  const fetchPayments = async () => {
+    showLoader();
+    const res = await fire.db
+      .collection("payments")
+      .get()
+      .catch((err) => console.log(err));
+    const payload = [];
+    res.forEach((pay) => {
+      payload.push({ ...pay.data(), id: pay.id });
     });
     dispatch({
-      type: FETCHED_ROUTES,
+      type: FETCH_PAYMENTS,
       payload,
     });
-  };
-  //------------------------------------------------------------------------//
-  const addRoute = async (newRoute, car, list) => {
-    const route = {
-      ...newRoute,
-      owner: car.owner,
-      listOwner: car.id,
-      routeOwner: list.id,
-    };
-    try {
-      const res = await axios.post(`${url}/routes.json`, route);
-      const payload = {
-        ...route,
-        id: res.data.name,
-      };
-      dispatch({
-        type: ADD_ROUTE,
-        payload,
-      });
-    } catch (e) {
-      throw new Error(e.message);
-    }
   };
   //------------------------------------------------------------------------//
   const closeNewRoute = async (list) => {
@@ -825,7 +960,7 @@ export const FirebaseState = ({ children }) => {
         ...res.data,
       };
       dispatch({
-        type: OPEN_ROUTE,
+        type: OPEN_PAYMENT,
         payload,
       });
     } catch (e) {
@@ -833,30 +968,19 @@ export const FirebaseState = ({ children }) => {
     }
   };
   //------------------------------------------------------------------------//
-  const removeRoute = async (id) => {
-    await axios.delete(`${url}/routes/${id}.json`);
-    dispatch({
-      type: REMOVE_ROUTE,
-      payload: id,
-    });
-  };
-  //------------------------------------------------------------------------//
-  const openRoute = async (route) => {
-    route = {
-      ...route,
-      openRoute: true,
-    };
-    try {
-      const res = await axios.patch(`${url}/routes/${route.id}.json`, route);
-      const payload = {
-        ...res.data,
-      };
+  const removePayment = async (id) => {
+    if (id) {
+      await fire.db
+        .collection("payments")
+        .doc(id)
+        .delete()
+        .catch((err) => console.log(err));
       dispatch({
-        type: CHANGE_ROUTE,
-        payload,
+        type: REMOVE_PAYMENT,
+        payload: id,
       });
-    } catch (e) {
-      throw new Error(e.message);
+    } else {
+      return null;
     }
   };
   //------------------------------------------------------------------------//
@@ -878,6 +1002,9 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
+
+
+
   //-------------------------Userinfo functions---------------------------//
   const addUserInfo = async (newInfo) => {
     showLoader();
@@ -971,6 +1098,7 @@ export const FirebaseState = ({ children }) => {
     <FirebaseContext.Provider
       value={{
         showLoader,
+        addDates,
 
         addClient,
         changeClient,
@@ -988,10 +1116,21 @@ export const FirebaseState = ({ children }) => {
         removeProject,
         fetchProjects,
 
-        addRoute,
-        addDates,
+        fetchPayments,
+        addPayment,
+        openPayment,
+        clousePayment,
+        openNewPayment,
+        clouseNewPayment,
+        changePayment,
+        removePayment,
 
-        openNewRoute,
+
+
+
+
+
+
         closeNewRoute,
         clouseNewList,
         changeListRouteTime,
@@ -1001,12 +1140,12 @@ export const FirebaseState = ({ children }) => {
         removeCarRouteTime,
         rewriteCarRouteTime,
         openList,
-        openRoute,
+
         closeList,
         closeRoute,
 
-        removeRoute,
-        fetchRoutes,
+    
+
         changeCreate,
         changeDates,
         fetchDates,
@@ -1019,7 +1158,7 @@ export const FirebaseState = ({ children }) => {
         loading: state.loading,
         clients: state.clients,
         projects: state.projects,
-        routes: state.routes,
+        payments: state.payments,
         dates: state.dates,
         userInfos: state.userInfos,
         create: state.create,

@@ -10,6 +10,8 @@ const Projects = memo(({ windowWidth }) => {
   email = email.split("@")[0];
   const {
     clients,
+    projects,
+    payments,
     dates,
     userInfos,
 
@@ -22,7 +24,6 @@ const Projects = memo(({ windowWidth }) => {
     clouseClient,
     removeClient,
 
-    projects,
     addProject,
     openProject,
     clouseProject,
@@ -30,11 +31,19 @@ const Projects = memo(({ windowWidth }) => {
     clouseCurrentProject,
     removeProject,
     fetchProjects,
+
+    addPayment,
+    openPayment,
+    openNewPayment,
+    clouseNewPayment,
+    clousePayment,
+    fetchPayments,
   } = useContext(FirebaseContext);
   useEffect(() => {
     fetchClients();
     fetchDates();
     fetchUsersInfo();
+    fetchPayments();
     fetchProjects();
     // eslint-disable-next-line
   }, []);
@@ -45,8 +54,10 @@ const Projects = memo(({ windowWidth }) => {
         <Loader />
       ) : (
         <AllProjects
-        clients={clients}
         dates={dates}
+        clients={clients}
+        projects={projects}
+        payments={ payments}
         userInfos={userInfos}
         openClient={openClient}
         clouseClient={clouseClient}
@@ -57,9 +68,14 @@ const Projects = memo(({ windowWidth }) => {
         removeProject={removeProject}
         clientType={clientType}
         windowWidth={windowWidth}
-        projects={projects}
         openCurrentProject={openCurrentProject}
         clouseCurrentProject={clouseCurrentProject}
+        fetchPayments={fetchPayments}
+        addPayment={addPayment}
+        openPayment={openPayment}
+        clousePayment={clousePayment}
+        openNewPayment={openNewPayment}
+        clouseNewPayment={clouseNewPayment}
       />
       )}
     </div>

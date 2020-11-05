@@ -609,9 +609,7 @@ input[type="submit"]:hover {
 .projectInnerLi {
   margin: 5px 0 0 0;
   padding: 0;
-  background: lightslategray; }
-  .projectInnerLi:hover {
-    background: #889bae; }
+  background: #45494d; }
 
 .CreateProjectStyle {
   margin: 5px 12px 0 15px; }
@@ -755,7 +753,7 @@ details {
   left: -150px;
   top: -125px;
   -webkit-box-shadow: 0px 0px 13px 5px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 13px 5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 13px 5px rgba(247, 129, 129, 0.75);
   box-shadow: 0px 0px 13px 5px rgba(0, 0, 0, 0.75); }
 
 .top-show-content {
@@ -833,6 +831,107 @@ body #open {
   overflow: hidden;
   position: fixed;
   top: 0px; }
+
+/* -------------------------------Route Table----------------------------------*/
+.allPaymentsConteiner {
+  padding: 0px 5px 0px 5px; }
+
+.paymentDetails {
+  color: black;
+  font-size: 9px;
+  margin: 0 0 0 0; }
+
+.paymentDetails:hover {
+  color: #190585;
+  font-size: 9px; }
+
+.paymentDetails summary {
+  width: 20%; }
+
+.paymentDetailsSmall {
+  font-size: 7px; }
+
+.payments-groupe {
+  background-color: #1a3146;
+  padding: 0;
+  margin: 1px 0 1px 0; }
+
+.paymentTableBasis {
+  height: auto; }
+
+.paymentHeadTable {
+  margin-bottom: 2px;
+  user-select: none;
+  color: black;
+  font-size: 10px; }
+
+.paymentTable {
+  cursor: pointer;
+  color: black;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 1px 1px rgba(0, 0, 0, 0.64);
+  box-shadow: 0px 10px 13px -7px #000000, 1px 1px 1px 1px rgba(0, 0, 0, 0.64);
+  font-size: 12px; }
+
+.paymentTable td {
+  margin: 0;
+  padding: 0;
+  border: 1px solid black; }
+
+.paymentHeadTable td {
+  border: 1px solid black; }
+
+.routeTable:hover {
+  color: #03c0c0;
+  -webkit-box-shadow: 0px 10px 13px -7px #2e2e2e, 1px 1px 1px 1px rgba(0, 0, 0, 0.64);
+  box-shadow: 0px 10px 13px -7px #424242, 1px 1px 1px 1px rgba(0, 0, 0, 0.64); }
+
+#deleteRouteBtn {
+  font-size: 7px;
+  padding: 0 5px 0 5px;
+  margin: 5px 0 3px 0;
+  color: #ff2400; }
+
+#deleteRouteBtn:hover {
+  color: black; }
+
+.payment-buttons-grup {
+  padding-bottom: 5px;
+  margin: 5px 0px 0px 0px; }
+
+.payment-buttons-grup button {
+  font-size: 12px; }
+
+.add-pay-btn, .close-list-pay-btn {
+  width: 50%;
+  padding: 0;
+  margin: 0px 0px 0px 0px;
+  color: black; }
+
+.headStart {
+  color: black; }
+
+.headAdd {
+  color: black; }
+
+.headExpended {
+  color: black; }
+
+.headEnd {
+  color: black; }
+
+/* -----------------------------Create Route Form------------------------------*/
+#CreateRouteStyle {
+  padding: 10px 10px 7px 14px; }
+
+#createRouteBtn {
+  font-size: 15px;
+  width: 100%;
+  margin: 10px 0px 0px 0;
+  padding: 0;
+  color: black; }
+
+.routeHead {
+  color: black; }
 
 /* Указываем box sizing */
 *,

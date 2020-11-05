@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { PaymentComponent } from "./PaymentComponent";
 import { CreateProject } from "./CreateProject";
 import { ProjectDataArray } from "../helpComponents/dataFunctions";
 import fire from "../config/Fire";
@@ -8,6 +9,8 @@ var moment = require("moment");
 export const AllProjectsComponent = memo(
   ({
     dates,
+    client,
+    payments,
     userInfo,
     newProjects,
     sizeArray,
@@ -25,7 +28,14 @@ export const AllProjectsComponent = memo(
     setId,
     modalClass,
     openClientTableClass,
+
+    addPayment,
+    openPayment,
+    openNewPayment,
+    clouseNewPayment,
+    clousePayment,
   }) => {
+    console.log(client);
     let dataListWarningText =
       "Видалення проекту! Для видалення клієнту необхідно видалити всі проекти!!!";
     let owner = fire.auth.currentUser.uid;
@@ -50,28 +60,30 @@ export const AllProjectsComponent = memo(
       <form>
         <TransitionGroup component="ul" className="project-group">
           {newProjects.map((project) => {
-            let newRoutes = [];
             // let newRoutes = routes.filter(
             //   (route) => route.routeOwner === project.id
             // );
-            //newRoutes.sort((a, b) => a.routNumber - b.routNumber);
-            //let listLiquids = NewListLiquidsCount(newRoutes);
-
             //--PROJECTS DATA ARRAY-------------------------->
             const projectDataArray = ProjectDataArray(project);
+            let currentProjectPayments = payments.filter(
+              (pay) => pay.paymentOwner === project.id
+            );
+            //newRoutes.sort((a, b) => a.routNumber - b.routNumber);
             //--DYNAMIC CLASSES ----------------------------->
-            let projectReadinessDateClass = (moment(new Date(project.projectReadinessDate))
-              .format("YYYY-MM-DD") >= moment(new Date())
-                .format("YYYY-MM-DD")) ? "goodTime" : "badTime";
-            let signaturуOfActClass = (project.signaturуOfAct === "Так") ? "good" : "bad";
-            let poketExistenceClass = (project.poketExistence === "Так") ? "good" : "bad";
-            let contractExistenceClass = (project.contractExistence === "Так") ? "good" : "bad";
+            let projectReadinessDateClass =
+              moment(new Date(project.projectReadinessDate)).format(
+                "YYYY-MM-DD"
+              ) >= moment(new Date()).format("YYYY-MM-DD")
+                ? "goodTime"
+                : "badTime";
+            let signaturуOfActClass =
+              project.signaturуOfAct === "Так" ? "good" : "bad";
+            let poketExistenceClass =
+              project.poketExistence === "Так" ? "good" : "bad";
+            let contractExistenceClass =
+              project.contractExistence === "Так" ? "good" : "bad";
             return (
-              <CSSTransition
-                key={project.id}
-                classNames={"note"}
-                timeout={800}
-              >
+              <CSSTransition key={project.id} classNames={"note"} timeout={800}>
                 <li
                   key={project.id}
                   className="project-group-item projectInnerLi"
@@ -87,38 +99,40 @@ export const AllProjectsComponent = memo(
                             <tr align="center">
                               {windowWidth > 75 + summArray(1, sizeArray) && (
                                 <td width={sizeArray[0].size} className="head">
-                                  <small className="projectName"
-                                  >{projectDataArray[0]}</small>
+                                  <small className="projectName">
+                                    {projectDataArray[0]}
+                                  </small>
                                 </td>
                               )}
                               {windowWidth > 75 + summArray(2, sizeArray) && (
-                                <td width={sizeArray[1].size}
-                                  className={`head ${projectReadinessDateClass}`}>
-                                  <small className="smallProjectDateBold"
-                                  >{`${moment(
+                                <td
+                                  width={sizeArray[1].size}
+                                  className={`head ${projectReadinessDateClass}`}
+                                >
+                                  <small className="smallProjectDateBold">{`${moment(
                                     projectDataArray[1]
                                   ).format("DD.MM.YY")}`}</small>
                                 </td>
                               )}
                               {windowWidth > 75 + summArray(3, sizeArray) && (
                                 <td width={sizeArray[2].size}>
-                                  <small
-                                    className={contractExistenceClass}
-                                  >{projectDataArray[2]}</small>
+                                  <small className={contractExistenceClass}>
+                                    {projectDataArray[2]}
+                                  </small>
                                 </td>
                               )}
                               {windowWidth > 75 + summArray(4, sizeArray) && (
                                 <td width={sizeArray[3].size}>
-                                  <small
-                                    className={signaturуOfActClass
-                                    }>{projectDataArray[3]}</small>
+                                  <small className={signaturуOfActClass}>
+                                    {projectDataArray[3]}
+                                  </small>
                                 </td>
                               )}
                               {windowWidth > 75 + summArray(5, sizeArray) && (
                                 <td width={sizeArray[4].size}>
-                                  <small
-                                    className={poketExistenceClass}
-                                  >{projectDataArray[4]}</small>
+                                  <small className={poketExistenceClass}>
+                                    {projectDataArray[4]}
+                                  </small>
                                 </td>
                               )}
                               {windowWidth > 75 + summArray(6, sizeArray) && (
@@ -138,9 +152,9 @@ export const AllProjectsComponent = memo(
                               )}
                               {windowWidth > 75 + summArray(9, sizeArray) && (
                                 <td width={sizeArray[8].size} className="head">
-                                  <small>{`${moment(
-                                    projectDataArray[8]
-                                  ).format("DD.MM.YY")}`}</small>
+                                  <small>{`${moment(projectDataArray[8]).format(
+                                    "DD.MM.YY"
+                                  )}`}</small>
                                 </td>
                               )}
                               {windowWidth > 75 + summArray(10, sizeArray) && (
@@ -148,54 +162,47 @@ export const AllProjectsComponent = memo(
                                   <small>{projectDataArray[9]}</small>
                                 </td>
                               )}
-                              {windowWidth >
-                                75 + summArray(11, sizeArray) && (
-                                  <td width={sizeArray[10].size}>
-                                    <small>{projectDataArray[10]}</small>
-                                  </td>
-                                )}
-                              {windowWidth >
-                                75 + summArray(12, sizeArray) && (
-                                  <td width={sizeArray[11].size}>
-                                    <small>
-                                      {projectDataArray[11]}
-                                    </small>
-                                  </td>
-                                )}
-                              {windowWidth >
-                                75 + summArray(13, sizeArray) && (
-                                  <td width={sizeArray[12].size}>
-                                    <small>{projectDataArray[12]}</small>
-                                  </td>
-                                )}
-                              {windowWidth >
-                                75 + summArray(14, sizeArray) && (
-                                  <td width={sizeArray[13].size}>
-                                    <small>{projectDataArray[13]}</small>
-                                  </td>
-                                )}
+                              {windowWidth > 75 + summArray(11, sizeArray) && (
+                                <td width={sizeArray[10].size}>
+                                  <small>{projectDataArray[10]}</small>
+                                </td>
+                              )}
+                              {windowWidth > 75 + summArray(12, sizeArray) && (
+                                <td width={sizeArray[11].size}>
+                                  <small>{projectDataArray[11]}</small>
+                                </td>
+                              )}
+                              {windowWidth > 75 + summArray(13, sizeArray) && (
+                                <td width={sizeArray[12].size}>
+                                  <small>{projectDataArray[12]}</small>
+                                </td>
+                              )}
+                              {windowWidth > 75 + summArray(14, sizeArray) && (
+                                <td width={sizeArray[13].size}>
+                                  <small>{projectDataArray[13]}</small>
+                                </td>
+                              )}
                             </tr>
                           </tbody>
                         </table>
                         {!project.openProject &
-                          !newRoutes.length &
-                          (userInfo.company === userInfo.jointCompany)
-                          //& (userInfo.owner === client.owner) 
-                          && (
-                            <button
-                              id="deleteProjectBtn"
-                              type="button"
-                              className="btn btn-outline-danger btn-sm deleteProjectBtn"
-                              onClick={() => {
-                                setId(project.id);
-                                setFunct("removeList");
-                                setModalText(dataListWarningText);
-                                setModalClass();
-                              }}
-                            >
-                              Х
-                            </button>
-                          )}
+                          !currentProjectPayments.length &
+                          (userInfo.company === userInfo.jointCompany) && (
+                          //& (userInfo.owner === client.owner)
+                          <button
+                            id="deleteProjectBtn"
+                            type="button"
+                            className="btn btn-outline-danger btn-sm deleteProjectBtn"
+                            onClick={() => {
+                              setId(project.id);
+                              setFunct("removeList");
+                              setModalText(dataListWarningText);
+                              setModalClass();
+                            }}
+                          >
+                            Х
+                          </button>
+                        )}
                       </div>
                     </div>
                   )}
@@ -217,7 +224,7 @@ export const AllProjectsComponent = memo(
                     {project.openProject && (
                       <CreateProject
                         className={openClientTableClass}
-                        //client={client}
+                        client={client}
                         project={project}
                         setAlertText={setAlertText}
                         setAlertClass={setAlertClass}
@@ -226,38 +233,29 @@ export const AllProjectsComponent = memo(
                       />
                     )}
                   </div>
+                  <PaymentComponent
+                    project={project}
+                    setId={setId}
+                    currentProjectPayments={currentProjectPayments}
+                    openPayment={openPayment}
+                    clousePayment={clousePayment}
+                    openNewPayment={openNewPayment}
+                    clouseNewPayment={clouseNewPayment}
+                    addPayment={addPayment}
+                    setFunct={setFunct}
+                    setModalClass={setModalClass}
+                    setModalText={setModalText}
+                    windowWidth={windowWidth}
+                    setAlertText={setAlertText}
+                    setAlertClass={setAlertClass}
+                    modalClass={modalClass}
+                    userInfo={userInfo}
+                  />
                 </li>
               </CSSTransition>
             );
           })}
         </TransitionGroup>
-        {/* <div className="d-flex justify-content-between projectButtonsGrup">
-            <button
-              type="button"
-              className="btn btn-outline-primary btn-sm addProjectBtn"
-              onClick={() => openProject(client)}
-              style={{ marginRight: 4 }}
-            >
-              + Проект
-            </button>
-            <button
-              type="button"
-              className="btn btn-outline-info btn-sm closeProjectBtn"
-              onClick={() => clouseProject(client)}
-              style={{ marginRight: 4 }}
-            >
-              Закрити
-            </button>
-          </div> */}
-        {/* {client.openProject && (
-          <CreateProject
-            client={client}
-            setAlertText={setAlertText}
-            setAlertClass={setAlertClass}
-            newProjects={newProjects}
-            userInfo={userInfo}
-          />
-        )} */}
       </form>
     );
   }

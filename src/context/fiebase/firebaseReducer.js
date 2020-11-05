@@ -13,16 +13,17 @@ import {
   SHOW_LOADER,
   ADD_DATES,
   REMOVE_LIST,
-  REMOVE_ROUTE,
+  REMOVE_PAYMENT,
   CHANGE_CREATE,
   CHANGE_DATES,
   CHANGE_PROJECT,
   ADD_PROJECT,
-  FETCHED_ROUTES,
+  FETCH_PAYMENTS,
   FETCHED_DATES,
-  ADD_ROUTE,
-  CHANGE_ROUTE,
-  OPEN_ROUTE,
+  ADD_PAYMENT,
+  OPEN_PAYMENT,
+  CLOUSE_PAYMENT,
+  CHANGE_PAYMENT,
   OPEN_DENSITY,
   ADD_DENSITY,
   FETCHED_DENSITIES,
@@ -33,6 +34,8 @@ import {
   REMOVE_DATES,
   REMOVE_USERINFOS,
   FETCH_PROJECTS,
+  OPEN_NEW_PAYMENT,
+  CLOUSE_NEW_PAYMENT,
 } from "../types";
 
 const handlers = {
@@ -120,6 +123,57 @@ const handlers = {
       .concat([payload]),
   }),
 
+
+  [FETCH_PAYMENTS]: (state, { payload }) => ({
+    ...state,
+    payments: payload,
+    loading: false,
+  }),
+  [ADD_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    payments: [...state.payments, payload],
+  }),
+  [OPEN_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    payments: state.payments
+      .filter((pay) => pay.id !== payload.id)
+      .concat([payload]),
+  }),
+  [OPEN_NEW_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects
+      .filter((project) => project.id !== payload.id)
+      .concat([payload]),
+  }),
+  [CLOUSE_NEW_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects
+      .filter((project) => project.id !== payload.id)
+      .concat([payload]),
+  }),
+  [CLOUSE_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    payments: state.payments
+      .filter((pay) => pay.id !== payload.id)
+      .concat([payload]),
+  }),
+  [CHANGE_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    payments: state.payments
+      .filter((pay) => pay.id !== payload.id)
+      .concat([payload]),
+  }),
+  [REMOVE_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    payments: state.payments.filter((pay) => pay.id !== payload),
+  }),
+
+
+
+
+
+
+
   [CHANGE_CREATE]: (state) => ({ ...state, create: !state.create }),
 
   [OPEN_DENSITY]: (state, { payload }) => ({
@@ -161,31 +215,10 @@ const handlers = {
     lists: state.lists.filter((list) => list.id !== payload),
   }),
 
-  [OPEN_ROUTE]: (state, { payload }) => ({
-    ...state,
-    lists: state.lists
-      .filter((list) => list.id !== payload.id)
-      .concat([payload]),
-  }),
-  [ADD_ROUTE]: (state, { payload }) => ({
-    ...state,
-    routes: [...state.routes, payload],
-  }),
-  [FETCHED_ROUTES]: (state, { payload }) => ({
-    ...state,
-    routes: payload,
-    loading: false,
-  }),
-  [REMOVE_ROUTE]: (state, { payload }) => ({
-    ...state,
-    routes: state.routes.filter((route) => route.id !== payload),
-  }),
-  [CHANGE_ROUTE]: (state, { payload }) => ({
-    ...state,
-    routes: state.routes
-      .filter((route) => route.id !== payload.id)
-      .concat([payload]),
-  }),
+
+
+
+
   [CHANGE_INFO]: (state, { payload }) => ({ ...state, writeInfo: payload }),
   [FETCHED_USERINFO]: (state, { payload }) => ({
     ...state,
