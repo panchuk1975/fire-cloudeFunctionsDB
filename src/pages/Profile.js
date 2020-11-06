@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, memo } from "react";
-import { ProfileComponent } from "../components/ProfileComponent";
+import { ProfileComponent } from "../components/2_conteiners/ProfileComponent";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import fire from "../config/Fire";
 

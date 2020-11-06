@@ -1,195 +1,37 @@
 import {
-  ADD_CLIENT,
-  CHANGE_CLIENT,
-  OPEN_CLIENT,
-  CLOUSE_CLIENT,
-  FETCH_CLIENTS,
-  REMOVE_CLIENT,
-  OPEN_PROJECT,
-  CLOUSE_PROJECT,
-  REMOVE_PROJECT,
-  OPEN_CURRENT_PROJECT,
-  CLOUSE_CURRENT_PROJECT,
   SHOW_LOADER,
+
   ADD_DATES,
-  REMOVE_LIST,
-  REMOVE_PAYMENT,
-  CHANGE_CREATE,
   CHANGE_DATES,
-  CHANGE_PROJECT,
-  ADD_PROJECT,
-  FETCH_PAYMENTS,
+  REMOVE_DATES,
   FETCHED_DATES,
-  ADD_PAYMENT,
-  OPEN_PAYMENT,
-  CLOUSE_PAYMENT,
-  CHANGE_PAYMENT,
-  OPEN_DENSITY,
-  ADD_DENSITY,
-  FETCHED_DENSITIES,
-  FETCHED_USERINFO,
-  CHANGE_INFO,
+
   ADD_USERINFO,
   CHANGE_USERINFO,
-  REMOVE_DATES,
+  FETCHED_USERINFO,
   REMOVE_USERINFOS,
+
+  ADD_CLIENT,
+  CHANGE_CLIENT,
+  REMOVE_CLIENT,
+  FETCH_CLIENTS,
+
+  ADD_PROJECT,
+  CHANGE_PROJECT,
+  CHANGE_PROJECTFORM,
+  REMOVE_PROJECT,
   FETCH_PROJECTS,
-  OPEN_NEW_PAYMENT,
-  CLOUSE_NEW_PAYMENT,
+
+  ADD_PAYMENT,
+  CHANGE_PAYMENT,
+  CHANGE_PAYMENTFORM,
+  REMOVE_PAYMENT,
+  FETCH_PAYMENTS,
 } from "../types";
 
 const handlers = {
+  //---COMMON FUNCTIONS------------------------------------>
   [SHOW_LOADER]: (state) => ({ ...state, loading: true }),
-
-  //---CLIENTS STATE
-  [ADD_CLIENT]: (state, { payload }) => ({
-    ...state,
-    clients: [...state.clients, payload],
-    //loading: false,
-  }),
-  [CHANGE_CLIENT]: (state, { payload }) => ({
-    ...state,
-    clients: state.clients
-      .filter((client) => client.id !== payload.id)
-      .concat([payload]),
-  }),
-  [OPEN_CLIENT]: (state, { payload }) => ({
-    ...state,
-    clients: state.clients
-      .filter((client) => client.id !== payload.id)
-      .concat([payload]),
-    loading: false,
-  }),
-  [CLOUSE_CLIENT]: (state, { payload }) => ({
-    ...state,
-    clients: state.clients
-      .filter((client) => client.id !== payload.id)
-      .concat([payload]),
-    loading: false,
-  }),
-  [FETCH_CLIENTS]: (state, { payload }) => ({
-    ...state,
-    clients: payload,
-    loading: false,
-  }),
-  [REMOVE_CLIENT]: (state, { payload }) => ({
-    ...state,
-    clients: state.clients.filter((client) => client.id !== payload),
-    loading: false,
-  }),
-
-  [ADD_PROJECT]: (state, { payload }) => ({
-    ...state,
-    projects: [...state.projects, payload],
-  }),
-  [CHANGE_PROJECT]: (state, { payload }) => ({
-    ...state,
-    projects: state.projects
-      .filter((project) => project.id !== payload.id)
-      .concat([payload]),
-  }),
-  [FETCH_PROJECTS]: (state, { payload }) => ({
-    ...state,
-    projects: payload,
-    loading: false,
-  }),
-  [OPEN_PROJECT]: (state, { payload }) => ({
-    ...state,
-    clients: state.clients
-      .filter((client) => client.id !== payload.id)
-      .concat([payload]),
-  }),
-  [CLOUSE_PROJECT]: (state, { payload }) => ({
-    ...state,
-    clients: state.clients
-      .filter((client) => client.id !== payload.id)
-      .concat([payload]),
-  }),
-  [REMOVE_PROJECT]: (state, { payload }) => ({
-    ...state,
-    projects: state.projects.filter((project) => project.id !== payload),
-    loading: false,
-  }),
-  [OPEN_CURRENT_PROJECT]: (state, { payload }) => ({
-    ...state,
-    projects: state.projects
-      .filter((project) => project.id !== payload.id)
-      .concat([payload]),
-  }),
-  [CLOUSE_CURRENT_PROJECT]: (state, { payload }) => ({
-    ...state,
-    projects: state.projects
-      .filter((project) => project.id !== payload.id)
-      .concat([payload]),
-  }),
-
-
-  [FETCH_PAYMENTS]: (state, { payload }) => ({
-    ...state,
-    payments: payload,
-    loading: false,
-  }),
-  [ADD_PAYMENT]: (state, { payload }) => ({
-    ...state,
-    payments: [...state.payments, payload],
-  }),
-  [OPEN_PAYMENT]: (state, { payload }) => ({
-    ...state,
-    payments: state.payments
-      .filter((pay) => pay.id !== payload.id)
-      .concat([payload]),
-  }),
-  [OPEN_NEW_PAYMENT]: (state, { payload }) => ({
-    ...state,
-    projects: state.projects
-      .filter((project) => project.id !== payload.id)
-      .concat([payload]),
-  }),
-  [CLOUSE_NEW_PAYMENT]: (state, { payload }) => ({
-    ...state,
-    projects: state.projects
-      .filter((project) => project.id !== payload.id)
-      .concat([payload]),
-  }),
-  [CLOUSE_PAYMENT]: (state, { payload }) => ({
-    ...state,
-    payments: state.payments
-      .filter((pay) => pay.id !== payload.id)
-      .concat([payload]),
-  }),
-  [CHANGE_PAYMENT]: (state, { payload }) => ({
-    ...state,
-    payments: state.payments
-      .filter((pay) => pay.id !== payload.id)
-      .concat([payload]),
-  }),
-  [REMOVE_PAYMENT]: (state, { payload }) => ({
-    ...state,
-    payments: state.payments.filter((pay) => pay.id !== payload),
-  }),
-
-
-
-
-
-
-
-  [CHANGE_CREATE]: (state) => ({ ...state, create: !state.create }),
-
-  [OPEN_DENSITY]: (state, { payload }) => ({
-    ...state,
-    cars: state.densities
-      .filter((den) => den.id !== payload.id)
-      .concat([payload]),
-  }),
-  [ADD_DENSITY]: (state, { payload }) => ({
-    ...state,
-    densities: [...state.densities, payload],
-  }),
-  [FETCHED_DENSITIES]: (state, { payload }) => ({
-    ...state,
-    densities: payload,
-  }),
 
   [ADD_DATES]: (state, { payload }) => ({
     ...state,
@@ -210,23 +52,13 @@ const handlers = {
     dates: state.dates.filter((date) => date.id !== payload),
   }),
 
-  [REMOVE_LIST]: (state, { payload }) => ({
-    ...state,
-    lists: state.lists.filter((list) => list.id !== payload),
-  }),
-
-
-
-
-
-  [CHANGE_INFO]: (state, { payload }) => ({ ...state, writeInfo: payload }),
   [FETCHED_USERINFO]: (state, { payload }) => ({
     ...state,
     userInfos: payload,
   }),
   [ADD_USERINFO]: (state, { payload }) => ({
     ...state,
-    userInfos: [...state.routes, payload],
+    userInfos: [...state.userInfos, payload],
   }),
   [REMOVE_USERINFOS]: (state, { payload }) => ({
     ...state,
@@ -237,6 +69,81 @@ const handlers = {
     userInfos: state.userInfos
       .filter((info) => info.id !== payload.id)
       .concat([payload]),
+  }),
+
+  //---CLIENTS STATE--------------------------------------->
+  [ADD_CLIENT]: (state, { payload }) => ({
+    ...state,
+    clients: [...state.clients, payload],
+  }),
+  [CHANGE_CLIENT]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients
+      .filter((client) => client.id !== payload.id)
+      .concat([payload]),
+  }),
+  [FETCH_CLIENTS]: (state, { payload }) => ({
+    ...state,
+    clients: payload,
+    loading: false,
+  }),
+  [REMOVE_CLIENT]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients.filter((client) => client.id !== payload),
+  }),
+
+  //---PROJECTS STATE--------------------------------------->
+  [ADD_PROJECT]: (state, { payload }) => ({
+    ...state,
+    projects: [...state.projects, payload],
+  }),
+  [CHANGE_PROJECT]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects
+      .filter((project) => project.id !== payload.id)
+      .concat([payload]),
+  }),
+  [CHANGE_PROJECTFORM]: (state, { payload }) => ({
+    ...state,
+    clients: state.clients
+      .filter((client) => client.id !== payload.id)
+      .concat([payload]),
+  }),
+  [FETCH_PROJECTS]: (state, { payload }) => ({
+    ...state,
+    projects: payload,
+    loading: false,
+  }),
+  [REMOVE_PROJECT]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects.filter((project) => project.id !== payload),
+    loading: false,
+  }),
+  //---PAYMENTS STATE------------------------------------->
+  [ADD_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    payments: [...state.payments, payload],
+  }),
+  [CHANGE_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    payments: state.payments
+      .filter((pay) => pay.id !== payload.id)
+      .concat([payload]),
+  }),
+  [CHANGE_PAYMENTFORM]: (state, { payload }) => ({
+    ...state,
+    projects: state.projects
+      .filter((project) => project.id !== payload.id)
+      .concat([payload]),
+  }),
+  [FETCH_PAYMENTS]: (state, { payload }) => ({
+    ...state,
+    payments: payload,
+    loading: false,
+  }),
+  [REMOVE_PAYMENT]: (state, { payload }) => ({
+    ...state,
+    payments: state.payments.filter((pay) => pay.id !== payload),
   }),
   DEFAULT: (state) => state,
 };

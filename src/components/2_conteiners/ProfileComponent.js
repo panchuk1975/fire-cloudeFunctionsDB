@@ -1,12 +1,12 @@
 import React, { memo, useState, useContext } from "react";
-import { FirebaseContext } from "../context/fiebase/firebaseContext";
+import { FirebaseContext } from "../../context/fiebase/firebaseContext";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
-import { CreateComponent } from "./CreateComponent";
-import { ModalBox } from "./ModalBox";
-import { ProjectsComponent } from "./ProjectsComponent";
-import { AlertBox } from "./AlertBox";
-import fire from "../config/Fire";
+import { NewListLiquidsCount } from "../../mathfunctions/listFunctions";
+import { CreateComponent } from "../5_create_components/CreateComponent";
+import { ModalBox } from "../6_common_help_comp/ModalBox";
+import { ProjectsComponent } from "../3_sub_conteiners/ProjectsComponent";
+import { AlertBox } from "../6_common_help_comp/AlertBox";
+import fire from "../../config/Fire";
 var normalize = require("normalize-object");
 var moment = require("moment");
 

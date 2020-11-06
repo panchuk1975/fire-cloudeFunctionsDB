@@ -1,28 +1,28 @@
 import React, { useState, useContext } from "react";
-import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import { AlertBox } from "./AlertBox";
-import fire from "../config/Fire";
+import { FirebaseContext } from "../../context/fiebase/firebaseContext";
+import { AlertBox } from "../6_common_help_comp/AlertBox";
+import fire from "../../config/Fire";
 var moment = require("moment");
 
 export const CreateComponent = ({ client, clients, userInfo }) => {
-  //-----------------------------Call stand by--------------------------------//
+  //---CALL CONTEXT--------------------------->
   const firebase = useContext(FirebaseContext);
-  //------------------------------Alert block---------------------------------//
+  //---ALERT BLOCK STATE---------------------->
   let [alertClass, setAlertClass] = useState("modal");
   let [alertText, setAlertText] = useState("");
-  //--------------------------------Car form----------------------------------//
+  //---INITIAL CLIENT FORM-------------------->
   let initialForm = {};
   if (!client) {
     initialForm = {
-      clientType: "Юрідичний",// driver
-      companyName: "",// typeOfCar
-      secName: "Іванов", //carEngineNumber
-      firstName: "Іван",// govermentCarNumber
-      thirdName: "Іванович", //factoryCarNumber,
-      contractNumber: "", //carPassportNumber,
-      adress: "Полтава", //operatingGroup,
-      phonNumber: "0987896756",//specialCarEquipmentNumber,
-      addPhonNumber: "0532678909",//specialCarEquipmentNumber,
+      clientType: "Юрідичний",
+      companyName: "",
+      secName: "Іванов",
+      firstName: "Іван",
+      thirdName: "Іванович",
+      contractNumber: "",
+      adress: "Полтава",
+      phonNumber: "0987896756",
+      addPhonNumber: "0532678909",
       dateOfNegotiations: moment(new Date()).format("YYYY-MM-DD"),
       negotiationsResult: "Не узгоджено",
       incomingSourse: "",
@@ -30,7 +30,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
       contractPeriod: 12,
       registrationDate: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
       ipNumber: 22345678865555,
-      passportNumber:"АБ 345678",
+      passportNumber: "АБ 345678",
       additionalInfo: "",
       openClient: false,
       openList: false,
@@ -42,12 +42,12 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
       openList: false,
     };
   }
-  //---------------------------Form state-------------------------------//
+  //---INITIAL FORM STATE HENDLER-------------------->
   let [form, setForm] = useState({ ...initialForm });
   const changeHandler = (event) => {
     setForm({ ...form, [event.target.name]: event.currentTarget.value });
-     };
-  //-------------------------Create Car function------------------------//
+  };
+  //---CREATE CLIENT-------------------------------->
   const createHandler = (event) => {
     var owner = fire.auth.currentUser.uid;
     clients = clients.filter((client) => client.owner === owner);
@@ -65,14 +65,13 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
             firebase
               .addClient(form)
               .then(() => {
-              //firebase.changeCreate();
               })
               .catch(() => {
-                setAlertText("Ошибка сервера!");
+                setAlertText("Помилка сервера!");
                 setAlertClass("open");
               });
-              setAlertText("Нового кліента створено!");
-              setAlertClass("open");
+            setAlertText("Нового кліента створено!");
+            setAlertClass("open");
           } else {
             setAlertText("У Вас відсутні права вносити зміни в документи!");
             setAlertClass("open");
@@ -90,12 +89,12 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
             "Нового кліента створено! Для перегляду перейдіть до юридичних осіб."
           );
           setAlertClass("open");
-        } else if (form.clientType ===  "Фізичний") {
+        } else if (form.clientType === "Фізичний") {
           setAlertText(
             "Нового кліента створено! Для перегляду перейдіть до фізичних осіб."
           );
           setAlertClass("open");
-         } else {
+        } else {
           setAlertClass("modal");
         }
       } else {
@@ -105,7 +104,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
         ) {
           firebase
             .changeClient(form)
-            .then(() => {})
+            .then(() => { })
             .catch(() => {
               setAlertText("Ошибка сервера!");
               setAlertClass("open");
@@ -171,7 +170,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
             />
           </div><div className="form-group">
             <label htmlFor="secName">
-            <small>Призвіще</small>
+              <small>Призвіще</small>
             </label>
             <input
               type="text"
@@ -207,7 +206,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               value={form.thirdName}
               name="thirdName"
               onChange={changeHandler}
-             // required
+            // required
             />
           </div>
           <div className="form-group">
@@ -221,7 +220,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               value={form.contractNumber}
               name="contractNumber"
               onChange={changeHandler}
-             // required
+            // required
             />
           </div>
           <div className="form-group">
@@ -235,7 +234,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               value={form.adress}
               name="adress"
               onChange={changeHandler}
-             // required
+            // required
             />
           </div>
           <div className="form-group">
@@ -249,7 +248,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               value={form.phonNumber}
               name="phonNumber"
               onChange={changeHandler}
-             // required
+            // required
             />
           </div>
           <div className="form-group">
@@ -263,7 +262,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               value={form.addPhonNumber}
               name="addPhonNumber"
               onChange={changeHandler}
-             // required
+            // required
             />
           </div>
           <div className="form-group">
@@ -277,7 +276,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               value={moment(form.dateOfNegotiations).format("YYYY-MM-DD")}
               name="dateOfNegotiations"
               onChange={changeHandler}
-             // required
+            // required
             />
           </div>
           <div className="form-group">
@@ -293,7 +292,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
                 className="custom-select custom-select-sm"
               >
                 <option className="main" value="Не узгоджено">
-                Не узгоджено
+                  Не узгоджено
                 </option>
                 <option value="Узгоджено">Узгоджено</option>
                 <option value="Відкладено">Відкладено</option>
@@ -313,7 +312,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
                 className="custom-select custom-select-sm"
               >
                 <option className="main" value="Телефон">
-                Телефон
+                  Телефон
                 </option>
                 <option value="Сайт">Сайт</option>
                 <option value="Ютюб">Ютюб</option>
@@ -332,36 +331,36 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               value={moment(form.dateOfSignContract).format("YYYY-MM-DD")}
               name="dateOfSignContract"
               onChange={changeHandler}
-             // required
+            // required
             />
           </div>
           <div className="form-group">
-              <label htmlFor="contractPeriod">
-                <small>Строк дії догшовору, міс</small>
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Строк дії догшовору, міс"
-                value={form.contractPeriod}
-                name="contractPeriod"
-                onChange={changeHandler}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="ipNumber">
-                <small>ІПН</small>
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="ІПН"
-                value={form.ipNumber}
-                name="ipNumber"
-                onChange={changeHandler}
-              />
-            </div>
-            <div className="form-group">
+            <label htmlFor="contractPeriod">
+              <small>Строк дії догшовору, міс</small>
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Строк дії догшовору, міс"
+              value={form.contractPeriod}
+              name="contractPeriod"
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="ipNumber">
+              <small>ІПН</small>
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              placeholder="ІПН"
+              value={form.ipNumber}
+              name="ipNumber"
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="passportNumber">
               <small>Серія та номер паспорту</small>
             </label>
@@ -372,11 +371,11 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               value={form.passportNumber}
               name="passportNumber"
               onChange={changeHandler}
-             // required
+            // required
             />
           </div>
         </div>
-        <div  className="form-group additionalInfoConteiner">
+        <div className="form-group additionalInfoConteiner">
           <label htmlFor="additionalInfo">
             <small>Додаткові дані</small>
           </label>

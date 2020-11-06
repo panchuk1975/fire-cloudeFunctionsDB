@@ -1,11 +1,8 @@
 import React, { memo, useContext, useEffect } from "react";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import { CommonLiquidsCount } from "../mathfunctions/liquidsFunctions";
-import { LiquidsComponent } from "../components/LiquidsComponent";
+import { PaymentsRend } from "../components/4_render_components/PaymentsRend";
 import fire from "../config/Fire";
-import { Loader } from "../components/Loader";
-import "../CSS/LiqCompStyle.scss";
-
+import { Loader } from "../components/6_common_help_comp/Loader";
 
 const Liquids = memo(() => {
     let contentWidthNumber =
@@ -23,17 +20,16 @@ const Liquids = memo(() => {
     loading,
     dates,
     fetchDates,
-    lists,
-    fetchLists,
-    routes,
-    fetchRoutes,
-    cars,
-    fetchCars,
+    projects,
+    fetchProjects,
+    payments,
+    fetchPayments,
+    fetchClients,
   } = useContext(FirebaseContext);
   let owner = fire.auth.currentUser.uid;
   let ownerDates = dates.find((date) => date.owner === owner);
-  let ownerAllRoutes = routes.filter((route) => route.owner === owner);
-  let ownerAllLists = lists.filter((list) => list.owner === owner);
+  let ownerAllPayments = payments.filter((pay) => pay.owner === owner);
+  let ownerAllProjects = projects.filter((project) => project.owner === owner);
   let ownerInitialDates = {};
   if (!ownerDates) {
     ownerInitialDates = {
@@ -42,20 +38,20 @@ const Liquids = memo(() => {
       dateFinish: "2080.01.01",
     };
   }
-  let ownerRoutes = ownerAllRoutes.filter(
-    (route) => route.routDate >= ownerDates.dateStart
-  );
-  ownerRoutes = ownerRoutes.filter(
-    (route) => route.routDate <= ownerDates.dateFinish
-  );
-  let listLiquids = CommonLiquidsCount(ownerRoutes, cars);
- // console.log(ownerAllRoutes)
-  listLiquids = listLiquids.sort((a, b) => a.name - b.name);
+  // let ownerPayments = ownerAllPayments.filter(
+  //   (pay) => pay.payDate >= ownerDates.dateStart
+  // );
+  // ownerPayments = ownerPayments.filter(
+  //   (pay) => pay.routDate <= ownerDates.dateFinish
+  // );
+//   let listLiquids = CommonLiquidsCount(ownerRoutes, cars);
+//  // console.log(ownerAllRoutes)
+//   listLiquids = listLiquids.sort((a, b) => a.name - b.name);
   useEffect(() => {
     fetchDates();
-    fetchLists();
-    fetchRoutes();
-    fetchCars();
+    fetchProjects();
+    fetchPayments();
+    fetchClients();
     // eslint-disable-next-line
   }, []);
   return (
@@ -64,14 +60,13 @@ const Liquids = memo(() => {
       {loading ? (
         <Loader />
       ) : (
-        <LiquidsComponent
-          ownerRoutes={ownerRoutes}
-          listLiquids={listLiquids}
+        <PaymentsRend
+          //listLiquids={listLiquids}
           ownerDates={ownerDates}
           ownerInitialDates={ownerInitialDates}
           liquidWidth={liquidWidth}
-          ownerAllRoutes={ownerAllRoutes}
-          ownerAllLists={ownerAllLists}
+          ownerAllPayments={ownerAllPayments}
+          ownerAllProjects={ownerAllProjects}
         />
       )}
     </div>

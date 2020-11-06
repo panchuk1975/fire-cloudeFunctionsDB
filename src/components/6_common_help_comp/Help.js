@@ -1,5 +1,5 @@
 import React from "react";
-import fire from "../config/Fire";
+import fire from "../../config/Fire";
 // const operator = require("../pictures/operator.png");
 // const about2 = require("../pictures/about2.png");
 // const about3 = require("../pictures/createNewAuto.png");

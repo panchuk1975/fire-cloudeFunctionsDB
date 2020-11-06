@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, memo } from "react";
-import { AllProjects } from "../components/AllProjects";
+import { AllProjects } from "../components/2_conteiners/AllProjects";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import { Loader } from "../components/Loader";
+import { Loader } from "../components/6_common_help_comp/Loader";
 import fire from "../config/Fire";
 
 const Projects = memo(({ windowWidth }) => {
@@ -20,13 +20,6 @@ const Projects = memo(({ windowWidth }) => {
     fetchDates,
     fetchUsersInfo,
 
-    openClient,
-    clouseClient,
-    removeClient,
-
-    addProject,
-    openProject,
-    clouseProject,
     openCurrentProject,
     clouseCurrentProject,
     removeProject,
@@ -54,17 +47,11 @@ const Projects = memo(({ windowWidth }) => {
         <Loader />
       ) : (
         <AllProjects
-        dates={dates}
+        dates={dates} 
         clients={clients}
         projects={projects}
         payments={ payments}
         userInfos={userInfos}
-        openClient={openClient}
-        clouseClient={clouseClient}
-        removeClient={removeClient}
-        addProject={addProject}
-        openProject={openProject}
-        clouseProject={clouseProject}
         removeProject={removeProject}
         clientType={clientType}
         windowWidth={windowWidth}

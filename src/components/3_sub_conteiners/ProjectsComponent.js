@@ -1,10 +1,10 @@
 import React, { memo } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 //import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
-import { CreateProject } from "./CreateProject";
-import { SizeNameArray, ProjectDataArray } from "../helpComponents/dataFunctions";
-import { PaymentComponent } from "./PaymentComponent";
-import fire from "../config/Fire";
+import { CreateProject } from "../5_create_components/CreateProject";
+import { SizeNameArray, ProjectDataArray } from "../../helpComponents/dataFunctions";
+import { PaymentComponent } from "../4_render_components/PaymentComponent";
+import fire from "../../config/Fire";
 var moment = require("moment");
 
 export const ProjectsComponent = memo(

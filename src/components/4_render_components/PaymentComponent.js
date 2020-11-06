@@ -1,7 +1,7 @@
 import React, { memo, useContext } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import { CreatePayment } from "./CreatePayment";
+import { FirebaseContext } from "../../context/fiebase/firebaseContext";
+import { CreatePayment } from "../5_create_components/CreatePayment";
 var moment = require("moment");
 
 export const PaymentComponent = memo(
@@ -14,15 +14,15 @@ export const PaymentComponent = memo(
     openNewPayment,
     clouseNewPayment,
     addPayment,
-    closeNewRoute,
     windowWidth,
     setAlertText,
     setAlertClass,
-    listLiquids,
-    carRoutes,
     userInfo,
   }) => {
     const firebase = useContext(FirebaseContext);
+    currentProjectPayments.sort(
+      (a, b) => new Date(a.payDate) - new Date(b.payDate)
+    );
     return (
       <div className="allPaymentsConteiner">
         <details className="paymentDetails">
@@ -145,9 +145,6 @@ export const PaymentComponent = memo(
             </div>
           <TransitionGroup component="ul" className="list-group">
             {currentProjectPayments.map((pay) => {
-              currentProjectPayments.sort(
-                (a, b) => new Date(a.payDate) - new Date(b.payDate)
-              );
               return (
                 <CSSTransition key={pay.id} classNames={"note"} timeout={800}>
                   <li  key={pay.id} className="list-group-item payments-groupe">
@@ -163,13 +160,13 @@ export const PaymentComponent = memo(
                           >
                             <tbody>
                               <tr align="center">
-                                <td width="50">
+                                <td width="250">
                                   <small className="routeHead">
                                     {pay.payNumber}
                                   </small>
                                 </td>
                                 {windowWidth > 425 && (
-                                  <td width="64">
+                                  <td width="264">
                                     <small className="routeHead">
                                       {`${moment(pay.payDate).format(
                                         "DD.MM HH:mm"
@@ -303,7 +300,7 @@ export const PaymentComponent = memo(
                               //   arrivalCarDate
                               // );
                               // setAlertText(
-                              //   "Маршрут видалено! Для видалення листа необхідно видалити всі маршрути!"
+                              //   "Оплату видалено! Для видалення проекту необхідно видалити всі проплати!"
                               // );
                               // setAlertClass("open");
                               // setTimeout(() => {
@@ -346,48 +343,6 @@ export const PaymentComponent = memo(
               );
             })}
           </TransitionGroup>
-          {/* <div id="countRoutesGroup" className="d-flex justify-content-between">
-            {windowWidth > 995 &&
-              listLiquids.map((liquid) => {
-                return (
-                  <pre key={liquid.name} className="listLiquidв">
-                    {" "}
-                    <small className="liquidValue"> {liquid.name}</small>
-                    <small className="headStart"> {liquid.balanceStart}</small>
-                  </pre>
-                );
-              })}
-            {windowWidth > 512 &&
-              listLiquids.map((liquid) => {
-                return (
-                  <pre key={liquid.name} className="listLiquidв">
-                    {" "}
-                    <small className="liquidValue"> {liquid.name}</small>
-                    <small className="headAdd"> {liquid.received}</small>
-                  </pre>
-                );
-              })}
-            {windowWidth > 770 &&
-              listLiquids.map((liquid) => {
-                return (
-                  <pre key={liquid.name} className="listLiquidв">
-                    {" "}
-                    <small className="liquidValue"> {liquid.name}</small>
-                    <small className="headExpended"> {liquid.expended}</small>
-                  </pre>
-                );
-              })}
-            {windowWidth > 335 &&
-              listLiquids.map((liquid) => {
-                return (
-                  <pre key={liquid.name} className="listLiquidв">
-                    {" "}
-                    <small className="liquidValue"> {liquid.name}</small>
-                    <small className="headEnd"> {liquid.balanceFinish}</small>
-                  </pre>
-                );
-              })}
-          </div> */}
           <div  className="d-flex justify-content-between payment-buttons-grup">
             <button
               type="button"
@@ -414,8 +369,6 @@ export const PaymentComponent = memo(
               newCarRoutes={newCarRoutes}
               setAlertText={setAlertText}
               setAlertClass={setAlertClass}
-              //oldCarRoutes={oldCarRoutes}
-              //oldCarTimes={oldCarTimes}
               userInfo={userInfo}
             />
           )}

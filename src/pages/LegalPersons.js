@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, memo } from "react";
-import { PersonsComp } from "../components/PersonsComp";
+import { PersonsComp } from "../components/2_conteiners/PersonsComp";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
-import { Loader } from "../components/Loader";
+import { Loader } from "../components/6_common_help_comp/Loader";
 import fire from "../config/Fire";
 
 const LegalPersons = memo(({ windowWidth }) => {
@@ -19,10 +19,10 @@ const LegalPersons = memo(({ windowWidth }) => {
     userInfos,
 
     loading,
-    fetchClients,
     fetchDates,
     fetchUsersInfo,
-
+    fetchClients,
+   
     openClient,
     clouseClient,
     removeClient,
@@ -41,16 +41,6 @@ const LegalPersons = memo(({ windowWidth }) => {
     clouseNewPayment,
     clousePayment,
     fetchPayments,
-    //routes,
-    //fetchRoutes,
-    // openList,
-    // closeList,
-    // openRoute,
-    // closeRoute,
-    // openNewList,
-
-    // closeNewRoute,
-    // clouseNewList, 
   } = useContext(FirebaseContext);
   useEffect(() => {
     fetchClients();
@@ -60,6 +50,7 @@ const LegalPersons = memo(({ windowWidth }) => {
     fetchProjects();
     // eslint-disable-next-line
   }, []);
+  console.log(userInfos)
   return (
     <div>
       <small>{email}</small>
@@ -77,27 +68,17 @@ const LegalPersons = memo(({ windowWidth }) => {
             removeClient={removeClient}
             addProject={addProject}
             openProject={openProject}
-            clouseProject={clouseProject}
-            removeProject={removeProject}
-            clientType={clientType}
-            windowWidth={windowWidth}
             openCurrentProject={openCurrentProject}
             clouseCurrentProject={clouseCurrentProject}
+            clouseProject={clouseProject}
+            removeProject={removeProject}
             addPayment={addPayment}
             openPayment={openPayment}
             clousePayment={clousePayment}
             openNewPayment={openNewPayment}
             clouseNewPayment={clouseNewPayment}
-          //routes={routes}
-          //openList={openList}
-          //closeList={closeList}
-          //openRoute={openRoute}
-          //closeRoute={closeRoute}
-          //openNewList={openNewList}
-          //clouseNewList={clouseNewList}
-          //openNewRoute={openNewRoute}
-          //closeNewRoute={closeNewRoute}
-
+            clientType={clientType}
+            windowWidth={windowWidth}
           />
         )}
     </div>

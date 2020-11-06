@@ -22,6 +22,9 @@
     background-color: rgb(26, 49, 70);
     padding: 0;
     margin: 1px 0 1px 0;
+    &:hover{
+      background-color: rgb(34, 63, 90);
+    }
 }
 .paymentTableBasis {
     height: auto;
@@ -33,7 +36,6 @@
     font-size: 10px;
   }
   .paymentTable {
-    
     cursor: pointer;
     color: black;
     //border-radius: 5px;
@@ -45,6 +47,7 @@
       margin: 0;
       padding: 0;
       border: 1px solid rgb(0, 0, 0);
+
   }
   .paymentHeadTable td{
       border: 1px solid rgb(0, 0, 0);
@@ -100,11 +103,11 @@
 //     margin: 0 0px 0 0;
 //     text-align: center;
 //   }
-  /* -----------------------------Create Route Form------------------------------*/
-#CreateRouteStyle {
-    padding: 10px 10px 7px 14px;
+  // ---Create Route Form------------------------------>
+.createPaymentStyle {
+    padding: 0px 3px 7px 1px;
   }
-  #createRouteBtn {
+  .createRouteBtn {
     font-size: 15px;
     width: 100%;
     margin: 10px 0px 0px 0;
@@ -114,6 +117,102 @@
   .routeHead {
     color: black;
   }
+  /*-----------COMMON PAYMENTS - DATA PAGE---------------*/
+.createTimeBasis {
+  padding: 1px 10px 10px 10px;
+  background: rgb(23, 19, 51);
+  border-radius: 5px;
+  background-position: top;
+  background-size: cover;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(238, 212, 212, 0.75);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.createTimeLiquidsBasis input {
+  font-size: 13px;
+}
+.createDateBtn {
+  color: black;
+  padding: 0 0 0 0;
+  height: 25px;
+  width: 122px;
+}
+.createDateBtnConteiner {
+  width: 122px;
+  height: 25px;
+  margin: 20px 0px 0 0px;
+}
+
+//---PAYMENTS HEADER ------------------------------->
+.createPaymentsHeadBasis {
+  margin: 8px 0 0 0;
+  padding: 1px 0px 0px 0px;
+  background: rgb(23, 19, 51);
+  //border-radius: 5px;
+  background-position: top;
+  background-size: cover;
+  width: 100%;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+.payments-conteiner {
+  margin: 0px 0px 5px 0px;
+}
+.paymentNumber {
+  font-weight: bold;
+  font-weight: 300;
+  color: rgb(255, 255, 255);
+}
+.paymentData {
+  font-weight: 300;
+  color: rgb(58, 45, 245);
+}
+.allPaymentTable {
+  font-size: 12px;
+  height: 10px;
+  width: 100%;
+  text-align: center;
+}
+.allPaymentTable td {
+  width: 25%;
+}
+.allPaymentTable table tbody tr td {
+  margin:0;
+  padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// .liquidName {
+//   color: rgb(43, 223, 52);
+//   font-weight: 300;
+// }
+// #liquidNameCol {
+//   text-align: center;
+//   width: 100%;
+// }
+
+
+
+// .liquidbalanceExpended {
+//   font-weight: 300;
+//   color: rgb(248, 24, 61);
+// }
+// .liquidbalanceFinish {
+//   font-weight: 300;
+//   color: rgb(15, 216, 31);
+// }
+
 //   #routeDate {
 //     width: 90%;
 //     margin: 0 33px 0 0;

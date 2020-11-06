@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { PaymentComponent } from "./PaymentComponent";
-import { CreateProject } from "./CreateProject";
-import { ProjectDataArray } from "../helpComponents/dataFunctions";
-import fire from "../config/Fire";
+import { PaymentComponent } from "../4_render_components/PaymentComponent";
+import { CreateProject } from "../../components/5_create_components/CreateProject";
+import { ProjectDataArray } from "../../helpComponents/dataFunctions";
+import fire from "../../config/Fire";
 var moment = require("moment");
 
 export const AllProjectsComponent = memo(
@@ -14,8 +14,8 @@ export const AllProjectsComponent = memo(
     userInfo,
     newProjects,
     sizeArray,
-    openProject,
-    clouseProject,
+    openClientTableClass,
+   
     openCurrentProject,
     clouseCurrentProject,
 
@@ -27,7 +27,6 @@ export const AllProjectsComponent = memo(
     setModalClass,
     setId,
     modalClass,
-    openClientTableClass,
 
     addPayment,
     openPayment,
@@ -188,7 +187,6 @@ export const AllProjectsComponent = memo(
                         {!project.openProject &
                           !currentProjectPayments.length &
                           (userInfo.company === userInfo.jointCompany) && (
-                          //& (userInfo.owner === client.owner)
                           <button
                             id="deleteProjectBtn"
                             type="button"

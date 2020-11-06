@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import fire from "../config/Fire";
+import fire from "../../config/Fire";
 import { NavLink } from "react-router-dom";
 
 let contentWidth = "25%";
@@ -12,12 +12,13 @@ contentWidth = `${
   106.6952733
 }%`;
 
-class Login extends Component {
+export class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: "",
+      confirmPassword: "",
       fireErrors: "",
       formTitle: "",
       loginBtn: true,
@@ -29,13 +30,19 @@ class Login extends Component {
     event.persist();
     this.setState({ [event.target.name]: event.target.value });
   };
-  login = (event) => {
+  register = (event) => {
     event.preventDefault();
     fire.auth
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .catch((error) => {
-        this.setState({ fireErrors: error.message });
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(function () {
+        let user = fire.auth.currentUser;
+        console.log(user);
+        user.sendEmailVerification();
+      })
+      .catch(function (error) {
+        console.log(error.message, 7000);
       });
+    console.log(`Validation link was sent to email.`);
   };
   updateDimensions = () => {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
@@ -60,12 +67,19 @@ class Login extends Component {
         show_btn.textContent = "SHOW";
       }
     };
-    let errorNotification = this.state.fireErrors ? (
-      <div className="Error" style={{ backgroundColor: "red" }}>
-        {this.state.formTitle ||
-          "Warning! Authorization Error! Check the data!"}
-      </div>
-    ) : null;
+    let showConfirmPassword = () => {
+      const conf_pass_field = document.querySelector(".confirmPassword");
+      const conf_show_btn = document.querySelector(".confirmShow");
+      if (conf_pass_field.type === "password") {
+        conf_pass_field.type = "text";
+        conf_show_btn.style.color = "#3498db";
+        conf_show_btn.textContent = "HIDE";
+      } else {
+        conf_pass_field.type = "password";
+        conf_show_btn.style.color = "#222";
+        conf_show_btn.textContent = "SHOW";
+      }
+    };
     contentWidth = `${
       7.2096691 * Math.pow(10, -14) * Math.pow(window.innerWidth, 5) -
       3.8875191 * Math.pow(10, -10) * Math.pow(window.innerWidth, 4) +
@@ -74,15 +88,17 @@ class Login extends Component {
       0.1046586 * window.innerWidth +
       106.6952733
     }%`;
+    let errorNotification = this.state.fireErrors ? (
+      <div className="Error" style={{ backgroundColor: "red" }}>
+        {this.state.formTitle ||
+          "Warning! Authorization Error! Check the data!"}
+      </div>
+    ) : null;
     return (
       <div className="bg-img">
-        <div
-          id="loginConteiner"
-          className="content"
-          style={{ width: contentWidth }}
-        >
+        <div className="content" style={{ width: contentWidth }}>
           <header>FORASLEND DB</header>
-          <form action="#" onSubmit={this.login}>
+          <form action="#" onSubmit={this.register}>
             <div className="field">
               <span className="fa fa-user"></span>
               <input
@@ -98,7 +114,6 @@ class Login extends Component {
             <div className="field spase">
               <span className="fa fa-lock"></span>
               <input
-                id="password"
                 type="password"
                 className="password"
                 placeholder="Password"
@@ -112,24 +127,33 @@ class Login extends Component {
               </span>
             </div>
             <div className="field spase">
-              <input type="submit" value="LOGIN" />
+              <span className="fa fa-lock"></span>
+              <input
+                type="password"
+                className="confirmPassword"
+                placeholder="Confirm password"
+                value={this.state.confirmPassword}
+                name="confirmPassword"
+                onChange={this.handleChange}
+                required
+              />
+              <span className="confirmShow" onClick={showConfirmPassword}>
+                SHOW
+              </span>
+            </div>
+            <div className="field spase">
+              <input type="submit" value="REGISTER" />
             </div>
             <div className="signup">
-              <NavLink to={"/about"}>
-                <span>About! </span>
-              </NavLink>
-              Don't have any accounts?
-              <NavLink to={"/register"}>
-                <span> Signup!</span>
+              Already have an account?
+              <NavLink to={"/login"}>
+                <span>Login</span>
               </NavLink>
             </div>
             {errorNotification}
-            <div className="signup">
-              Forgot password?
-              <NavLink to={"/forgotpassword"}>
-                <span> Use form here!</span>
-              </NavLink>
-            </div>
+            {this.state.password !== this.state.confirmPassword && (
+              <div className="notConfirm">Password is not confirmid!</div>
+            )}
           </form>
         </div>
       </div>
@@ -137,4 +161,4 @@ class Login extends Component {
   }
 }
 
-export default Login = React.memo(Login);
+export default Register = React.memo(Register);

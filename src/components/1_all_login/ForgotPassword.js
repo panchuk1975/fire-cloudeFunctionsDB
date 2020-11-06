@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import "../CSS/LogRegFormStyle.scss";
 
 class ForgotPassword extends Component {
   updateDimensions = () => {

@@ -4,13 +4,13 @@ import // ExportReactCSV,
 //carExelInfo,
 //carLiquidsExelInfo,
 //carListLiquidsExelInfo,
-"../mathfunctions/liquidsFunctions";
-import { CreateComponent } from "./CreateComponent";
-import { ModalBox } from "./ModalBox";
-import { AlertBox } from "./AlertBox";
-import { ShowBox } from "./ShowBox";
-import fire from "../config/Fire";
-import { ProjectsComponent } from "./ProjectsComponent";
+"../../mathfunctions/liquidsFunctions";
+import { CreateComponent } from "../5_create_components/CreateComponent";
+import { ModalBox } from "../6_common_help_comp/ModalBox";
+import { AlertBox } from "../6_common_help_comp/AlertBox";
+import { ShowBox } from "../6_common_help_comp/ShowBox";
+import fire from "../../config/Fire";
+import { ProjectsComponent } from "../3_sub_conteiners/ProjectsComponent";
 var moment = require("moment");
 
 export const PersonsComp = memo(

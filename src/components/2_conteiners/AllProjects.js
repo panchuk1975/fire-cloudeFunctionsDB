@@ -1,10 +1,10 @@
 import React, { memo, useState } from "react";
-import { ModalBox } from "./ModalBox";
-import { AlertBox } from "./AlertBox";
-import { ShowBox } from "./ShowBox";
-import fire from "../config/Fire";
-import { AllProjectsComponent } from "./AllProjectsComponent";
-import {SizeNameArray} from "../helpComponents/dataFunctions";
+import { ModalBox } from "../6_common_help_comp/ModalBox";
+import { AlertBox } from "../6_common_help_comp/AlertBox";
+import { ShowBox } from "../6_common_help_comp/ShowBox";
+import fire from "../../config/Fire";
+import { AllProjectsComponent } from "../3_sub_conteiners/AllProjectsComponent";
+import {SizeNameArray} from "../../helpComponents/dataFunctions";
 
 export const AllProjects = memo(
   ({
@@ -18,12 +18,7 @@ export const AllProjects = memo(
     clients,
     projects,
     payments,
-    //---CLIENT FUNCTIONS ------------------->
-    removeClient,
     //---PROJECTS FUNCTIONS ----------------->
-    addProject,
-    openProject,
-    clouseProject,
     removeProject,
     openCurrentProject,
     clouseCurrentProject,
@@ -258,11 +253,6 @@ export const AllProjects = memo(
               payments={payments}
               client={client}
               newProjects={projects}
-              //openNewRoute={openNewRoute}
-              //closeNewRoute={closeNewRoute}
-              addProject={addProject}
-              openProject={openProject}
-              clouseProject={clouseProject}
               removeProject={removeProject}
               openCurrentProject={openCurrentProject}
               clouseCurrentProject={clouseCurrentProject}
@@ -270,7 +260,7 @@ export const AllProjects = memo(
               openPayment={openPayment}
               clousePayment={clousePayment}
               openNewPayment={openNewPayment}
-              clouseNewPayment={clouseNewPayment}
+              clouseNewPayment={clouseNewPayment} 
               windowWidth={windowWidth}
               setAlertClass={setAlertClass}
               setAlertText={setAlertText}
@@ -279,19 +269,9 @@ export const AllProjects = memo(
               setModalClass={setModalClass}
               setId={setId}
               modalClass={modalClass}
-              //listCarLiquids={listCarLiquids}
               sizeArray={sizeArray}
               userInfo={userInfo}
             />
-            {fun === "removeCar" && (
-              <ModalBox
-                modalClass={modalClass}
-                modalText={textModal}
-                modalFunction={setClass}
-                Id={Id}
-                innerFunction={removeClient}
-              />
-            )}
             {fun === "removeList" && (
               <ModalBox
                 modalClass={modalClass}

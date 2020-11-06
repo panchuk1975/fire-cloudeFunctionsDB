@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-const logo = require("../pictures/about1.png");
+const logo = require("../../pictures/about1.png");
 
 const About = ({ contentWidth }) => {
   let imgWidth = `${contentWidth + 9}%`;

@@ -1,8 +1,8 @@
 import React, { useContext, useState, memo } from "react";
 import { NavLink } from "react-router-dom";
-import fire from "../config/Fire";
-import { FirebaseContext } from "../context/fiebase/firebaseContext";
-const newLogo = require("../pictures/newLogo.png");
+import fire from "../../config/Fire";
+import { FirebaseContext } from "../../context/fiebase/firebaseContext";
+const newLogo = require("../../pictures/newLogo.png");
 
 export const Navbar = memo(() => {
   const [showBtn, setBtn] = useState("item");
@@ -69,12 +69,12 @@ export const Navbar = memo(() => {
           <NavLink className="nav-link" to="/projects">
             Резерв
           </NavLink>
-        </li>
+        </li>*/}
         <li className={showBtn} onClick={() => setClass()}>
-          <NavLink className="nav-link" to="/projects">
-            Статистика
+          <NavLink className="nav-link" to="/payments">
+            Проплати
           </NavLink>
-        </li> */}
+        </li> 
         <li className={showBtn} onClick={() => setClass()}>
           <NavLink className="nav-link" to="/profile">
             Профіль

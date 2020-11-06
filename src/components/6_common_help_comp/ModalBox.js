@@ -1,20 +1,24 @@
 import React from "react";
-import "../CSS/AlertBox.scss";
 import Octicon, { Alert, Flame } from "@primer/octicons-react";
 
-export const AlertBox = ({ modalClass, modalText, modalFunction }) => {
+export const ModalBox = ({
+  modalClass,
+  modalText,
+  modalFunction,
+  Id,
+  innerFunction,
+}) => {
   let setClass = () => {
     modalFunction("modal");
   };
   return (
     <div id={modalClass}>
       <div className="window">
-        <div className={modalClass}>
+        <form className={modalClass}>
           <div className="top-content">
-            <div className="alert-left-text">
+            <div className="left-text">
               <pre>
-                <Octicon icon={Alert} size="medium" ariaLabel="Alert" />          Увага
-                !!!
+                <Octicon icon={Alert} size="medium" ariaLabel="Alert" />            Увага!!!
               </pre>
             </div>
             <button
@@ -29,12 +33,22 @@ export const AlertBox = ({ modalClass, modalText, modalFunction }) => {
               icon={Flame}
               size="large"
               ariaLabel="Flame"
-              className="alertFlame"
+              className="flame"
             />
-            <hr/>
             <p>{modalText}</p>
+            <button
+              id="close-btn"
+              type="button"
+              className="btn btn-outline-danger btn-sm"
+              onClick={() => {
+                innerFunction(Id);
+                setClass();
+              }}
+            >
+              Видалити дані!
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
