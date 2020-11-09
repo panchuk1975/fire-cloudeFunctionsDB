@@ -12,7 +12,7 @@ contentWidth = `${
   106.6952733
 }%`;
 
-class Login extends Component{
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
