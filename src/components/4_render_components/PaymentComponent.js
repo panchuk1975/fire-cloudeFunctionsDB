@@ -279,9 +279,8 @@ export const PaymentComponent = memo(
                           </table>
                         {userInfo.company === userInfo.jointCompany && (
                           <button
-                            id="deleteRouteBtn"
                             type="button"
-                            className="btn btn-outline-danger btn-sm"
+                            className="btn btn-outline-danger btn-sm deleteRouteBtn"
                             onClick={() => {
                               firebase.removePayment(pay.id);
                               // firebase.removeListRouteTime(
@@ -354,7 +353,6 @@ export const PaymentComponent = memo(
             </button>
             <button
               type="button"
-              id=""
               className="btn btn-outline-info btn-sm close-list-pay-btn"
               onClick={() => clouseNewPayment(project)}
               style={{ marginRight: 4 }}

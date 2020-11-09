@@ -888,13 +888,13 @@ body #open {
   -webkit-box-shadow: 0px 10px 13px -7px #2e2e2e, 1px 1px 1px 1px rgba(0, 0, 0, 0.64);
   box-shadow: 0px 10px 13px -7px #424242, 1px 1px 1px 1px rgba(0, 0, 0, 0.64); }
 
-#deleteRouteBtn {
+.deleteRouteBtn {
   font-size: 7px;
   padding: 0 5px 0 5px;
   margin: 5px 0 3px 0;
   color: #ff2400; }
 
-#deleteRouteBtn:hover {
+.deleteRouteBtn:hover {
   color: black; }
 
 .payment-buttons-grup {
@@ -1170,6 +1170,25 @@ body #open {
   overflow: hidden;
   position: fixed;
   top: 0px; }
+
+.searchConteiner {
+  padding: 5px 0 5px 0; }
+
+.caseOfBtn {
+  padding: 0 4px 0 4px;
+  font-size: 12px;
+  height: 25px;
+  margin: 0px 2px 0 2px;
+  border-radius: 1px; }
+
+@media all and (max-width: 870px) {
+  .searchConteiner {
+    padding: 3px 0 0px 0; }
+  .caseOfBtn {
+    padding: 0 2px 0 2px;
+    font-size: 10px;
+    height: 20px;
+    margin: 0px 1px 0 1px; } }
 
 /* Указываем box sizing */
 *,

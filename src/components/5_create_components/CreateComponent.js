@@ -29,7 +29,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
       dateOfSignContract: moment(new Date()).format("YYYY-MM-DD"),
       contractPeriod: 12,
       registrationDate: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
-      ipNumber: 22345678865555,
+      ipNumber: "22345678865555",
       passportNumber: "АБ 345678",
       additionalInfo: "",
       openClient: false,
@@ -295,7 +295,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
                   Не узгоджено
                 </option>
                 <option value="Узгоджено">Узгоджено</option>
-                <option value="Відкладено">Відкладено</option>
+                <option value="В процесі">В процесі</option>
               </select>
             </div>
           </div>
@@ -352,7 +352,7 @@ export const CreateComponent = ({ client, clients, userInfo }) => {
               <small>ІПН</small>
             </label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               placeholder="ІПН"
               value={form.ipNumber}

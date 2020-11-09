@@ -405,7 +405,6 @@ export const ProjectsComponent = memo(
                             </tbody>
                           </table>  
                           <button
-                             id="deleteProjectBtn"
                              type="button"
                             className={`btn btn-outline-danger btn-sm deleteProjectBtn ${openDeleteProjectButtonClass}`}
                             onClick={() => {
