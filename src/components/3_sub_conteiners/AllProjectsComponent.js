@@ -34,7 +34,6 @@ export const AllProjectsComponent = memo(
     clouseNewPayment,
     clousePayment,
   }) => {
-    console.log(client);
     let dataListWarningText =
       "Видалення проекту! Для видалення клієнту необхідно видалити всі проекти!!!";
     let owner = fire.auth.currentUser.uid;
@@ -188,7 +187,6 @@ export const AllProjectsComponent = memo(
                           !currentProjectPayments.length &
                           (userInfo.company === userInfo.jointCompany) && (
                           <button
-                            id="deleteProjectBtn"
                             type="button"
                             className="btn btn-outline-danger btn-sm deleteProjectBtn"
                             onClick={() => {

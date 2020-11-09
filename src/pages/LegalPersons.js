@@ -110,14 +110,14 @@ const LegalPersons = memo(({ windowWidth }) => {
   ], filterItem);
   //---BUTTONS ARRAY----------------------->
   let buttonsArray = [
-    { name: 'all', label: 'Всі' },
-    { name: 'active', label: 'Активовані' },
-    { name: 'inprocess', label: 'В процесі' },
-    { name: 'done', label: 'Домовлено' },
+    { name: 'all', label: 'Всі', shortLabel: 	'∑'},
+    { name: 'active', label: 'Активовані', shortLabel: "\u2705" },
+    { name: 'inprocess', label: 'В процесі', shortLabel: 	"\u23F3" },
+    { name: 'done', label: 'Домовлено', shortLabel: 	"\u2B50" },
   ];
-  const buttonsBlock = buttonsArray.map(({ name, label }) => {
+  const buttonsBlock = buttonsArray.map(({ name, label, shortLabel }) => {
     const isActive = filterItem === name;
-    const buttonClass = isActive ? 'btn-info' : "btn-outline-secondary";
+    const buttonClass = isActive ? 'btn-dark' : "btn-outline-secondary";
     return (
       <button
         key={name}
@@ -127,7 +127,8 @@ const LegalPersons = memo(({ windowWidth }) => {
         name="filterItem"
         onClick={() => onFilterChange(name)}
       >
-        {label}
+         {windowWidth < 870 && `${shortLabel}`}
+         {windowWidth >= 870 && `${label}`}
       </button>
     )
   })

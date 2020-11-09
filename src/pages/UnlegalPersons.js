@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, memo } from "react";
+import React, { useContext, useEffect, useState, memo } from "react";
 import { PersonsComp } from "../components/2_conteiners/PersonsComp";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { Loader } from "../components/6_common_help_comp/Loader";
 import fire from "../config/Fire";
 
 const UnlegalPersons = memo(({ windowWidth }) => {
+  const [search, setSearch] = useState("");
+  const [filterItem, setFilter] = useState("all");
   const clientType = "Фізичний";
     let email = "";
     if(fire.auth.currentUser){
@@ -49,14 +51,113 @@ const UnlegalPersons = memo(({ windowWidth }) => {
     fetchProjects();
     // eslint-disable-next-line
   }, []);
+    //---SEARCH FUNCTION-------------->
+    const changeHandler = (event) => {
+      setSearch(event.target.value);
+    };
+    //---SORT FUNCTION------------------------->
+    const sortBySearch = (clients, search, property) => {
+      //--Sort by client property-------->
+      let newClients = clients.filter((client) => {
+        if (client[property].toLowerCase().indexOf(search.toLowerCase()) > -1) {
+          return client;
+        }
+        return null;
+      })
+      return newClients;
+    }
+    //---FILTER FUNCTIONS---------------------------->
+    const sortByFilter = (clients, filter) => {
+      //--Sort by client property-------->
+      switch (filter) {
+        case 'all': return clients;
+        case 'active': return clients.filter((client) => client.negotiationsResult === "Не узгоджено");
+        case 'done': return clients.filter((client) => client.negotiationsResult === "Узгоджено");
+        case 'inprocess': return clients.filter((client) => client.negotiationsResult === "В процесі");
+        default: return clients;
+      }
+    }
+    const onFilterChange = (name) => {
+      setFilter(name);
+    }
+    //---USE SORT FUNCTION--------------------------->
+    let companyNameClients = sortBySearch(clients, search, 'companyName');
+    let secNameClients = sortBySearch(clients, search, 'secName');
+    let firstNameClients = sortBySearch(clients, search, 'firstName');
+    let thirdNameClients = sortBySearch(clients, search, 'thirdName');
+    let phonNumberClients = sortBySearch(clients, search, 'phonNumber');
+    let addPhonNumberClients = sortBySearch(clients, search, 'addPhonNumber');
+    let dateOfNegotiationsClients = sortBySearch(clients, search, 'dateOfNegotiations');
+    let dateOfSignContractClients = sortBySearch(clients, search, 'dateOfSignContract');
+    let registrationDateClients = sortBySearch(clients, search, 'registrationDate');
+    let adressClients = sortBySearch(clients, search, 'adress');
+    let ipNumberClients = sortBySearch(clients, search, 'ipNumber');
+    let passportNumberClients = sortBySearch(clients, search, 'passportNumber');
+    let visibleClients = sortByFilter([
+      ...companyNameClients,
+      ...secNameClients,
+      ...firstNameClients,
+      ...thirdNameClients,
+      ...phonNumberClients,
+      ...addPhonNumberClients,
+      ...dateOfNegotiationsClients,
+      ...dateOfSignContractClients,
+      ...registrationDateClients,
+      ...ipNumberClients,
+      ...passportNumberClients,
+      ...adressClients,
+    ], filterItem);
+    //---BUTTONS ARRAY----------------------->
+    let buttonsArray = [
+      { name: 'all', label: 'Всі', shortLabel: 	'∑'},
+      { name: 'active', label: 'Активовані', shortLabel: "\u2705" },
+      { name: 'inprocess', label: 'В процесі', shortLabel: 	"\u23F3" },
+      { name: 'done', label: 'Домовлено', shortLabel: 	"\u2B50" },
+    ];
+    const buttonsBlock = buttonsArray.map(({ name, label, shortLabel }) => {
+      const isActive = filterItem === name;
+      const buttonClass = isActive ? 'btn-dark' : "btn-outline-secondary";
+      return (
+        <button
+          key={name}
+          type="radio"
+          className={`btn caseOfBtn ${buttonClass}`}
+          value={filterItem}
+          name="filterItem"
+          onClick={() => onFilterChange(name)}
+        >
+           {windowWidth < 870 && `${shortLabel}`}
+           {windowWidth >= 870 && `${label}`}
+        </button>
+      )
+    })
   return (
-    <div>
-      <small>{email}</small>
+    <div >
+      <div className="d-flex  flex-wrap justify-content-between searchConteiner">
+        <div>
+          <small>{email}</small>
+        </div>
+        <div className="d-flex  flex-wrap justify-content-between buttonsConteiner">
+          {buttonsBlock}
+        </div>
+        <div >
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search..."
+              value={search}
+              name="search"
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+      </div>
       {loading ? (
         <Loader />
       ) : (
         <PersonsComp
-          clients={clients}
+          clients={visibleClients}
           projects={projects}
           payments={payments}
           dates={dates}
