@@ -1,7 +1,6 @@
 import React from "react";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
-import "../CSS/LiqCompStyle.scss";
 import { NewListLiquidsCount } from "../mathfunctions/listFunctions";
 var moment = require("moment");
 
@@ -26,9 +25,8 @@ export const ExportReactCSV = ({ csvData, fileName, textCSV }) => {
   };
   return (
     <button
-      id="createExelBtn"
       onClick={(e) => exportToCSV(csvData, fileName)}
-      className="btn btn-success"
+      className="btn btn-success createExelBtn"
     >
       <small>{textCSV}</small>
     </button>

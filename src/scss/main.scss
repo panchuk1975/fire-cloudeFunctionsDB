@@ -1,11 +1,15 @@
-@import "app";
-@import "navbar";
-@import "help";
-@import "create";
-@import "logreg";
-@import "profile";
-@import "clientTabl";
-@import "client";
+@import "_app";
+@import "_navbar";
+@import "_help";
+@import "_logreg";
+@import "_profile";
+@import "_client";
+@import "_project";
+@import "_showbox";
+@import "_payment";
+@import "_alertbox";
+@import "_modalbox";
+@import "_search";
 //--------------------------Сброс стилей--------------------------//
 /* Указываем box sizing */
 *,
@@ -86,51 +90,49 @@ select {
   }
 }
 
-
-
 // ----------------------BASE SCSS-------------------------//
 body {
-  background-color: white;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  background-color: rgb(160, 160, 160);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-    color: black;
+  color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 .note {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 strong {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 .note-exit-active {
-    animation: note 800ms ease-out forwards;
+  animation: note 800ms ease-out forwards;
 }
 
 .note-enter-active {
-    animation: note 800ms ease-out alternate-reverse;
+  animation: note 800ms ease-out alternate-reverse;
 }
 
 @keyframes note {
-    0% {
-        transform: translateX(0);
-    }
-    30% {
-        opacity: 0.7;
-        transform: translateX(30px);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-200px);
-    }
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    opacity: 0.7;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
 }

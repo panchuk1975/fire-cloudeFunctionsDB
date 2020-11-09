@@ -41,8 +41,9 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
+/build
 build/Release
-
+build/
 # Dependency directories
 node_modules/
 
@@ -63,3 +64,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.Fire.js
+.envadd
+<<<<<<< HEAD
+=======
+build/
+>>>>>>> 6a47dd6c4ec8f26a8b6143c5738eb1e0a40d82af
