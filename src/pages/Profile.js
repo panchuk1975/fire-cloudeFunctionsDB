@@ -15,7 +15,6 @@ const Home = memo(({ windowWidth }) => {
     fetchClients,
     fetchDates,
     fetchProjects,
-    //fetchRoutes,
     openCar,
     closeCar,
     openList,
@@ -33,7 +32,6 @@ const Home = memo(({ windowWidth }) => {
   useEffect(() => {
     fetchClients();
     fetchProjects();
-    //fetchRoutes();
     fetchDates();
     fetchUsersInfo();
     // eslint-disable-next-line

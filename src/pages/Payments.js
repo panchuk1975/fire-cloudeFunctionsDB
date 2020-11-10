@@ -1,21 +1,17 @@
-import React, { memo, useContext, useEffect } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import { FirebaseContext } from "../context/fiebase/firebaseContext";
 import { PaymentsRend } from "../components/4_render_components/PaymentsRend";
 import fire from "../config/Fire";
 import { Loader } from "../components/6_common_help_comp/Loader";
 
-const Liquids = memo(() => {
-    let contentWidthNumber =
-    7.2096691 * Math.pow(10, -14) * Math.pow(window.innerWidth, 5) -
-    3.8875191 * Math.pow(10, -10) * Math.pow(window.innerWidth, 4) +
-    7.5708477 * Math.pow(10, -7) * Math.pow(window.innerWidth, 3) -
-    6.0702864 * Math.pow(10, -4) * Math.pow(window.innerWidth, 2) +
-    0.1046586 * window.innerWidth +
-    106.6952733;
-  let liquidWidth = `${contentWidthNumber + 4}%`;
-  let email = fire.auth.currentUser.email;
-
-  email = email.split("@")[0];
+const Payments = memo(({ windowWidth }) => {
+  const [search, setSearch] = useState("");
+  const [filterItem, setFilter] = useState("all");
+  let email = "";
+  if (fire.auth.currentUser) {
+    email = fire.auth.currentUser.email;
+    email = email.split("@")[0];
+  }
   const {
     loading,
     dates,
@@ -25,52 +21,153 @@ const Liquids = memo(() => {
     payments,
     fetchPayments,
     fetchClients,
+    openPayment,
+    clousePayment,
+    userInfos,
+    fetchUsersInfo,
   } = useContext(FirebaseContext);
-  let owner = fire.auth.currentUser.uid;
+    //---Render-------------------------------------->
+    useEffect(() => {
+      fetchDates();
+      fetchProjects();
+      fetchPayments();
+      fetchClients();
+      fetchUsersInfo();
+      // eslint-disable-next-line
+    }, []);
+  //--Create user data----------------------->
+  var owner = fire.auth.currentUser.uid;
+  let userInfo = userInfos.find((info) => info.owner === owner);
+  if (!userInfo) {
+    return null;
+  }
+  //--CREATE USER DATES------------------------------------->
   let ownerDates = dates.find((date) => date.owner === owner);
   let ownerAllPayments = payments.filter((pay) => pay.owner === owner);
   let ownerAllProjects = projects.filter((project) => project.owner === owner);
-  let ownerInitialDates = {};
   if (!ownerDates) {
-    ownerInitialDates = {
+    ownerDates = {
       dateStart: "1950.01.01",
       dateOfEnd: 36,
       dateFinish: "2080.01.01",
     };
   }
-  // let ownerPayments = ownerAllPayments.filter(
-  //   (pay) => pay.payDate >= ownerDates.dateStart
+  //let datePayments = ownerAllPayments;
+  let dateProjects = ownerAllProjects;
+  // let datePayments = ownerAllPayments.filter(
+  //   (pay) => Date.parse(new Date(pay.payDate)) > Date.parse(ownerDates.dateStart)
   // );
-  // ownerPayments = ownerPayments.filter(
-  //   (pay) => pay.routDate <= ownerDates.dateFinish
+  // datePayments = datePayments.filter(
+  //   (pay) => Date.parse(pay.payDate) <= Date.parse(ownerDates.dateFinish)
   // );
-//   let listLiquids = CommonLiquidsCount(ownerRoutes, cars);
-//  // console.log(ownerAllRoutes)
-//   listLiquids = listLiquids.sort((a, b) => a.name - b.name);
-  useEffect(() => {
-    fetchDates();
-    fetchProjects();
-    fetchPayments();
-    fetchClients();
-    // eslint-disable-next-line
-  }, []);
+  // let dateProjects = ownerAllProjects.filter(
+  //   (pay) => Date.parse(pay.projectDate) > Date.parse(ownerDates.dateStart)
+  // );
+  // dateProjects = dateProjects.filter(
+  //   (pay) => Date.parse(pay.projectDate) <= Date.parse(ownerDates.dateFinish)
+  // );
+  //datePayments = datePayments.sort((a, b) => a.payDate - b.payDate);
+  //---SEARCH FUNCTION-------------->
+  const changeHandler = (event) => {
+    setSearch(event.target.value);
+  };
+  //---SORT FUNCTION------------------------->
+  const sortBySearch = (payments, search, property) => {
+    //console.log(search)
+    //--Sort by client property-------->
+    let newPayments = payments.filter((pay) => {
+      if (pay[property].toLowerCase().indexOf(search.toLowerCase()) > -1) {
+        return pay;
+      }
+      return null;
+    })
+    return newPayments;
+  }
+  //---FILTER FUNCTIONS---------------------------->
+  const sortByFilter = (payments, filter) => {
+    //--Sort by client property-------->
+    switch (filter) {
+      case 'all': return payments;
+      case 'active': return payments.filter((payment) => payment.payNumber);
+      case 'done': return payments.filter((payment) => payment.payDate);
+      case 'inprocess': return payments.filter((payment) => payment.negotiationsResult === "В процесі");
+      default: return payments;
+    }
+  }
+  const onFilterChange = (name) => {
+    setFilter(name);
+  }
+  //---USE SORT FUNCTION--------------------------->
+  let numberArrayPayments = sortBySearch(ownerAllPayments, search, 'payNumber');
+  let dateArrayPayments = sortBySearch(ownerAllPayments, search, 'payDate');
+//console.log(numberArrayPayments, dateArrayPayments)
+let visiblePayments = payments;
+if (search){
+  visiblePayments = sortByFilter([
+    ...numberArrayPayments,
+    ...dateArrayPayments,
+  ], filterItem);
+}
+  //---BUTTONS ARRAY----------------------->
+  let buttonsArray = [
+    { name: 'all', label: 'Всі', shortLabel: '∑' },
+    { name: 'active', label: 'Активовані', shortLabel: "\u2705" },
+    { name: 'inprocess', label: 'В процесі', shortLabel: "\u23F3" },
+    { name: 'done', label: 'Домовлено', shortLabel: "\u2B50" },
+  ];
+  const buttonsBlock = buttonsArray.map(({ name, label, shortLabel }) => {
+    const isActive = filterItem === name;
+    const buttonClass = isActive ? 'btn-dark' : "btn-outline-secondary";
+    return (
+      <button
+        key={name}
+        type="radio"
+        className={`btn caseOfBtn ${buttonClass}`}
+        value={filterItem}
+        name="filterItem"
+        onClick={() => onFilterChange(name)}
+      >
+        {windowWidth < 870 && `${shortLabel}`}
+        {windowWidth >= 870 && `${label}`}
+      </button>
+    )
+  })
   return (
-    <div>
-      <small>{email}</small>
+    <div >
+      <div className="d-flex  flex-wrap justify-content-between searchConteiner">
+        <div>
+          <small>{email}</small>
+        </div>
+        <div className="d-flex  flex-wrap justify-content-between buttonsConteiner">
+          {buttonsBlock}
+        </div>
+        <div >
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search..."
+              value={search}
+              name="search"
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+      </div>
       {loading ? (
         <Loader />
       ) : (
-        <PaymentsRend
-          //listLiquids={listLiquids}
-          ownerDates={ownerDates}
-          ownerInitialDates={ownerInitialDates}
-          liquidWidth={liquidWidth}
-          ownerAllPayments={ownerAllPayments}
-          ownerAllProjects={ownerAllProjects}
-        />
-      )}
+          <PaymentsRend
+            ownerDates={ownerDates}
+            ownerAllPayments={visiblePayments}
+            ownerAllProjects={dateProjects}
+            openPayment={openPayment}
+            clousePayment={clousePayment}
+            userInfo={userInfo}
+          />
+        )}
     </div>
   );
 });
 
-export default Liquids;
+export default Payments;

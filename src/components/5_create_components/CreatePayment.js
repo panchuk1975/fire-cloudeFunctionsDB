@@ -108,7 +108,7 @@ export const CreatePayment = ({
                 //   arrivalCarDate
                 // );
               })
-              .catch(() => {
+              .catch((err) => {
                 setAlertText("Ошибка сервера!");
                 setAlertClass("open");
               });
@@ -132,7 +132,8 @@ export const CreatePayment = ({
     }
   };
   return (
-    <div className="createPaymentStyle">
+    <div className="createPaymentStyle"
+    >
       <div>
         <div className="d-flex  flex-wrap justify-content-between">
           <div className="form-group">
@@ -154,9 +155,8 @@ export const CreatePayment = ({
               <small>Час проплати</small>
             </label>
             <input
-              id="createRouteDate"
               type="datetime-local"
-              className="form-control"
+              className="form-control createPaymentDate"
               placeholder="Час проплати"
               value={form.payDate}
               name="payDate"
@@ -165,10 +165,10 @@ export const CreatePayment = ({
             />
           </div>
         </div>
-      </div> 
+      </div>
       <div className="d-flex justify-content-between">
         <button
-          className="btn btn-success createRouteBtn"
+          className="btn btn-success createPaymentBtn"
           value="Enter"
           name="submit"
           onClick={createHandler}

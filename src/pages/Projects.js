@@ -11,7 +11,6 @@ const Projects = memo(({ windowWidth }) => {
   let email = fire.auth.currentUser.email;
   email = email.split("@")[0];
   const {
-    clients,
     projects,
     payments,
     dates,
@@ -42,68 +41,56 @@ const Projects = memo(({ windowWidth }) => {
     fetchProjects();
     // eslint-disable-next-line
   }, []);
-   //---SEARCH FUNCTION-------------->
-   const changeHandler = (event) => {
+  //---SEARCH FUNCTION-------------->
+  const changeHandler = (event) => {
     setSearch(event.target.value);
   };
   //---SORT FUNCTION------------------------->
-  const sortBySearch = (clients, search, property) => {
+  const sortBySearch = (projects, search, property) => {
     //--Sort by client property-------->
-    let newClients = clients.filter((client) => {
-      if (client[property].toLowerCase().indexOf(search.toLowerCase()) > -1) {
-        return client;
+    let newProjects = projects.filter((project) => {
+      if (String(project[property]).toLowerCase().indexOf(search.toLowerCase()) > -1) {
+        return project;
       }
       return null;
     })
-    return newClients;
+    return newProjects;
   }
   //---FILTER FUNCTIONS---------------------------->
-  const sortByFilter = (clients, filter) => {
+  const sortByFilter = (projects, filter) => {
     //--Sort by client property-------->
     switch (filter) {
-      case 'all': return clients;
-      case 'active': return clients.filter((client) => client.negotiationsResult === "Не узгоджено");
-      case 'done': return clients.filter((client) => client.negotiationsResult === "Узгоджено");
-      case 'inprocess': return clients.filter((client) => client.negotiationsResult === "В процесі");
-      default: return clients;
+      case 'all': return projects;
+      case 'active': return projects.filter((project) => project.contractExistence === "Так");
+      case 'done': return projects.filter((project) => project.negotiationsResult === "Так");
+      case 'inprocess': return projects.filter((project) => project.signaturуOfAct === "Так");
+      default: return projects;
     }
   }
   const onFilterChange = (name) => {
     setFilter(name);
   }
   //---USE SORT FUNCTION--------------------------->
-  let companyNameClients = sortBySearch(clients, search, 'companyName');
-  let secNameClients = sortBySearch(clients, search, 'secName');
-  let firstNameClients = sortBySearch(clients, search, 'firstName');
-  let thirdNameClients = sortBySearch(clients, search, 'thirdName');
-  let phonNumberClients = sortBySearch(clients, search, 'phonNumber');
-  let addPhonNumberClients = sortBySearch(clients, search, 'addPhonNumber');
-  let dateOfNegotiationsClients = sortBySearch(clients, search, 'dateOfNegotiations');
-  let dateOfSignContractClients = sortBySearch(clients, search, 'dateOfSignContract');
-  let registrationDateClients = sortBySearch(clients, search, 'registrationDate');
-  let adressClients = sortBySearch(clients, search, 'adress');
-  let ipNumberClients = sortBySearch(clients, search, 'ipNumber');
-  let passportNumberClients = sortBySearch(clients, search, 'passportNumber');
-  let visibleClients = sortByFilter([
-    ...companyNameClients,
-    ...secNameClients,
-    ...firstNameClients,
-    ...thirdNameClients,
-    ...phonNumberClients,
-    ...addPhonNumberClients,
-    ...dateOfNegotiationsClients,
-    ...dateOfSignContractClients,
-    ...registrationDateClients,
-    ...ipNumberClients,
-    ...passportNumberClients,
-    ...adressClients,
+  let projectNumberProjects = sortBySearch(projects, search, 'projectNumber');
+  let projectDateProjects = sortBySearch(projects, search, 'projectDate');
+  let typesOfLandWorksProjects = sortBySearch(projects, search, 'typesOfLandWorks')
+  let projectCostProjects = sortBySearch(projects, search, 'projectCost')
+  let responsibleForLandManageProjects = sortBySearch(projects, search, 'responsibleForLandManage')
+  let contractorProjects = sortBySearch(projects, search, 'contractor')
+  let visibleProjects = sortByFilter([
+    ...projectNumberProjects,
+    ...projectDateProjects,
+    ...typesOfLandWorksProjects,
+    ...projectCostProjects,
+    ...responsibleForLandManageProjects,
+    ...contractorProjects,
   ], filterItem);
   //---BUTTONS ARRAY----------------------->
   let buttonsArray = [
-    { name: 'all', label: 'Всі', shortLabel: 	'∑'},
+    { name: 'all', label: 'Всі', shortLabel: '∑' },
     { name: 'active', label: 'Активовані', shortLabel: "\u2705" },
-    { name: 'inprocess', label: 'В процесі', shortLabel: 	"\u23F3" },
-    { name: 'done', label: 'Домовлено', shortLabel: 	"\u2B50" },
+    { name: 'inprocess', label: 'В процесі', shortLabel: "\u23F3" },
+    { name: 'done', label: 'Домовлено', shortLabel: "\u2B50" },
   ];
   const buttonsBlock = buttonsArray.map(({ name, label, shortLabel }) => {
     const isActive = filterItem === name;
@@ -117,55 +104,55 @@ const Projects = memo(({ windowWidth }) => {
         name="filterItem"
         onClick={() => onFilterChange(name)}
       >
-         {windowWidth < 870 && `${shortLabel}`}
-         {windowWidth >= 870 && `${label}`}
+        {windowWidth < 870 && `${shortLabel}`}
+        {windowWidth >= 870 && `${label}`}
       </button>
     )
   })
   return (
     <div >
-    <div className="d-flex  flex-wrap justify-content-between searchConteiner">
-      <div>
-        <small>{email}</small>
-      </div>
-      <div className="d-flex  flex-wrap justify-content-between buttonsConteiner">
-        {buttonsBlock}
-      </div>
-      <div >
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search..."
-            value={search}
-            name="search"
-            onChange={changeHandler}
-          />
+      <div className="d-flex  flex-wrap justify-content-between searchConteiner">
+        <div>
+          <small>{email}</small>
+        </div>
+        <div className="d-flex  flex-wrap justify-content-between buttonsConteiner">
+          {buttonsBlock}
+        </div>
+        <div >
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search..."
+              value={search}
+              name="search"
+              onChange={changeHandler}
+            />
+          </div>
         </div>
       </div>
-    </div>
       {loading ? (
         <Loader />
       ) : (
-        <AllProjects
-        dates={dates} 
-        clients={visibleClients}
-        projects={projects}
-        payments={ payments}
-        userInfos={userInfos}
-        removeProject={removeProject}
-        clientType={clientType}
-        windowWidth={windowWidth}
-        openCurrentProject={openCurrentProject}
-        clouseCurrentProject={clouseCurrentProject}
-        fetchPayments={fetchPayments}
-        addPayment={addPayment}
-        openPayment={openPayment}
-        clousePayment={clousePayment}
-        openNewPayment={openNewPayment}
-        clouseNewPayment={clouseNewPayment}
-      />
-      )}
+          <AllProjects
+            dates={dates}
+            //clients={visibleProjects}
+            projects={visibleProjects}
+            payments={payments}
+            userInfos={userInfos}
+            removeProject={removeProject}
+            clientType={clientType}
+            windowWidth={windowWidth}
+            openCurrentProject={openCurrentProject}
+            clouseCurrentProject={clouseCurrentProject}
+            fetchPayments={fetchPayments}
+            addPayment={addPayment}
+            openPayment={openPayment}
+            clousePayment={clousePayment}
+            openNewPayment={openNewPayment}
+            clouseNewPayment={clouseNewPayment}
+          />
+        )}
     </div>
   );
 });

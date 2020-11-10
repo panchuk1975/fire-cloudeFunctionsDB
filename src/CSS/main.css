@@ -452,6 +452,28 @@ input[type="submit"]:hover {
     -moz-box-shadow: 0px 0px 10px 3px rgba(92, 92, 92, 0.75);
     box-shadow: 0px 0px 10px 3px rgba(68, 68, 68, 0.75); }
 
+.createTimeBasis {
+  padding: 1px 10px 10px 10px;
+  background: #171333;
+  border-radius: 5px;
+  background-position: top;
+  background-size: cover;
+  margin-bottom: 10px; }
+
+.createTimeLiquidsBasis input {
+  font-size: 13px; }
+
+.createDateBtn {
+  color: black;
+  padding: 0 0 0 0;
+  height: 25px;
+  width: 122px; }
+
+.createDateBtnConteiner {
+  width: 122px;
+  height: 25px;
+  margin: 20px 0px 0 0px; }
+
 .userInfoBasis {
   margin: 0px 0 0px 0;
   padding: 20px;
@@ -833,8 +855,12 @@ body #open {
   position: fixed;
   top: 0px; }
 
-/* -------------------------------Route Table----------------------------------*/
+.paymentHeadTable td {
+  font-size: 12px;
+  border: 1px solid black; }
+
 .allPaymentsConteiner {
+  background-color: white;
   padding: 0px 5px 0px 5px; }
 
 .paymentDetails {
@@ -852,52 +878,8 @@ body #open {
 .paymentDetailsSmall {
   font-size: 7px; }
 
-.payments-groupe {
-  background-color: #1a3146;
-  padding: 0;
-  margin: 1px 0 1px 0; }
-  .payments-groupe:hover {
-    background-color: #223f5a; }
-
-.paymentTableBasis {
-  height: auto; }
-
-.paymentHeadTable {
-  margin-bottom: 2px;
-  user-select: none;
-  color: black;
-  font-size: 10px; }
-
-.paymentTable {
-  cursor: pointer;
-  color: black;
-  -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 1px 1px rgba(0, 0, 0, 0.64);
-  box-shadow: 0px 10px 13px -7px #000000, 1px 1px 1px 1px rgba(0, 0, 0, 0.64);
-  font-size: 12px; }
-
-.paymentTable td {
-  margin: 0;
-  padding: 0;
-  border: 1px solid black; }
-
-.paymentHeadTable td {
-  border: 1px solid black; }
-
-.routeTable:hover {
-  color: #03c0c0;
-  -webkit-box-shadow: 0px 10px 13px -7px #2e2e2e, 1px 1px 1px 1px rgba(0, 0, 0, 0.64);
-  box-shadow: 0px 10px 13px -7px #424242, 1px 1px 1px 1px rgba(0, 0, 0, 0.64); }
-
-.deleteRouteBtn {
-  font-size: 7px;
-  padding: 0 5px 0 5px;
-  margin: 5px 0 3px 0;
-  color: #ff2400; }
-
-.deleteRouteBtn:hover {
-  color: black; }
-
 .payment-buttons-grup {
+  background-color: lightseagreen;
   padding-bottom: 5px;
   margin: 5px 0px 0px 0px; }
 
@@ -910,58 +892,34 @@ body #open {
   margin: 0px 0px 0px 0px;
   color: black; }
 
-.headStart {
-  color: black; }
-
-.headAdd {
-  color: black; }
-
-.headExpended {
-  color: black; }
-
-.headEnd {
-  color: black; }
-
-.createPaymentStyle {
-  padding: 0px 3px 7px 1px; }
-
-.createRouteBtn {
+.createPaymentBtn {
   font-size: 15px;
   width: 100%;
   margin: 10px 0px 0px 0;
   padding: 0;
   color: black; }
 
-.routeHead {
-  color: black; }
+.payments-incomp-background {
+  background-color: #d9e712;
+  padding: 0;
+  margin: 1px 0 1px 0; }
+  .payments-incomp-background:hover {
+    background-color: #223f5a; }
 
-/*-----------COMMON PAYMENTS - DATA PAGE---------------*/
-.createTimeBasis {
-  padding: 1px 10px 10px 10px;
-  background: #171333;
-  border-radius: 5px;
-  background-position: top;
-  background-size: cover;
-  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 5px 5px 5px 0px rgba(238, 212, 212, 0.75);
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75); }
+.createPaymentStyle {
+  background-color: lightgreen;
+  padding: 0px 3px 7px 1px; }
 
-.createTimeLiquidsBasis input {
-  font-size: 13px; }
+.paymentComponentTable td {
+  margin: 0;
+  font-size: 16px;
+  border: 1px solid black; }
 
-.createDateBtn {
-  color: black;
-  padding: 0 0 0 0;
-  height: 25px;
-  width: 122px; }
-
-.createDateBtnConteiner {
-  width: 122px;
-  height: 25px;
-  margin: 20px 0px 0 0px; }
+.payments-conteiner {
+  background-color: #493636; }
 
 .createPaymentsHeadBasis {
-  margin: 8px 0 0 0;
+  color: white;
   padding: 1px 0px 0px 0px;
   background: #171333;
   background-position: top;
@@ -971,30 +929,44 @@ body #open {
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75); }
 
-.payments-conteiner {
-  margin: 0px 0px 5px 0px; }
-
-.paymentNumber {
-  font-weight: bold;
-  font-weight: 300;
-  color: white; }
-
-.paymentData {
-  font-weight: 300;
-  color: #3a2df5; }
-
 .allPaymentTable {
-  font-size: 12px;
+  font-size: 16px;
   height: 10px;
   width: 100%;
   text-align: center; }
 
 .allPaymentTable td {
+  border: 1px solid white;
   width: 25%; }
 
-.allPaymentTable table tbody tr td {
+.commonPaymentRender {
+  background-color: #12d0e9;
+  margin: 4px 0 4px 0;
+  width: 100%; }
+
+.paymentTableBasis {
+  margin: 3px 0 3px 0;
+  background-color: lightpink;
+  height: auto; }
+
+.paymentTable {
+  cursor: pointer;
+  color: black;
+  font-size: 16px; }
+
+.paymentCommonTable td {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  border: 1px solid black; }
+
+.deletePaymentBtn {
+  font-size: 7px;
+  padding: 2px 5px 2px 5px;
+  margin: 5px 0 5px 0;
+  color: #ff2400; }
+
+.deletePaymentBtn:hover {
+  color: black; }
 
 .window {
   position: absolute;

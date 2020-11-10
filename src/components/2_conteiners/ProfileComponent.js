@@ -1,10 +1,9 @@
 import React, { memo, useState, useContext } from "react";
 import { FirebaseContext } from "../../context/fiebase/firebaseContext";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { NewListLiquidsCount } from "../../mathfunctions/listFunctions";
-import { CreateComponent } from "../5_create_components/CreateComponent";
+//import { CreateComponent } from "../5_create_components/CreateComponent";
 import { ModalBox } from "../6_common_help_comp/ModalBox";
-import { ProjectsComponent } from "../3_sub_conteiners/ProjectsComponent";
+//import { ProjectsComponent } from "../3_sub_conteiners/ProjectsComponent";
 import { AlertBox } from "../6_common_help_comp/AlertBox";
 import fire from "../../config/Fire";
 var normalize = require("normalize-object");
@@ -30,6 +29,7 @@ export const ProfileComponent = memo(
     userInfos,
     windowWidth,
     removeUserInfos,
+    ownerDates,
   }) => {
     //-----------------------------User data----------------------------//
     const user = fire.auth.currentUser;
@@ -53,7 +53,138 @@ export const ProfileComponent = memo(
     //------------------------------Alert box-----------------------------//
     let [alertClass, setAlertClass] = useState("modal");
     let [alertText, setAlertText] = useState("");
-    //--------------------------Profile Initial form----------------------//
+    let [modalClass, setClass] = useState("modal");
+    let [textModal, setModalText] = useState();
+    let [Id, setId] = useState();
+    let setModalClass = () => {
+      if ((modalClass = "modal")) {
+        setClass("open");
+      } else {
+        setClass("modal");
+      }
+    };
+    //-----SET DATA BLOCK------------------------------------------->
+    let [dateForm, setDateForm] = useState({
+      ...ownerDates,
+    });
+    if (Object.keys(dateForm).length === 0) {
+      dateForm = JSON.parse(localStorage.getItem("date"));
+    } else {
+      localStorage.setItem("date", JSON.stringify(dateForm));
+    }
+    const changeDateHandler = (event) => {
+      setDateForm({ ...dateForm, [event.target.name]: event.target.value });
+      console.log(event.target.name, event.target.value);
+    };
+    // //------------------------Set deleted Data-----------------------//
+    // let holdTime = new Date();
+    // let requiredHoldTime = new Date();
+    // holdTime.setMonth(holdTime.getMonth() - Number(form.dateOfEnd));
+    // requiredHoldTime.setMonth(holdTime.getMonth() - 36);
+    // //----------------------Set deleted old Items--------------------//
+    // let routesForRemove = [];
+    // let listsForRemove = [];
+    // if (Number(form.dateOfEnd) > 36) {
+    //   routesForRemove = ownerAllRoutes.filter(
+    //     (route) => Date.parse(route.routArrival) < Date.parse(requiredHoldTime)
+    //   );
+    //   if (routesForRemove.length === 0) {
+    //     routesForRemove = ownerAllRoutes.filter(
+    //       (route) => Date.parse(route.routDate) < Date.parse(requiredHoldTime)
+    //     );
+    //   }
+    //   listsForRemove = ownerAllLists.filter(
+    //     (list) => Date.parse(list.listDate) < Date.parse(requiredHoldTime)
+    //   );
+    // } else {
+    //   routesForRemove = ownerAllRoutes.filter(
+    //     (route) => Date.parse(route.routArrival) < Date.parse(holdTime)
+    //   );
+    //   if (routesForRemove.length === 0) {
+    //     routesForRemove = ownerAllRoutes.filter(
+    //       (route) => Date.parse(route.routDate) < Date.parse(holdTime)
+    //     );
+    //   }
+    //   listsForRemove = ownerAllLists.filter(
+    //     (list) => Date.parse(list.listDate) < Date.parse(holdTime)
+    //   );
+    // }
+    //----------------------------Set Date---------------------------//
+    const createDateHandler = (event) => {
+      event.preventDefault();
+      // if (routesForRemove.length !== 0) {
+      //   setId(event);
+      //   setModalText(dataWarningText);
+      //   setModalClass();
+      // }
+      // if (listsForRemove.length !== 0) {
+      //   setId(event);
+      //   setModalText(dataWarningText);
+      //   setModalClass();
+      // }
+      if (!ownerDates) {
+        firebase
+          .addDates({ ...form })
+          .then(() => { })
+          .catch(() => {
+            console.log("Error");
+            setAlertText("Ошибка сервера!");
+            setAlertClass("open");
+          });
+        setAlertText("Дату встановлено!");
+        setAlertClass("open");
+      } else {
+        firebase
+          .changeDates({ ...form, id: ownerDates.id })
+          .then(() => { })
+          .catch(() => {
+            setAlertText("Ошибка сервера!");
+            setAlertClass("open");
+          });
+        setAlertText("Дату змінено!");
+        setAlertClass("open");
+      }
+      setTimeout(() => {
+        setAlertClass("modal");
+      }, 1000);
+    };
+    //------------------------Delete Old Data-----------------------//
+    const deleteDateHandler = (event) => {
+      event.preventDefault();
+      // routesForRemove.forEach((element) => {
+      //   firebase
+      //     .removeRoute(element.id)
+      //     .then(() => {})
+      //     .catch(() => {
+      //       setAlertText("Ошибка сервера!");
+      //       setAlertClass("open");
+      //     });
+      //   setAlertText("Маршрути успішно видалено!");
+      //   setAlertClass("open");
+      // });
+      // listsForRemove.forEach((element) => {
+      //   firebase
+      //     .removeList(element.id)
+      //     .then(() => {})
+      //     .catch(() => {
+      //       setAlertText("Ошибка сервера!");
+      //       setAlertClass("open");
+      //     });
+      //   setAlertText("Застарілі дані успішно видалено!");
+      //   setAlertClass("open");
+      // });
+      // setTimeout(() => {
+      //   setAlertClass("modal");
+      // }, 1000);
+    };
+   
+    // let dataWarningText =
+    //   "У вас є застарілі дані, необхідно видалити їх та звільніти місце!";
+    let dataWarningThanksText =
+      "Дякуємо за видалення застарілих даних, ви звільнили додаткове місце!";
+
+      // ---SET PROFILE BLOCK--------------------------------------------->
+         //--------------------------Profile Initial form----------------------//
     let initialForm = {
       firstName: "",
       secondName: "",
@@ -78,7 +209,6 @@ export const ProfileComponent = memo(
         };
       }
     }
-
     //------------------------------Form state----------------------------//
     let [form, setForm] = useState({
       ...initialForm,
@@ -173,17 +303,7 @@ export const ProfileComponent = memo(
     const dataWarningText =
       "Ви намагаєтеся видалити дані! Після видалення відновлення даних буде не можливим!";
     const { removeCar, removeList } = useContext(FirebaseContext);
-    let [modalClass, setClass] = useState("modal");
     let [fun, setFunct] = useState("");
-    let [textModal, setModalText] = useState();
-    let [Id, setId] = useState();
-    let setModalClass = () => {
-      if ((modalClass = "modal")) {
-        setClass("open");
-      } else {
-        setClass("modal");
-      }
-    };
     //------------------------------------Open car for ID-----------------------------//
     if (userInfo) {
       if (userInfo.carID) {
@@ -200,6 +320,74 @@ export const ProfileComponent = memo(
     //-----------------------------------------JSX------------------------------------//
     return (
       <div>
+              <div>
+        <div id="2345" className="createTimeBasis">
+          <div className="d-flex flex-wrap justify-content-around">
+            <div className="form-group">
+              <label htmlFor="dateStart">
+                <small>Початкова дата</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Початкова дата"
+                value={moment(form.dateStart).format("YYYY-MM-DD")}
+                name="dateStart"
+                onChange={changeDateHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateFinish">
+                <small>Кінцева дата</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Кінцева дата"
+                value={moment(form.dateFinish).format("YYYY-MM-DD")}
+                name="dateFinish"
+                onChange={changeDateHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="dateOfEnd">
+                <small>Час зберігання,міс</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Період зберігання,міс"
+                value={form.dateOfEnd}
+                name="dateOfEnd"
+                onChange={changeDateHandler}
+              />
+            </div>
+            <div className="createDateBtnConteiner">
+              <button
+                className="btn btn-success createDateBtn"
+                value="Дата"
+                name="submit"
+                onClick={createDateHandler}
+              >
+                <small>Зберегти</small>
+              </button>
+            </div>
+            <div className="createDateBtnConteiner">
+              <button
+                className="btn btn-danger createDateBtn"
+                value="Дата"
+                name="submit"
+                onClick={(event) => {
+                  setId(event);
+                  setModalText(dataWarningThanksText);
+                  setModalClass();
+                }}
+              >
+                <small>Очистити</small>
+              </button>
+            </div>
+          </div>
+        </div>
         <div className="userInfoBasis">
           <div id="form" className="d-flex flex-wrap justify-content-between">
             <div className="form-group">
@@ -340,159 +528,6 @@ export const ProfileComponent = memo(
         >
           {carExists &&
             userClients.map((car) => {
-              //---------------------------Car Data----------------------------------//
-              let newLists = lists.filter((list) => list.listOwner === car.id);
-              newLists.sort((a, b) => a.listNumber - b.listNumber);
-              let carRoutes = routes.filter(
-                (route) => route.listOwner === car.id
-              );
-              let listCarLiquids = NewListLiquidsCount(carRoutes);
-              //----------------------------Data for TO----------------------------------//
-              let TO2 =
-                parseInt(
-                  (Number(car.carIndicatorLastTO2) + Number(car.routeToTO2)) *
-                    100
-                ) / 100;
-              let routeToTO2 =
-                parseInt(
-                  (Number(car.carIndicatorLastTO2) +
-                    Number(car.routeToTO2) -
-                    Number(car.carIndicatorLast)) *
-                    100
-                ) / 100;
-              let TO1 =
-                parseInt(
-                  (Number(car.carIndicatorLastTO1) + Number(car.routeToTO1)) *
-                    100
-                ) / 100;
-              let routeToTO1 =
-                parseInt(
-                  (Number(car.carIndicatorLastTO1) +
-                    Number(car.routeToTO1) -
-                    Number(car.carIndicatorLast)) *
-                    100
-                ) / 100;
-              let timeTO2 =
-                parseInt(
-                  (Number(car.carTimeLastTO2) + Number(car.nextTimeTO2)) * 100
-                ) / 100;
-              let timeToTO2 =
-                parseInt(
-                  (Number(car.carTimeLastTO2) +
-                    Number(car.nextTimeTO2) -
-                    Number(car.carTimeFinish)) *
-                    100
-                ) / 100;
-              let timeTO1 =
-                parseInt(
-                  (Number(car.carTimeLastTO1) + Number(car.nextTimeTO1)) * 100
-                ) / 100;
-              let timeToTO1 =
-                parseInt(
-                  (Number(car.carTimeLastTO1) +
-                    Number(car.nextTimeTO1) -
-                    Number(car.carTimeFinish)) *
-                    100
-                ) / 100;
-              let КР =
-                parseInt(
-                  (Number(car.carIndicatorLastКР) + Number(car.routeToКР)) * 100
-                ) / 100;
-              let routeToКР =
-                parseInt(
-                  (Number(car.carIndicatorLastКР) +
-                    Number(car.routeToКР) -
-                    Number(car.carIndicatorLast)) *
-                    100
-                ) / 100;
-              let СР =
-                parseInt(
-                  (Number(car.carIndicatorLastСР) + Number(car.routeToСР)) * 100
-                ) / 100;
-              let routeToСР =
-                parseInt(
-                  (Number(car.carIndicatorLastСР) +
-                    Number(car.routeToСР) -
-                    Number(car.carIndicatorLast)) *
-                    100
-                ) / 100;
-              let timeКР =
-                parseInt(
-                  (Number(car.carTimeLastКР) + Number(car.nextTimeКР)) * 100
-                ) / 100;
-              let timeToКР =
-                parseInt(
-                  (Number(car.carTimeLastКР) +
-                    Number(car.nextTimeКР) -
-                    Number(car.carTimeFinish)) *
-                    100
-                ) / 100;
-              let timeСР =
-                parseInt(
-                  (Number(car.carTimeLastСР) + Number(car.nextTimeСР)) * 100
-                ) / 100;
-              let timeToСР =
-                parseInt(
-                  (Number(car.carTimeLastСР) +
-                    Number(car.nextTimeСР) -
-                    Number(car.carTimeFinish)) *
-                    100
-                ) / 100;
-              //--------------------------------Color types for TO-----------------------------//
-              let carType = null;
-              if (car.serviceability === "Справний") {
-                carType = "head";
-              } else {
-                carType = "carBrocken";
-              }
-              let typeRouteTO1 = null;
-              if (car.carIndicatorLast > TO1) {
-                typeRouteTO1 = "carBrocken";
-              } else {
-                typeRouteTO1 = "routeTO2";
-              }
-              let typeRouteTO2 = null;
-              if (car.carIndicatorLast > TO2) {
-                typeRouteTO2 = "carBrocken";
-              } else {
-                typeRouteTO2 = "routeTO2";
-              }
-              let typeTimeTO1 = null;
-              if (car.carTimeFinish > timeTO1) {
-                typeTimeTO1 = "carBrocken";
-              } else {
-                typeTimeTO1 = "routeTO2";
-              }
-              let typeTimeTO2 = null;
-              if (car.carTimeFinish > timeTO2) {
-                typeTimeTO2 = "carBrocken";
-              } else {
-                typeTimeTO2 = "routeTO2";
-              }
-              let typeRouteКР = null;
-              if (car.carIndicatorLast > КР) {
-                typeRouteКР = "carBrocken";
-              } else {
-                typeRouteКР = "routeTO2";
-              }
-              let typeRouteСР = null;
-              if (car.carIndicatorLast > СР) {
-                typeRouteСР = "carBrocken";
-              } else {
-                typeRouteСР = "routeTO2";
-              }
-              let typeTimeКР = null;
-              if (car.carTimeFinish > timeКР) {
-                typeTimeКР = "carBrocken";
-              } else {
-                typeTimeКР = "routeTO2";
-              }
-              let typeTimeСР = null;
-              if (car.carTimeFinish > timeСР) {
-                typeTimeСР = "carBrocken";
-              } else {
-                typeTimeСР = "routeTO2";
-              }
               //-----------------------------Car GSX---------------------------//
               if (!userInfo) {
                 return null;
@@ -504,109 +539,6 @@ export const ProfileComponent = memo(
                       id="carBasis"
                       className="d-flex  justify-content-start"
                     >
-                      {!car.openCar & (car.driver === "Автомобіль-агрегат") && (
-                        <div
-                          onClick={() => {
-                            openCar(car);
-                          }}
-                        >
-                          <table className="carTable">
-                            <thead></thead>
-                            <tbody>
-                              <tr align="center">
-                                {windowWidth > 265 && (
-                                  <td width="100">
-                                    <small className={carType}>
-                                      {car.typeOfCar}
-                                    </small>
-                                  </td>
-                                )}
-                                <td width="88">
-                                  <small className={carType}>
-                                    {car.governmentCarNumber}
-                                  </small>
-                                </td>
-                                {windowWidth > 319 && (
-                                  <td width="60">
-                                    <small>{car.carIndicatorLast}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 359 && (
-                                  <td width="40">
-                                    <small>{car.carTimeFinish}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 411 && (
-                                  <td width="52">
-                                    <small>{car.totalCarMileage}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 451 && (
-                                  <td width="40">
-                                    <small>{car.carTimeTotal}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 551 && (
-                                  <td width="90">
-                                    <small>{car.specialCarEquipment}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 770 && (
-                                  <td width="110">
-                                    <small>{car.carOwnerName}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="90">
-                                    <small className={carType}>ТО1: </small>
-                                    <small className={typeRouteTO1}>
-                                      {TO1}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="52" className={typeRouteTO1}>
-                                    <small>{routeToTO1}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="62" className={typeTimeTO1}>
-                                    <small>{timeTO1}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="38" className={typeTimeTO1}>
-                                    <small>{timeToTO1}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="90">
-                                    <small className={carType}>ТО2: </small>
-                                    <small className={typeRouteTO2}>
-                                      {TO2}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="52" className={typeRouteTO2}>
-                                    <small>{routeToTO2}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="62" className={typeTimeTO2}>
-                                    <small>{timeTO2}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="38" className={typeTimeTO2}>
-                                    <small>{timeToTO2}</small>
-                                  </td>
-                                )}
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      )}
                       {!car.openCar & (car.driver === "Автомобіль") && (
                         <div
                           onClick={() => {
@@ -618,264 +550,25 @@ export const ProfileComponent = memo(
                               <tr align="center">
                                 {windowWidth > 265 && (
                                   <td width="100">
-                                    <small className={carType}>
+                                    {/* <small className={carType}>
                                       {car.typeOfCar}
-                                    </small>
+                                    </small> */}
                                   </td>
                                 )}
                                 <td width="88">
-                                  <small className={carType}>
+                                  {/* <small className={carType}>
                                     {car.governmentCarNumber}
-                                  </small>
+                                  </small> */}
                                 </td>
-                                {windowWidth > 315 && (
-                                  <td width="60">
-                                    <small>{car.carIndicatorLast}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 370 && (
-                                  <td width="50">
-                                    <small>{car.totalCarMileage}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 452 && (
-                                  <td width="82">
-                                    <small>
-                                      {`${moment(car.dateOfRegistration).format(
-                                        "DD.MM HH:mm"
-                                      )}`}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 532 && (
-                                  <td width="80">
-                                    <small>{car.carPassportNumber}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 762 && (
-                                  <td width="90">
-                                    <small>{car.factoryCarNumber}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 762 && (
-                                  <td width="50">
-                                    <small>{car.dateOfCarProduction}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 992 && (
-                                  <td width="90">
-                                    <small>{car.specialCarEquipment}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 992 && (
-                                  <td width="90">
-                                    <small>{car.carOwnerName}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="90">
-                                    <small className={carType}>ТО1: </small>
-                                    <small className={typeRouteTO1}>
-                                      {TO1}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="42" className={typeRouteTO1}>
-                                    <small>{routeToTO1}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="90">
-                                    <small className={carType}>ТО2: </small>
-                                    <small className={typeRouteTO2}>
-                                      {TO2}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="42" className={typeRouteTO2}>
-                                    <small>{routeToTO2}</small>
-                                  </td>
-                                )}
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      )}
-                      {!car.openCar & (car.driver === "Агрегат") && (
-                        <div
-                          onClick={() => {
-                            openCar(car);
-                          }}
-                        >
-                          <table className="carTable">
-                            <thead></thead>
-                            <tbody>
-                              <tr align="center">
-                                {windowWidth > 255 && (
-                                  <td width="120">
-                                    <small className={carType}>
-                                      {car.typeOfCar}
-                                    </small>
-                                  </td>
-                                )}
-                                <td width="68">
-                                  <small className={carType}>
-                                    {car.governmentCarNumber}
-                                  </small>
-                                </td>
-                                {windowWidth > 305 && (
-                                  <td width="60">
-                                    <small>{car.carTimeFinish}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 362 && (
-                                  <td width="40">
-                                    <small>{car.carTimeTotal}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 425 && (
-                                  <td width="90">
-                                    <small>
-                                      {`${moment(car.dateOfRegistration).format(
-                                        "DD.MM HH:mm"
-                                      )}`}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 545 && (
-                                  <td width="90">
-                                    <small>{car.carEngineNumber}</small>
-                                  </td>
-                                )}
-
-                                {windowWidth > 770 && (
-                                  <td width="150">
-                                    <small>{car.specialCarEquipment}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="120">
-                                    <small>{car.carOwnerName}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="92">
-                                    <small className={carType}>ТО1: </small>
-                                    <small className={typeTimeTO1}>
-                                      {timeTO1}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="60" className={typeTimeTO1}>
-                                    <small>{timeToTO1}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="92">
-                                    <small className={carType}>ТО2: </small>
-                                    <small className={typeTimeTO2}>
-                                      {timeTO2}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="60" className={typeTimeTO2}>
-                                    <small>{timeToTO2}</small>
-                                  </td>
-                                )}
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      )}
-                      {!car.openCar & (car.driver === "Електроприлад") && (
-                        <div
-                          onClick={() => {
-                            openCar(car);
-                          }}
-                        >
-                          <table className="carTable">
-                            <thead></thead>
-                            <tbody>
-                              <tr align="center">
-                                {windowWidth > 236 && (
-                                  <td width="150">
-                                    <small className={carType}>
-                                      {car.typeOfCar}
-                                    </small>
-                                  </td>
-                                )}
-                                <td width="88">
-                                  <small className={carType}>
-                                    {car.governmentCarNumber}
-                                  </small>
-                                </td>
-                                {windowWidth > 359 && (
-                                  <td width="110">
-                                    <small>{car.carTimeFinish}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 451 && (
-                                  <td width="40">
-                                    <small>{car.carTimeTotal}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 531 && (
-                                  <td width="82">
-                                    <small>
-                                      {`${moment(car.dateOfRegistration).format(
-                                        "DD.MM HH:mm"
-                                      )}`}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 770 && (
-                                  <td width="130">
-                                    <small>{car.specialCarEquipment}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="110">
-                                    <small>{car.carOwnerName}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="112">
-                                    <small className={carType}>ТO1: </small>
-                                    <small className={typeTimeTO1}>
-                                      {timeTO1}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 995 && (
-                                  <td width="58" className={typeTimeTO1}>
-                                    <small>{timeToTO1}</small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="112">
-                                    <small className={carType}>ТO2: </small>
-                                    <small className={typeTimeTO2}>
-                                      {timeTO2}
-                                    </small>
-                                  </td>
-                                )}
-                                {windowWidth > 1201 && (
-                                  <td width="58" className={typeTimeTO2}>
-                                    <small>{timeToTO2}</small>
-                                  </td>
-                                )}
                               </tr>
                             </tbody>
                           </table>
                         </div>
                       )}
                       <div>
-                        {!car.openCar &
-                          !newLists.length &
+                        {
+                        //!car.openCar &
+                          //!newLists.length &
                           (userInfo.company === userInfo.jointCompany) &
                           (userInfo.owner === car.owner) && (
                           <button
@@ -895,7 +588,6 @@ export const ProfileComponent = memo(
                       </div>
                     </form>
                     <form className="addingObjTableProf">
-                      {car.openCar & (car.driver === "Автомобіль") && (
                         <table
                           className="carTable"
                           onClick={() => {
@@ -905,274 +597,21 @@ export const ProfileComponent = memo(
                           <tbody>
                             <tr align="center">
                               <td width="100">
-                                <small className={carType}>КР: </small>
-                                <small className={typeRouteКР}>{КР}</small>
+                                {/* <small className={carType}>КР: </small>
+                                <small className={typeRouteКР}>{КР}</small> */}
                               </td>
                               {windowWidth > 247 && (
-                                <td width="50" className={typeRouteКР}>
-                                  <small>{routeToКР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 327 && (
-                                <td width="100">
-                                  <small className={carType}>СР: </small>
-                                  <small className={typeRouteСР}>{СР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 377 && (
-                                <td width="50" className={typeRouteСР}>
-                                  <small>{routeToСР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 477 && (
-                                <td width="100">
-                                  <small className={carType}>ТО1: </small>
-                                  <small className={typeRouteTO1}>{TO1}</small>
-                                </td>
-                              )}
-                              {windowWidth > 527 && (
-                                <td width="50" className={typeRouteTO1}>
-                                  <small>{routeToTO1}</small>
-                                </td>
-                              )}
-                              {windowWidth > 770 && (
-                                <td width="100">
-                                  <small className={carType}>ТО2: </small>
-                                  <small className={typeRouteTO2}>{TO2}</small>
-                                </td>
-                              )}
-                              {windowWidth > 770 && (
-                                <td width="50" className={typeRouteTO2}>
-                                  <small>{routeToTO2}</small>
+                                <td width="50"
+                                //className={typeRouteКР}
+                                >
+                                  {/* <small>{routeToКР}</small> */}
                                 </td>
                               )}
                             </tr>
                           </tbody>
                         </table>
-                      )}
-                      {car.openCar & (car.driver === "Автомобіль-агрегат") && (
-                        <table
-                          className="carTable"
-                          onClick={() => {
-                            closeCar(car);
-                          }}
-                        >
-                          <tbody>
-                            <tr align="center">
-                              <td width="70">
-                                <small className={carType}>КР: </small>
-                                <small className={typeRouteКР}>{КР}</small>
-                              </td>
-                              {windowWidth > 247 && (
-                                <td width="55" className={typeRouteКР}>
-                                  <small>{routeToКР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 327 && (
-                                <td width="70">
-                                  <small className={carType}>СР: </small>
-                                  <small className={typeRouteСР}>{СР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 377 && (
-                                <td width="55" className={typeRouteСР}>
-                                  <small>{routeToСР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 477 && (
-                                <td width="80">
-                                  <small className={carType}>ТО1: </small>
-                                  <small className={typeRouteTO1}>{TO1}</small>
-                                </td>
-                              )}
-                              {windowWidth > 527 && (
-                                <td width="55" className={typeRouteTO1}>
-                                  <small>{routeToTO1}</small>
-                                </td>
-                              )}
-                              {windowWidth > 770 && (
-                                <td width="80">
-                                  <small className={carType}>ТО2: </small>
-                                  <small className={typeRouteTO2}>{TO2}</small>
-                                </td>
-                              )}
-                              {windowWidth > 770 && (
-                                <td width="55" className={typeRouteTO2}>
-                                  <small>{routeToTO2}</small>
-                                </td>
-                              )}
-                              {windowWidth > 995 && (
-                                <td width="70">
-                                  <small className={carType}>ЧК: </small>
-                                  <small className={typeTimeКР}>{timeКР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 995 && (
-                                <td width="55" className={typeTimeКР}>
-                                  <small>{timeToКР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 1205 && (
-                                <td width="80">
-                                  <small className={carType}>ЧС: </small>
-                                  <small className={typeTimeСР}>{timeСР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 1205 && (
-                                <td width="55" className={typeTimeСР}>
-                                  <small>{timeToСР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 1205 && (
-                                <td width="80">
-                                  <small className={carType}>ЧТ1: </small>
-                                  <small className={typeTimeTO1}>
-                                    {timeTO1}
-                                  </small>
-                                </td>
-                              )}
-                              {windowWidth > 1205 && (
-                                <td width="55" className={typeTimeTO1}>
-                                  <small>{timeToTO1}</small>
-                                </td>
-                              )}
-                              {windowWidth > 1205 && (
-                                <td width="80">
-                                  <small className={carType}>ЧТ2: </small>
-                                  <small className={typeTimeTO2}>
-                                    {timeTO2}
-                                  </small>
-                                </td>
-                              )}
-                              {windowWidth > 1205 && (
-                                <td width="55" className={typeTimeTO2}>
-                                  <small>{timeToTO2}</small>
-                                </td>
-                              )}
-                            </tr>
-                          </tbody>
-                        </table>
-                      )}
-                      {car.openCar & (car.driver === "Агрегат") && (
-                        <table
-                          className="carTable"
-                          onClick={() => {
-                            closeCar(car);
-                          }}
-                        >
-                          <tbody>
-                            <tr align="center">
-                              <td width="100">
-                                <small className={carType}>ЧК: </small>
-                                <small className={typeTimeКР}>{timeКР}</small>
-                              </td>
-                              {windowWidth > 260 && (
-                                <td width="60" className={typeTimeКР}>
-                                  <small>{timeToКР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 355 && (
-                                <td width="100">
-                                  <small className={carType}>ЧС: </small>
-                                  <small className={typeTimeСР}>{timeСР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 420 && (
-                                <td width="60" className={typeTimeСР}>
-                                  <small>{timeToСР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 520 && (
-                                <td width="100">
-                                  <small className={carType}>ТО1: </small>
-                                  <small className={typeTimeTO1}>
-                                    {timeTO1}
-                                  </small>
-                                </td>
-                              )}
-                              {windowWidth > 770 && (
-                                <td width="60" className={typeTimeTO1}>
-                                  <small>{timeToTO1}</small>
-                                </td>
-                              )}
-                              {windowWidth > 770 && (
-                                <td width="100">
-                                  <small className={carType}>ТО2: </small>
-                                  <small className={typeTimeTO2}>
-                                    {timeTO2}
-                                  </small>
-                                </td>
-                              )}
-                              {windowWidth > 995 && (
-                                <td width="60" className={typeTimeTO2}>
-                                  <small>{timeToTO2}</small>
-                                </td>
-                              )}
-                            </tr>
-                          </tbody>
-                        </table>
-                      )}
-                      {car.openCar & (car.driver === "Електроприлад") && (
-                        <table
-                          className="carTable"
-                          onClick={() => {
-                            closeCar(car);
-                          }}
-                        >
-                          <tbody>
-                            <tr align="center">
-                              <td width="100">
-                                <small className={carType}>ЧК: </small>
-                                <small className={typeTimeКР}>{timeКР}</small>
-                              </td>
-                              {windowWidth > 260 && (
-                                <td width="60" className={typeTimeКР}>
-                                  <small>{timeToКР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 355 && (
-                                <td width="100">
-                                  <small className={carType}>ЧС: </small>
-                                  <small className={typeTimeСР}>{timeСР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 420 && (
-                                <td width="60" className={typeTimeСР}>
-                                  <small>{timeToСР}</small>
-                                </td>
-                              )}
-                              {windowWidth > 520 && (
-                                <td width="100">
-                                  <small className={carType}>ТО1: </small>
-                                  <small className={typeTimeTO1}>
-                                    {timeTO1}
-                                  </small>
-                                </td>
-                              )}
-                              {windowWidth > 770 && (
-                                <td width="60" className={typeTimeTO1}>
-                                  <small>{timeToTO1}</small>
-                                </td>
-                              )}
-                              {windowWidth > 770 && (
-                                <td width="100">
-                                  <small className={carType}>ТО2: </small>
-                                  <small className={typeTimeTO2}>
-                                    {timeTO2}
-                                  </small>
-                                </td>
-                              )}
-                              {windowWidth > 995 && (
-                                <td width="60" className={typeTimeTO2}>
-                                  <small>{timeToTO2}</small>
-                                </td>
-                              )}
-                            </tr>
-                          </tbody>
-                        </table>
-                      )}
-                    </form>
-                    {!car.openCar && (
+                     </form>
+                    {/* {!car.openCar && (
                       <ProjectsComponent
                         car={car}
                         dates={dates}
@@ -1198,15 +637,15 @@ export const ProfileComponent = memo(
                         listCarLiquids={listCarLiquids}
                         userInfo={userInfo}
                       />
-                    )}
+                    )} */}
                     <form>
-                      {car.openCar && (
+                      {/* {car.openCar && (
                         <CreateComponent
                           car={car}
                           userClients={userClients}
                           userInfo={userInfo}
                         />
-                      )}
+                      )} */}
                     </form>
                   </li>
                 </CSSTransition>
@@ -1239,12 +678,20 @@ export const ProfileComponent = memo(
               innerFunction={removeAccounte}
             />
           )}
+           <ModalBox
+          modalClass={modalClass}
+          modalText={textModal}
+          modalFunction={setClass}
+          Id={Id}
+          innerFunction={deleteDateHandler}
+        />
         </TransitionGroup>
         <AlertBox
           modalClass={alertClass}
           modalText={alertText}
           modalFunction={setAlertClass}
         />
+      </div>
       </div>
     );
   }

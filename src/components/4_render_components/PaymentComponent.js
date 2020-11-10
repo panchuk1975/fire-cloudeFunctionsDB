@@ -147,26 +147,26 @@ export const PaymentComponent = memo(
             {currentProjectPayments.map((pay) => {
               return (
                 <CSSTransition key={pay.id} classNames={"note"} timeout={800}>
-                  <li  key={pay.id} className="list-group-item payments-groupe">
+                  <li  key={pay.id} className="list-group-item payments-incomp-background">
                     {!pay.openPay && (
                       <div
                         className="d-flex justify-content-between paymentTableBasis"
                       >
                           <table
-                            className="paymentTable"
+                             className="paymentComponentTable"
                             onClick={() => {
                               openPayment(pay);
                             }}
                           >
                             <tbody>
                               <tr align="center">
-                                <td width="250">
+                                <td width="100">
                                   <small className="routeHead">
                                     {pay.payNumber}
                                   </small>
                                 </td>
                                 {windowWidth > 425 && (
-                                  <td width="264">
+                                  <td width="150">
                                     <small className="routeHead">
                                       {`${moment(pay.payDate).format(
                                         "DD.MM HH:mm"
@@ -280,7 +280,7 @@ export const PaymentComponent = memo(
                         {userInfo.company === userInfo.jointCompany && (
                           <button
                             type="button"
-                            className="btn btn-outline-danger btn-sm deleteRouteBtn"
+                            className="btn btn-outline-danger btn-sm deletePaymentBtn"
                             onClick={() => {
                               firebase.removePayment(pay.id);
                               // firebase.removeListRouteTime(

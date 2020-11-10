@@ -15,7 +15,6 @@ export const AllProjects = memo(
     dates,
     client,
     userInfos,
-    clients,
     projects,
     payments,
     //---PROJECTS FUNCTIONS ----------------->
@@ -53,16 +52,6 @@ export const AllProjects = memo(
       (infoUse) => infoUse.company === userInfo.jointCompany
     );
     if (!userInUse) {
-      return null;
-    }
-    //--Create clients data array--------------->
-    clients = clients.filter((client) => client.owner === userInUse.owner);
-    clients = clients.filter((client) => client.clientType === clientType);
-    clients.sort(
-      (a, b) => new Date(b.registrationDate) - new Date(a.registrationDate)
-    );
-    let clientsExists = clients.length;
-    if (clientsExists === 0) {
       return null;
     }
     //--TABLE FUNCTION-------------------------->
