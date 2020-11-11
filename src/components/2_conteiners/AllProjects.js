@@ -13,7 +13,7 @@ export const AllProjects = memo(
     clientType,
     //---COMMON STATE ----------------------->
     dates,
-    client,
+    clients,
     userInfos,
     projects,
     payments,
@@ -240,7 +240,7 @@ export const AllProjects = memo(
             <AllProjectsComponent
               dates={dates}
               payments={payments}
-              client={client}
+              clients={clients}
               newProjects={projects}
               removeProject={removeProject}
               openCurrentProject={openCurrentProject}

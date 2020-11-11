@@ -38,6 +38,26 @@ export const SizeNameArray = (windowWidth) => {
     return sizeArray;
 }
 
+export const paymentsSizeNameArray = (windowWidth) => {
+    let sizeArray = [
+        { id: 0, size: 110, name: "Дата дог.", fullName: "Дата підписання договору з клієнтом" },
+        { id: 1, size: 110, name: "Номер", fullName: "Реєстраційний номер проекту" },
+        { id: 2, size: 110, name: "Сума", fullName: "Загальна сума проплати" },
+        { id: 3, size: 170, name: "Клієнт", fullName: "Офіційна назва(призвіще) клієнта" },
+        { id: 4, size: 150, name: "Приймав", fullName: "ПРизвіще відповідального за отримання проплати" },
+    ];
+    if (windowWidth > 800) {
+        sizeArray = [
+            { id: 0, size: 150, name: "Дата договору", fullName: "Дата підписання договору з клієнтом" },
+            { id: 1, size: 150, name: "Номер проекту", fullName: "Реєстраційний номер проекту" },
+            { id: 2, size: 150, name: "Сума проплати, грн", fullName: "Загальна сума проплати" },
+            { id: 3, size: 250, name: "Назва (призвіще та ініціали)", fullName: "Офіційна назва(призвіще) клієнта" },
+            { id: 4, size: 200, name: "Хто приймав", fullName: "ПРизвіще відповідального за отримання проплати" },
+        ]
+    }
+    return sizeArray;
+}
+
 export const ProjectDataArray = (project) => {
     const projectDataArray = [
         project.projectNumber,
@@ -58,7 +78,18 @@ export const ProjectDataArray = (project) => {
     return projectDataArray;
 }
 
-const summArray = (numb, sizeArray) => {
+export const paymentDataArray = (pay) => {
+    const paymentDataArray = [
+        pay.payDate,
+        pay.payProjectNumber,
+        pay.paySumm,
+        pay.payClientName,
+        pay.payResponsible,
+    ];
+    return paymentDataArray;
+}
+
+export const summArray = (numb, sizeArray) => {
     let i = 0;
     let summ = 0;
     while (i < numb) {
@@ -67,6 +98,43 @@ const summArray = (numb, sizeArray) => {
     }
     return summ;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const ProgectHeadTable = (windowWidth, sizeArray, setFunct, setModalText, setModalClass) => {
     const renderBody = sizeArray.map((item) => {

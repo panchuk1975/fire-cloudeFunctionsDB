@@ -13,23 +13,12 @@ export const ProfileComponent = memo(
   ({
     clients,
     dates,
-    lists,
-    routes,
     openCar,
     closeCar,
-    openNewList,
-    clouseNewList,
-    openNewRoute,
-    closeNewRoute,
-    openList,
-    closeList,
-    openRoute,
-    closeRoute,
     removeDates,
     userInfos,
     windowWidth,
     removeUserInfos,
-    ownerDates,
   }) => {
     //-----------------------------User data----------------------------//
     const user = fire.auth.currentUser;
@@ -40,7 +29,7 @@ export const ProfileComponent = memo(
       "userClientsLength",
       JSON.stringify(userClients.length)
     );
-    const date = dates.find((date) => date.owner === owner);
+    const ownerDates = dates.find((date) => date.owner === owner);
     let userInfo = normalize(userInfos.find((info) => info.owner === owner));
     let userInfoExsists = !!userInfo;
     if (userInfoExsists) {
@@ -74,7 +63,6 @@ export const ProfileComponent = memo(
     }
     const changeDateHandler = (event) => {
       setDateForm({ ...dateForm, [event.target.name]: event.target.value });
-      console.log(event.target.name, event.target.value);
     };
     // //------------------------Set deleted Data-----------------------//
     // let holdTime = new Date();
@@ -124,7 +112,7 @@ export const ProfileComponent = memo(
       // }
       if (!ownerDates) {
         firebase
-          .addDates({ ...form })
+          .addDates({ ...dateForm })
           .then(() => { })
           .catch(() => {
             console.log("Error");
@@ -135,7 +123,7 @@ export const ProfileComponent = memo(
         setAlertClass("open");
       } else {
         firebase
-          .changeDates({ ...form, id: ownerDates.id })
+          .changeDates({ ...dateForm, id: ownerDates.id })
           .then(() => { })
           .catch(() => {
             setAlertText("Ошибка сервера!");
@@ -284,8 +272,8 @@ export const ProfileComponent = memo(
           setAlertText(error.message);
           setAlertClass("open");
         });
-        if (date) {
-          removeDates(date.id);
+        if (ownerDates) {
+          removeDates(ownerDates.id);
         }
         if (userInfo) {
           removeUserInfos(userInfo.id);
@@ -331,7 +319,7 @@ export const ProfileComponent = memo(
                 type="date"
                 className="form-control"
                 placeholder="Початкова дата"
-                value={moment(form.dateStart).format("YYYY-MM-DD")}
+                value={moment(dateForm.dateStart).format("YYYY-MM-DD")}
                 name="dateStart"
                 onChange={changeDateHandler}
               />
@@ -344,7 +332,7 @@ export const ProfileComponent = memo(
                 type="date"
                 className="form-control"
                 placeholder="Кінцева дата"
-                value={moment(form.dateFinish).format("YYYY-MM-DD")}
+                value={moment(dateForm.dateFinish).format("YYYY-MM-DD")}
                 name="dateFinish"
                 onChange={changeDateHandler}
               />
@@ -357,7 +345,7 @@ export const ProfileComponent = memo(
                 type="number"
                 className="form-control"
                 placeholder="Період зберігання,міс"
-                value={form.dateOfEnd}
+                value={dateForm.dateOfEnd}
                 name="dateOfEnd"
                 onChange={changeDateHandler}
               />

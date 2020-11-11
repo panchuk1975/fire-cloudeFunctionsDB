@@ -6,7 +6,6 @@ import { Loader } from "../components/6_common_help_comp/Loader";
 
 const Payments = memo(({ windowWidth }) => {
   const [search, setSearch] = useState("");
-  const [filterItem, setFilter] = useState("all");
   let email = "";
   if (fire.auth.currentUser) {
     email = fire.auth.currentUser.email;
@@ -23,6 +22,7 @@ const Payments = memo(({ windowWidth }) => {
     fetchClients,
     openPayment,
     clousePayment,
+    removePayment,
     userInfos,
     fetchUsersInfo,
   } = useContext(FirebaseContext);
@@ -83,63 +83,24 @@ const Payments = memo(({ windowWidth }) => {
     })
     return newPayments;
   }
-  //---FILTER FUNCTIONS---------------------------->
-  const sortByFilter = (payments, filter) => {
-    //--Sort by client property-------->
-    switch (filter) {
-      case 'all': return payments;
-      case 'active': return payments.filter((payment) => payment.payNumber);
-      case 'done': return payments.filter((payment) => payment.payDate);
-      case 'inprocess': return payments.filter((payment) => payment.negotiationsResult === "В процесі");
-      default: return payments;
-    }
-  }
-  const onFilterChange = (name) => {
-    setFilter(name);
-  }
+
   //---USE SORT FUNCTION--------------------------->
-  let numberArrayPayments = sortBySearch(ownerAllPayments, search, 'payNumber');
+  let payProjectNumberPayments = sortBySearch(ownerAllPayments, search, 'payProjectNumber');
   let dateArrayPayments = sortBySearch(ownerAllPayments, search, 'payDate');
 //console.log(numberArrayPayments, dateArrayPayments)
 let visiblePayments = payments;
 if (search){
-  visiblePayments = sortByFilter([
-    ...numberArrayPayments,
+  visiblePayments =[
+    ...payProjectNumberPayments,
     ...dateArrayPayments,
-  ], filterItem);
-}
-  //---BUTTONS ARRAY----------------------->
-  let buttonsArray = [
-    { name: 'all', label: 'Всі', shortLabel: '∑' },
-    { name: 'active', label: 'Активовані', shortLabel: "\u2705" },
-    { name: 'inprocess', label: 'В процесі', shortLabel: "\u23F3" },
-    { name: 'done', label: 'Домовлено', shortLabel: "\u2B50" },
   ];
-  const buttonsBlock = buttonsArray.map(({ name, label, shortLabel }) => {
-    const isActive = filterItem === name;
-    const buttonClass = isActive ? 'btn-dark' : "btn-outline-secondary";
-    return (
-      <button
-        key={name}
-        type="radio"
-        className={`btn caseOfBtn ${buttonClass}`}
-        value={filterItem}
-        name="filterItem"
-        onClick={() => onFilterChange(name)}
-      >
-        {windowWidth < 870 && `${shortLabel}`}
-        {windowWidth >= 870 && `${label}`}
-      </button>
-    )
-  })
+}
+//---SIZE ARRAYS------------------------------------>
   return (
     <div >
       <div className="d-flex  flex-wrap justify-content-between searchConteiner">
         <div>
           <small>{email}</small>
-        </div>
-        <div className="d-flex  flex-wrap justify-content-between buttonsConteiner">
-          {buttonsBlock}
         </div>
         <div >
           <div className="form-group">
@@ -163,7 +124,9 @@ if (search){
             ownerAllProjects={dateProjects}
             openPayment={openPayment}
             clousePayment={clousePayment}
+            removePayment={removePayment}
             userInfo={userInfo}
+            windowWidth={windowWidth}
           />
         )}
     </div>

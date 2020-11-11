@@ -2,14 +2,14 @@ import React, { memo } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { PaymentComponent } from "../4_render_components/PaymentComponent";
 import { CreateProject } from "../../components/5_create_components/CreateProject";
-import { ProjectDataArray } from "../../helpComponents/dataFunctions";
+import { ProjectDataArray, summArray } from "../../helpComponents/dataFunctions";
 import fire from "../../config/Fire";
 var moment = require("moment");
 
 export const AllProjectsComponent = memo(
   ({
     dates,
-    client,
+    clients,
     payments,
     userInfo,
     newProjects,
@@ -44,15 +44,6 @@ export const AllProjectsComponent = memo(
         dateFinish: "2070-01-01T00:00",
       };
     }
-    const summArray = (numb, sizeArray) => {
-      let i = 0;
-      let summ = 0;
-      while (i < numb) {
-        summ = summ + sizeArray[i].size;
-        i++;
-      }
-      return summ;
-    };
     //-----------------------RENDER----------------->
     return (
       <form>
@@ -220,7 +211,6 @@ export const AllProjectsComponent = memo(
                     {project.openProject && (
                       <CreateProject
                         className={openClientTableClass}
-                        client={client}
                         project={project}
                         setAlertText={setAlertText}
                         setAlertClass={setAlertClass}
@@ -230,6 +220,7 @@ export const AllProjectsComponent = memo(
                     )}
                   </div>
                   <PaymentComponent
+                    clients={clients}
                     project={project}
                     setId={setId}
                     currentProjectPayments={currentProjectPayments}

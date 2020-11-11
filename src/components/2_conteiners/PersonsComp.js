@@ -345,6 +345,7 @@ export const PersonsComp = memo(
                       {!client.openClient && (
                         <ProjectsComponent
                           client={client}
+                          clients={clients}
                           dates={dates}
                           payments={payments}
                           newProjects={newProjects}

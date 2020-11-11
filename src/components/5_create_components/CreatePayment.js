@@ -3,6 +3,7 @@ import { FirebaseContext } from "../../context/fiebase/firebaseContext";
 var moment = require("moment");
 
 export const CreatePayment = ({
+  clients,
   project,
   pay,
   currentProjectPayments,
@@ -19,9 +20,15 @@ export const CreatePayment = ({
     // let nextNumber =
     //   Number(project.projectNumber) +
     //   Math.round((currentProjectPayments.length / 100 + 0.01) * 100) / 100;
+    let client = clients.filter((client)=>project.projectOwner === client.id)[0];
+    const clientName = client.companyName ? client.companyName : client.secName;
     initialForm = {
+      payDate: moment(new Date()).format("DD.MM.YYYY"),
+      paySumm: 0,
       payNumber: "",
-      payDate: moment(new Date()).format("YYYY-MM-DDTHH:mm"),
+      payResponsible: "",
+      payProjectNumber: project.projectNumber,
+      payClientName: clientName,
       owner: project.owner,
       projectOwner: project.projectOwner,
       paymentOwner: project.id,
@@ -134,8 +141,35 @@ export const CreatePayment = ({
   return (
     <div className="createPaymentStyle"
     >
-      <div>
-        <div className="d-flex  flex-wrap justify-content-between">
+      <div className="d-flex  flex-wrap justify-content-between">
+        <div id="datetime-local" className="form-group">
+          <label htmlFor="payDate">
+            <small>Дата проплати</small>
+          </label>
+          <input
+            type="date"
+            className="form-control createPaymentDate"
+            placeholder="Дата проплати"
+            value={form.payDate}
+            name="payDate"
+            onChange={changeHandler}
+            required
+          />
+        </div>
+        <div id="datetime-local" className="form-group">
+          <label htmlFor="paySumm">
+            <small>Сума проплати</small>
+          </label>
+          <input
+            type="number"
+            className="form-control createPaymentDate"
+            placeholder="Сума проплати"
+            value={form.paySumm}
+            name="paySumm"
+            onChange={changeHandler}
+            required
+          />
+        </div>
           <div className="form-group">
             <label htmlFor="payNumber">
               <small>Номер проплати</small>
@@ -147,23 +181,20 @@ export const CreatePayment = ({
               value={form.payNumber}
               name="payNumber"
               onChange={changeHandler}
-              required
             />
           </div>
-          <div id="datetime-local" className="form-group">
-            <label htmlFor="payDate">
-              <small>Час проплати</small>
+          <div className="form-group">
+            <label htmlFor="payResponsible">
+              <small>Проводив проплату</small>
             </label>
             <input
-              type="datetime-local"
-              className="form-control createPaymentDate"
-              placeholder="Час проплати"
-              value={form.payDate}
-              name="payDate"
+              type="text"
+              className="form-control"
+              placeholder="Хто проводив"
+              value={form.payResponsible}
+              name="payResponsible"
               onChange={changeHandler}
-              required
             />
-          </div>
         </div>
       </div>
       <div className="d-flex justify-content-between">

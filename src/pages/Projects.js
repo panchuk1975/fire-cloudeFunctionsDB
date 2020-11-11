@@ -11,6 +11,7 @@ const Projects = memo(({ windowWidth }) => {
   let email = fire.auth.currentUser.email;
   email = email.split("@")[0];
   const {
+    clients,
     projects,
     payments,
     dates,
@@ -136,7 +137,7 @@ const Projects = memo(({ windowWidth }) => {
       ) : (
           <AllProjects
             dates={dates}
-            //clients={visibleProjects}
+            clients={clients}
             projects={visibleProjects}
             payments={payments}
             userInfos={userInfos}

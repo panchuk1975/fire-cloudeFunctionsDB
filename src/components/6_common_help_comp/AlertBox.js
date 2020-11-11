@@ -12,8 +12,7 @@ export const AlertBox = ({ modalClass, modalText, modalFunction }) => {
           <div className="top-content">
             <div className="alert-left-text">
               <pre>
-                <Octicon icon={Alert} size="medium" ariaLabel="Alert" />          Увага
-                !!!
+                <Octicon icon={Alert} size="medium" ariaLabel="Alert" />      Увага!!!
               </pre>
             </div>
             <button

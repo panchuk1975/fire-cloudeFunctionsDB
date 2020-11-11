@@ -90,7 +90,7 @@ class App extends Component {
     return (
       <FirebaseState>
         <BrowserRouter>
-          <div className="bg-img pt-4">
+          <div className="bg-img pt-1">
             {this.state.user ? (
               <div>
                 <Navbar />

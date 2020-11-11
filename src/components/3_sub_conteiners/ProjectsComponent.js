@@ -11,6 +11,7 @@ export const ProjectsComponent = memo(
   ({
     payments,
     client,
+    clients,
     dates,
     userInfo,
     newProjects,
@@ -473,6 +474,7 @@ export const ProjectsComponent = memo(
                     </div>
                     <PaymentComponent
                       client={client}
+                      clients={clients}
                       payments={payments}
                       project={project}
                       setId={setId}

@@ -17,7 +17,7 @@
   left: 0; }
 
 .bg-img {
-  padding: 10px 25px 10px 25px;
+  padding: 0 5px 0 5px;
   overflow: auto;
   height: 100vh;
   background-size: cover;
@@ -35,21 +35,22 @@
 .form-group input {
   font-size: 14px;
   height: 25px;
-  border-radius: 0px; }
+  border-radius: 3px; }
 
 .form-group label {
   font-size: 13px;
   margin: 0;
-  color: white; }
+  color: #131212; }
   .form-group label:hover {
-    color: limegreen; }
+    color: #1c28cf; }
 
 .form-control {
   margin: 0;
   padding: 0 2px 0 2px;
   width: 100%;
   text-align: center;
-  background: #acaaaa; }
+  background: #c9c6c6;
+  border: 1px solid grey; }
   .form-control:hover {
     background: #f8f8f8;
     color: black;
@@ -611,16 +612,13 @@ input[type="submit"]:hover {
   height: 20px;
   background-size: cover;
   background-position: top;
-  background-color: white;
+  background: #171333;
   width: 100%;
-  color: #070707;
+  color: #dadada;
   text-decoration: none;
   padding: 0px 0 22px 0;
-  border: 1px solid #8d8c8c;
-  margin: 10px 2px 5px 2px; }
-  .createExelBtn:hover {
-    color: #25e946;
-    border: 1px solid #25e946; }
+  border: 1px solid #4e4e4e;
+  margin: 5px 2px 0px 0px; }
 
 .tableItemsAreClouse,
 .deleteButtonItemAreClouse {
@@ -859,24 +857,19 @@ body #open {
   font-size: 12px;
   border: 1px solid black; }
 
-.allPaymentsConteiner {
-  background-color: white;
-  padding: 0px 5px 0px 5px; }
-
 .paymentDetails {
   color: black;
   font-size: 9px;
   margin: 0 0 0 0; }
 
 .paymentDetails:hover {
-  color: #190585;
-  font-size: 9px; }
+  color: #190585; }
 
 .paymentDetails summary {
   width: 20%; }
 
 .paymentDetailsSmall {
-  font-size: 7px; }
+  font-size: 8px; }
 
 .payment-buttons-grup {
   background-color: lightseagreen;
@@ -893,80 +886,92 @@ body #open {
   color: black; }
 
 .createPaymentBtn {
-  font-size: 15px;
+  font-size: 12px;
   width: 100%;
   margin: 10px 0px 0px 0;
   padding: 0;
-  color: black; }
+  height: 22px;
+  color: #cfcfcf;
+  background: #171333;
+  border: 1px solid #4e4e4e; }
+  .createPaymentBtn:hover {
+    background: #292158; }
 
 .payments-incomp-background {
+  width: 100%;
   background-color: #d9e712;
   padding: 0;
   margin: 1px 0 1px 0; }
-  .payments-incomp-background:hover {
-    background-color: #223f5a; }
 
 .createPaymentStyle {
-  background-color: lightgreen;
-  padding: 0px 3px 7px 1px; }
+  padding: 0px 0px 7px 1px; }
 
 .paymentComponentTable td {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   border: 1px solid black; }
 
-.payments-conteiner {
-  background-color: #493636; }
-
 .createPaymentsHeadBasis {
+  font-size: 14px;
   color: white;
   padding: 1px 0px 0px 0px;
   background: #171333;
   background-position: top;
   background-size: cover;
   width: 100%;
+  margin-bottom: 10px;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75); }
 
 .allPaymentTable {
-  font-size: 16px;
   height: 10px;
-  width: 100%;
   text-align: center; }
 
-.allPaymentTable td {
-  border: 1px solid white;
-  width: 25%; }
-
-.commonPaymentRender {
-  background-color: #12d0e9;
-  margin: 4px 0 4px 0;
+.transitionGroupeConteiner {
   width: 100%; }
 
+.paymentsBackgroundSize {
+  background-color: #a0a0a0;
+  border: none;
+  padding: 0; }
+
 .paymentTableBasis {
+  cursor: pointer;
+  border-radius: 2px;
+  border: 1px solid #535353;
+  width: 100%;
   margin: 3px 0 3px 0;
-  background-color: lightpink;
+  background-color: #828085;
   height: auto; }
+  .paymentTableBasis:hover {
+    background-color: #9c9aa0; }
 
 .paymentTable {
-  cursor: pointer;
-  color: black;
-  font-size: 16px; }
+  color: black; }
 
 .paymentCommonTable td {
-  margin: 0;
-  padding: 0;
-  border: 1px solid black; }
+  font-size: 14px; }
 
 .deletePaymentBtn {
   font-size: 7px;
   padding: 2px 5px 2px 5px;
-  margin: 5px 0 5px 0;
   color: #ff2400; }
 
 .deletePaymentBtn:hover {
   color: black; }
+
+.clousePaymentBtnTable {
+  color: silver;
+  border-radius: 3px;
+  font-size: 12px;
+  background: #171333;
+  cursor: pointer;
+  height: 22px;
+  width: 100%;
+  margin: 5px 0 0 0; }
+  .clousePaymentBtnTable:hover {
+    background: #282157; }
 
 .window {
   position: absolute;
@@ -986,7 +991,7 @@ body #open {
 .top-content {
   top: 150px;
   right: 50%;
-  width: 300px;
+  width: 330px;
   height: 250px;
   background-color: darkgrey;
   padding: 0px;

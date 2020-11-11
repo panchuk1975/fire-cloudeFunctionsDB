@@ -9,7 +9,7 @@ import {
   CHANGE_DATES,
   REMOVE_DATES,
   FETCHED_DATES,
-  
+
   ADD_USERINFO,
   CHANGE_USERINFO,
   FETCHED_USERINFO,
@@ -25,7 +25,7 @@ import {
   CHANGE_PROJECTFORM,
   REMOVE_PROJECT,
   FETCH_PROJECTS,
- 
+
   ADD_PAYMENT,
   CHANGE_PAYMENT,
   CHANGE_PAYMENTFORM,
@@ -49,164 +49,164 @@ export const FirebaseState = ({ children }) => {
     create: false,
     writeInfo: false,
   };
-   //--- USE USEREDUSER FROM REACT------------------->
-   const [state, dispatch] = useReducer(firebaseReducer, initialState);
-   //----COMMON LOADER----->
-   const showLoader = () => dispatch({ type: SHOW_LOADER });
-   //---USE PERIOD DATE FUNCTIONS------------------------------------------->
-   const addDates = async (newDates) => {
-     console.log(newDates);
-     const dates = {
-       ...newDates,
-       owner,
-     };
-     console.log(dates);
-     try {
-       await fire.db
-         .collection("dates")
-         .add(dates)
-         .catch((err) => console.log(err));
-       const payload = {
-         ...dates,
-       };
-       dispatch({
-         type: ADD_DATES,
-         payload,
-       });
-     } catch (e) {
-       throw new Error(e.message);
-     }
-   };
-   //----------------------------------------->
-   const changeDates = async (newDates) => {
-     const dates = {
-       ...newDates,
-       owner,
-     };
-     try {
-       await fire.db
-         .collection("dates")
-         .doc(dates.id)
-         .update(dates)
-         .catch((err) => console.log(err));
-       const payload = {
-         ...dates,
-       };
-       dispatch({
-         type: CHANGE_DATES,
-         payload,
-       });
-     } catch (e) {
-       throw new Error(e.message);
-     }
-   };
-   //------------------------------------->
-   const removeDates = async (id) => {
-     await fire.db
-       .collection("dates")
-       .doc(id)
-       .delete()
-       .catch((err) => console.log(err));
-     dispatch({
-       type: REMOVE_DATES,
-       payload: id,
-     });
-   };
-   //--------------------------------->
-   const fetchDates = async () => {
-     showLoader();
-     const res = await fire.db
-       .collection("dates") //.doc(id)
-       .get()
-       .catch((err) => console.log(err));
-     if (!res.data) {
-       res.data = {};
-     }
-     const payload = [];
-     res.forEach((doc) => {
-       payload.push({ ...doc.data(), id: doc.id });
-     });
-     dispatch({
-       type: FETCHED_DATES,
-       payload,
-     });
-   };
+  //--- USE USEREDUSER FROM REACT------------------->
+  const [state, dispatch] = useReducer(firebaseReducer, initialState);
+  //----COMMON LOADER----->
+  const showLoader = () => dispatch({ type: SHOW_LOADER });
+  //---USE PERIOD DATE FUNCTIONS------------------------------------------->
+  const addDates = async (newDates) => {
+    console.log(newDates);
+    const dates = {
+      ...newDates,
+      owner,
+    };
+    try {
+      const res = await fire.db
+        .collection("dates")
+        .add(dates)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...dates,
+        id: res.id,
+      };
+      dispatch({
+        type: ADD_DATES,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //----------------------------------------->
+  const changeDates = async (newDates) => {
+    const dates = {
+      ...newDates,
+      owner,
+    };
+    try {
+      await fire.db
+        .collection("dates")
+        .doc(dates.id)
+        .update(dates)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...dates,
+      };
+      dispatch({
+        type: CHANGE_DATES,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //------------------------------------->
+  const removeDates = async (id) => {
+    await fire.db
+      .collection("dates")
+      .doc(id)
+      .delete()
+      .catch((err) => console.log(err));
+    dispatch({
+      type: REMOVE_DATES,
+      payload: id,
+    });
+  };
+  //--------------------------------->
+  const fetchDates = async () => {
+    showLoader();
+    const res = await fire.db
+      .collection("dates") //.doc(id)
+      .get()
+      .catch((err) => console.log(err));
+    if (!res.data) {
+      res.data = {};
+    }
+    const payload = [];
+    res.forEach((doc) => {
+      payload.push({ ...doc.data(), id: doc.id });
+    });
+    dispatch({
+      type: FETCHED_DATES,
+      payload,
+    });
+  };
   //---USER INFO FUNCTIONS--------------------------------------------------->
-   const addUserInfo = async (newInfo) => {
-     showLoader();
-     const userInfo = {
-       ...newInfo,
-     };
-     try {
-       const res = await fire.db
-         .collection("usersInfos")
-         .add(userInfo)
-         .catch((err) => console.log(err));
-       console.log(res);
-       const payload = {
-         ...newInfo,
-       };
-       dispatch({
-         type: ADD_USERINFO,
-         payload,
-       });
-     } catch (e) {
-       throw new Error(e.message);
-     }
-   };
-   //------------------------------------------------------------------------//
-   const changeUserInfo = async (newUserInfo) => {
-     showLoader();
-     const userInfo = {
-       ...newUserInfo,
-     };
-     console.log(userInfo.id);
-     try {
-       await fire.db
-         .collection("usersInfos")
-         .doc(userInfo.id)
-         .update(userInfo)
-         .catch((err) => console.log(err));
-       const payload = {
-         ...userInfo,
-       };
-       console.log(payload);
-       dispatch({
-         type: CHANGE_USERINFO,
-         payload,
-       });
-     } catch (e) {
-       throw new Error(e.message);
-     }
-   };
-   //------------------------------------------------------------------------//
-   const fetchUsersInfo = async () => {
-     showLoader();
-     const res = await fire.db
-       .collection("usersInfos") //.doc(id)
-       .get()
-       .catch((err) => console.log(err));
-     const payload = [];
-     res.forEach((doc) => {
-       payload.push({ ...doc.data(), id: doc.id });
-     });
-     dispatch({
-       type: FETCHED_USERINFO,
-       payload,
-     });
-   };
-   //-----------------------------------------------------------------------//
-   const removeUserInfos = async (id) => {
-     await fire.db
-       .collection("usersInfos")
-       .doc(id)
-       .delete()
-       .catch((err) => console.log(err));
-     dispatch({
-       type: REMOVE_USERINFOS,
-       payload: id,
-     });
-   };
+  const addUserInfo = async (newInfo) => {
+    showLoader();
+    const userInfo = {
+      ...newInfo,
+    };
+    try {
+      const res = await fire.db
+        .collection("usersInfos")
+        .add(userInfo)
+        .catch((err) => console.log(err));
+      console.log(res);
+      const payload = {
+        ...newInfo,
+      };
+      dispatch({
+        type: ADD_USERINFO,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //------------------------------------------------------------------------//
+  const changeUserInfo = async (newUserInfo) => {
+    showLoader();
+    const userInfo = {
+      ...newUserInfo,
+    };
+    console.log(userInfo.id);
+    try {
+      await fire.db
+        .collection("usersInfos")
+        .doc(userInfo.id)
+        .update(userInfo)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...userInfo,
+      };
+      console.log(payload);
+      dispatch({
+        type: CHANGE_USERINFO,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+  //------------------------------------------------------------------------//
+  const fetchUsersInfo = async () => {
+    showLoader();
+    const res = await fire.db
+      .collection("usersInfos") //.doc(id)
+      .get()
+      .catch((err) => console.log(err));
+    const payload = [];
+    res.forEach((doc) => {
+      payload.push({ ...doc.data(), id: doc.id });
+    });
+    dispatch({
+      type: FETCHED_USERINFO,
+      payload,
+    });
+  };
+  //-----------------------------------------------------------------------//
+  const removeUserInfos = async (id) => {
+    await fire.db
+      .collection("usersInfos")
+      .doc(id)
+      .delete()
+      .catch((err) => console.log(err));
+    dispatch({
+      type: REMOVE_USERINFOS,
+      payload: id,
+    });
+  };
   //-CLIENT FUNCTIONS----------------------------------------------->
   const addClient = async (newClient) => {
     const client = {
@@ -434,8 +434,8 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-   //--OPEN NEW PROJECT FORM ----------------->
-   const openProject = async (currentClient) => {
+  //--OPEN NEW PROJECT FORM ----------------->
+  const openProject = async (currentClient) => {
     let client = {
       ...currentClient,
       openProject: true,
@@ -513,7 +513,7 @@ export const FirebaseState = ({ children }) => {
     });
   };
 
-  
+
   //------------------------------------------------------------------------//
   // const changeListRouteTime = async (
   //   form,
@@ -621,8 +621,8 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-   //--OPEN PAYMENT FORM----------------------->
-   const openPayment = async (currentPay) => {
+  //--OPEN PAYMENT FORM----------------------->
+  const openPayment = async (currentPay) => {
     let pay = {
       ...currentPay,
       openPay: true,
@@ -644,8 +644,8 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-   //--CLOUSE PAYMENT FORM----------------------->
-   const clousePayment = async (currentPay) => {
+  //--CLOUSE PAYMENT FORM----------------------->
+  const clousePayment = async (currentPay) => {
     let pay = {
       ...currentPay,
       openPay: false,
@@ -690,30 +690,30 @@ export const FirebaseState = ({ children }) => {
       throw new Error(e.message);
     }
   };
-    //--CLOSE PAYMENT FORM----------------------->
-    const clouseNewPayment = async (currentProject) => {
-      let project = {
-        ...currentProject,
-        openPayment: false,
-      };
-      try {
-        await fire.db
-          .collection("projects")
-          .doc(project.id)
-          .update(project)
-          .catch((err) => console.log(err));
-        const payload = {
-          ...project,
-        };
-        dispatch({
-          type: CHANGE_PAYMENTFORM,
-          payload,
-        });
-      } catch (e) {
-        throw new Error(e.message);
-      }
+  //--CLOSE PAYMENT FORM----------------------->
+  const clouseNewPayment = async (currentProject) => {
+    let project = {
+      ...currentProject,
+      openPayment: false,
     };
- 
+    try {
+      await fire.db
+        .collection("projects")
+        .doc(project.id)
+        .update(project)
+        .catch((err) => console.log(err));
+      const payload = {
+        ...project,
+      };
+      dispatch({
+        type: CHANGE_PAYMENTFORM,
+        payload,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+
   //--FETCH PAYMENTS---------------------------->
   const fetchPayments = async () => {
     showLoader();
@@ -730,7 +730,7 @@ export const FirebaseState = ({ children }) => {
       payload,
     });
   };
- //---DELETE PAYMENT---------------------------->
+  //---DELETE PAYMENT---------------------------->
   const removePayment = async (id) => {
     if (id) {
       await fire.db
@@ -761,7 +761,7 @@ export const FirebaseState = ({ children }) => {
         changeUserInfo,
         removeUserInfos,
         fetchUsersInfo,
-       
+
         addClient,
         changeClient,
         openClient,

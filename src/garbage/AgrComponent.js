@@ -429,3 +429,36 @@ export const AgrComponent = memo(
     );
   }
 );
+
+ {/* <button
+                            type="button"
+                            className="btn btn-outline-danger btn-sm deleteRouteBtn"
+                            onClick={() => {
+                              firebase.removePayment(pay.id);
+                              // firebase.removeListRouteTime(
+                              //   pay,
+                              //   list,
+                              //   oldRoutes,
+                              //   oldTimes,
+                              //   departureListDate,
+                              //   arrivalListDate
+                              // );
+                              // firebase.removeCarRouteTime(
+                              //   pay,
+                              //   car,
+                              //   oldCarRoutes,
+                              //   oldCarTimes,
+                              //   arrivalCarDate
+                              // );
+                              // setAlertText(
+                              //   "Оплату видалено! Для видалення проекту необхідно видалити всі проплати!"
+                              // );
+                              // setAlertClass("open");
+                              // setTimeout(() => {
+                              //   setAlertClass("modal");
+                              // }, 1500);
+                            }}
+                          >
+                            Х
+                          </button> */}
+                      
