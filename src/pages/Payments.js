@@ -99,15 +99,15 @@ if (search){
   return (
     <div >
       <div className="d-flex  flex-wrap justify-content-between searchConteiner">
-        <div>
-          <small>{email}</small>
-        </div>
         <div >
-          <div className="form-group">
+          <small className = "emailBlock">{email}</small>
+        </div>
+        <div>
+          <div className="form-group searchPaymants">
             <input
               type="text"
-              className="form-control"
-              placeholder="Search..."
+              className="form-control searchPaymants"
+              placeholder="Знайти..."
               value={search}
               name="search"
               onChange={changeHandler}

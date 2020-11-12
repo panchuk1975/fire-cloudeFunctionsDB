@@ -973,6 +973,55 @@ body #open {
   .clousePaymentBtnTable:hover {
     background: #282157; }
 
+.paginationBtn {
+  color: #dddddd;
+  background: #171333;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+  width: 25px;
+  height: 25px;
+  margin: 0 1px 0 1px; }
+
+.newPageForm {
+  cursor: pointer;
+  border-radius: 3px;
+  text-align: center;
+  margin-left: 5px;
+  font-size: 12px;
+  width: 70px;
+  height: 25px; }
+
+.paginationConteiner {
+  margin: -30px 0 5px 0; }
+
+.searchConteiner {
+  margin: 0; }
+
+@media all and (max-width: 870px) {
+  .searchPaymants {
+    width: 60px; }
+  .emailBlock {
+    font-size: 8px; }
+  .paginationBtn {
+    font-size: 10px;
+    width: 17px;
+    height: 17px; }
+  .newPageForm {
+    font-size: 11px;
+    margin-left: 2px;
+    width: 40px;
+    height: 18px; }
+  .searchConteiner {
+    height: 15px; }
+  .searchConteiner input {
+    height: 16px; }
+  .searchPaymants {
+    height: 25px; }
+  .paginationConteiner {
+    margin: -13px 0 6px 0;
+    height: 14px; } }
+
 .window {
   position: absolute;
   background: yellow;

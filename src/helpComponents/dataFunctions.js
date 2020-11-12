@@ -42,7 +42,7 @@ export const paymentsSizeNameArray = (windowWidth) => {
     let sizeArray = [
         { id: 0, size: 110, name: "Дата дог.", fullName: "Дата підписання договору з клієнтом" },
         { id: 1, size: 110, name: "Номер", fullName: "Реєстраційний номер проекту" },
-        { id: 2, size: 110, name: "Сума", fullName: "Загальна сума проплати" },
+        { id: 2, size: 105, name: "Сума", fullName: "Загальна сума проплати" },
         { id: 3, size: 170, name: "Клієнт", fullName: "Офіційна назва(призвіще) клієнта" },
         { id: 4, size: 150, name: "Приймав", fullName: "ПРизвіще відповідального за отримання проплати" },
     ];
