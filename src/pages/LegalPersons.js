@@ -64,60 +64,88 @@ const LegalPersons = memo(({ windowWidth }) => {
         return client;
       }
       return null;
-    })
+    });
     return newClients;
-  }
+  };
   //---FILTER FUNCTIONS---------------------------->
   const sortByFilter = (clients, filter) => {
     //--Sort by client property-------->
     switch (filter) {
-      case 'all': return clients;
-      case 'active': return clients.filter((client) => client.negotiationsResult === "Не узгоджено");
-      case 'done': return clients.filter((client) => client.negotiationsResult === "Узгоджено");
-      case 'inprocess': return clients.filter((client) => client.negotiationsResult === "В процесі");
-      default: return clients;
+      case "all":
+        return clients;
+      case "active":
+        return clients.filter(
+          (client) => client.negotiationsResult === "Не узгоджено"
+        );
+      case "done":
+        return clients.filter(
+          (client) => client.negotiationsResult === "Узгоджено"
+        );
+      case "inprocess":
+        return clients.filter(
+          (client) => client.negotiationsResult === "В процесі"
+        );
+      default:
+        return clients;
     }
-  }
+  };
   const onFilterChange = (name) => {
     setFilter(name);
-  }
+  };
   //---USE SORT FUNCTION--------------------------->
-  let companyNameClients = sortBySearch(clients, search, 'companyName');
-  let secNameClients = sortBySearch(clients, search, 'secName');
-  let firstNameClients = sortBySearch(clients, search, 'firstName');
-  let thirdNameClients = sortBySearch(clients, search, 'thirdName');
-  let phonNumberClients = sortBySearch(clients, search, 'phonNumber');
-  let addPhonNumberClients = sortBySearch(clients, search, 'addPhonNumber');
-  let dateOfNegotiationsClients = sortBySearch(clients, search, 'dateOfNegotiations');
-  let dateOfSignContractClients = sortBySearch(clients, search, 'dateOfSignContract');
-  let registrationDateClients = sortBySearch(clients, search, 'registrationDate');
-  let adressClients = sortBySearch(clients, search, 'adress');
-  let ipNumberClients = sortBySearch(clients, search, 'ipNumber');
-  let passportNumberClients = sortBySearch(clients, search, 'passportNumber');
-  let visibleClients = sortByFilter([
-    ...companyNameClients,
-    ...secNameClients,
-    ...firstNameClients,
-    ...thirdNameClients,
-    ...phonNumberClients,
-    ...addPhonNumberClients,
-    ...dateOfNegotiationsClients,
-    ...dateOfSignContractClients,
-    ...registrationDateClients,
-    ...ipNumberClients,
-    ...passportNumberClients,
-    ...adressClients,
-  ], filterItem);
+  let companyNameClients = sortBySearch(clients, search, "companyName");
+  let secNameClients = sortBySearch(clients, search, "secName");
+  let firstNameClients = sortBySearch(clients, search, "firstName");
+  let thirdNameClients = sortBySearch(clients, search, "thirdName");
+  let phonNumberClients = sortBySearch(clients, search, "phonNumber");
+  let addPhonNumberClients = sortBySearch(clients, search, "addPhonNumber");
+  let dateOfNegotiationsClients = sortBySearch(
+    clients,
+    search,
+    "dateOfNegotiations"
+  );
+  let dateOfSignContractClients = sortBySearch(
+    clients,
+    search,
+    "dateOfSignContract"
+  );
+  let registrationDateClients = sortBySearch(
+    clients,
+    search,
+    "registrationDate"
+  );
+  let adressClients = sortBySearch(clients, search, "adress");
+  let ipNumberClients = sortBySearch(clients, search, "ipNumber");
+  let passportNumberClients = sortBySearch(clients, search, "passportNumber");
+  let visibleClients = sortByFilter(
+    [
+      ...new Set([
+        ...companyNameClients,
+        ...secNameClients,
+        ...firstNameClients,
+        ...thirdNameClients,
+        ...phonNumberClients,
+        ...addPhonNumberClients,
+        ...dateOfNegotiationsClients,
+        ...dateOfSignContractClients,
+        ...registrationDateClients,
+        ...ipNumberClients,
+        ...passportNumberClients,
+        ...adressClients,
+      ]),
+    ],
+    filterItem
+  );
   //---BUTTONS ARRAY----------------------->
   let buttonsArray = [
-    { name: 'all', label: 'Всі', shortLabel: 	'∑'},
-    { name: 'active', label: 'Активовані', shortLabel: "\u2705" },
-    { name: 'inprocess', label: 'В процесі', shortLabel: 	"\u23F3" },
-    { name: 'done', label: 'Домовлено', shortLabel: 	"\u2B50" },
+    { name: "all", label: "Всі", shortLabel: "∑" },
+    { name: "active", label: "Активовані", shortLabel: "\u2705" },
+    { name: "inprocess", label: "В процесі", shortLabel: "\u23F3" },
+    { name: "done", label: "Домовлено", shortLabel: "\u2B50" },
   ];
   const buttonsBlock = buttonsArray.map(({ name, label, shortLabel }) => {
     const isActive = filterItem === name;
-    const buttonClass = isActive ? 'btn-dark' : "btn-outline-secondary";
+    const buttonClass = isActive ? "btn-dark" : "btn-outline-secondary";
     return (
       <button
         key={name}
@@ -127,13 +155,13 @@ const LegalPersons = memo(({ windowWidth }) => {
         name="filterItem"
         onClick={() => onFilterChange(name)}
       >
-         {windowWidth < 870 && `${shortLabel}`}
-         {windowWidth >= 870 && `${label}`}
+        {windowWidth < 870 && `${shortLabel}`}
+        {windowWidth >= 870 && `${label}`}
       </button>
-    )
-  })
+    );
+  });
   return (
-    <div >
+    <div>
       <div className="d-flex  flex-wrap justify-content-between searchConteiner">
         <div>
           <small>{email}</small>
@@ -141,7 +169,7 @@ const LegalPersons = memo(({ windowWidth }) => {
         <div className="d-flex  flex-wrap justify-content-between buttonsConteiner">
           {buttonsBlock}
         </div>
-        <div >
+        <div>
           <div className="form-group">
             <input
               type="text"
@@ -157,30 +185,30 @@ const LegalPersons = memo(({ windowWidth }) => {
       {loading ? (
         <Loader />
       ) : (
-          <PersonsComp
-            dates={dates}
-            clients={visibleClients}
-            projects={projects}
-            payments={payments}
-            userInfos={userInfos}
-            openClient={openClient}
-            clouseClient={clouseClient}
-            removeClient={removeClient}
-            addProject={addProject}
-            openProject={openProject}
-            openCurrentProject={openCurrentProject}
-            clouseCurrentProject={clouseCurrentProject}
-            clouseProject={clouseProject}
-            removeProject={removeProject}
-            addPayment={addPayment}
-            openPayment={openPayment}
-            clousePayment={clousePayment}
-            openNewPayment={openNewPayment}
-            clouseNewPayment={clouseNewPayment}
-            clientType={clientType}
-            windowWidth={windowWidth}
-          />
-        )}
+        <PersonsComp
+          dates={dates}
+          clients={visibleClients}
+          projects={projects}
+          payments={payments}
+          userInfos={userInfos}
+          openClient={openClient}
+          clouseClient={clouseClient}
+          removeClient={removeClient}
+          addProject={addProject}
+          openProject={openProject}
+          openCurrentProject={openCurrentProject}
+          clouseCurrentProject={clouseCurrentProject}
+          clouseProject={clouseProject}
+          removeProject={removeProject}
+          addPayment={addPayment}
+          openPayment={openPayment}
+          clousePayment={clousePayment}
+          openNewPayment={openNewPayment}
+          clouseNewPayment={clouseNewPayment}
+          clientType={clientType}
+          windowWidth={windowWidth}
+        />
+      )}
     </div>
   );
 });

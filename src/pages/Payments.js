@@ -26,15 +26,15 @@ const Payments = memo(({ windowWidth }) => {
     userInfos,
     fetchUsersInfo,
   } = useContext(FirebaseContext);
-    //---Render-------------------------------------->
-    useEffect(() => {
-      fetchDates();
-      fetchProjects();
-      fetchPayments();
-      fetchClients();
-      fetchUsersInfo();
-      // eslint-disable-next-line
-    }, []);
+  //---Render-------------------------------------->
+  useEffect(() => {
+    fetchDates();
+    fetchProjects();
+    fetchPayments();
+    fetchClients();
+    fetchUsersInfo();
+    // eslint-disable-next-line
+  }, []);
   //--Create user data----------------------->
   var owner = fire.auth.currentUser.uid;
   let userInfo = userInfos.find((info) => info.owner === owner);
@@ -52,55 +52,56 @@ const Payments = memo(({ windowWidth }) => {
       dateFinish: "2080.01.01",
     };
   }
-  //let datePayments = ownerAllPayments;
-  let dateProjects = ownerAllProjects;
-  // let datePayments = ownerAllPayments.filter(
-  //   (pay) => Date.parse(new Date(pay.payDate)) > Date.parse(ownerDates.dateStart)
-  // );
-  // datePayments = datePayments.filter(
-  //   (pay) => Date.parse(pay.payDate) <= Date.parse(ownerDates.dateFinish)
-  // );
-  // let dateProjects = ownerAllProjects.filter(
-  //   (pay) => Date.parse(pay.projectDate) > Date.parse(ownerDates.dateStart)
-  // );
-  // dateProjects = dateProjects.filter(
-  //   (pay) => Date.parse(pay.projectDate) <= Date.parse(ownerDates.dateFinish)
-  // );
-  //datePayments = datePayments.sort((a, b) => a.payDate - b.payDate);
   //---SEARCH FUNCTION-------------->
   const changeHandler = (event) => {
     setSearch(event.target.value);
   };
   //---SORT FUNCTION------------------------->
   const sortBySearch = (payments, search, property) => {
-    //console.log(search)
     //--Sort by client property-------->
     let newPayments = payments.filter((pay) => {
       if (pay[property].toLowerCase().indexOf(search.toLowerCase()) > -1) {
         return pay;
       }
       return null;
-    })
+    });
     return newPayments;
-  }
-
+  };
   //---USE SORT FUNCTION--------------------------->
-  let payProjectNumberPayments = sortBySearch(ownerAllPayments, search, 'payProjectNumber');
-  let dateArrayPayments = sortBySearch(ownerAllPayments, search, 'payDate');
-//console.log(numberArrayPayments, dateArrayPayments)
-let visiblePayments = payments;
-if (search){
-  visiblePayments =[
-    ...payProjectNumberPayments,
-    ...dateArrayPayments,
+  let payProjectNumberPayments = sortBySearch(
+    ownerAllPayments,
+    search,
+    "payProjectNumber"
+  );
+  let dateArrayPayments = sortBySearch(ownerAllPayments, search, "payDate");
+  let summArrayPayments = sortBySearch(ownerAllPayments, search, "paySumm");
+  let payClientNameArrayPayments = sortBySearch(
+    ownerAllPayments,
+    search,
+    "payClientName"
+  );
+  let payResponsibleArrayPayments = sortBySearch(
+    ownerAllPayments,
+    search,
+    "payResponsible"
+  );
+  let visiblePayments = payments;
+  visiblePayments = [
+    ...new Set([
+      ...payProjectNumberPayments,
+      ...dateArrayPayments,
+      ...summArrayPayments,
+      ...payClientNameArrayPayments,
+      ...payResponsibleArrayPayments,
+    ]),
   ];
-}
-//---SIZE ARRAYS------------------------------------>
+
+  //---SIZE ARRAYS------------------------------------>
   return (
-    <div >
+    <div>
       <div className="d-flex  flex-wrap justify-content-between searchConteiner">
-        <div >
-          <small className = "emailBlock">{email}</small>
+        <div>
+          <small className="emailBlock">{email}</small>
         </div>
         <div>
           <div className="form-group searchPaymants">
@@ -118,17 +119,17 @@ if (search){
       {loading ? (
         <Loader />
       ) : (
-          <PaymentsRend
-            ownerDates={ownerDates}
-            ownerAllPayments={visiblePayments}
-            ownerAllProjects={dateProjects}
-            openPayment={openPayment}
-            clousePayment={clousePayment}
-            removePayment={removePayment}
-            userInfo={userInfo}
-            windowWidth={windowWidth}
-          />
-        )}
+        <PaymentsRend
+          ownerDates={ownerDates}
+          ownerAllPayments={visiblePayments}
+          ownerAllProjects={ownerAllProjects}
+          openPayment={openPayment}
+          clousePayment={clousePayment}
+          removePayment={removePayment}
+          userInfo={userInfo}
+          windowWidth={windowWidth}
+        />
+      )}
     </div>
   );
 });

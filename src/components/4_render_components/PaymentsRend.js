@@ -5,7 +5,11 @@ import { AlertBox } from "../6_common_help_comp/AlertBox";
 import { ShowBox } from "../6_common_help_comp/ShowBox";
 import { ExportReactCSV } from "../../mathfunctions/liquidsFunctions";
 import { CreatePayment } from "../5_create_components/CreatePayment";
-import { paymentsSizeNameArray, paymentDataArray, summArray } from "../../helpComponents/dataFunctions";
+import {
+  paymentsSizeNameArray,
+  paymentDataArray,
+  summArray,
+} from "../../helpComponents/dataFunctions";
 
 var moment = require("moment");
 
@@ -40,52 +44,60 @@ export const PaymentsRend = memo(
     let sizeArray = paymentsSizeNameArray(windowWidth);
     //---CUT PAYMENTS ARRAY BY DATE PERIOD----------->
     ownerAllPayments = ownerAllPayments.filter(
-      (pay) => pay.payDate >= ownerDates.dateStart);
+      (pay) => pay.payDate >= ownerDates.dateStart
+    );
     ownerAllPayments = ownerAllPayments.filter(
       (pay) => pay.payDate <= ownerDates.dateFinish
     );
     //---SORT PAYMENTS BY DATE------------------------->
-    ownerAllPayments.sort(
-      (a, b) => new Date(b.payDate) - new Date(a.payDate)
-    );
+    ownerAllPayments.sort((a, b) => new Date(b.payDate) - new Date(a.payDate));
     //---PAGINATION BLOCK----------------------------------------->
     let [pageName, setNewPageName] = useState(1);
-    let [pageSize, setNewPageSize] = useState(5);
+    let [pageSize, setNewPageSize] = useState(12);
     const changeHandler = (event) => {
-      if (event.target.value) {
-        setNewPageSize(event.target.value);
-      }
+      setNewPageSize(12);
+      if (!event.target.value) {
+        setNewPageSize(12);
+      } else setNewPageSize(event.target.value);
     };
     const pagesCount = Math.ceil(ownerAllPayments.length / pageSize);
     let pagesArray = [];
     let sliceNumber = 0;
     for (let i = 1; i <= pagesCount; i++) {
-      if (!pageSize) {
-        setNewPageSize(3);
-      }
       let page = {
         pageNumber: i,
         pageCount: Number(sliceNumber) + Number(pageSize),
-      }
+      };
       pagesArray.push(page);
       sliceNumber = Number(sliceNumber) + Number(pageSize);
     }
-    let allPayments = ownerAllPayments.slice(pageSize * (pageName - 1), pageSize * pageName);
+    let allPayments = ownerAllPayments.slice(
+      pageSize * (pageName - 1),
+      pageSize * pageName
+    );
     let newPagesArray = pagesArray.slice(0, 8);
     let firstNumber = pageName - 4;
     let secondNumber = pageName + 4;
-    if (firstNumber < 0) {
+    if (secondNumber > pagesArray.length - 2) {
+      secondNumber = pagesArray.length;
+      firstNumber = pagesArray.length - 8;
+    } else if (pageName < 0) {
       firstNumber = 0;
       secondNumber = 8;
-    } else {
-      if (secondNumber > pagesArray.length) {
-        secondNumber = pagesArray.length;
-        firstNumber = pagesArray.length - 8;
-      }
+    } else if (pagesArray.length < 8) {
+      firstNumber = 0;
+      secondNumber = pagesArray.length;
     }
-    
+    if (firstNumber < 3) {
+      firstNumber = 0;
+      secondNumber = 8;
+    } else if (pagesArray.length < 8) {
+      firstNumber = 0;
+      secondNumber = pagesArray.length;
+    }
     newPagesArray = pagesArray.slice(firstNumber, secondNumber);
-    console.log(firstNumber, secondNumber)
+    //---EXEL INFO---------------------------->
+    let exelPaymentsInfo = [];
     //---RENDER PAYMENTS TABLE HEADER---------------------------------------------->
     return (
       <div className="allPaymentsConteiner">
@@ -101,27 +113,26 @@ export const PaymentsRend = memo(
               >
                 {page.pageNumber}
               </button>
-            )
+            );
           })}
-          <div className="newPageForm">
+          <div className="form-group newPageForm">
             <input
               type="number"
-              className="newPageForm"
-              value={pageSize}
+              className="form-control newPageForm"
+              defaultValue={pageSize}
               name="pageSize"
               onChange={changeHandler}
             />
           </div>
         </div>
-        <div
-          className="d-flex flex-wrap payments-conteiner"
-        >
+        <div className="d-flex flex-wrap payments-conteiner">
           <div className="createPaymentsHeadBasis">
             <table className="allPaymentTable">
               <tbody>
                 <tr>
                   {windowWidth > 30 + summArray(1, sizeArray) && (
-                    <td width={sizeArray[0].size}
+                    <td
+                      width={sizeArray[0].size}
                       onClick={() => {
                         setFunct("showFunction");
                         setModalText(sizeArray[0].fullName);
@@ -132,7 +143,8 @@ export const PaymentsRend = memo(
                     </td>
                   )}
                   {windowWidth > 30 + summArray(2, sizeArray) && (
-                    <td width={sizeArray[1].size}
+                    <td
+                      width={sizeArray[1].size}
                       onClick={() => {
                         setFunct("showFunction");
                         setModalText(sizeArray[1].fullName);
@@ -143,7 +155,8 @@ export const PaymentsRend = memo(
                     </td>
                   )}
                   {windowWidth > 30 + summArray(3, sizeArray) && (
-                    <td width={sizeArray[2].size}
+                    <td
+                      width={sizeArray[2].size}
                       onClick={() => {
                         setFunct("showFunction");
                         setModalText(sizeArray[2].fullName);
@@ -154,7 +167,8 @@ export const PaymentsRend = memo(
                     </td>
                   )}
                   {windowWidth > 30 + summArray(4, sizeArray) && (
-                    <td width={sizeArray[3].size}
+                    <td
+                      width={sizeArray[3].size}
                       onClick={() => {
                         setFunct("showFunction");
                         setModalText(sizeArray[3].fullName);
@@ -165,7 +179,8 @@ export const PaymentsRend = memo(
                     </td>
                   )}
                   {windowWidth > 30 + summArray(5, sizeArray) && (
-                    <td width={sizeArray[4].size}
+                    <td
+                      width={sizeArray[4].size}
                       onClick={() => {
                         setFunct("showFunction");
                         setModalText(sizeArray[4].fullName);
@@ -185,16 +200,29 @@ export const PaymentsRend = memo(
             //---GET ARRAY OF PAYMENTS DATA-------->
             let payDataArray = paymentDataArray(pay);
             //---GET CURRENT PAYMENT PROJECT-------------------->
-            let project = (ownerAllProjects.filter((proj) => proj.id === pay.paymentOwner))[0];
+            let project = ownerAllProjects.filter(
+              (proj) => proj.id === pay.paymentOwner
+            )[0];
+            //---GET PAYMENTS INFO FOR EXEL------------------------------>
+             
+            let newExelPay = {
+              "Дата проплати": pay.payDate,
+              "Сума проплати": pay.paySumm,
+              "Номер проекту": pay.payProjectNumber,
+              "Клієнт": pay.payClientName,
+              "Хто проводив": pay.payResponsible,
+            };
+            exelPaymentsInfo = exelPaymentsInfo.concat(newExelPay);
             //---RENDER PAYMENTS ARRAY------------------------------------------------>
             return (
               //<CSSTransition key={pay.id} classNames={"note"} timeout={50}>
-              <div key={pay.id} className="list-group-item paymentsBackgroundSize"
-                style={{ width: windowWidth - 10 }}>
+              <div
+                key={pay.id}
+                className="list-group-item paymentsBackgroundSize"
+                style={{ width: windowWidth - 10 }}
+              >
                 {!pay.openPay && (
-                  <div
-                    className="d-flex justify-content-between paymentTableBasis"
-                  >
+                  <div className="d-flex justify-content-between paymentTableBasis">
                     <table
                       className="paymentCommonTable"
                       onClick={() => {
@@ -205,38 +233,37 @@ export const PaymentsRend = memo(
                         <tr align="center">
                           {windowWidth > 30 + summArray(1, sizeArray) && (
                             <td width={sizeArray[0].size - 1}>
-                              <small className="smallProjectDateBold"
-                              >{`${moment(
+                              <small className="smallProjectDateBold">{`${moment(
                                 payDataArray[0]
                               ).format("YYYY-MM-DD")}`}</small>
                             </td>
                           )}
                           {windowWidth > 30 + summArray(2, sizeArray) && (
                             <td width={sizeArray[1].size}>
-                              <small
-                                className="smallProjectDateBold"
-                              >{payDataArray[1]}</small>
+                              <small className="smallProjectDateBold">
+                                {payDataArray[1]}
+                              </small>
                             </td>
                           )}
                           {windowWidth > 30 + summArray(3, sizeArray) && (
                             <td width={sizeArray[2].size}>
-                              <small
-                                className="smallProjectDateBold"
-                              >{payDataArray[2]}</small>
+                              <small className="smallProjectDateBold">
+                                {payDataArray[2]}
+                              </small>
                             </td>
                           )}
                           {windowWidth > 30 + summArray(4, sizeArray) && (
                             <td width={sizeArray[3].size}>
-                              <small
-                                className="smallProjectDateBold"
-                              >{payDataArray[3]}</small>
+                              <small className="smallProjectDateBold">
+                                {payDataArray[3]}
+                              </small>
                             </td>
                           )}
                           {windowWidth > 30 + summArray(5, sizeArray) && (
                             <td width={sizeArray[4].size}>
-                              <small
-                                className="smallProjectDateBold"
-                              >{payDataArray[4]}</small>
+                              <small className="smallProjectDateBold">
+                                {payDataArray[4]}
+                              </small>
                             </td>
                           )}
                         </tr>
@@ -265,7 +292,7 @@ export const PaymentsRend = memo(
                       onClick={() => clousePayment(pay)}
                     >
                       Закрити форму
-                 </button>
+                    </button>
                     <CreatePayment
                       project={project}
                       pay={pay}
@@ -285,7 +312,7 @@ export const PaymentsRend = memo(
         </div>
 
         <ExportReactCSV
-          csvData={ownerAllPayments}
+          csvData={exelPaymentsInfo}
           fileName={"Проплати"}
           textCSV="EXEL"
         />

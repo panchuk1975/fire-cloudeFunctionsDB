@@ -50,52 +50,77 @@ const Projects = memo(({ windowWidth }) => {
   const sortBySearch = (projects, search, property) => {
     //--Sort by client property-------->
     let newProjects = projects.filter((project) => {
-      if (String(project[property]).toLowerCase().indexOf(search.toLowerCase()) > -1) {
+      if (
+        String(project[property]).toLowerCase().indexOf(search.toLowerCase()) >
+        -1
+      ) {
         return project;
       }
       return null;
-    })
+    });
     return newProjects;
-  }
+  };
   //---FILTER FUNCTIONS---------------------------->
   const sortByFilter = (projects, filter) => {
     //--Sort by client property-------->
     switch (filter) {
-      case 'all': return projects;
-      case 'active': return projects.filter((project) => project.contractExistence === "Так");
-      case 'done': return projects.filter((project) => project.negotiationsResult === "Так");
-      case 'inprocess': return projects.filter((project) => project.signaturуOfAct === "Так");
-      default: return projects;
+      case "all":
+        return projects;
+      case "active":
+        return projects.filter(
+          (project) => project.contractExistence === "Так"
+        );
+      case "done":
+        return projects.filter(
+          (project) => project.negotiationsResult === "Так"
+        );
+      case "inprocess":
+        return projects.filter((project) => project.signaturуOfAct === "Так");
+      default:
+        return projects;
     }
-  }
+  };
   const onFilterChange = (name) => {
     setFilter(name);
-  }
+  };
   //---USE SORT FUNCTION--------------------------->
-  let projectNumberProjects = sortBySearch(projects, search, 'projectNumber');
-  let projectDateProjects = sortBySearch(projects, search, 'projectDate');
-  let typesOfLandWorksProjects = sortBySearch(projects, search, 'typesOfLandWorks')
-  let projectCostProjects = sortBySearch(projects, search, 'projectCost')
-  let responsibleForLandManageProjects = sortBySearch(projects, search, 'responsibleForLandManage')
-  let contractorProjects = sortBySearch(projects, search, 'contractor')
-  let visibleProjects = sortByFilter([
-    ...projectNumberProjects,
-    ...projectDateProjects,
-    ...typesOfLandWorksProjects,
-    ...projectCostProjects,
-    ...responsibleForLandManageProjects,
-    ...contractorProjects,
-  ], filterItem);
+  let projectNumberProjects = sortBySearch(projects, search, "projectNumber");
+  let projectDateProjects = sortBySearch(projects, search, "projectDate");
+  let typesOfLandWorksProjects = sortBySearch(
+    projects,
+    search,
+    "typesOfLandWorks"
+  );
+  let projectCostProjects = sortBySearch(projects, search, "projectCost");
+  let responsibleForLandManageProjects = sortBySearch(
+    projects,
+    search,
+    "responsibleForLandManage"
+  );
+  let contractorProjects = sortBySearch(projects, search, "contractor");
+  let visibleProjects = sortByFilter(
+    [
+      ...new Set([
+        ...projectNumberProjects,
+        ...projectDateProjects,
+        ...typesOfLandWorksProjects,
+        ...projectCostProjects,
+        ...responsibleForLandManageProjects,
+        ...contractorProjects,
+      ]),
+    ],
+    filterItem
+  );
   //---BUTTONS ARRAY----------------------->
   let buttonsArray = [
-    { name: 'all', label: 'Всі', shortLabel: '∑' },
-    { name: 'active', label: 'Активовані', shortLabel: "\u2705" },
-    { name: 'inprocess', label: 'В процесі', shortLabel: "\u23F3" },
-    { name: 'done', label: 'Домовлено', shortLabel: "\u2B50" },
+    { name: "all", label: "Всі", shortLabel: "∑" },
+    { name: "active", label: "Активовані", shortLabel: "\u2705" },
+    { name: "inprocess", label: "В процесі", shortLabel: "\u23F3" },
+    { name: "done", label: "Домовлено", shortLabel: "\u2B50" },
   ];
   const buttonsBlock = buttonsArray.map(({ name, label, shortLabel }) => {
     const isActive = filterItem === name;
-    const buttonClass = isActive ? 'btn-dark' : "btn-outline-secondary";
+    const buttonClass = isActive ? "btn-dark" : "btn-outline-secondary";
     return (
       <button
         key={name}
@@ -108,10 +133,10 @@ const Projects = memo(({ windowWidth }) => {
         {windowWidth < 870 && `${shortLabel}`}
         {windowWidth >= 870 && `${label}`}
       </button>
-    )
-  })
+    );
+  });
   return (
-    <div >
+    <div>
       <div className="d-flex  flex-wrap justify-content-between searchConteiner">
         <div>
           <small>{email}</small>
@@ -119,7 +144,7 @@ const Projects = memo(({ windowWidth }) => {
         <div className="d-flex  flex-wrap justify-content-between buttonsConteiner">
           {buttonsBlock}
         </div>
-        <div >
+        <div>
           <div className="form-group">
             <input
               type="text"
@@ -135,25 +160,25 @@ const Projects = memo(({ windowWidth }) => {
       {loading ? (
         <Loader />
       ) : (
-          <AllProjects
-            dates={dates}
-            clients={clients}
-            projects={visibleProjects}
-            payments={payments}
-            userInfos={userInfos}
-            removeProject={removeProject}
-            clientType={clientType}
-            windowWidth={windowWidth}
-            openCurrentProject={openCurrentProject}
-            clouseCurrentProject={clouseCurrentProject}
-            fetchPayments={fetchPayments}
-            addPayment={addPayment}
-            openPayment={openPayment}
-            clousePayment={clousePayment}
-            openNewPayment={openNewPayment}
-            clouseNewPayment={clouseNewPayment}
-          />
-        )}
+        <AllProjects
+          dates={dates}
+          clients={clients}
+          projects={visibleProjects}
+          payments={payments}
+          userInfos={userInfos}
+          removeProject={removeProject}
+          clientType={clientType}
+          windowWidth={windowWidth}
+          openCurrentProject={openCurrentProject}
+          clouseCurrentProject={clouseCurrentProject}
+          fetchPayments={fetchPayments}
+          addPayment={addPayment}
+          openPayment={openPayment}
+          clousePayment={clousePayment}
+          openNewPayment={openNewPayment}
+          clouseNewPayment={clouseNewPayment}
+        />
+      )}
     </div>
   );
 });
