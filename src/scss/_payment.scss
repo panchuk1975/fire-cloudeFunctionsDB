@@ -1,7 +1,16 @@
-//---PAYMENT-HEAD TABLE-------------------------------->
-.paymentHeadTable td{
-  font-size: 12px;
-  border: 1px solid rgb(0, 0, 0);
+//---PROJECT PAYMENT HEAD TABLE-------------------------------->
+.paymentHeadTableConteiner{
+  margin-top: 5px;
+  background: rgb(23, 19, 51);
+  height: 22px;
+}
+.paymentProjecgtHeadTable td{
+  text-align: center;
+  small {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(214, 214, 214);
+  }
 }
 //---CLIENT-PROJECT-PAYMENYT-COMPONENT PROPERTYS----------->
 .paymentDetails {
@@ -10,7 +19,9 @@
     margin: 0 0 0 0;
   }
   .paymentDetails:hover {
-    color: #190585;
+    summary small {
+      color: #190585;
+    }
   }
   .paymentDetails summary{
     width: 20%;
@@ -18,11 +29,39 @@
 .paymentDetailsSmall{
     font-size: 8px;
 }
+.allPaymentsConteiner{
+  margin: 0;
+  padding: -2px 0 -2px;
+  .list-group-item {
+  width: 100%;
+  background-color: rgb(160, 160, 160);
+  padding: 0;
+  margin: -2px 0 -2px 0;
+  }
+}
+//---PAYMENT ADDITIONAL "LI"--------->
+//---CREATE PAYMENT BACKGROUND-->
+  .createPaymentStyle {
+    padding: 0px 0px 7px 0;
+    margin: 0 6px 0 4px;
+  }
+  .clousePaymentFormTable tr td  {
+    border: 1px solid white;
+align-items: center;
+width:100%;
+  }
+  //---COMPONENT TABLE------->
+  .paymentComponentTable td{
+    font-size: 14px;
+}
+.paymentComponentTable {
+  padding: 0;
+}
 //---PAYMENT BUTTONS GROUP------------->
 .payment-buttons-grup {
-  background-color: lightseagreen;
-  padding-bottom:5px;
-  margin: 5px 0px 0px 0px;
+  margin: 5px 2px 0px 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .payment-buttons-grup button{
   font-size: 12px;
@@ -46,29 +85,12 @@
       background: rgb(41, 33, 88);
     }
   }
-//---PAYMENT ADDITIONAL "LI"--------->
-.payments-incomp-background{
-  width: 100%;
-  background-color: rgb(217, 231, 18);
-  padding: 0;
-  margin: 1px 0 1px 0;
-}
-//---CREATE PAYMENT BACKGROUND-->
-.createPaymentStyle {
-    padding: 0px 0px 7px 1px;
-  }
-  //---COMPONENT TABLE------->
-  .paymentComponentTable td{
-    margin: 0;
-    font-size: 14px;
-    border: 1px solid rgb(0, 0, 0);
-}
+ //---EXEL PAYMENT PROJECT BTN -------->
+ .ExportReactCSV{
+   padding: 0 4px 5px 4px;
+ }
+
 //---PAYMENT RENDER COMPONENT BODY------------------------------>
-//---COMMON CONTEINER----------------------------->
-// .payments-conteiner {
-//   background-color: rgb(73, 54, 54);
-//   margin-bottom: 5px;
-// }
 //---PAYMENTS HEADER ------------------------------->
 .createPaymentsHeadBasis {
   font-size: 14px;
@@ -89,9 +111,6 @@
   height: 10px;
   text-align: center;
 }
-// .allPaymentTable td {
-//   border: 1px solid white;
-// }
 //---PAYMENT BACKGROUND---->
 .transitionGroupeConteiner{
   width: 100%
@@ -114,20 +133,8 @@
     background-color: rgb(156, 154, 160);
   }
 }
-  .paymentTable {
-    color: black;
-    //border-radius: 5px;
-    // -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 1px 1px rgba(0,0,0,0.64); 
-    // box-shadow: 0px 10px 13px -7px #000000, 1px 1px 1px 1px rgba(0,0,0,0.64);
-    //&:hover{
-      //color: rgb(3, 192, 192);
-      // -webkit-box-shadow: 0px 10px 13px -7px #2e2e2e, 1px 1px 1px 1px rgba(0,0,0,0.64); 
-      // box-shadow: 0px 10px 13px -7px #424242, 1px 1px 1px 1px rgba(0,0,0,0.64);
-    //}
-  }
   .paymentCommonTable td{
     font-size: 14px;
-      //border: 1px solid rgb(0, 0, 0);
   }
   .deletePaymentBtn {
     font-size: 7px;
@@ -145,7 +152,10 @@
     cursor: pointer;
     height: 22px;
     width: 100%;
-    margin: 5px 0 0 0;
+    padding: 0 5px  5px;
+    td {
+      text-align: center;
+    }
     &:hover{
       background: rgb(40, 33, 87);
     }
@@ -165,7 +175,7 @@
     border-radius: 3px;
     text-align: center;
     margin-left: 5px;
-    font-size: 12px;
+    font-size: 14px;
     width: 70px;
     height: 25px;
   }
@@ -177,33 +187,32 @@
       } 
   @media all and (max-width: 870px) {
   .searchPaymants{
+    height: 35px;
      width: 60px;
+     input {
+       height: 25px;
+     }
   }
   .emailBlock{
    font-size: 8px;
   }
   .paginationBtn{
-    font-size: 10px;
     width: 17px;
-    height: 17px;
+    height: 25px;
   }
   .newPageForm{
-    font-size: 11px;
     margin-left: 2px;
     width: 40px;
-    height: 18px;
-  }
-  .searchConteiner {
-    height: 15px;
-      } 
-  .searchConteiner input{
-    height: 16px;
-      } 
-  .searchPaymants{
-height: 25px;
+    height: 25px;
+    input{
+      font-size: 12px;
+      height: 25px;
+    }
   }
   .paginationConteiner{
-    margin: -13px 0 6px 0;
-    height: 14px;
+    margin: -35px 0 5px 0;
   }
+  }
+  .exportReactCSVConteiner{
+    padding: 0 5px 5px 5px;
   }

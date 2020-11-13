@@ -310,7 +310,6 @@ export const PaymentsRend = memo(
           })}
           {/* </TransitionGroup> */}
         </div>
-
         <ExportReactCSV
           csvData={exelPaymentsInfo}
           fileName={"Проплати"}

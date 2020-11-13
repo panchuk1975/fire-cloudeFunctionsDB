@@ -853,16 +853,24 @@ body #open {
   position: fixed;
   top: 0px; }
 
-.paymentHeadTable td {
-  font-size: 12px;
-  border: 1px solid black; }
+.paymentHeadTableConteiner {
+  margin-top: 5px;
+  background: #171333;
+  height: 22px; }
+
+.paymentProjecgtHeadTable td {
+  text-align: center; }
+  .paymentProjecgtHeadTable td small {
+    font-size: 12px;
+    font-weight: 500;
+    color: #d6d6d6; }
 
 .paymentDetails {
   color: black;
   font-size: 9px;
   margin: 0 0 0 0; }
 
-.paymentDetails:hover {
+.paymentDetails:hover summary small {
   color: #190585; }
 
 .paymentDetails summary {
@@ -871,10 +879,34 @@ body #open {
 .paymentDetailsSmall {
   font-size: 8px; }
 
+.allPaymentsConteiner {
+  margin: 0;
+  padding: -2px 0 -2px; }
+  .allPaymentsConteiner .list-group-item {
+    width: 100%;
+    background-color: #a0a0a0;
+    padding: 0;
+    margin: -2px 0 -2px 0; }
+
+.createPaymentStyle {
+  padding: 0px 0px 7px 0;
+  margin: 0 6px 0 4px; }
+
+.clousePaymentFormTable tr td {
+  border: 1px solid white;
+  align-items: center;
+  width: 100%; }
+
+.paymentComponentTable td {
+  font-size: 14px; }
+
+.paymentComponentTable {
+  padding: 0; }
+
 .payment-buttons-grup {
-  background-color: lightseagreen;
-  padding-bottom: 5px;
-  margin: 5px 0px 0px 0px; }
+  margin: 5px 2px 0px 5px;
+  padding-top: 5px;
+  padding-bottom: 5px; }
 
 .payment-buttons-grup button {
   font-size: 12px; }
@@ -897,19 +929,8 @@ body #open {
   .createPaymentBtn:hover {
     background: #292158; }
 
-.payments-incomp-background {
-  width: 100%;
-  background-color: #d9e712;
-  padding: 0;
-  margin: 1px 0 1px 0; }
-
-.createPaymentStyle {
-  padding: 0px 0px 7px 1px; }
-
-.paymentComponentTable td {
-  margin: 0;
-  font-size: 14px;
-  border: 1px solid black; }
+.ExportReactCSV {
+  padding: 0 4px 5px 4px; }
 
 .createPaymentsHeadBasis {
   font-size: 14px;
@@ -947,9 +968,6 @@ body #open {
   .paymentTableBasis:hover {
     background-color: #9c9aa0; }
 
-.paymentTable {
-  color: black; }
-
 .paymentCommonTable td {
   font-size: 14px; }
 
@@ -969,7 +987,9 @@ body #open {
   cursor: pointer;
   height: 22px;
   width: 100%;
-  margin: 5px 0 0 0; }
+  padding: 0 5px  5px; }
+  .clousePaymentBtnTable td {
+    text-align: center; }
   .clousePaymentBtnTable:hover {
     background: #282157; }
 
@@ -988,7 +1008,7 @@ body #open {
   border-radius: 3px;
   text-align: center;
   margin-left: 5px;
-  font-size: 12px;
+  font-size: 14px;
   width: 70px;
   height: 25px; }
 
@@ -1000,27 +1020,27 @@ body #open {
 
 @media all and (max-width: 870px) {
   .searchPaymants {
+    height: 35px;
     width: 60px; }
+    .searchPaymants input {
+      height: 25px; }
   .emailBlock {
     font-size: 8px; }
   .paginationBtn {
-    font-size: 10px;
     width: 17px;
-    height: 17px; }
+    height: 25px; }
   .newPageForm {
-    font-size: 11px;
     margin-left: 2px;
     width: 40px;
-    height: 18px; }
-  .searchConteiner {
-    height: 15px; }
-  .searchConteiner input {
-    height: 16px; }
-  .searchPaymants {
     height: 25px; }
+    .newPageForm input {
+      font-size: 12px;
+      height: 25px; }
   .paginationConteiner {
-    margin: -13px 0 6px 0;
-    height: 14px; } }
+    margin: -35px 0 5px 0; } }
+
+.exportReactCSVConteiner {
+  padding: 0 5px 5px 5px; }
 
 .window {
   position: absolute;
