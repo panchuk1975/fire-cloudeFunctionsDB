@@ -53,11 +53,11 @@ export const PaymentsRend = memo(
     ownerAllPayments.sort((a, b) => new Date(b.payDate) - new Date(a.payDate));
     //---PAGINATION BLOCK----------------------------------------->
     let [pageName, setNewPageName] = useState(1);
-    let [pageSize, setNewPageSize] = useState(12);
+    let [pageSize, setNewPageSize] = useState(15);
     const changeHandler = (event) => {
-      setNewPageSize(12);
+      setNewPageSize(15);
       if (!event.target.value) {
-        setNewPageSize(12);
+        setNewPageSize(15);
       } else setNewPageSize(event.target.value);
     };
     const pagesCount = Math.ceil(ownerAllPayments.length / pageSize);
