@@ -286,7 +286,7 @@ export const ProjectsComponent = memo(
               //--DISABLE BUTTON--->
               let disableDeleteProjectButtonClass = "deleteButtonItemAreClouse";
               if (currentProjectPayments.length) {
-                disableDeleteProjectButtonClass = "";
+                disableDeleteProjectButtonClass = "";  
               }
               if (userInfo.company !== userInfo.jointCompany) {
                 disableDeleteProjectButtonClass = "";

@@ -1,22 +1,30 @@
 import React, { useState, useContext, memo } from "react";
 import { FirebaseContext } from "../../context/fiebase/firebaseContext";
+import Checkbox from "react-custom-checkbox";
+import * as Icon from "react-icons/fi";
 var moment = require("moment");
 
 export const CreateProject = memo(
   ({ client, project, setAlertText, setAlertClass, newProjects, userInfo }) => {
     const firebase = useContext(FirebaseContext);
+    //---INITIAL FORM ------------------------------------>
     let initialForm = {};
     if (!project) {
       initialForm = {
         projectNumber: "",
-        projectDate: moment(new Date()).format("YYYY-MM-DD"),
+        projectDate: moment(new Date()).format("yyyy-MM-DDThh:ss"),
         typesOfLandWorks: "",
         projectCost: 0,
-        contractExistence: "Так",
-        signaturуOfAct: "Так",
-        paymentDate: moment(new Date()).format("YYYY-MM-DD"),
-        аmountOfPayments: 0,
-        poketExistence: "Так",
+        amountOfDebt: 0,
+        contractExistence: false,
+        signaturуOfAct: false,
+        contractDate: moment(new Date()).format("YYYY-MM-DD"),
+        contractPeriod: 3,
+        lastContractDate: moment(new Date()).format("YYYY-MM-DD"),
+        poketExistence: false,
+
+        
+
         fullCalculation: 0,
         responsibleForLandManage: "",
         contractor: "",
@@ -45,15 +53,35 @@ export const CreateProject = memo(
     } else {
       initialForm = {
         ...project,
-        projectDate: moment(new Date()).format("YYYY-MM-DD"),
         openProject: false,
-        openTask: false,
+        openPayment: false,
       };
     }
+    //---FORMS-------------------------------------->
     let [form, setForm] = useState({ ...initialForm });
     const changeHandler = (event) => {
       setForm({ ...form, [event.target.name]: event.target.value });
     };
+    //---CHECKBOXES------------------------------->
+    const contractExistenceCheckBoxHandler = (event) => {
+      setForm({ ...form, contractExistence: event });
+    };
+    const signaturуOfActCheckBoxHandler = (event) => {
+      setForm({ ...form, signaturуOfAct: event });
+    };
+    const poketExistenceCheckBoxHandler = (event) => {
+      setForm({ ...form, poketExistence: event });
+    };
+    //  //--------------------------------------->
+     //const payments = firebase.payments;
+     //const projectPayments = payments.filter((pay) => pay.paymentOwner === project.id);
+    //  let summPayments = 0;
+    //  projectPayments.map((pay) => {
+    //    summPayments =  summPayments + Number(pay.paySumm);
+    //    return pay;
+    //  })
+    //  form.amountOfDebt = summPayments;
+    //---CREATE AND SAVE----------------------->
     const createHandler = (event) => {
       let isProjectExists = !!newProjects.filter(
         // eslint-disable-next-line
@@ -66,7 +94,7 @@ export const CreateProject = memo(
         if (!project) {
           if (!isProjectExists) {
             if (
-              (userInfo.company === userInfo.jointCompany) 
+              (userInfo.company === userInfo.jointCompany)
               //& (userInfo.owner === client.owner)
             ) {
               firebase
@@ -92,8 +120,8 @@ export const CreateProject = memo(
           }
         } else {
           if (
-            (userInfo.company === userInfo.jointCompany) 
-           // & (userInfo.owner === client.owner)
+            (userInfo.company === userInfo.jointCompany)
+            // & (userInfo.owner === client.owner)
           ) {
             firebase
               .changeProject(form, client, project.id)
@@ -121,6 +149,10 @@ export const CreateProject = memo(
     } else {
       classProjectBasis = "ModifyProjectStyle";
     }
+    //---MATH FUNCTIONS------------------------------->
+    form.lastContractDate = moment(new Date()).add(form.contractPeriod, 'months').format("YYYY-MM-DD");
+   
+    //---RENDER BLOCK----------------------------------------------------------------->
     return (
       <div className={classProjectBasis}>
         <div>
@@ -144,10 +176,10 @@ export const CreateProject = memo(
                 <small>Дата проекту</small>
               </label>
               <input
-                type="date"
+                type="datetime-local"
                 className="form-control"
                 placeholder="Дата проекту"
-                value={moment(form.projectDate).format("YYYY-MM-DD")}
+                value={form.projectDate}
                 name="projectDate"
                 onChange={changeHandler}
               />
@@ -156,71 +188,60 @@ export const CreateProject = memo(
               <label htmlFor="typesOfLandWorks">
                 <small>Види робіт</small>
               </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Види робіт"
-                value={form.typesOfLandWorks}
-                name="typesOfLandWorks"
-                onChange={changeHandler}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="projectCost">
-                <small>Ціна проекту</small>
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Ціна проекту"
-                value={form.projectCost}
-                name="projectCost"
-                onChange={changeHandler}
-              />
-            </div>
-            <div className="form-group">
-            <label htmlFor="contractExistence">
-                <small>Наявність договору</small>
-              </label>
               <div>
                 <select
                   type="text"
-                  name="contractExistence"
-                  value={form.contractExistence}
+                  name="typesOfLandWorks"
+                  value={form.typesOfLandWorks}
                   onChange={changeHandler}
                   className="custom-select custom-select-sm important"
                 >
-                  <option className="main" value="Так">
-                    Так
+                  <option className="main" value="Схеми землеустрою і техніко-економічні обґрунтування використання та охорони земель адміністративно-територіальних одиниць">
+                    Схеми землеустрою і техніко-економічні обґрунтування використання та охорони земель адміністративно-територіальних одиниць
                 </option>
-                  <option value="Так">Так</option>
-                  <option value="Ні">Ні</option>
+                  <option value="Проекти землеустрою щодо встановлення (зміни) меж адміністративно-територіальних одиниць">Проекти землеустрою щодо встановлення (зміни) меж адміністративно-територіальних одиниць</option>
+                  <option value="Проекти землеустрою щодо організації і встановлення меж територій природно-заповідного фонду та іншого природоохоронного призначення">Проекти землеустрою щодо організації і встановлення меж територій природно-заповідного фонду та іншого природоохоронного призначення</option>
+                  <option value="Проекти землеустрою щодо приватизації земель державних і комунальних сільськогосподарських підприємств;установ та організацій">Проекти землеустрою щодо приватизації земель державних і комунальних сільськогосподарських підприємств;установ та організацій</option>
+                  <option value="Проекти землеустрою щодо відведення земельних ділянок">Проекти землеустрою щодо відведення земельних ділянок</option>
+                  <option value="Проекти землеустрою щодо впорядкування території для містобудівних потреб">Проекти землеустрою щодо впорядкування території для містобудівних потреб</option>
+                  <option value="Проекти землеустрою;що забезпечують еколого-економічне обґрунтування сівозміни та впорядкування угідь">Проекти землеустрою;що забезпечують еколого-економічне обґрунтування сівозміни та впорядкування угідь</option>
+                  <option value="Проекти землеустрою щодо впорядкування території населених пунктів">Проекти землеустрою щодо впорядкування території населених пунктів</option>
+                  <option value="Проекти землеустрою щодо організації території земельних часток (паїв)">Проекти землеустрою щодо організації території земельних часток (паїв)</option>
+                  <option value="Робочі проекти землеустрою">Робочі проекти землеустрою</option>
+                  <option value="Технічна документація із землеустрою щодо визначення та встановлення в натурі (на місцевості) державного кордону України">Технічна документація із землеустрою щодо визначення та встановлення в натурі (на місцевості) державного кордону України</option>
+                  <option value="Технічна документація із землеустрою щодо встановлення (відновлення) меж земельної ділянки в натурі (на місцевості)">Технічна документація із землеустрою щодо встановлення (відновлення) меж земельної ділянки в натурі (на місцевості)</option>
+                  <option value="Технічна документація із землеустрою щодо встановлення меж частини земельної ділянки на яку поширюються права суборенди, сервітуту">Технічна документація із землеустрою щодо встановлення меж частини земельної ділянки на яку поширюються права суборенди;сервітуту</option>
+                  <option value="Технічна документація із землеустрою щодо поділу та об’єднання земельних ділянок,Технічна документація із землеустрою щодо інвентаризації земель">Технічна документація із землеустрою щодо поділу та об’єднання земельних ділянок,Технічна документація із землеустрою щодо інвентаризації земель</option>
                 </select>
               </div>
             </div>
-            <div className="form-group">
-            <label htmlFor="signaturуOfAct">
-                <small>Наявність підпису АВР</small>
-              </label>
-              <div>
-                <select
-                  type="text"
-                  name="signaturуOfAct"
-                  value={form.signaturуOfAct}
-                  onChange={changeHandler}
-                  className="custom-select custom-select-sm important"
-                >
-                  <option className="main" value="Так">
-                    Так
-                </option>
-                  <option value="Так">Так</option>
-                  <option value="Ні">Ні</option>
-                </select>
-              </div>
+            <div className="form-group checkbox">
+              <Checkbox
+                icon={<Icon.FiCheck color="#174A41" size={14} />}
+                name="contractExistence"
+                checked={form.contractExistence}
+                onChange={contractExistenceCheckBoxHandler}
+                borderColor="#D7C629"
+                style={{ cursor: "pointer" }}
+                labelStyle={{ marginLeft: 5, userSelect: "none" }}
+                label="Наявність договору"
+              />
+            </div>
+            <div className="form-group checkbox">
+              <Checkbox
+                icon={<Icon.FiCheck color="#174A41" size={14} />}
+                name="signaturуOfAct"
+                checked={form.signaturуOfAct}
+                onChange={signaturуOfActCheckBoxHandler}
+                borderColor="#D7C629"
+                style={{ cursor: "pointer" }}
+                labelStyle={{ marginLeft: 5, userSelect: "none" }}
+                label="Наявність підпису акту ВР"
+              />
             </div>
             <div className="form-group">
               <label htmlFor="paymentDate">
-                <small>Дата оплати</small>
+                <small>Дата підписання договору</small>
               </label>
               <input
                 type="date"
@@ -232,32 +253,74 @@ export const CreateProject = memo(
               />
             </div>
             <div className="form-group">
-              <label htmlFor="аmountOfPayments">
-                <small>Сумма оплати</small>
+              <label htmlFor="contractPeriod">
+                <small>Строк договору, міс</small>
               </label>
               <input
                 type="number"
                 className="form-control"
-                placeholder="Сумма оплати"
-                value={form.аmountOfPayments}
-                name="аmountOfPayments"
+                placeholder="Строк договору, міс"
+                defaultValue={form.contractPeriod}
+                name="contractPeriod"
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="paymentDate">
+                <small>Дата закінчення договору</small>
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                placeholder="Дата закінчення"
+                value={form.lastContractDate}
+                //name="paymentDate" //--- change not avalible
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-group checkbox">
+              <Checkbox
+                icon={<Icon.FiCheck color="#174A41" size={14} />}
+                name="poketExistence"
+                checked={form.poketExistence}
+                onChange={poketExistenceCheckBoxHandler}
+                borderColor="#D7C629"
+                style={{ cursor: "pointer" }}
+                labelStyle={{ marginLeft: 5, userSelect: "none" }}
+                label="Наявність пакету документів"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="projectCost">
+                <small>Ціна проекту, грн</small>
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Ціна проекту"
+                value={form.projectCost}
+                name="projectCost"
                 onChange={changeHandler}
               />
             </div>
             <div className="form-group">
               <label htmlFor="amountOfDebt">
-                <small>Сума заборгованості</small>
+                <small>Сума заборгованості, грн</small>
               </label>
               <input
                 type="number"
                 className="form-control"
-                placeholder="Сума заборгованості"
+                placeholder="Сума заборгованості, грн"
                 value={form.amountOfDebt}
                 name="amountOfDebt"
                 onChange={changeHandler}
               />
             </div>
-            <div className="form-group">
+
+
+
+
+            {/* <div className="form-group">
               <label htmlFor="poketExistence">
                 <small>Наявність пакету документів</small>
               </label>
@@ -276,7 +339,22 @@ export const CreateProject = memo(
                   <option value="Ні">Ні</option>
                 </select>
               </div>
-            </div>
+            </div> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div className="form-group">
               <label htmlFor="responsibleForLandManage">
                 <small>Відповідальний</small>

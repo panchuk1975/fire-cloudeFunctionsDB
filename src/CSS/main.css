@@ -627,66 +627,91 @@ input[type="submit"]:hover {
 .negotiationsResult {
   font-size: 10px; }
 
+.CreateProjectStyle {
+  background-color: #a0a0a0;
+  padding: 0 5px 0 5px; }
+
 .projectInnerLi {
+  border-radius: 10px;
   margin: 5px 0 0 0;
   padding: 0;
-  background: #45494d; }
+  background: #7d8083;
+  border: 1px solid #777777; }
+  .projectInnerLi:hover {
+    background: #83878a; }
 
-.CreateProjectStyle {
-  margin: 5px 12px 0 15px; }
+.projectsTable {
+  background-color: #a0a0a0;
+  padding: 0;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
+  -moz-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
+  box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99); }
+
+.headTable {
+  background: #171333;
+  color: #c2c2c2;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: none;
+  user-select: none; }
+
+.headTable td {
+  border: 1px solid #2d343a; }
 
 .clouseProjectBasis {
   padding: 5px 5px 0 5px;
   cursor: pointer; }
 
 .clouseProjectForm {
+  border-radius: 5px;
   background-color: #081c47;
   width: 100%;
   text-align: center;
-  margin: 0px; }
+  margin: 0; }
   .clouseProjectForm:hover {
     background-color: #0a235a; }
 
 .clouseProjectTableButton {
+  border-radius: 5px;
   font-size: 14px;
   color: white;
   height: 25px; }
-  .clouseProjectTableButton:hover {
-    color: #e4c40c; }
 
 .projectTable {
   cursor: pointer;
   font-size: 14px;
   color: black;
   padding: 0 5px 0 5px; }
-  .projectTable:hover {
-    color: #0b2094; }
+
+.projectTable td {
+  border: 1px solid #8ea4b8; }
 
 .deleteProjectBtn {
   font-size: 7px;
-  padding: 0 5px 0 5px;
-  margin: 2px 0 2px 0;
+  padding: 5px 5px 5px 5px;
+  margin: 6px 3px 2px 0;
   color: #ff2400; }
 
 .deleteProjectBtn:hover {
   color: black; }
 
 .projectButtonsGrup {
-  padding: 0 3px 2px 5px; }
+  padding: 0 3px 5px 5px; }
 
-.headTable {
-  color: #e4c40c;
-  font-size: 12px;
-  font-weight: 600;
-  background-color: none;
-  margin: 2px 0 0 0;
-  user-select: none; }
+.checkbox {
+  padding: 27px 0 0 0; }
+  .checkbox label {
+    font-size: 12px; }
 
-.headTable td {
-  border: 1px solid #2d343a; }
+@media all and (max-width: 870px) {
+  .checkbox {
+    padding: 24px 0 0 0; }
+    .checkbox label {
+      font-size: 8px; } }
 
-.projectTable td {
-  border: 1px solid #8ea4b8; }
+.ModifyProjectStyle {
+  margin: 0 5px 0 5px; }
 
 .custom-select-sm {
   margin: 0 0 0 0; }
@@ -696,7 +721,9 @@ input[type="submit"]:hover {
   width: 100%;
   margin: 10px 2px 5px 0;
   padding: 0;
-  color: black; }
+  color: black;
+  border: 1px solid #585858;
+  font-weight: 600; }
 
 .projectButtonsGrup button {
   font-size: 12px; }

@@ -95,7 +95,6 @@ const Payments = memo(({ windowWidth }) => {
       ...payResponsibleArrayPayments,
     ]),
   ];
-
   //---SIZE ARRAYS------------------------------------>
   return (
     <div>

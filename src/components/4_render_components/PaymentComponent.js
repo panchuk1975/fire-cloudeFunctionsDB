@@ -222,14 +222,14 @@ export const PaymentComponent = memo(
                         )}
                       </div>
                     )}
-                    {pay.openPay && (
+                    {/* {pay.openPay && (
                       <button
                         className="clousePaymentBtnTable"
                         onClick={() => clousePayment(pay)}
                       >
                         Закрити форму
                       </button>
-                    )}
+                    )} */}
                     {pay.openPay && (
                       <CreatePayment
                         clients={clients}

@@ -15,7 +15,7 @@ export const AllProjectsComponent = memo(
     newProjects,
     sizeArray,
     openClientTableClass,
-   
+
     openCurrentProject,
     clouseCurrentProject,
 
@@ -71,6 +71,28 @@ export const AllProjectsComponent = memo(
               project.poketExistence === "Так" ? "good" : "bad";
             let contractExistenceClass =
               project.contractExistence === "Так" ? "good" : "bad";
+            //--DELETE BUTTON -->
+            let openDeleteProjectButtonClass = null;
+            if (project.openProject) {
+              openDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+            }
+            if (currentProjectPayments.length) {
+              openDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+            }
+            if (userInfo.company !== userInfo.jointCompany) {
+              openDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+            }
+            //--DISABLE BUTTON--->
+            let disableDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+            if (currentProjectPayments.length) {
+              disableDeleteProjectButtonClass = "";
+            }
+            if (userInfo.company !== userInfo.jointCompany) {
+              disableDeleteProjectButtonClass = "";
+            }
+            if (project.openProject) {
+              disableDeleteProjectButtonClass = "deleteButtonItemAreClouse";
+            }
             return (
               <CSSTransition key={project.id} classNames={"note"} timeout={800}>
                 <li
@@ -86,14 +108,14 @@ export const AllProjectsComponent = memo(
                         >
                           <tbody>
                             <tr align="center">
-                              {windowWidth > 75 + summArray(1, sizeArray) && (
+                              {windowWidth > 35 + summArray(1, sizeArray) && (
                                 <td width={sizeArray[0].size} className="head">
                                   <small className="projectName">
                                     {projectDataArray[0]}
                                   </small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(2, sizeArray) && (
+                              {windowWidth > 35 + summArray(2, sizeArray) && (
                                 <td
                                   width={sizeArray[1].size}
                                   className={`head ${projectReadinessDateClass}`}
@@ -103,70 +125,70 @@ export const AllProjectsComponent = memo(
                                   ).format("DD.MM.YY")}`}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(3, sizeArray) && (
+                               {windowWidth > 35 + summArray(3, sizeArray) && (
                                 <td width={sizeArray[2].size}>
                                   <small className={contractExistenceClass}>
                                     {projectDataArray[2]}
                                   </small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(4, sizeArray) && (
+                               {windowWidth > 35 + summArray(4, sizeArray) && (
                                 <td width={sizeArray[3].size}>
                                   <small className={signaturуOfActClass}>
                                     {projectDataArray[3]}
                                   </small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(5, sizeArray) && (
+                               {windowWidth > 35 + summArray(5, sizeArray) && (
                                 <td width={sizeArray[4].size}>
                                   <small className={poketExistenceClass}>
                                     {projectDataArray[4]}
                                   </small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(6, sizeArray) && (
+                              {windowWidth > 35 + summArray(6, sizeArray) && (
                                 <td width={sizeArray[5].size}>
                                   <small>{projectDataArray[5]}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(7, sizeArray) && (
+                              {windowWidth > 35 + summArray(7, sizeArray) && (
                                 <td width={sizeArray[6].size}>
                                   <small>{projectDataArray[6]}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(8, sizeArray) && (
+                              {windowWidth > 35 + summArray(8, sizeArray) && (
                                 <td width={sizeArray[7].size}>
                                   <small>{projectDataArray[7]}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(9, sizeArray) && (
+                              {windowWidth > 35 + summArray(9, sizeArray) && (
                                 <td width={sizeArray[8].size} className="head">
                                   <small>{`${moment(projectDataArray[8]).format(
                                     "DD.MM.YY"
                                   )}`}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(10, sizeArray) && (
+                              {windowWidth > 35 + summArray(10, sizeArray) && (
                                 <td width={sizeArray[9].size}>
                                   <small>{projectDataArray[9]}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(11, sizeArray) && (
+                               {windowWidth > 35 + summArray(11, sizeArray) && (
                                 <td width={sizeArray[10].size}>
                                   <small>{projectDataArray[10]}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(12, sizeArray) && (
+                               {windowWidth > 35 + summArray(12, sizeArray) && (
                                 <td width={sizeArray[11].size}>
                                   <small>{projectDataArray[11]}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(13, sizeArray) && (
+                               {windowWidth > 35 + summArray(13, sizeArray) && (
                                 <td width={sizeArray[12].size}>
                                   <small>{projectDataArray[12]}</small>
                                 </td>
                               )}
-                              {windowWidth > 75 + summArray(14, sizeArray) && (
+                              {windowWidth > 35 + summArray(14, sizeArray) && (
                                 <td width={sizeArray[13].size}>
                                   <small>{projectDataArray[13]}</small>
                                 </td>
@@ -174,12 +196,10 @@ export const AllProjectsComponent = memo(
                             </tr>
                           </tbody>
                         </table>
-                        {!project.openProject &
-                          !currentProjectPayments.length &
-                          (userInfo.company === userInfo.jointCompany) && (
+                        <div>
                           <button
                             type="button"
-                            className="btn btn-outline-danger btn-sm deleteProjectBtn"
+                            className={`btn btn-outline-danger btn-sm deleteProjectBtn ${openDeleteProjectButtonClass}`}
                             onClick={() => {
                               setId(project.id);
                               setFunct("removeList");
@@ -187,9 +207,16 @@ export const AllProjectsComponent = memo(
                               setModalClass();
                             }}
                           >
-                            Х
+                            &times;
                           </button>
-                        )}
+                          <button
+                            type="button"
+                            className={`bbtn btn-outline-secondary btn-sm deleteProjectBtn ${disableDeleteProjectButtonClass}`}
+                            disabled
+                          >
+                            &times;
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )}

@@ -4,7 +4,7 @@ import { AlertBox } from "../6_common_help_comp/AlertBox";
 import { ShowBox } from "../6_common_help_comp/ShowBox";
 import fire from "../../config/Fire";
 import { AllProjectsComponent } from "../3_sub_conteiners/AllProjectsComponent";
-import {SizeNameArray} from "../../helpComponents/dataFunctions";
+import { SizeNameArray } from "../../helpComponents/dataFunctions";
 
 export const AllProjects = memo(
   ({
@@ -72,13 +72,13 @@ export const AllProjects = memo(
     //-------------------Progects render block------------------>
     return (
       <div>
-        <li className="list-group-item clientInnerLi">
+        <div className="list-group-item projectsTable">
           <div>
             <div className="d-flex justify-content-between">
               <table className="headTable">
                 <tbody>
                   <tr align="center">
-                    {windowWidth > 75 + summArray(1, sizeArray) && (
+                    {windowWidth > 35 + summArray(1, sizeArray) && (
                       <td width={sizeArray[0].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -89,7 +89,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[0].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(2, sizeArray) && (
+                    {windowWidth > 35 + summArray(2, sizeArray) && (
                       <td width={sizeArray[1].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -100,7 +100,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[1].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(3, sizeArray) && (
+                     {windowWidth > 35 + summArray(3, sizeArray) && (
                       <td width={sizeArray[2].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -111,7 +111,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[2].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(4, sizeArray) && (
+                     {windowWidth > 35 + summArray(4, sizeArray) && (
                       <td
                         width={sizeArray[3].size}
                         onClick={() => {
@@ -123,7 +123,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[3].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(5, sizeArray) && (
+                     {windowWidth > 35 + summArray(5, sizeArray) && (
                       <td
                         width={sizeArray[4].size}
                         onClick={() => {
@@ -135,7 +135,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[4].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(6, sizeArray) && (
+                    {windowWidth > 35 + summArray(6, sizeArray) && (
                       <td width={sizeArray[5].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -146,7 +146,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[5].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(7, sizeArray) && (
+                     {windowWidth > 35 + summArray(7, sizeArray) && (
                       <td width={sizeArray[6].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -157,7 +157,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[6].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(8, sizeArray) && (
+                     {windowWidth > 35 + summArray(8, sizeArray) && (
                       <td width={sizeArray[7].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -168,7 +168,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[7].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(9, sizeArray) && (
+                     {windowWidth > 35 + summArray(9, sizeArray) && (
                       <td width={sizeArray[8].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -178,7 +178,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[8].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(10, sizeArray) && (
+                     {windowWidth > 35 + summArray(10, sizeArray) && (
                       <td width={sizeArray[9].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -189,7 +189,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[9].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(11, sizeArray) && (
+                     {windowWidth > 35 + summArray(11, sizeArray) && (
                       <td width={sizeArray[10].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -200,7 +200,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[10].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(12, sizeArray) && (
+                     {windowWidth > 35 + summArray(12, sizeArray) && (
                       <td width={sizeArray[11].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -211,7 +211,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[11].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(13, sizeArray) && (
+                     {windowWidth > 35 + summArray(13, sizeArray) && (
                       <td width={sizeArray[12].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -222,7 +222,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[12].name}</small>
                       </td>
                     )}
-                    {windowWidth > 75 + summArray(14, sizeArray) && (
+                     {windowWidth > 35 + summArray(14, sizeArray) && (
                       <td width={sizeArray[13].size}
                         onClick={() => {
                           setFunct("showFunction");
@@ -233,6 +233,7 @@ export const AllProjects = memo(
                         <small>{sizeArray[13].name}</small>
                       </td>
                     )}
+                  
                   </tr>
                 </tbody>
               </table>
@@ -249,7 +250,7 @@ export const AllProjects = memo(
               openPayment={openPayment}
               clousePayment={clousePayment}
               openNewPayment={openNewPayment}
-              clouseNewPayment={clouseNewPayment} 
+              clouseNewPayment={clouseNewPayment}
               windowWidth={windowWidth}
               setAlertClass={setAlertClass}
               setAlertText={setAlertText}
@@ -300,7 +301,7 @@ export const AllProjects = memo(
             textCSV="листи.xlx"
           />    */}
           </div>
-        </li>
+        </div>
       </div>
     );
   }

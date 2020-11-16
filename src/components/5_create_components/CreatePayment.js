@@ -23,7 +23,7 @@ export const CreatePayment = ({
     let client = clients.filter((client)=>project.projectOwner === client.id)[0];
     const clientName = client.companyName ? client.companyName : client.secName;
     initialForm = {
-      payDate: moment(new Date()).format("DD.MM.YYYY"),
+      payDate: moment(new Date()).format("YYYY-MM-DDThh:ss"),
       paySumm: 0,
       payNumber: "",
       payResponsible: "",
@@ -45,19 +45,14 @@ export const CreatePayment = ({
   };
   currentProjectPayments.sort((a, b) => new Date(a.payDate) - new Date(b.payDate));
   const createHandler = (event) => {
-    let isPayExists = !!currentProjectPayments.filter(
-      // eslint-disable-next-line
-      (pay) => Number(pay.payNumber) == Number(form.payNumber)
-    ).length;
     !form.payDate && setAlertText("Дата проплати обовязкова!");
-    !form.payNumber && setAlertText("Номер проплати обовязковий!");
+    !form.paySumm && setAlertText("Сума проплати обовязкова!");
     !form.payDate && setAlertClass("open");
-    !form.payNumber && setAlertClass("open");
+    !form.paySumm && setAlertClass("open");
     event.preventDefault();
-    if (form.payNumber) {
+    if (form.paySumm) {
       if (form.payDate) {
         if (!pay) {
-          if (!isPayExists) {
             if (userInfo.company === userInfo.jointCompany) {
               firebase
                 .addPayment(form, project)
@@ -87,11 +82,6 @@ export const CreatePayment = ({
               setAlertClass("open");
               return;
             }
-          } else {
-            setAlertText("Така проплата вже існує!");
-            setAlertClass("open");
-            return;
-          }
         } else {
           if (userInfo.company === userInfo.jointCompany) {
             firebase
@@ -142,12 +132,12 @@ export const CreatePayment = ({
     <div className="createPaymentStyle"
     >
       <div className="d-flex  flex-wrap justify-content-between">
-        <div id="datetime-local" className="form-group">
+        <div  className="form-group">
           <label htmlFor="payDate">
             <small>Дата проплати</small>
           </label>
           <input
-            type="date"
+            type="datetime-local"
             className="form-control createPaymentDate"
             placeholder="Дата проплати"
             value={form.payDate}
