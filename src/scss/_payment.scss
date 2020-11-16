@@ -1,58 +1,80 @@
 //---PROJECT PAYMENT HEAD TABLE-------------------------------->
-.paymentHeadTableConteiner{
+.paymentHeadTableConteiner {
   margin-top: 5px;
   background: rgb(23, 19, 51);
   height: 22px;
 }
-.paymentProjecgtHeadTable td{
+.paymentProjecgtHeadTable td {
   text-align: center;
+  padding-top: 4px;
   small {
-    font-size: 12px;
+    font-size: 9px;
     font-weight: 500;
-    color: rgb(214, 214, 214);
+    color: rgb(201, 201, 201);
   }
 }
 //---CLIENT-PROJECT-PAYMENYT-COMPONENT PROPERTYS----------->
 .paymentDetails {
-    color: black;
-    font-size: 9px;
-    margin: 0 0 0 0;
-  }
-  .paymentDetails:hover {
-    summary small {
-      color: #190585;
-    }
-  }
-  .paymentDetails summary{
-    width: 20%;
-  }
-.paymentDetailsSmall{
-    font-size: 8px;
+  color: black;
+  font-size: 9px;
+  margin: 0 0 0 0;
+  height: 8px;
 }
-.allPaymentsConteiner{
+.paymentDetails:hover {
+  summary small {
+    color: #190585;
+  }
+}
+.paymentDetails summary {
+  width: 20%;
+}
+.paymentDetailsSmall {
+  font-size: 8px;
+}
+.allPaymentsConteiner {
   margin: 0;
   padding: -2px 0 -2px;
   .list-group-item {
-  width: 100%;
-  background-color: rgb(160, 160, 160);
-  padding: 0;
-  margin: -2px 0 -2px 0;
+    width: 100%;
+    background-color: rgb(160, 160, 160);
+    padding: 0;
+    margin: -2px 0 -2px 0;
   }
 }
 //---PAYMENT ADDITIONAL "LI"--------->
 //---CREATE PAYMENT BACKGROUND-->
-  .createPaymentStyle {
-    padding: 0px 0px 7px 0;
-    margin: 0 6px 0 4px;
+.createPaymentStyle {
+  padding: 0px 0px 7px 0;
+  margin: 0 6px 0 4px;
+}
+.clousePaymentFormTable tr td {
+  border: 1px solid white;
+  align-items: center;
+  width: 100%;
+}
+.clousePaymentConteiner {
+  padding:  5px 5px 0 5px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.clousePaymentTable {
+  border-radius: 3px;
+  cursor: pointer;
+  color: rgb(191, 190, 190);
+  font-size: 12px;
+  width: 100%;
+  background: rgb(23, 19, 51);
+  &:hover{
+    background: rgb(34, 28, 73);
   }
-  .clousePaymentFormTable tr td  {
-    border: 1px solid white;
-align-items: center;
-width:100%;
-  }
-  //---COMPONENT TABLE------->
-  .paymentComponentTable td{
-    font-size: 14px;
+}
+.clousePaymentTable tr {
+ text-align: center;
+}
+//---COMPONENT TABLE------->
+.paymentComponentTable td {
+  font-size: 14px;
 }
 .paymentComponentTable {
   padding: 0;
@@ -63,32 +85,33 @@ width:100%;
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.payment-buttons-grup button{
+.payment-buttons-grup button {
   font-size: 12px;
 }
-.add-pay-btn, .close-list-pay-btn{
+.add-pay-btn,
+.close-list-pay-btn {
   width: 50%;
   padding: 0;
   margin: 0px 0px 0px 0px;
   color: black;
 }
 .createPaymentBtn {
-    font-size: 12px;
-    width: 100%;
-    margin: 10px 0px 0px 0;
-    padding: 0;
-    height: 22px;
-    color: rgb(207, 207, 207);
-    background: rgb(23, 19, 51);
-    border: 1px solid rgb(78, 78, 78);
-    &:hover {
-      background: rgb(41, 33, 88);
-    }
+  font-size: 12px;
+  width: 100%;
+  margin: 10px 0px 0px 0;
+  padding: 0;
+  height: 22px;
+  color: rgb(207, 207, 207);
+  background: rgb(23, 19, 51);
+  border: 1px solid rgb(78, 78, 78);
+  &:hover {
+    background: rgb(41, 33, 88);
   }
- //---EXEL PAYMENT PROJECT BTN -------->
- .ExportReactCSV{
-   padding: 0 4px 5px 4px;
- }
+}
+//---EXEL PAYMENT PROJECT BTN -------->
+.ExportReactCSV {
+  padding: 0 4px 5px 4px;
+}
 
 //---PAYMENT RENDER COMPONENT BODY------------------------------>
 //---PAYMENTS HEADER ------------------------------->
@@ -112,10 +135,10 @@ width:100%;
   text-align: center;
 }
 //---PAYMENT BACKGROUND---->
-.transitionGroupeConteiner{
-  width: 100%
+.transitionGroupeConteiner {
+  width: 100%;
 }
-.paymentsBackgroundSize{
+.paymentsBackgroundSize {
   background-color: rgb(160, 160, 160);
   border: none;
   padding: 0;
@@ -123,96 +146,97 @@ width:100%;
 //---MAIN COMMON BASIS BODY !!!---->
 .paymentTableBasis {
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 5px;
   border: 1px solid rgb(83, 83, 83);
   width: 100%;
   margin: 3px 0 3px 0;
   background-color: rgb(130, 128, 133);
   height: auto;
-  &:hover{
+  &:hover {
     background-color: rgb(156, 154, 160);
   }
 }
-  .paymentCommonTable td{
-    font-size: 14px;
-  }
-  .deletePaymentBtn {
-    font-size: 7px;
-    padding: 2px 5px 2px 5px;
-    color: #ff2400;
-  }
-  .deletePaymentBtn:hover {
-    color: black;
-  }
-  .clousePaymentBtnTable{
-    color: rgb(192, 192, 192);
-    border-radius: 3px;
-    font-size: 12px;
-    background: rgb(23, 19, 51);
-    cursor: pointer;
-    height: 22px;
-    width: 100%;
-    padding: 0 5px  5px;
-    td {
-      text-align: center;
-    }
-    &:hover{
-      background: rgb(40, 33, 87);
-    }
-  }
-  .paginationBtn{
-    color: rgb(221, 221, 221);
-    background: rgb(23, 19, 51);
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 12px;
-    width: 25px;
-    height: 25px;
-    margin: 0 1px 0 1px;
-  }
-  .newPageForm{
-    cursor: pointer;
-    border-radius: 3px;
+.paymentCommonTable td {
+  font-size: 14px;
+}
+.deletePaymentBtn {
+  border-radius: 4px;
+  font-size: 7px;
+  padding: 2px 5px 2px 5px;
+  color: #ff2400;
+}
+.deletePaymentBtn:hover {
+  color: black;
+}
+.clousePaymentBtnTable {
+  color: rgb(192, 192, 192);
+  border-radius: 3px;
+  font-size: 12px;
+  background: rgb(23, 19, 51);
+  cursor: pointer;
+  height: 22px;
+  width: 100%;
+  padding: 0 5px 5px;
+  td {
     text-align: center;
-    margin-left: 5px;
-    font-size: 14px;
-    width: 70px;
-    height: 25px;
   }
-  .paginationConteiner{
-    margin: -30px 0 5px 0;
+  &:hover {
+    background: rgb(40, 33, 87);
   }
-  .searchConteiner {
-    margin: 0;
-      } 
-  @media all and (max-width: 870px) {
-  .searchPaymants{
+}
+.paginationBtn {
+  color: rgb(221, 221, 221);
+  background: rgb(23, 19, 51);
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+  width: 25px;
+  height: 25px;
+  margin: 0 1px 0 1px;
+}
+.newPageForm {
+  cursor: pointer;
+  border-radius: 3px;
+  text-align: center;
+  margin-left: 5px;
+  font-size: 14px;
+  width: 70px;
+  height: 25px;
+}
+.paginationConteiner {
+  margin: -30px 0 5px 0;
+}
+.searchConteiner {
+  margin: 0;
+}
+@media all and (max-width: 870px) {
+  .searchPaymants {
     height: 35px;
-     width: 60px;
-     input {
-       height: 25px;
-     }
+    width: 60px;
+    input {
+      height: 25px;
+    }
   }
-  .emailBlock{
-   font-size: 8px;
+  .emailBlock {
+    font-size: 8px;
   }
-  .paginationBtn{
+  .paginationBtn {
     width: 17px;
     height: 25px;
   }
-  .newPageForm{
+  .newPageForm {
     margin-left: 2px;
     width: 40px;
     height: 25px;
-    input{
+    input {
       font-size: 12px;
       height: 25px;
     }
   }
-  .paginationConteiner{
+  .paginationConteiner {
     margin: -35px 0 5px 0;
   }
-  }
-  .exportReactCSVConteiner{
-    padding: 0 5px 5px 5px;
-  }
+}
+.exportReactCSVConteiner {
+  padding: 0 5px 5px 5px;
+}

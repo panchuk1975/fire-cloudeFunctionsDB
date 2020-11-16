@@ -9,7 +9,7 @@
   padding: 0;
   background: rgb(125, 128, 131);
   border: 1px solid rgb(119, 119, 119);
-  &:hover{
+  &:hover{  
     background: rgb(131, 135, 138);
   }
 }
@@ -23,9 +23,11 @@
   -moz-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
   box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
 }
-.headTable {
+.projectsHeadTableConteiner{
   background: rgb(23, 19, 51);
-  color: rgb(194, 194, 194);
+}
+.headTable {
+  color: rgb(213, 213, 213);
   font-size: 12px;
   font-weight: 600;
   background-color: none;
@@ -41,18 +43,18 @@
 }
 .clouseProjectForm  {
   border-radius: 5px;
-  background-color: rgb(8, 28, 71);
+  background: rgb(23, 19, 51);
   width: 100%;
   text-align: center;
   margin: 0;
   &:hover {
-    background-color: rgb(10, 35, 90);
+    background-color: rgb(9, 29, 72);
   }
 }
 .clouseProjectTableButton {
   border-radius: 5px;
   font-size: 14px;
-  color: white;
+  color: rgb(199, 198, 198);
   height: 25px;
 }
 //---PROJECT DATA TABLE---------------------->
@@ -68,7 +70,7 @@
 .deleteProjectBtn {
   font-size: 7px;
   padding: 5px 5px 5px 5px;
-  margin: 6px 3px 2px 0;
+  margin: 4px 4px 2px 0;
   color: #ff2400;
 }
 .deleteProjectBtn:hover {

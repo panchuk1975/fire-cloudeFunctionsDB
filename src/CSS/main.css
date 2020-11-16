@@ -648,9 +648,11 @@ input[type="submit"]:hover {
   -moz-box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99);
   box-shadow: 5px 5px 7px -3px rgba(0, 0, 0, 0.99); }
 
+.projectsHeadTableConteiner {
+  background: #171333; }
+
 .headTable {
-  background: #171333;
-  color: #c2c2c2;
+  color: #d5d5d5;
   font-size: 12px;
   font-weight: 600;
   background-color: none;
@@ -665,17 +667,17 @@ input[type="submit"]:hover {
 
 .clouseProjectForm {
   border-radius: 5px;
-  background-color: #081c47;
+  background: #171333;
   width: 100%;
   text-align: center;
   margin: 0; }
   .clouseProjectForm:hover {
-    background-color: #0a235a; }
+    background-color: #091d48; }
 
 .clouseProjectTableButton {
   border-radius: 5px;
   font-size: 14px;
-  color: white;
+  color: #c7c6c6;
   height: 25px; }
 
 .projectTable {
@@ -690,7 +692,7 @@ input[type="submit"]:hover {
 .deleteProjectBtn {
   font-size: 7px;
   padding: 5px 5px 5px 5px;
-  margin: 6px 3px 2px 0;
+  margin: 4px 4px 2px 0;
   color: #ff2400; }
 
 .deleteProjectBtn:hover {
@@ -886,16 +888,18 @@ body #open {
   height: 22px; }
 
 .paymentProjecgtHeadTable td {
-  text-align: center; }
+  text-align: center;
+  padding-top: 4px; }
   .paymentProjecgtHeadTable td small {
-    font-size: 12px;
+    font-size: 9px;
     font-weight: 500;
-    color: #d6d6d6; }
+    color: #c9c9c9; }
 
 .paymentDetails {
   color: black;
   font-size: 9px;
-  margin: 0 0 0 0; }
+  margin: 0 0 0 0;
+  height: 8px; }
 
 .paymentDetails:hover summary small {
   color: #190585; }
@@ -924,6 +928,25 @@ body #open {
   align-items: center;
   width: 100%; }
 
+.clousePaymentConteiner {
+  padding: 5px 5px 0 5px;
+  display: flex;
+  justify-content: center;
+  width: 100%; }
+
+.clousePaymentTable {
+  border-radius: 3px;
+  cursor: pointer;
+  color: #bfbebe;
+  font-size: 12px;
+  width: 100%;
+  background: #171333; }
+  .clousePaymentTable:hover {
+    background: #221c49; }
+
+.clousePaymentTable tr {
+  text-align: center; }
+
 .paymentComponentTable td {
   font-size: 14px; }
 
@@ -938,7 +961,8 @@ body #open {
 .payment-buttons-grup button {
   font-size: 12px; }
 
-.add-pay-btn, .close-list-pay-btn {
+.add-pay-btn,
+.close-list-pay-btn {
   width: 50%;
   padding: 0;
   margin: 0px 0px 0px 0px;
@@ -986,7 +1010,7 @@ body #open {
 
 .paymentTableBasis {
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 5px;
   border: 1px solid #535353;
   width: 100%;
   margin: 3px 0 3px 0;
@@ -999,6 +1023,7 @@ body #open {
   font-size: 14px; }
 
 .deletePaymentBtn {
+  border-radius: 4px;
   font-size: 7px;
   padding: 2px 5px 2px 5px;
   color: #ff2400; }
@@ -1014,7 +1039,7 @@ body #open {
   cursor: pointer;
   height: 22px;
   width: 100%;
-  padding: 0 5px  5px; }
+  padding: 0 5px 5px; }
   .clousePaymentBtnTable td {
     text-align: center; }
   .clousePaymentBtnTable:hover {

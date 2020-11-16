@@ -130,13 +130,16 @@ export const PaymentComponent = memo(
                 "Дата проплати": pay.payDate,
                 "Сума проплати": pay.paySumm,
                 "Номер проекту": pay.payProjectNumber,
-                "Клієнт": pay.payClientName,
+                Клієнт: pay.payClientName,
                 "Хто проводив": pay.payResponsible,
               };
               exelPaymentsInfo = exelPaymentsInfo.concat(newExelPay);
               return (
                 <CSSTransition key={pay.id} classNames={"note"} timeout={800}>
-                  <li key={pay.id} className="list-group-item payments-incomp-background">
+                  <li
+                    key={pay.id}
+                    className="list-group-item payments-incomp-background"
+                  >
                     {!pay.openPay && (
                       <div
                         className="d-flex justify-content-between paymentTableBasis"
@@ -144,9 +147,7 @@ export const PaymentComponent = memo(
                           openPayment(pay);
                         }}
                       >
-                        <table
-                          className="paymentComponentTable"
-                        >
+                        <table className="paymentComponentTable">
                           <tbody>
                             <tr align="center">
                               {windowWidth > 30 + summArray(1, sizeArray) && (
@@ -222,14 +223,20 @@ export const PaymentComponent = memo(
                         )}
                       </div>
                     )}
-                    {/* {pay.openPay && (
-                      <button
-                        className="clousePaymentBtnTable"
-                        onClick={() => clousePayment(pay)}
-                      >
-                        Закрити форму
-                      </button>
-                    )} */}
+                    {pay.openPay && (
+                      <div className="clousePaymentConteiner">
+                        <table
+                          className="clousePaymentTable"
+                          onClick={() => clousePayment(pay)}
+                        >
+                          <tbody>
+                            <tr>
+                              <tb>Закрити форму</tb>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
                     {pay.openPay && (
                       <CreatePayment
                         clients={clients}

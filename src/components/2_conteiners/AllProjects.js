@@ -74,7 +74,7 @@ export const AllProjects = memo(
       <div>
         <div className="list-group-item projectsTable">
           <div>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between projectsHeadTableConteiner">
               <table className="headTable">
                 <tbody>
                   <tr align="center">
