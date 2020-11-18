@@ -2,15 +2,21 @@ import React, { Component } from "react";
 import fire from "../../config/Fire";
 import { NavLink } from "react-router-dom";
 
-let contentWidth = "25%";
-contentWidth = `${
-  7.2096691 * Math.pow(10, -14) * Math.pow(window.innerWidth, 5) -
-  3.8875191 * Math.pow(10, -10) * Math.pow(window.innerWidth, 4) +
-  7.5708477 * Math.pow(10, -7) * Math.pow(window.innerWidth, 3) -
-  6.0702864 * Math.pow(10, -4) * Math.pow(window.innerWidth, 2) +
-  0.1046586 * window.innerWidth +
-  106.6952733
-}%`;
+let icnFacebook = require('../../pictures/facebook_icon.png');
+let icnGoogle = require('../../pictures/google_icon.png');
+
+let showPass = require('../../pictures/icon_open_armor.png');
+let hidePass = require('../../pictures/icon_closed_armor.png');
+
+// let contentWidth = "25%";
+// contentWidth = `${
+//   7.2096691 * Math.pow(10, -14) * Math.pow(window.innerWidth, 5) -
+//   3.8875191 * Math.pow(10, -10) * Math.pow(window.innerWidth, 4) +
+//   7.5708477 * Math.pow(10, -7) * Math.pow(window.innerWidth, 3) -
+//   6.0702864 * Math.pow(10, -4) * Math.pow(window.innerWidth, 2) +
+//   0.1046586 * window.innerWidth +
+//   106.6952733
+// }%`;
 
 class Login extends Component {
   constructor(props) {
@@ -48,16 +54,14 @@ class Login extends Component {
   }
   render() {
     let showPassword = () => {
-      const pass_field = document.querySelector(".password");
-      const show_btn = document.querySelector(".show");
+      const pass_field = document.querySelector(".show_pass");
+      const show_btn = document.querySelector(".icon");
       if (pass_field.type === "password") {
         pass_field.type = "text";
-        show_btn.style.color = "#3498db";
-        show_btn.textContent = "HIDE";
+        show_btn.src = showPass;
       } else {
         pass_field.type = "password";
-        show_btn.style.color = "#222";
-        show_btn.textContent = "SHOW";
+        show_btn.src = hidePass;
       }
     };
     let errorNotification = this.state.fireErrors ? (
@@ -66,71 +70,91 @@ class Login extends Component {
           "Warning! Authorization Error! Check the data!"}
       </div>
     ) : null;
-    contentWidth = `${
-      7.2096691 * Math.pow(10, -14) * Math.pow(window.innerWidth, 5) -
-      3.8875191 * Math.pow(10, -10) * Math.pow(window.innerWidth, 4) +
-      7.5708477 * Math.pow(10, -7) * Math.pow(window.innerWidth, 3) -
-      6.0702864 * Math.pow(10, -4) * Math.pow(window.innerWidth, 2) +
-      0.1046586 * window.innerWidth +
-      106.6952733
-    }%`;
+    // contentWidth = `${
+    //   7.2096691 * Math.pow(10, -14) * Math.pow(window.innerWidth, 5) -
+    //   3.8875191 * Math.pow(10, -10) * Math.pow(window.innerWidth, 4) +
+    //   7.5708477 * Math.pow(10, -7) * Math.pow(window.innerWidth, 3) -
+    //   6.0702864 * Math.pow(10, -4) * Math.pow(window.innerWidth, 2) +
+    //   0.1046586 * window.innerWidth +
+    //   106.6952733
+    // }%`;
     return (
-      <div className="bg-img">
-        <div
-          id="loginConteiner"
-          className="content"
-          style={{ width: contentWidth }}
-        >
-          <header>FORASLEND DB</header>
-          <form action="#" onSubmit={this.login}>
-            <div className="field">
-              <span className="fa fa-user"></span>
-              <input
-                type="email"
-                className="email"
-                placeholder="Email or Phone"
-                value={this.state.email}
-                name="email"
-                onChange={this.handleChange}
-                required
-              />
-            </div>
-            <div className="field spase">
-              <span className="fa fa-lock"></span>
-              <input
-                id="password"
-                type="password"
-                className="password"
-                placeholder="Password"
-                value={this.state.password}
-                name="password"
-                onChange={this.handleChange}
-                required
-              />
-              <span className="show" onClick={showPassword}>
-                SHOW
-              </span>
-            </div>
-            <div className="field spase">
-              <input type="submit" value="LOGIN" />
-            </div>
-            <div className="signup">
-              <NavLink to={"/about"}>
-                <span>About! </span>
-              </NavLink>
-              Don't have any accounts?
-              <NavLink to={"/register"}>
-                <span> Signup!</span>
-              </NavLink>
+      <div className="layout">
+        <div className="add_field size_field">
+          <div className="layout__page layout__page_thin">
+            <div className="shadow_box">
+              <h1 className="shadow_box__title">Вхід</h1>
+              <form action="#" className="form form_login" onSubmit={this.login}>
+                <fieldset className="form__fields">
+                  <div className="form_for_entering_phone_or_mail">
+                    <input
+                      type="email"
+                      className="input_width form__field_input first_bord_radius"
+                      placeholder="E-mail або Телефон"
+                      value={this.state.email}
+                      name="email"
+                      onChange={this.handleChange}
+                      required
+                    />
+                    <div className="underline"></div>
+                  </div>
+                  <div className="form_for_entering_password">
+                    <div className="input_password_form">
+                      <input
+                        id="password"
+                        type="password"
+                        className="show_pass input_width form__field_input second_bord_radius"
+                        placeholder="Пароль"
+                        value={this.state.password}
+                        name="password"
+                        onChange={this.handleChange}
+                        required
+                      />
+                      <div className="underline"></div>
+                    </div>
+                    <div className="show" onClick={showPassword}>
+                      <span className="icon_eye">
+                        <img src={hidePass} height="20" width="20" className="img icon" />
+                      </span>
+                    </div>
+                  </div>
+                  <div className="form__buttons">
+                    <button type="submit" className="button_wide button_primary">
+                      Увійти
+                    </button>
+                  </div>
+                  <div className="form__field_socials">
+                    <label className="form__field_label">Увійти за допомогою</label>
+                    <div className="social_bottons">
+                      <a href="#" title="Увійти за допомогою Facebook" className="socials_buttons_facebook">
+                        <span className="icon_facebook">
+                          <img src={icnFacebook} height="16" width="7" className="img" />
+                        </span>
+                      </a>
+                      <a href="#" title="Увійти за допомогою Google" className="socials_buttons_google">
+                        <span className="icon_google">
+                          <img src={icnGoogle} height="12px" width="12px" className="img" />
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
             </div>
             {errorNotification}
-            <div className="signup">
-              Forgot password?
-              <NavLink to={"/forgotpassword"}>
-                <span> Use form here!</span>
-              </NavLink>
+            <div className="shadow_box password_recovery_form">
+              Забули пароль? 
+              <span>
+                <NavLink to={"/forgotpassword"} className="password_recovery_link"> Відновити </NavLink>
+              </span>
             </div>
-          </form>
+            <div className="shadow_box password_recovery_form">
+              Ще немає облікового запису?
+              <span>
+                <NavLink to={"/register"} className="registration_link"> Зареєструватись</NavLink>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     );

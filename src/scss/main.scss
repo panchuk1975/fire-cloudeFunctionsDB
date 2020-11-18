@@ -1,138 +1,212 @@
-@import "_app";
-@import "_navbar";
-@import "_help";
-@import "_logreg";
-@import "_profile";
-@import "_client";
-@import "_project";
-@import "_showbox";
-@import "_payment";
-@import "_alertbox";
-@import "_modalbox";
-@import "_search";
-//--------------------------Сброс стилей--------------------------//
-/* Указываем box sizing */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+//@import "_app";
+//@import "_navbar";
+//@import "_help";
+@import "_authorization";
+@import "_checkin";
+//@import "_profile";
+//@import "_client";
+//@import "_project";
+//@import "_showbox";
+//@import "_payment";
+//@import "_alertbox";
+//@import "_modalbox";
+//@import "_search";
 
-/* Убираем внутренние отступы */
-ul[class],
-ol[class] {
-  padding: 0;
-}
+/************* Сброс стилей Reset Meyer *************/
 
-/* Убираем внешние отступы */
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-ul[class],
-ol[class],
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
-/* Выставляем основные настройки по-умолчанию для body */
-body {
-  min-height: 100vh;
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-}
-
-/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
-ul[class],
-ol[class] {
-  list-style: none;
-}
-
-/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
-/* Упрощаем работу с изображениями */
-img {
-  max-width: 100%;
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-/* Указываем понятную периодичность в потоке данных у article*/
-article > * + * {
-  margin-top: 1em;
+ol, ul {
+  list-style: none;
 }
 
-/* Наследуем шрифты для инпутов и кнопок */
-input,
-button,
-textarea,
-select {
-  font: inherit;
+blockquote, q {
+  quotes: none;
 }
 
-/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
 }
 
-// ----------------------BASE SCSS-------------------------//
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/************* Чистая верстка *************/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	line-height: 1.15;
+}
+
+html, body {
+	height: 100%;
+}
+
 body {
-  background-color: rgb(160, 160, 160);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  color: black;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	height: 100%;
+	width: 100%;
+	background-color: #1b1c22 !important;
+	font-family: OpenSans, sans-serif, arial;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
 
-.note {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+// @keyframes note {
+//   0% {
+//     transform: translateX(0);
+//   }
+//   30% {
+//     opacity: 0.7;
+//     transform: translateX(30px);
+//   }
+//   100% {
+//     opacity: 0;
+//     transform: translateX(-200px);
+//   }
+// }
 
-strong {
-  margin-right: 1rem;
-}
-.note-exit-active {
-  animation: note 800ms ease-out forwards;
-}
 
-.note-enter-active {
-  animation: note 800ms ease-out alternate-reverse;
-}
+// //--------------------------Сброс стилей--------------------------//
+// /* Указываем box sizing */
+// *,
+// *::before,
+// *::after {
+//   box-sizing: border-box;
+// }
 
-@keyframes note {
-  0% {
-    transform: translateX(0);
-  }
-  30% {
-    opacity: 0.7;
-    transform: translateX(30px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-200px);
-  }
-}
+// /* Убираем внутренние отступы */
+// ul[class],
+// ol[class] {
+//   padding: 0;
+// }
+
+// /* Убираем внешние отступы */
+// body,
+// h1,
+// h2,
+// h3,
+// h4,
+// p,
+// ul[class],
+// ol[class],
+// li,
+// figure,
+// figcaption,
+// blockquote,
+// dl,
+// dd {
+//   margin: 0;
+// }
+
+// /* Выставляем основные настройки по-умолчанию для body */
+// body {
+//   min-height: 100vh;
+//   scroll-behavior: smooth;
+//   text-rendering: optimizeSpeed;
+//   line-height: 1.5;
+// }
+
+// /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+// ul[class],
+// ol[class] {
+//   list-style: none;
+// }
+
+// /* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+// a:not([class]) {
+//   text-decoration-skip-ink: auto;
+// }
+
+// /* Упрощаем работу с изображениями */
+// img {
+//   max-width: 100%;
+//   display: block;
+// }
+
+// /* Указываем понятную периодичность в потоке данных у article*/
+// article > * + * {
+//   margin-top: 1em;
+// }
+
+// /* Наследуем шрифты для инпутов и кнопок */
+// input,
+// button,
+// textarea,
+// select {
+//   font: inherit;
+// }
+
+// /* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+// @media (prefers-reduced-motion: reduce) {
+//   * {
+//     animation-duration: 0.01ms !important;
+//     animation-iteration-count: 1 !important;
+//     transition-duration: 0.01ms !important;
+//     scroll-behavior: auto !important;
+//   }
+// }
+
+// // ----------------------BASE SCSS-------------------------//
+// body {
+//   background-color: rgb(160, 160, 160);
+//   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+//     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+//     sans-serif;
+//   color: black;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
+
+// code {
+//   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+//     monospace;
+// }
+
+// .note {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+// strong {
+//   margin-right: 1rem;
+// }
+// .note-exit-active {
+//   animation: note 800ms ease-out forwards;
+// }
+
+// .note-enter-active {
+//   animation: note 800ms ease-out alternate-reverse;
+// }

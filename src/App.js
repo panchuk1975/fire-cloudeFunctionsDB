@@ -204,7 +204,7 @@ class App extends Component {
                     }}
                   />
                   <Route
-                    path={"/help"}
+                    path={"/profile"}
                     render={() => {
                       return (
                         <React.Suspense
@@ -242,11 +242,11 @@ class App extends Component {
                               style={{ width: contentWidth }}
                               className="fireAuthConteinerRegister"
                             >
-                              <StyledFirebaseAuth
+                              {/* <StyledFirebaseAuth
                                 className="firebaseAuth"
                                 uiConfig={this.uiConfigRegister}
                                 firebaseAuth={firebase.auth()}
-                              />
+                              /> */}
                             </div>
                           </React.Suspense>
                         );

@@ -1,0 +1,284 @@
+/*Форма Регистрации*/
+.layout_rg {
+	height: 100%;
+	width: 100%;
+	min-width: 20em;
+	overflow-x: hidden;
+}
+
+.add_field_rg {
+	margin: 0 auto;
+}
+
+.size_field_rg {
+	margin-top: 4.313em;
+	max-width: 28.8em;
+	padding: 1.25em;
+}
+
+.layout__page_rg {
+	width: 100%;
+}
+
+.shadow_box_rg {
+	width: 100%;
+	background: #282b3d;
+	box-shadow: 0 0 2px rgba(255, 255, 255, 0.384);
+	padding: 2.5em;
+	box-sizing: border-box;
+	margin: 0 auto;
+	border-radius: 3px;
+}
+
+.shadow_box__title_rg {
+	font-size: 1.375em;
+	text-align: center;
+	color: white;
+	line-height: 1.25em;
+	font-weight: bold;
+}
+
+.form_registration_rg {
+	padding-top: 1.938em;
+    box-sizing: border-box;
+}
+
+/*Форма для авторизации*/
+
+.form__fields_rg {
+	border: 0;
+	padding: 0;
+}
+
+.button_rg, .input_rg {
+	overflow: visible;
+}
+
+/*Поля для заполнения номера тел. / почты и пароля*/
+
+.input_rg {
+	color: white;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.input_width_rg {
+	width: 100%;
+	height: 3em;
+}
+
+.first_bord_radius_rg {
+	border-radius: 3px;
+}
+
+.second_bord_radius_rg {
+	border-radius: 3px 0px 0px 3px;
+}
+
+.form__field_input_rg {
+	outline: 0;
+	background: #42445e;
+	border: none;
+	padding: 0 0.75em;
+	box-sizing: border-box;
+}
+
+.input_rg::placeholder {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.input_rg:focus {
+	border-radius: 3px 3px 0px 0px;
+}
+
+.input_rg:focus+.underline_rg {
+	transform: scale(1);
+	text-decoration: none;
+}
+
+.underline_rg {
+	background-color: #f58341;
+	height: 0.125em;
+	margin-top: -0.125em;
+	-webkit-transform: scale(0, 1);
+	transform: scale(0, 1);
+	-webkit-transition: all 0.5s linear;
+	transition: all 0.2s linear;
+	width: 100%;
+	text-decoration: none;
+}
+
+.input_field_email_rg, .input_field_tel_rg, .input_field_password_rg, .input_field_congfirm_password_rg {
+	margin-top: 1.938em;
+}
+
+.input_field_password_rg, .input_field_congfirm_password_rg {
+	display: flex;
+}
+
+/*Кнопка Авторизации*/
+
+.form__buttons_rg {
+	margin-top: 1.75em;
+}
+
+.button_wide_rg {
+	height: 2.8em;
+	width: 100%;
+    padding: 0;
+}
+
+.button_primary_rg {
+	outline: 0;
+	background-color:#f58341;
+	border: none;
+	color: #fff;
+	font-size: 0.9375em;
+	border-radius: 3px;
+}
+
+.button_primary_rg:hover {
+	background-color:#f7752b;
+}
+
+/*Авторизация через социальные сети*/
+.form__field_label_rg {
+	color: white;
+	font-weight: 700;
+	margin-bottom: 0.8em;
+	display: inline-block;
+	width: 100%;
+	font-size: 0.9375em;
+}
+
+.social_bottons_rg {
+	padding-top: 0.3125em;
+	display: flex;
+	align-items: center;
+}
+
+.socials_buttons_facebook_rg, .socials_buttons_google_rg {
+	height: 2.25em;
+	width: 2.25em;
+	background: #42445e;
+	border-radius: 3px;
+}
+
+.socials_buttons_google_rg {
+	margin-left: 1.25em;
+}
+
+.socials_buttons_facebook_rg:hover {
+	background: #3B5998;
+}
+
+.socials_buttons_google_rg:hover {
+	background: #DC4E41;
+}
+
+a {
+	text-decoration: none;
+}
+
+.icon_facebook_rg, .icon_google_rg {
+	display: block;
+	width: 100%;
+}
+
+.icon_facebook_rg {
+	padding-top: 0.625em;
+}
+
+.icon_google_rg {
+	padding-top: 0.75em;
+}
+
+.img_rg {
+	display: block;
+	margin: 0 auto;
+}
+
+/*Авториация*/
+.authorization_form_rg {
+	text-align: center;
+	padding: 1.08em 0;
+	margin-top: 0.6875em;
+	color: white;
+	font-size: 0.875em;
+}
+
+.authorization_link_rg {
+	font-weight: bold;
+	color: #f58341;
+}
+
+.authorization_link_rg:hover {
+	color: #f7752b;
+}
+
+/* ----------- -------------- ------------ */
+/* ----------- Медиа Запросы ------------ */
+/* ----------- ------------- ------------ */
+
+@media only screen and (max-width: 1280px) {
+	.size_field_rg {
+		margin-top: 4.313em;
+	}
+
+	.shadow_box_rg {
+		padding: 2.5em;
+	}
+
+	.authorization_form_rg {
+		padding: 1.1em !important;
+		font-size: 0.875em !important;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.shadow_box_rg {
+		padding: 2.5em;
+	}
+}
+
+@media all and (max-width: 600px) {
+	.size_field_rg {
+		margin-top: 3em;
+	}
+}
+
+@media all and (max-width: 480px) {
+	.size_field_rg {
+		margin-top: 1em;
+	}
+}
+
+@media only screen and (max-width: 414px) {
+	.size_field_rg {
+		margin-top: 0.2em;
+	}
+}
+
+@media all and (max-width: 414px) {
+	.shadow_box_rg {
+		padding: 1.6em;
+	}
+}
+
+@media only screen and (max-width: 412px) {
+	.shadow_box_rg {
+		padding: 1.3em;
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.size_field_rg {
+		margin-top: 0px;
+	}
+}
+
+@media all and (max-width: 320px) {
+	.shadow_box_rg {
+		padding: 1em;
+	}
+}
